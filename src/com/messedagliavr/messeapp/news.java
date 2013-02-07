@@ -14,21 +14,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class news extends ListActivity {
-	public String[] titoli=new String[99];
-	public String[] descrizioni=new String[99];
-	public int a=0;
+	public String[] titoli = new String[99];
+	public String[] descrizioni = new String[99];
+	public int a = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		System.out.println("prova1");
 		new connection().execute();
-		while (a==0){}
-		System.out.println("prova4");
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, titoli);
-		ListView listView = (ListView) findViewById(R.id.list);
-		listView.setAdapter(adapter);
+		while (a == 0) {
+		}
 
 	}
 
@@ -48,7 +43,7 @@ public class news extends ListActivity {
 			String xml = parser.getXmlFromUrl(URL); // getting XML
 			Document doc = parser.getDomElement(xml); // getting DOM element
 			NodeList nl = doc.getElementsByTagName(ITEM);
-		
+
 			// looping through all item nodes <item>
 			for (int i = 0; i < nl.getLength(); i++) {
 				// creating new HashMap
@@ -64,11 +59,19 @@ public class news extends ListActivity {
 			System.out.println("prova3");
 			for (int c = 0; c < nl.getLength(); c++) {
 				e = (Element) nl.item(c);
-				titoli[c]= parser.getValue(e, TITLE); // name child value
+				titoli[c] = parser.getValue(e, TITLE); // name child value
 				descrizioni[c] = parser.getValue(e, DESC);
 			}
 			a++;
 			return null;
+		}
+
+		public void onPostExecute() {
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(news.this,
+					android.R.layout.simple_list_item_1, titoli);
+			ListView listView = (ListView) news.this
+					.findViewById(android.R.id.list);
+			listView.setAdapter(adapter);
 		}
 
 		// selecting single ListView item

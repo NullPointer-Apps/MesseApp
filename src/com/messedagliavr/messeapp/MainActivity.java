@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
     }
     public void news(View view) {
 		if (CheckInternet() == true) {
-			setContentView(R.layout.list_item);
+
 			startActivity(new Intent(this, news.class));
 		} else {
 			Toast.makeText(MainActivity.this, R.string.noconnection,
