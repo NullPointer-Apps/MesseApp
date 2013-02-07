@@ -20,8 +20,7 @@ public class news extends ListActivity {
     public String [] descrizioni=null;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_item);	
+        super.onCreate(savedInstanceState);	
         new connection().execute();
         ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,titoli);
         ListView listView= (ListView)findViewById(R.id.list);
@@ -34,7 +33,7 @@ public class news extends ListActivity {
 	public class connection extends AsyncTask<Void, Void, Void> {
 		public Void doInBackground(Void... params) {
 	   // All static variables
-    final String URL = "http://www.messedaglia.it/index.php/archivio-news?format=feed&type=rss";
+    final String URL = "http://www.lookedpath.tk/apps/firstapp/version.xml";
     // XML node keys
     final String ITEM = "item"; // parent node
     final String TITLE = "title";
