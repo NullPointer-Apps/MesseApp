@@ -24,7 +24,6 @@ public class news extends ListActivity {
 		new connection().execute();
 		while (a == 0) {
 		}
-
 	}
 
 	public class connection extends AsyncTask<Void, Void, Void> {
@@ -72,6 +71,8 @@ public class news extends ListActivity {
 			ListView listView = (ListView) news.this
 					.findViewById(android.R.id.list);
 			listView.setAdapter(adapter);
+			System.out.println("prova4");
+			a++;
 		}
 
 		// selecting single ListView item
