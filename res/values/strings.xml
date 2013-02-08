@@ -7,5 +7,7 @@
     <string name="Circolari">circolari</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_list_item_selected">ListItemSelected</string>
+    <string name="title">TITLE</string>
+    <string name="description">DESCRIPTION</string>
 
 </resources>

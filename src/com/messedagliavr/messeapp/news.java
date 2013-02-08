@@ -103,6 +103,9 @@ public class news extends ListActivity {
 						Intent intent = new Intent(news.this,
 								ListItemSelected.class);
 						intent.putExtra(TITLE, titoli.get(position));
+						System.out.println(titoli.get(position));
+						System.out.println(" - ");
+						System.out.println(descrizioni.get(position));
 						intent.putExtra(DESC, descrizioni.get(position));
 						startActivity(intent);
 					}

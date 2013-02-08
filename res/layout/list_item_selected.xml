@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:text="@string/title" />
 
     <TextView
         android:id="@+id/DescrizioneView"
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/TitoloView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="173dp" />
+        android:layout_marginTop="173dp"
+        android:text="@string/description" />
 
 </RelativeLayout>
