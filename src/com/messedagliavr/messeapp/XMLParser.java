@@ -52,6 +52,7 @@ public class XMLParser {
 	public Document getDomElement(String xml) {
 		Document doc = null;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		dbf.setCoalescing(true);
 		try {
 
 			DocumentBuilder db = dbf.newDocumentBuilder();

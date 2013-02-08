@@ -40,7 +40,7 @@ public class news extends ListActivity {
 			ArrayList<String> descrizioni = new ArrayList<String>();
 			System.out.println("prova2");
 			// All static variables
-			final String URL = "http://www.messedaglia.it/index.php/archivio-news?format=feed&type=rss";
+			final String URL = "http://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
 			// XML node keys
 			final String ITEM = "item"; // parent node
 			final String TITLE = "title";
