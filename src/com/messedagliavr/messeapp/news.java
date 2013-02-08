@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,15 +28,23 @@ public class news extends ListActivity {
 	public static final String DESC = "description";
 	public String[] titolim;
 	public String[] descrizionim;
+	ProgressDialog mDialog;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		mDialog = new ProgressDialog(news.this);
+	    mDialog.setMessage("Caricamento...");
+	    mDialog.setCancelable(false);
 		super.onCreate(savedInstanceState);
 		new connection().execute();
 	}
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<String>>> {
+		public void onPreExecute() {
+			mDialog.show();
+		}
 
 		public HashMap<String, ArrayList<String>> doInBackground(Void... params) {
 			HashMap<String, ArrayList<String>> temhashmap = new HashMap<String, ArrayList<String>>();
@@ -104,7 +113,7 @@ public class news extends ListActivity {
 					}
 				});
 			}
-
+			mDialog.dismiss();
 		}
 	}
 }
