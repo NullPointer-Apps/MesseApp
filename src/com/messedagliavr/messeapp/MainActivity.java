@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -41,6 +42,24 @@ public class MainActivity extends Activity {
 
 	public void social(View view) {
 		setContentView(R.layout.social);
+	}
+	
+	public void voti(View view) {
+		Intent voti = new Intent(Intent.ACTION_VIEW);
+		voti.setData(Uri.parse("http://atv.infoschool.eu/VRLS0003"));
+		startActivity(voti);
+	}
+	
+	public void youtube(View view) {
+		Intent youtube = new Intent(Intent.ACTION_VIEW);
+		youtube.setData(Uri.parse("http://www.youtube.com/user/MessedagliaWeb"));
+		startActivity(youtube);
+	}
+	
+	public void facebook(View view) {
+		Intent facebook = new Intent(Intent.ACTION_VIEW);
+		facebook.setData(Uri.parse("http://www.facebook.com/groups/110918169016604/"));
+		startActivity(facebook);
 	}
 	
 	public void news(View view) {

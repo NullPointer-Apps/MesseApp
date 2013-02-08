@@ -13,7 +13,7 @@
         android:layout_marginLeft="23dp"
         android:layout_marginTop="17dp"
         android:contentDescription="@string/Calendario"
-        android:onClick="news"
+        android:onClick="facebook"
         android:src="@drawable/facebook" />
 
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_alignTop="@+id/ImageView02"
         android:layout_marginRight="42dp"
         android:contentDescription="@string/Calendario"
-        android:onClick="news"
+        android:onClick="youtube"
         android:src="@drawable/youtube" />
 
 </RelativeLayout>
