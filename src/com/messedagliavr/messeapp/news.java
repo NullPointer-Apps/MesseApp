@@ -17,6 +17,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class news extends ListActivity {
+	
+	@Override
+	public void onBackPressed() {
+		startActivity(new Intent(this, MainActivity.class));
+	}
 
 	public static final String TITLE = "title";
 	public static final String DESC = "description";

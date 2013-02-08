@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	
 
 	public boolean CheckInternet() {
 		ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -26,6 +27,11 @@ public class MainActivity extends Activity {
 		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		setContentView(R.layout.activity_main);
 	}
 
 	@Override

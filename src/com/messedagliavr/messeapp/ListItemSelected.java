@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class ListItemSelected extends Activity {
+	
+	@Override
+	public void onBackPressed() {
+		setContentView(R.layout.list_item);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
