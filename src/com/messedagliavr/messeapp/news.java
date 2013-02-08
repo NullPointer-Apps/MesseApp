@@ -8,26 +8,40 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class news extends ListActivity {
-	public String[] titoli = new String[99];
-	public String[] descrizioni = new String[99];
-	public int a = 0;
 
+	public static final String TITLE = "title";
+	public static final String DESC = "description";
+	public String[] titolim;
+	public String[] descrizionim;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new connection().execute();
+<<<<<<< HEAD
 		while (a == 0) {
 		}
+=======
+		System.out.println("prova1");
+>>>>>>> Il parser RSS funziona. Il click sulla list view è da fixare
 	}
 
-	public class connection extends AsyncTask<Void, Void, Void> {
-		public Void doInBackground(Void... params) {
+	public class connection extends
+			AsyncTask<Void, Void, HashMap<String, ArrayList<String>>> {
+
+		public HashMap<String, ArrayList<String>> doInBackground(Void... params) {
+			HashMap<String, ArrayList<String>> temhashmap = new HashMap<String, ArrayList<String>>();
+			ArrayList<String> titoli = new ArrayList<String>();
+			ArrayList<String> descrizioni = new ArrayList<String>();
 			System.out.println("prova2");
 			// All static variables
 			final String URL = "http://www.messedaglia.it/index.php/archivio-news?format=feed&type=rss";
@@ -51,20 +65,24 @@ public class news extends ListActivity {
 				// adding each child node to HashMap key => value
 				map.put(TITLE, parser.getValue(e, TITLE));
 				map.put(DESC, parser.getValue(e, DESC));
-
 				// adding HashList to ArrayList
 				menuItems.add(map);
+
 			}
-			System.out.println("prova3");
+
 			for (int c = 0; c < nl.getLength(); c++) {
 				e = (Element) nl.item(c);
-				titoli[c] = parser.getValue(e, TITLE); // name child value
-				descrizioni[c] = parser.getValue(e, DESC);
+
+				titoli.add(parser.getValue(e, TITLE));
+				descrizioni.add(parser.getValue(e, DESC));
+
 			}
-			a++;
-			return null;
+			temhashmap.put("titoli", titoli);
+			temhashmap.put("descrizioni", descrizioni);
+			return temhashmap;
 		}
 
+<<<<<<< HEAD
 		public void onPostExecute() {
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(news.this,
 					android.R.layout.simple_list_item_1, titoli);
@@ -73,27 +91,45 @@ public class news extends ListActivity {
 			listView.setAdapter(adapter);
 			System.out.println("prova4");
 			a++;
-		}
+=======
+		public void onPostExecute(HashMap<String, ArrayList<String>> resultmap) {
 
-		// selecting single ListView item
-		/*
-		 * ListView lv = getListView(); lv.setOnItemClickListener(new
-		 * OnItemClickListener() {
-		 * 
-		 * public void onItemClick(AdapterView<?> parent, View view, int
-		 * position, long id) { // getting values from selected ListItem String
-		 * name = ((TextView)
-		 * view.findViewById(R.id.label)).getText().toString();
-		 * 
-		 * 
-		 * // Starting new intent Intent in = new
-		 * Intent(getApplicationContext(), SingleListItem.class);
-		 * in.putExtra(DESC, description); startActivity(in);
-		 * 
-		 * }
-		 * 
-		 * });
-		 */
+			if (resultmap.size() > 0) {
+				// get titoli ArrayList here
+				ArrayList<String>  titoli = resultmap.get("titoli");
+				titolim = titoli.toArray(new String[titoli.size()]);
+				// get descrizioni ArrayList here
+				ArrayList<String> descrizioni = resultmap.get("descrizioni");
+				descrizionim = descrizioni.toArray(new String[titoli.size()]);
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+						news.this, android.R.layout.simple_list_item_1, titoli);
+				setContentView(R.layout.list_item);
+				ListView listView = (ListView) news.this
+						.findViewById(android.R.id.list);
+				listView.setAdapter(adapter);
+
+			}
+>>>>>>> Il parser RSS funziona. Il click sulla list view è da fixare
+		}
+	}
+
+	public void click() {
+		ListView lv = getListView();
+		lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parentView,
+					View childView, int position, long id) {
+				// Here write your code for starting the new activity on
+				// selection of list item
+				Intent intent = new Intent(news.this, ListItemSelected.class);
+				intent.putExtra(TITLE, titolim[position].toString());
+				intent.putExtra(DESC, descrizionim[position].toString());
+				startActivity(intent);
+			}
+
+			public void onNothingSelected(AdapterView<?> parentView) {
+			}
+		});
+
 	}
 
 }
