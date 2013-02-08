@@ -27,8 +27,6 @@ public class news extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new connection().execute();
-		System.out.println("prova1");
-
 	}
 
 	public class connection extends
@@ -38,7 +36,6 @@ public class news extends ListActivity {
 			HashMap<String, ArrayList<String>> temhashmap = new HashMap<String, ArrayList<String>>();
 			ArrayList<String> titoli = new ArrayList<String>();
 			ArrayList<String> descrizioni = new ArrayList<String>();
-			System.out.println("prova2");
 			// All static variables
 			final String URL = "http://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
 			// XML node keys
@@ -71,23 +68,18 @@ public class news extends ListActivity {
 
 				titoli.add(parser.getValue(e, TITLE));
 				descrizioni.add(parser.getValue(e, DESC));
-
 			}
 			temhashmap.put("titoli", titoli);
 			temhashmap.put("descrizioni", descrizioni);
 			return temhashmap;
 		}
-
+		
 		public void onPostExecute(HashMap<String, ArrayList<String>> resultmap) {
 			if (resultmap.size() > 0) {
 				// get titoli ArrayList here
 				final ArrayList<String> titoli = resultmap.get("titoli");
-				// titolim = titoli.toArray(new String[titoli.size()]);
-				// get descrizioni ArrayList here
 				final ArrayList<String> descrizioni = resultmap
 						.get("descrizioni");
-				// descrizionim = descrizioni.toArray(new
-				// String[titoli.size()]);
 				ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 						news.this, android.R.layout.simple_list_item_1, titoli);
 				setContentView(R.layout.list_item);
@@ -99,18 +91,11 @@ public class news extends ListActivity {
 							View childView, int position, long id) {
 						// Here write your code for starting the new activity on
 						// selection of list item
-						System.out.println("provaclick2");
 						Intent intent = new Intent(news.this,
 								ListItemSelected.class);
 						intent.putExtra(TITLE, titoli.get(position));
-						System.out.println(titoli.get(position));
-						System.out.println(" - ");
-						System.out.println(descrizioni.get(position));
 						intent.putExtra(DESC, descrizioni.get(position));
 						startActivity(intent);
-					}
-
-					public void onNothingSelected(AdapterView<?> parentView) {
 					}
 				});
 			}
