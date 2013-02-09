@@ -12,5 +12,14 @@
     <string name="Circolari">Circular</string>
     <string name="exit">Exit</string>
 	<string name="noconnection">You need an Internet connection to check for new updates</string>
-
+	<string name="ambro">Francesco Ambrosini</string>
+	<string name="debla">Simone De Blasiis</string>
+	<string name="grezzana">Gabriele Grezzana</string>
+	<string name="benati">Francesco Benati</string>
+	<string name="bianchi">Davide Bianchi</string>
+	<string name="iervasi">Matteo Iervasi</string>
+	<string name="dev">Developers:</string>
+	<string name="graphic">Graphic:</string>
+	<string name="otdev">Other developers:</string>
+	
 </resources>

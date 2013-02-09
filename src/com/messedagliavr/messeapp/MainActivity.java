@@ -78,9 +78,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void facebook(View view) {
-		Intent facebook = new Intent(Intent.ACTION_VIEW);
-		facebook.setData(Uri
-				.parse("http://www.facebook.com/groups/110918169016604/"));
+		String uri = "fb://group/110918169016604";
+		Intent facebook = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 		startActivity(facebook);
 	}
 

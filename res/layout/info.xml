@@ -7,304 +7,118 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/TextDev"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_gravity="left|center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_row="0"
-        android:text="Sviluppatori:"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
-
-    <Space
-        android:id="@+id/space1"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space2"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="4" />
-
-    <Space
-        android:id="@+id/space3"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="7" />
-
-    <Space
-        android:id="@+id/space4"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="11" />
-
-    <Space
-        android:id="@+id/space5"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="14" />
-
-    <Space
-        android:id="@+id/space6"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space7"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space8"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space9"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space10"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space11"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space12"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space13"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="26" />
-
-    <Space
-        android:id="@+id/space14"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="28" />
-
-    <Space
-        android:id="@+id/space15"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space16"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="31" />
-
-    <Space
-        android:id="@+id/space17"
-        android:layout_width="1dp"
-        android:layout_height="15dp"
-        android:layout_row="33" />
-
-    <Space
-        android:id="@+id/space18"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space19"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space20"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space21"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space22"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space23"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space24"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space25"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space26"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space27"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space28"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space29"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space30"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space31"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space32"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space33"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space34"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space35"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <Space
-        android:id="@+id/space36"
-        android:layout_width="1dp"
-        android:layout_height="15dp" />
-
-    <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="left|top"
-        android:layout_marginTop="33dp"
-        android:layout_row="3"
-        android:text="Grafico:"
+        android:text="@string/dev"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/TextView03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="left|top"
-        android:layout_marginTop="28dp"
-        android:layout_row="6"
-        android:text="Gabriele Grezzana"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextView04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="left|top"
-        android:layout_row="8"
-        android:layout_weight="0.0"
-        android:text="Altri sviluppatori:"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextView05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="left|top"
-        android:layout_marginTop="24dp"
-        android:layout_row="9"
-        android:text="Matteo Iervasi"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextView06"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="left|top"
-        android:layout_marginTop="14dp"
-        android:layout_row="10"
-        android:layout_weight="0.0"
-        android:text="Davide Bianchi"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextView07"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="right|bottom"
-        android:layout_marginTop="14dp"
-        android:layout_row="9"
-        android:text="Francesco Benati"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textAmbro"
         android:layout_width="102dp"
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_gravity="left|top"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_row="1"
-        android:text="Francesco Ambrosini"
+        android:text="@string/ambro"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/TextBianchi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_row="16"
+        android:text="@string/bianchi"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextIervasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_row="15"
+        android:text="@string/iervasi"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextBenati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right|bottom"
+        android:layout_marginTop="10dp"
+        android:layout_row="15"
+        android:text="@string/benati"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextOtdev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_row="14"
+        android:text="@string/otdev"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextGraphic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_row="2"
+        android:text="@string/graphic"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextGrezz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_row="3"
+        android:text="@string/grezzana"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextDebla"
         android:layout_width="87dp"
         android:layout_height="wrap_content"
         android:layout_column="0"
-        android:layout_gravity="center_horizontal|top"
+        android:layout_gravity="right|top"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
         android:layout_row="1"
-        android:text="Simone De Blasiis"
+        android:text="@string/debla"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white" />
 

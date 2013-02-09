@@ -4,13 +4,22 @@
     <string name="app_name">MesseApp</string>
     <string name="Info">Info</string>
     <string name="main_title">MesseApp</string>
-    <string name="Calendario">Calendar</string>
+    <string name="Calendario">Calendario</string>
     <string name="Social">Social</string>
-    <string name="Voti">Marks</string>
-    <string name="Notizie">News</string>
-    <string name="Foto">Photo</string>
-    <string name="Circolari">Circular</string>
-    <string name="exit">Exit</string>
-	<string name="noconnection">Ti serve una connessione ad internet per controllare la presenza di nuovi aggiornamenti</string>
+    <string name="Voti">Voti</string>
+    <string name="Notizie">Notizie</string>
+    <string name="Foto">Foto</string>
+    <string name="Circolari">Circolari</string>
+    <string name="exit">Esci</string>
+    <string name="noconnection">Ti serve una connessione ad internet per controllare la presenza di nuovi aggiornamenti</string>
+    <string name="ambro">Francesco Ambrosini</string>
+    <string name="debla">Simone De Blasiis</string>
+    <string name="grezzana">Gabriele Grezzana</string>
+    <string name="benati">Francesco Benati</string>
+    <string name="iervasi">Matteo Iervasi</string>
+    <string name="bianchi">Davide Bianchi</string>
+    <string name="dev">Sviluppatori:</string>
+    <string name="graphic">Grafico:</string>
+    <string name="otdev">Altri sviluppatori:</string>
 
 </resources>
