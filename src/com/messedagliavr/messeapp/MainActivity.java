@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	int layoutid;
 
 	public boolean CheckInternet() {
 		ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -29,15 +30,17 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	@Override
 	public void onBackPressed() {
+
 		setContentView(R.layout.activity_main);
+
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		layoutid = R.id.activity_main;
 	}
 
 	@Override
@@ -51,6 +54,7 @@ public class MainActivity extends Activity {
 		case R.id.info:
 			System.out.println("info");
 			setContentView(R.layout.info);
+			layoutid = R.id.info;
 			break;
 		case R.id.exit:
 			finish();
