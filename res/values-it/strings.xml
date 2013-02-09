@@ -1,9 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">MesseApp</string>
-    <string name="menu_settings">Info</string>
-    <string name="title_activity_main">MesseApp</string>
-    <string name="noconnection">Ti serve una connessione ad internet per controllare gli aggiornamenti</string>
-    
+    <string name="Info">Info</string>
+    <string name="main_title">MesseApp</string>
+    <string name="Calendario">Calendar</string>
+    <string name="Social">Social</string>
+    <string name="Voti">Marks</string>
+    <string name="Notizie">News</string>
+    <string name="Foto">Photo</string>
+    <string name="Circolari">Circular</string>
+    <string name="exit">Exit</string>
+	<string name="noconnection">Ti serve una connessione ad internet per controllare la presenza di nuovi aggiornamenti</string>
 
 </resources>

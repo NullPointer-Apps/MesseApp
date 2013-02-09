@@ -5,128 +5,133 @@
     android:background="@drawable/sfondomesseapp" >
 
     <ImageView
-        android:id="@+id/ImageView02"
+        android:id="@+id/ImageSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_alignTop="@+id/ImageView03"
-        android:onClick="news"
-        android:contentDescription="@string/Calendario"
-        android:src="@drawable/calendario" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ImageView01"
-        android:layout_marginRight="34dp"
-        android:contentDescription="@string/Foto"
-        android:onClick="news"
-        android:src="@drawable/foto" />
-
-    <ImageView
-        android:id="@+id/ImageView03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/TextView01"
-        android:layout_marginRight="32dp"
-        android:layout_toLeftOf="@+id/ImageView02"
-        android:onClick="news"
-        android:contentDescription="@string/Notizie"
-        android:src="@drawable/notizie" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/Social"
+        android:onClick="social"
+        android:src="@drawable/social" />
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/TextSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TextView03"
-        android:layout_below="@+id/ImageView01"
+        android:layout_alignLeft="@+id/ImageSocial"
+        android:layout_below="@+id/ImageSocial"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/TextView03"
+    <ImageView
+        android:id="@+id/ImageFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageView03"
-        android:layout_below="@+id/ImageView03"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ImageSocial"
+        android:layout_marginRight="40dp"
+        android:contentDescription="@string/Foto"
+        android:src="@drawable/foto" />
+
+    <TextView
+        android:id="@+id/TextFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextSocial"
+        android:layout_alignBottom="@+id/TextSocial"
+        android:layout_alignLeft="@+id/ImageFoto"
         android:layout_marginLeft="25dp"
-        android:text="@string/Notizie"
-        android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextView05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TextView03"
-        android:layout_below="@+id/ImageView05"
-        android:text="@string/Voti"
-        android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageView02"
-        android:layout_below="@+id/ImageView02"
-        android:text="@string/Calendario"
-        android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextView04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TextView02"
-        android:layout_below="@+id/ImageView04"
-        android:text="@string/Circolari"
-        android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ImageView02"
-        android:layout_alignLeft="@+id/TextView04"
         android:text="@string/Foto"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/white" />
 
     <ImageView
-        android:id="@+id/ImageView01"
+        android:id="@+id/ImageNotizie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/ImageView03"
-        android:layout_marginTop="11dp"
-        android:onClick="social"
-        android:contentDescription="@string/Social"
-        android:src="@drawable/social" />
+        android:layout_alignLeft="@+id/ImageSocial"
+        android:layout_below="@+id/TextSocial"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/Notizie"
+        android:onClick="news"
+        android:src="@drawable/notizie" />
+
+    <TextView
+        android:id="@+id/TextNotizie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextSocial"
+        android:layout_below="@+id/ImageNotizie"
+        android:layout_marginTop="5dp"
+        android:text="@string/Notizie"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/white" />
 
     <ImageView
-        android:id="@+id/ImageView04"
+        android:id="@+id/ImageCalendario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView02"
-        android:layout_below="@+id/TextView02"
-        android:layout_marginTop="38dp"
-        android:onClick="news"
+        android:layout_alignLeft="@+id/ImageFoto"
+        android:layout_alignTop="@+id/ImageNotizie"
+        android:contentDescription="@string/Calendario"
+        android:src="@drawable/calendario" />
+
+    <TextView
+        android:id="@+id/TextCalendario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextNotizie"
+        android:layout_alignBottom="@+id/TextNotizie"
+        android:layout_alignLeft="@+id/TextFoto"
+        android:text="@string/Calendario"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/ImageVoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ImageNotizie"
+        android:layout_below="@+id/TextNotizie"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/Voti"
+        android:onClick="voti"
+        android:src="@drawable/calendario" />
+
+    <TextView
+        android:id="@+id/TextVoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextNotizie"
+        android:layout_below="@+id/ImageVoti"
+        android:layout_marginTop="5dp"
+        android:text="@string/Voti"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/ImageCircolari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ImageCalendario"
+        android:layout_alignTop="@+id/ImageVoti"
         android:contentDescription="@string/Circolari"
         android:src="@drawable/circolari" />
 
-    <ImageView
-        android:id="@+id/ImageView05"
+    <TextView
+        android:id="@+id/TextCircolari"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageView03"
-        android:layout_alignTop="@+id/ImageView04"
-        android:onClick="voti"
-        android:contentDescription="@string/Voti"
-        android:src="@drawable/calendario" />
+        android:layout_alignBaseline="@+id/TextVoti"
+        android:layout_alignBottom="@+id/TextVoti"
+        android:layout_alignLeft="@+id/TextCalendario"
+        android:text="@string/Circolari"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

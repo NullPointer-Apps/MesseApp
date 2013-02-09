@@ -2,17 +2,15 @@
 <resources>
 
     <string name="app_name">MesseApp</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MesseApp</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_list_item_selected">ListItemSelected</string>
-    <string name="title">TITLE</string>
-    <string name="description">DESCRIPTION</string>
-    <string name="Calendario">Calendario</string>
+    <string name="Info">Info</string>
+    <string name="main_title">MesseApp</string>
+    <string name="Calendario">Calendar</string>
     <string name="Social">Social</string>
-    <string name="Voti">Voti</string>
-    <string name="Notizie">Notizie</string>
-    <string name="Foto">Foto</string>
-    <string name="Circolari">Circolari</string>
+    <string name="Voti">Marks</string>
+    <string name="Notizie">News</string>
+    <string name="Foto">Photo</string>
+    <string name="Circolari">Circular</string>
+    <string name="exit">Exit</string>
+	<string name="noconnection">You need an Internet connection to check for new updates</string>
 
 </resources>

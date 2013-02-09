@@ -7,11 +7,11 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
 
 	public boolean CheckInternet() {
 		ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		setContentView(R.layout.activity_main);
@@ -46,28 +46,44 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.info:
+			System.out.println("info");
+			setContentView(R.layout.info);
+			break;
+		case R.id.exit:
+			finish();
+			android.os.Process.killProcess(android.os.Process.myPid());
+			super.onDestroy();
+			break;
+		}
+		return true;
+	}
+
 	public void social(View view) {
 		setContentView(R.layout.social);
 	}
-	
+
 	public void voti(View view) {
 		Intent voti = new Intent(Intent.ACTION_VIEW);
 		voti.setData(Uri.parse("http://atv.infoschool.eu/VRLS0003"));
 		startActivity(voti);
 	}
-	
+
 	public void youtube(View view) {
 		Intent youtube = new Intent(Intent.ACTION_VIEW);
 		youtube.setData(Uri.parse("http://www.youtube.com/user/MessedagliaWeb"));
 		startActivity(youtube);
 	}
-	
+
 	public void facebook(View view) {
 		Intent facebook = new Intent(Intent.ACTION_VIEW);
-		facebook.setData(Uri.parse("http://www.facebook.com/groups/110918169016604/"));
+		facebook.setData(Uri
+				.parse("http://www.facebook.com/groups/110918169016604/"));
 		startActivity(facebook);
 	}
-	
+
 	public void news(View view) {
 		if (CheckInternet() == true) {
 			setContentView(R.layout.list_item);
