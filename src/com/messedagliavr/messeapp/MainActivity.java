@@ -30,7 +30,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +48,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.info:
@@ -58,9 +57,7 @@ public class MainActivity extends Activity {
 			layoutid = R.id.info;
 			break;
 		case R.id.exit:
-			finish();
-			android.os.Process.killProcess(android.os.Process.myPid());
-			super.onDestroy();
+			super.finish();
 			break;
 		}
 		return true;

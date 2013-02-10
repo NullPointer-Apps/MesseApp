@@ -23,7 +23,10 @@ public class news extends ListActivity {
 
 	@Override
 	public void onBackPressed() {
-		startActivity(new Intent(this, MainActivity.class));
+		//startActivity(new Intent(this, MainActivity.class));
+		Intent main = new Intent(this, MainActivity.class);
+		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(main);
 	}
 
 	public static final String TITLE = "title";
@@ -112,7 +115,6 @@ public class news extends ListActivity {
 						String descrizionerw = descrizioni.get(position);
 						Spanned titolo = Html.fromHtml(titolorw);
 						Spanned descrizione = Html.fromHtml(descrizionerw);
-
 						intent.putExtra(TITLE, titoli.get(position));
 						intent.putExtra(DESC, descrizioni.get(position));
 						startActivity(intent);
