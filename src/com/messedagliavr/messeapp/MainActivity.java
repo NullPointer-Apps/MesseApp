@@ -30,11 +30,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	public void onBackPressed() {
-
-		setContentView(R.layout.activity_main);
-
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +44,12 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public void onBackPressed() {
+
+		setContentView(R.layout.activity_main);
+
+	}
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.info:

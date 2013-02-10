@@ -12,13 +12,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class news extends ListActivity {
-	
+
 	@Override
 	public void onBackPressed() {
 		startActivity(new Intent(this, MainActivity.class));
@@ -30,12 +32,11 @@ public class news extends ListActivity {
 	public String[] descrizionim;
 	ProgressDialog mDialog;
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mDialog = new ProgressDialog(news.this);
-	    mDialog.setMessage("Caricamento...");
-	    mDialog.setCancelable(false);
+		mDialog.setMessage("Caricamento...");
+		mDialog.setCancelable(false);
 		super.onCreate(savedInstanceState);
 		new connection().execute();
 	}
@@ -58,7 +59,6 @@ public class news extends ListActivity {
 			final String DESC = "description";
 			Element e = null;
 			ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
-
 			XMLParser parser = new XMLParser();
 			String xml = parser.getXmlFromUrl(URL); // getting XML
 			Document doc = parser.getDomElement(xml); // getting DOM element
@@ -87,8 +87,9 @@ public class news extends ListActivity {
 			temhashmap.put("descrizioni", descrizioni);
 			return temhashmap;
 		}
-		
+
 		public void onPostExecute(HashMap<String, ArrayList<String>> resultmap) {
+
 			if (resultmap.size() > 0) {
 				// get titoli ArrayList here
 				final ArrayList<String> titoli = resultmap.get("titoli");
@@ -107,6 +108,11 @@ public class news extends ListActivity {
 						// selection of list item
 						Intent intent = new Intent(news.this,
 								ListItemSelected.class);
+						String titolorw = titoli.get(position);
+						String descrizionerw = descrizioni.get(position);
+						Spanned titolo = Html.fromHtml(titolorw);
+						Spanned descrizione = Html.fromHtml(descrizionerw);
+
 						intent.putExtra(TITLE, titoli.get(position));
 						intent.putExtra(DESC, descrizioni.get(position));
 						startActivity(intent);

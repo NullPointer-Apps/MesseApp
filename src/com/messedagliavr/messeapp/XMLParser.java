@@ -14,6 +14,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -81,17 +82,23 @@ public class XMLParser {
 	}
 
 	public final String getElementValue(Node elem) {
-		Node child;
-		if (elem != null) {
-			if (elem.hasChildNodes()) {
-				for (child = elem.getFirstChild(); child != null; child = child
-						.getNextSibling()) {
-					if (child.getNodeType() == Node.TEXT_NODE) {
-						return child.getNodeValue();
-					}
-				}
-			}
-		}
-		return "";
-	}
+	    try {
+	        Node child;
+	        if( elem != null){
+	            if (elem.hasChildNodes()){
+	                for( child = elem.getFirstChild(); child != null; child = child.getNextSibling() ){
+	                    if( child.getNodeType() == Node.CDATA_SECTION_NODE 
+	                            || child.getNodeType() == Node.TEXT_NODE )
+	                    {
+	                        return child.getNodeValue().trim();
+	                    }
+	                }
+	            }
+	        }
+	        return "";
+	    } catch (DOMException e) {
+	        //Logger.logError(e);
+	        return "";
+	    }
+}
 }
