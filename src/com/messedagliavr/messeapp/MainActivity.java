@@ -45,14 +45,18 @@ public class MainActivity extends Activity {
 
 	public void onBackPressed() {
 
-		setContentView(R.layout.activity_main);
+		if (layoutid == R.id.info) {
+			setContentView(R.layout.activity_main);
+			layoutid = R.id.activity_main;
+		} else {
+			super.finish();
+		}
 
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.info:
-			System.out.println("info");
 			setContentView(R.layout.info);
 			layoutid = R.id.info;
 			break;

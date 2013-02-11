@@ -24,14 +24,12 @@ import org.xml.sax.SAXException;
 
 import android.util.Log;
 
-//XML Parser per gestire i feed RSS
 
 public class XMLParser {
 	public String getXmlFromUrl(String url) {
 		String xml = null;
 
 		try {
-			// defaultHttpClient
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
 
@@ -46,7 +44,6 @@ public class XMLParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// return XML
 		return xml;
 	}
 
@@ -72,7 +69,6 @@ public class XMLParser {
 			Log.e("Error: ", e.getMessage());
 			return null;
 		}
-		// return DOM
 		return doc;
 	}
 
@@ -97,7 +93,6 @@ public class XMLParser {
 	        }
 	        return "";
 	    } catch (DOMException e) {
-	        //Logger.logError(e);
 	        return "";
 	    }
 }

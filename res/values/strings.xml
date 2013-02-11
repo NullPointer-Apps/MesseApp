@@ -11,7 +11,7 @@
     <string name="Foto">Photo</string>
     <string name="Circolari">Circular</string>
     <string name="exit">Exit</string>
-	<string name="noconnection">You need an Internet connection to check for new updates</string>
+	<string name="noconnection">You need an Internet connection to see the news</string>
 	<string name="ambro">Francesco Ambrosini</string>
 	<string name="debla">Simone De Blasiis</string>
 	<string name="grezzana">Gabriele Grezzana</string>
