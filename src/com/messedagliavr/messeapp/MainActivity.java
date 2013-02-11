@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
 	public void onBackPressed() {
 
-		if (layoutid == R.id.info) {
+		if (layoutid == R.id.info || layoutid == R.id.social) {
 			setContentView(R.layout.activity_main);
 			layoutid = R.id.activity_main;
 		} else {
@@ -69,6 +69,7 @@ public class MainActivity extends Activity {
 
 	public void social(View view) {
 		setContentView(R.layout.social);
+		layoutid = R.id.social;
 	}
 
 	public void voti(View view) {

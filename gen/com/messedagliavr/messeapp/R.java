@@ -30,8 +30,8 @@ public final class R {
         public static final int ImageFoto=0x7f070003;
         public static final int ImageNotizie=0x7f070005;
         public static final int ImageSocial=0x7f070001;
-        public static final int ImageView01=0x7f07001a;
-        public static final int ImageView02=0x7f07001b;
+        public static final int ImageView01=0x7f07001b;
+        public static final int ImageView02=0x7f07001c;
         public static final int ImageVoti=0x7f070009;
         public static final int ScrollView01=0x7f070016;
         public static final int TextBenati=0x7f070011;
@@ -50,9 +50,10 @@ public final class R {
         public static final int TextVoti=0x7f07000a;
         public static final int TitoloView=0x7f070017;
         public static final int activity_main=0x7f070000;
-        public static final int exit=0x7f07001d;
-        public static final int info=0x7f07001c;
+        public static final int exit=0x7f07001e;
+        public static final int info=0x7f07001d;
         public static final int product_label=0x7f070019;
+        public static final int social=0x7f07001a;
         public static final int textAmbro=0x7f07000e;
     }
     public static final class layout {

@@ -8,6 +8,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         tools:context=".ListItemSelected" >
 
         <TextView
@@ -21,14 +22,14 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
 
-        <TextView
+        <WebView
             android:id="@+id/DescrizioneView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/DescrizioneView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="72dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_marginTop="72dp" />
+
     </RelativeLayout>
 
 </ScrollView>
