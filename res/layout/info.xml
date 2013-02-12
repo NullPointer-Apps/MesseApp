@@ -28,27 +28,6 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/TextGraphic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textAmbro"
-        android:layout_below="@+id/textAmbro"
-        android:layout_marginTop="29dp"
-        android:text="@string/graphic"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextGrezz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/grezzana"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
-
-    <TextView
         android:id="@+id/TextBenati"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,28 +35,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:text="@string/benati"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextOtdev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextGrezz"
-        android:layout_marginTop="27dp"
-        android:text="@string/otdev"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/TextIervasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextBenati"
-        android:layout_below="@+id/TextOtdev"
-        android:layout_marginTop="23dp"
-        android:text="@string/iervasi"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white" />
 
@@ -94,13 +51,58 @@
         android:textColor="@android:color/white" />
 
     <TextView
+        android:id="@+id/TextIervasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextBenati"
+        android:layout_alignLeft="@+id/TextBenati"
+        android:layout_marginBottom="66dp"
+        android:text="@string/iervasi"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
         android:id="@+id/TextBianchi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextBenati"
-        android:layout_alignBottom="@+id/TextBenati"
+        android:layout_above="@+id/TextBenati"
         android:layout_alignRight="@+id/TextDebla"
+        android:layout_marginBottom="30dp"
         android:text="@string/bianchi"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextOtdev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextIervasi"
+        android:layout_alignLeft="@+id/TextIervasi"
+        android:layout_marginBottom="46dp"
+        android:layout_marginLeft="12dp"
+        android:text="@string/otdev"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextGraphic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextGrezz"
+        android:layout_alignLeft="@+id/textAmbro"
+        android:layout_marginBottom="40dp"
+        android:text="@string/graphic"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/TextGrezz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextOtdev"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp"
+        android:text="@string/grezzana"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/white" />
 
