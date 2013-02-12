@@ -1,6 +1,7 @@
 package com.messedagliavr.messeapp;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -85,9 +86,15 @@ public class MainActivity extends Activity {
 	}
 
 	public void facebook(View view) {
-		String uri = "fb://group/110918169016604";
-		Intent facebook = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-		startActivity(facebook);
+		String fbapp = "fb://group/110918169016604";
+		Intent fbappi = new Intent(Intent.ACTION_VIEW, Uri.parse(fbapp));
+		try {
+			startActivity(fbappi);
+		} catch (ActivityNotFoundException ex) {
+			String uriMobile = "http://touch.facebook.com/groups/110918169016604";
+			Intent fb = new Intent(Intent.ACTION_VIEW, Uri.parse(uriMobile));
+			startActivity(fb);
+		}
 	}
 
 	public void news(View view) {
