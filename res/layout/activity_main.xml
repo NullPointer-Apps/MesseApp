@@ -102,7 +102,7 @@
         android:layout_marginTop="20dp"
         android:contentDescription="@string/Voti"
         android:onClick="voti"
-        android:src="@drawable/calendario" />
+        android:src="@drawable/voti" />
 
     <TextView
         android:id="@+id/TextVoti"
