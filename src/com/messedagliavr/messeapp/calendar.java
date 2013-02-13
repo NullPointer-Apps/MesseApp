@@ -18,8 +18,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-public class news extends ListActivity {
+public class calendar extends ListActivity {
 
 	@Override
 	public void onBackPressed() {
@@ -36,7 +37,7 @@ public class news extends ListActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		mDialog = new ProgressDialog(news.this);
+		mDialog = new ProgressDialog(calendar.this);
 		mDialog.setMessage("Caricamento...");
 		mDialog.setCancelable(false);
 		super.onCreate(savedInstanceState);
@@ -55,7 +56,7 @@ public class news extends ListActivity {
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
 			// All static variables
-			final String URL = "http://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
+			final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
 			// XML node keys
 			final String ITEM = "item"; // parent node
 			final String TITLE = "title";
@@ -95,21 +96,26 @@ public class news extends ListActivity {
 				final ArrayList<Spanned> descrizioni = resultmap
 						.get("descrizioni");
 				ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
-						news.this, android.R.layout.simple_list_item_1, titoli);
+						calendar.this, android.R.layout.simple_list_item_1, titoli);
 				setContentView(R.layout.list_item);
-				ListView listView = (ListView) news.this
+				ListView listView = (ListView) calendar.this
 						.findViewById(android.R.id.list);
 				listView.setAdapter(adapter);
 				listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					public void onItemClick(AdapterView<?> parentView,
 							View childView, int position, long id) {
-						Intent intent = new Intent(news.this,
-								ListItemSelectedNews.class);
+						Intent intent = new Intent(calendar.this,
+								ListItemSelectedCalendar.class);
 						intent.putExtra(TITLE,
 								Html.toHtml(titoli.get(position)));
 						intent.putExtra(DESC,
 								Html.toHtml(descrizioni.get(position)));
+						if (Html.toHtml(descrizioni.get(position))!="") {
 						startActivity(intent);
+						} else {
+							Toast.makeText(calendar.this, R.string.nodescription,
+									Toast.LENGTH_LONG).show();
+						}
 					}
 				});
 			}

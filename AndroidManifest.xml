@@ -27,9 +27,11 @@
         </activity>
         <activity android:name="com.messedagliavr.messeapp.news" >
         </activity>
-        <activity
-            android:name="com.messedagliavr.messeapp.ListItemSelected"
-            android:label="@string/main_title" >
+        <activity android:name="com.messedagliavr.messeapp.calendar" >
+        </activity>
+        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedNews" >
+        </activity>
+        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedCalendar" >
         </activity>
     </application>
 

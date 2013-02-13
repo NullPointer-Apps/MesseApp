@@ -106,4 +106,19 @@ public class MainActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 		}
 	}
+	
+	public void calendar(View view) {
+		if (CheckInternet() == true) {
+			setContentView(R.layout.list_item);
+			startActivity(new Intent(this, calendar.class));
+		} else {
+			Toast.makeText(MainActivity.this, R.string.noconnectioncalendar,
+					Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	public void notavailable(View view) {
+		Toast.makeText(MainActivity.this, R.string.notavailable,
+				Toast.LENGTH_LONG).show();
+	}
 }

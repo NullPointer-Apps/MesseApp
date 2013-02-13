@@ -13,7 +13,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-public class ListItemSelected extends Activity {
+public class ListItemSelectedNews extends Activity {
 
 	@Override
 	public void onBackPressed() {

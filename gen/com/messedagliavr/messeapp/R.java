@@ -89,6 +89,9 @@ public final class R {
         public static final int iervasi=0x7f040010;
         public static final int main_title=0x7f040002;
         public static final int noconnection=0x7f04000a;
+        public static final int noconnectioncalendar=0x7f040014;
+        public static final int nodescription=0x7f040015;
+        public static final int notavailable=0x7f040016;
         public static final int otdev=0x7f040013;
     }
     public static final class style {
