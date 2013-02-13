@@ -49,7 +49,6 @@
         android:layout_alignLeft="@+id/ImageFoto"
         android:layout_marginLeft="25dp"
         android:text="@string/Foto"
-        android:onClick="notavailable"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/white" />
 
@@ -125,6 +124,7 @@
         android:layout_alignLeft="@+id/ImageCalendario"
         android:layout_alignTop="@+id/ImageVoti"
         android:contentDescription="@string/Circolari"
+        android:onClick="notavailable"
         android:src="@drawable/circolari" />
 
     <TextView
