@@ -104,13 +104,13 @@ public class calendar extends ListActivity {
 				listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					public void onItemClick(AdapterView<?> parentView,
 							View childView, int position, long id) {
-						Intent intent = new Intent(calendar.this,
-								ListItemSelectedCalendar.class);
-						intent.putExtra(TITLE,
-								Html.toHtml(titoli.get(position)));
-						intent.putExtra(DESC,
-								Html.toHtml(descrizioni.get(position)));
 						if (Html.toHtml(descrizioni.get(position))!="") {
+							Intent intent = new Intent(calendar.this,
+									ListItemSelectedCalendar.class);
+							intent.putExtra(TITLE,
+									Html.toHtml(titoli.get(position)));
+							intent.putExtra(DESC,
+									Html.toHtml(descrizioni.get(position)));
 						startActivity(intent);
 						} else {
 							Toast.makeText(calendar.this, R.string.nodescription,

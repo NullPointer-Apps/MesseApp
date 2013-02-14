@@ -3,6 +3,7 @@ package com.messedagliavr.messeapp;
 import java.lang.reflect.Method;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class ListItemSelectedNews extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ProgressDialog mDialog = new ProgressDialog(ListItemSelectedNews.this);
+		mDialog.setMessage("Caricamento...");
+		mDialog.setCancelable(false);
 		setContentView(R.layout.list_item_selected);
 		Intent intent = getIntent();
 		String titolorw = intent.getStringExtra(news.TITLE);
@@ -32,7 +36,6 @@ public class ListItemSelectedNews extends Activity {
 		Spanned titolo = Html.fromHtml(titolorw);
 		titoloview.setText(titolo);
 		WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
-		//descrizioneview.setBackgroundColor(0x00FFFFFF);
 		try {
 			Method method = View.class.getMethod("setLayerType", int.class,
 					Paint.class);
@@ -42,7 +45,7 @@ public class ListItemSelectedNews extends Activity {
 			Log.e("RD", "Hardware Acceleration not supported on API "
 					+ android.os.Build.VERSION.SDK_INT, e);
 		}
-
+		mDialog.dismiss();
 	}
 
 }
