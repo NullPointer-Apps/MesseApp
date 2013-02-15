@@ -27,6 +27,7 @@ public class news extends ListActivity {
 	public static final String DESC = "description";
 	public String[] titolim;
 	public String[] descrizionim;
+	public Boolean canceled=true;
 	ProgressDialog mDialog;
 
 	@Override
@@ -41,8 +42,6 @@ public class news extends ListActivity {
 		Intent main = new Intent(this, MainActivity.class);
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
-		Toast.makeText(news.this, R.string.cancelednews,
-				Toast.LENGTH_LONG).show();
 	}
 
 	public class connection extends

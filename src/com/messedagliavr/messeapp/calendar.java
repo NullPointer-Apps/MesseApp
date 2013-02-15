@@ -39,6 +39,8 @@ public class calendar extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mDialog = new ProgressDialog(calendar.this);
+		super.onCreate(savedInstanceState);
+		new connection().execute();
 	}
 
 	public class connection extends
