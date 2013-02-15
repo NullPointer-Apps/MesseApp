@@ -56,7 +56,7 @@ public class calendar extends ListActivity {
 
 		public void onPreExecute() {
 			mDialog = ProgressDialog.show(calendar.this, "Scaricando",
-					"Sto scaricando le news", true, true,
+					"Sto scaricando gli eventi", true, true,
 					new DialogInterface.OnCancelListener() {
 						public void onCancel(DialogInterface dialog) {
 							connection.this.cancel(true);

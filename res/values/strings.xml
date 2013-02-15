@@ -25,6 +25,6 @@
 	<string name="nodescription">There\'s no description for this event</string>
 	<string name="notavailable">The function that you are trying to use is not yet available</string>
 	<string name="cancelednews">You aborted News\' download</string>
-	<string name="canceledcalendar">You aborted Calendar\'s download</string>
+	<string name="canceledcalendar">You aborted Events\' download</string>
 	
 </resources>

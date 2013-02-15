@@ -25,6 +25,6 @@
     <string name="nodescription">Non c\'è nessuna descrizione per questo evento</string>
     <string name="notavailable">La funzione che vuoi usare non è ancora disponibile</string>
     <string name="cancelednews">Hai annullato il download delle News</string>
-    <string name="canceledcalendar">Hai annullato il download del Calendario</string>
+    <string name="canceledcalendar">Hai annullato il download degli Eventi</string>
 
 </resources>
