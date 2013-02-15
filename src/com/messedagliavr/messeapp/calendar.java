@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,15 +39,27 @@ public class calendar extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mDialog = new ProgressDialog(calendar.this);
-		mDialog.setMessage("Caricamento...");
-		mDialog.setCancelable(false);
-		super.onCreate(savedInstanceState);
-		new connection().execute();
 	}
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
+		
+		protected void onCancelled() {
+			Intent main = new Intent(calendar.this, MainActivity.class);
+			main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(main);
+			Toast.makeText(calendar.this, R.string.canceledcalendar,
+					Toast.LENGTH_LONG).show();
+		}
+
 		public void onPreExecute() {
+			mDialog = ProgressDialog.show(calendar.this, "Scaricando",
+					"Sto scaricando le news", true, true,
+					new DialogInterface.OnCancelListener() {
+						public void onCancel(DialogInterface dialog) {
+							connection.this.cancel(true);
+						}
+					});
 			mDialog.show();
 		}
 

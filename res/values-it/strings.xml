@@ -24,5 +24,7 @@
     <string name="noconnectioncalendar">Ti serve una connessione ad internet per vedere gli eventi del calendario</string>
     <string name="nodescription">Non c\'è nessuna descrizione per questo evento</string>
     <string name="notavailable">La funzione che vuoi usare non è ancora disponibile</string>
+    <string name="cancelednews">Hai annullato il download delle News</string>
+    <string name="canceledcalendar">Hai annullato il download del Calendario</string>
 
 </resources>

@@ -81,6 +81,8 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int benati=0x7f04000e;
         public static final int bianchi=0x7f04000f;
+        public static final int canceledcalendar=0x7f040018;
+        public static final int cancelednews=0x7f040017;
         public static final int debla=0x7f04000c;
         public static final int dev=0x7f040011;
         public static final int exit=0x7f040009;
