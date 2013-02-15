@@ -28,9 +28,9 @@ public final class R {
         public static final int DescrizioneView=0x7f070018;
         public static final int ImageCalendario=0x7f070007;
         public static final int ImageCircolari=0x7f07000b;
-        public static final int ImageFoto=0x7f070004;
+        public static final int ImageFoto=0x7f070003;
         public static final int ImageNotizie=0x7f070005;
-        public static final int ImageSocial=0x7f070002;
+        public static final int ImageSocial=0x7f070001;
         public static final int ImageView01=0x7f07001b;
         public static final int ImageView02=0x7f07001c;
         public static final int ImageVoti=0x7f070009;
@@ -41,13 +41,13 @@ public final class R {
         public static final int TextCircolari=0x7f07000c;
         public static final int TextDebla=0x7f07000f;
         public static final int TextDev=0x7f070015;
-        public static final int TextFoto=0x7f070003;
+        public static final int TextFoto=0x7f070004;
         public static final int TextGraphic=0x7f07000e;
         public static final int TextGrezz=0x7f070014;
         public static final int TextIervasi=0x7f070011;
         public static final int TextNotizie=0x7f070006;
         public static final int TextOtdev=0x7f070013;
-        public static final int TextSocial=0x7f070001;
+        public static final int TextSocial=0x7f070002;
         public static final int TextVoti=0x7f07000a;
         public static final int TitoloView=0x7f070017;
         public static final int activity_main=0x7f070000;

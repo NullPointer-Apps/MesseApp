@@ -20,7 +20,7 @@
     <string name="bianchi">Davide Bianchi</string>
     <string name="dev">Sviluppatori:</string>
     <string name="graphic">Grafico:</string>
-    <string name="otdev">Altri sviluppatori:</string>
+    <string name="otdev">Nel progetto:</string>
     <string name="noconnectioncalendar">Ti serve una connessione ad internet per vedere gli eventi del calendario</string>
     <string name="nodescription">Non c\'è nessuna descrizione per questo evento</string>
     <string name="notavailable">La funzione che vuoi usare non è ancora disponibile</string>
