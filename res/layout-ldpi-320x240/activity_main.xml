@@ -5,19 +5,30 @@
     android:id="@+id/activity_main"
     android:background="@drawable/sfondomesseapp" >
 
+    <ImageView
+        android:id="@+id/ImageSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="0dp"
+        android:contentDescription="@string/Social"
+        android:onClick="social"
+        android:src="@drawable/social" />
+
     <TextView
         android:id="@+id/TextSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ImageSocial"
         android:layout_below="@+id/ImageSocial"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="0dp"
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
-<<<<<<< HEAD
-=======
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/ldpi_320x240" />
 
     <ImageView
         android:id="@+id/ImageFoto"
@@ -25,10 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/ImageSocial"
-        android:layout_marginRight="40dp"
+        android:layout_marginRight="35dp"
         android:contentDescription="@string/Foto"
         android:src="@drawable/foto" />
->>>>>>> SUPER LAYOUT COMMIT
 
     <TextView
         android:id="@+id/TextFoto"
@@ -37,12 +47,11 @@
         android:layout_alignBaseline="@+id/TextSocial"
         android:layout_alignBottom="@+id/TextSocial"
         android:layout_alignLeft="@+id/ImageFoto"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="30dp"
         android:text="@string/Foto"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
-<<<<<<< HEAD
-=======
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/ldpi_320x240" />
 
     <ImageView
         android:id="@+id/ImageNotizie"
@@ -50,11 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ImageSocial"
         android:layout_below="@+id/TextSocial"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         android:contentDescription="@string/Notizie"
         android:onClick="news"
         android:src="@drawable/notizie" />
->>>>>>> SUPER LAYOUT COMMIT
 
     <TextView
         android:id="@+id/TextNotizie"
@@ -62,12 +70,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextSocial"
         android:layout_below="@+id/ImageNotizie"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="@string/Notizie"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
-<<<<<<< HEAD
-=======
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/ldpi_320x240"  />
 
     <ImageView
         android:id="@+id/ImageCalendario"
@@ -77,20 +84,17 @@
         android:layout_alignTop="@+id/ImageNotizie"
         android:contentDescription="@string/Calendario"
         android:src="@drawable/calendario" />
->>>>>>> SUPER LAYOUT COMMIT
-
+    
     <TextView
         android:id="@+id/TextCalendario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextNotizie"
-        android:layout_alignBottom="@+id/TextNotizie"
         android:layout_alignLeft="@+id/TextFoto"
+        android:layout_below="@+id/ImageNotizie"
         android:text="@string/Calendario"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
-<<<<<<< HEAD
-=======
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/ldpi_320x240"  />
 
     <ImageView
         android:id="@+id/ImageVoti"
@@ -98,11 +102,10 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ImageNotizie"
         android:layout_below="@+id/TextNotizie"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         android:contentDescription="@string/Voti"
         android:onClick="voti"
         android:src="@drawable/voti" />
->>>>>>> SUPER LAYOUT COMMIT
 
     <TextView
         android:id="@+id/TextVoti"
@@ -110,10 +113,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextNotizie"
         android:layout_below="@+id/ImageVoti"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="@string/Voti"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/ldpi_320x240"  />
 
     <ImageView
         android:id="@+id/ImageCircolari"
@@ -122,7 +126,6 @@
         android:layout_alignLeft="@+id/ImageCalendario"
         android:layout_alignTop="@+id/ImageVoti"
         android:contentDescription="@string/Circolari"
-        android:onClick="notavailable"
         android:src="@drawable/circolari" />
 
     <TextView
@@ -134,64 +137,8 @@
         android:layout_alignLeft="@+id/TextCalendario"
         android:text="@string/Circolari"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
-<<<<<<< HEAD
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/ldpi_320x240"  />
 
-    <ImageView
-        android:id="@+id/ImageFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ImageSocial"
-        android:layout_marginRight="16dp"
-        android:contentDescription="@string/Foto"
-        android:onClick="notavailable"
-        android:src="@drawable/foto" />
-
-    <ImageView
-        android:id="@+id/ImageSocial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="48dp"
-        android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@+id/ImageFoto"
-        android:contentDescription="@string/Social"
-        android:onClick="social"
-        android:src="@drawable/social" />
-
-    <ImageView
-        android:id="@+id/ImageNotizie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageSocial"
-        android:layout_below="@+id/TextSocial"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/Notizie"
-        android:onClick="news"
-        android:src="@drawable/notizie" />
-
-    <ImageView
-        android:id="@+id/ImageVoti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageNotizie"
-        android:layout_below="@+id/TextNotizie"
-        android:layout_marginTop="24dp"
-        android:contentDescription="@string/Voti"
-        android:onClick="voti"
-        android:src="@drawable/calendario" />
-
-    <ImageView
-        android:id="@+id/ImageCalendario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ImageNotizie"
-        android:layout_alignLeft="@+id/ImageFoto"
-        android:contentDescription="@string/Calendario"
-        android:onClick="calendar"
-        android:src="@drawable/calendario" />
-=======
->>>>>>> SUPER LAYOUT COMMIT
 
 </RelativeLayout>
