@@ -81,6 +81,7 @@
         android:layout_alignLeft="@+id/ImageFoto"
         android:layout_alignTop="@+id/ImageNotizie"
         android:contentDescription="@string/Calendario"
+        android:onClick="calendar"
         android:src="@drawable/calendario" />
 
     <TextView

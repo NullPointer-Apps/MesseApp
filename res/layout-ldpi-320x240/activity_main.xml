@@ -61,6 +61,7 @@
         android:layout_alignLeft="@+id/ImageFoto"
         android:layout_alignTop="@+id/ImageNotizie"
         android:contentDescription="@string/Calendario"
+        android:onClick="calendar"
         android:src="@drawable/calendario" />
     
     <TextView
@@ -104,6 +105,7 @@
         android:layout_alignLeft="@+id/ImageCalendario"
         android:layout_alignTop="@+id/ImageVoti"
         android:contentDescription="@string/Circolari"
+        android:onClick="notavailable"
         android:src="@drawable/circolari" />
 
     <TextView
