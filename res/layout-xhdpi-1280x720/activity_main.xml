@@ -5,18 +5,6 @@
     android:id="@+id/activity_main"
     android:background="@drawable/sfondomesseapp" >
 
-    <ImageView
-        android:id="@+id/ImageSocial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="35dp"
-        android:contentDescription="@string/Social"
-        android:onClick="social"
-        android:src="@drawable/social" />
-
     <TextView
         android:id="@+id/TextSocial"
         android:layout_width="wrap_content"
@@ -27,18 +15,8 @@
         android:layout_marginTop="5dp"
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
-
-    <ImageView
-        android:id="@+id/ImageFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ImageSocial"
-        android:layout_marginRight="40dp"
-        android:onClick="notavailable"
-        android:contentDescription="@string/Foto"
-        android:src="@drawable/foto" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextFoto"
@@ -50,7 +28,8 @@
         android:layout_marginLeft="25dp"
         android:text="@string/Foto"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageNotizie"
@@ -72,7 +51,8 @@
         android:layout_marginTop="5dp"
         android:text="@string/Notizie"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageCalendario"
@@ -93,7 +73,8 @@
         android:layout_alignLeft="@+id/TextFoto"
         android:text="@string/Calendario"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageVoti"
@@ -115,7 +96,8 @@
         android:layout_marginTop="5dp"
         android:text="@string/Voti"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageCircolari"
@@ -136,6 +118,30 @@
         android:layout_alignLeft="@+id/TextCalendario"
         android:text="@string/Circolari"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ImageFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ImageSocial"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="27dp"
+        android:contentDescription="@string/Foto"
+        android:onClick="notavailable"
+        android:src="@drawable/foto" />
+
+    <ImageView
+        android:id="@+id/ImageSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="63dp"
+        android:layout_marginTop="36dp"
+        android:layout_toLeftOf="@+id/ImageFoto"
+        android:contentDescription="@string/Social"
+        android:onClick="social"
+        android:src="@drawable/social" />
 
 </RelativeLayout>

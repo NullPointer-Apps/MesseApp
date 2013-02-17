@@ -15,7 +15,8 @@
         android:layout_marginTop="5dp"
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextFoto"
@@ -27,7 +28,8 @@
         android:layout_marginLeft="25dp"
         android:text="@string/Foto"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageNotizie"
@@ -49,7 +51,8 @@
         android:layout_marginTop="5dp"
         android:text="@string/Notizie"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageCalendario"
@@ -70,7 +73,8 @@
         android:layout_alignLeft="@+id/TextFoto"
         android:text="@string/Calendario"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageVoti"
@@ -92,7 +96,8 @@
         android:layout_marginTop="5dp"
         android:text="@string/Voti"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageCircolari"
@@ -113,7 +118,8 @@
         android:layout_alignLeft="@+id/TextCalendario"
         android:text="@string/Circolari"
         android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageFoto"

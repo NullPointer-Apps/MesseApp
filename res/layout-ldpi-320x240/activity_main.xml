@@ -16,7 +16,8 @@
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240" />
+        android:textSize="@dimen/ldpi_320x240"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextFoto"
@@ -29,7 +30,8 @@
         android:text="@string/Foto"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240" />
+        android:textSize="@dimen/ldpi_320x240"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageNotizie"
@@ -52,7 +54,8 @@
         android:text="@string/Notizie"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"  />
+        android:textSize="@dimen/ldpi_320x240"
+        android:textStyle="bold"  />
 
     <ImageView
         android:id="@+id/ImageCalendario"
@@ -73,7 +76,8 @@
         android:text="@string/Calendario"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"  />
+        android:textSize="@dimen/ldpi_320x240"
+        android:textStyle="bold"  />
 
     <ImageView
         android:id="@+id/ImageVoti"
@@ -96,7 +100,8 @@
         android:text="@string/Voti"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"  />
+        android:textSize="@dimen/ldpi_320x240"
+        android:textStyle="bold"  />
 
     <ImageView
         android:id="@+id/ImageCircolari"
@@ -119,18 +124,8 @@
         android:onClick="notavailable"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"  />
-
-    <ImageView
-        android:id="@+id/ImageFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/TextFoto"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="29dp"
-        android:contentDescription="@string/Foto"
-        android:onClick="notavailable"
-        android:src="@drawable/foto" />
+        android:textSize="@dimen/ldpi_320x240"
+        android:textStyle="bold"  />
 
     <ImageView
         android:id="@+id/ImageSocial"
@@ -142,5 +137,16 @@
         android:contentDescription="@string/Social"
         android:onClick="social"
         android:src="@drawable/social" />
+
+    <ImageView
+        android:id="@+id/ImageFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextFoto"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="29dp"
+        android:contentDescription="@string/Foto"
+        android:onClick="notavailable"
+        android:src="@drawable/foto" />
 
 </RelativeLayout>
