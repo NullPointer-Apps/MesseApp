@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">A. Messedaglia Verona</string>
+    <string name="app_name">A. Messedaglia VR</string>
     <string name="Info">Info</string>
-    <string name="main_title">A. Messedaglia Verona</string>
+    <string name="main_title">A. Messedaglia VR</string>
     <string name="Calendario">Eventi</string>
     <string name="Social">Social</string>
     <string name="Voti">Voti</string>

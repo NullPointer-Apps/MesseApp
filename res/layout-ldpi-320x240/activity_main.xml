@@ -5,18 +5,6 @@
     android:id="@+id/activity_main"
     android:background="@drawable/sfondomesseapp" >
 
-    <ImageView
-        android:id="@+id/ImageSocial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="0dp"
-        android:contentDescription="@string/Social"
-        android:onClick="social"
-        android:src="@drawable/social" />
-
     <TextView
         android:id="@+id/TextSocial"
         android:layout_width="wrap_content"
@@ -29,17 +17,6 @@
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
         android:textSize="@dimen/ldpi_320x240" />
-
-    <ImageView
-        android:id="@+id/ImageFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ImageSocial"
-        android:layout_marginRight="35dp"
-        android:onClick="notavailable"
-        android:contentDescription="@string/Foto"
-        android:src="@drawable/foto" />
 
     <TextView
         android:id="@+id/TextFoto"
@@ -142,5 +119,26 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/ldpi_320x240"  />
 
+    <ImageView
+        android:id="@+id/ImageFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextFoto"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="29dp"
+        android:contentDescription="@string/Foto"
+        android:onClick="notavailable"
+        android:src="@drawable/foto" />
+
+    <ImageView
+        android:id="@+id/ImageSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="42dp"
+        android:layout_toLeftOf="@+id/TextFoto"
+        android:contentDescription="@string/Social"
+        android:onClick="social"
+        android:src="@drawable/social" />
 
 </RelativeLayout>
