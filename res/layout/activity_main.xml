@@ -37,6 +37,7 @@
         android:layout_alignTop="@+id/ImageSocial"
         android:layout_marginRight="40dp"
         android:contentDescription="@string/Foto"
+        android:onClick="notavailable"
         android:src="@drawable/foto" />
 
     <TextView

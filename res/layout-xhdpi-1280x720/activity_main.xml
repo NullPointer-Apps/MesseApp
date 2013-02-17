@@ -36,6 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/ImageSocial"
         android:layout_marginRight="40dp"
+        android:onClick="notavailable"
         android:contentDescription="@string/Foto"
         android:src="@drawable/foto" />
 
@@ -121,6 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ImageCalendario"
         android:layout_alignTop="@+id/ImageVoti"
+        android:onClick="notavailable"
         android:contentDescription="@string/Circolari"
         android:src="@drawable/circolari" />
 
