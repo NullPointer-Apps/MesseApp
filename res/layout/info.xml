@@ -6,31 +6,6 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/TextDev"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="25dp"
-        android:text="@string/dev"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextAmbro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextDev"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="30dp"
-        android:maxWidth="100dp"
-        android:text="@string/ambro"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <TextView
         android:id="@+id/TextDebla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,18 +27,6 @@
         android:layout_marginTop="145dp"
         android:text="@string/graphic"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextGrezz"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="75dp"
-        android:layout_marginTop="192dp"
-        android:text="@string/grezzana"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black" />
 
     <TextView
@@ -92,14 +55,25 @@
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/TextIervasi"
+        android:id="@+id/TextAmbro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextBenati"
-        android:layout_alignBottom="@+id/TextBenati"
-        android:layout_alignLeft="@+id/TextDebla"
+        android:layout_alignRight="@+id/TextBianchi"
+        android:layout_below="@+id/TextDev"
+        android:layout_marginTop="31dp"
         android:maxWidth="100dp"
-        android:text="@string/iervasi"
+        android:text="@string/ambro"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/TextGrezz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextAmbro"
+        android:layout_below="@+id/TextGraphic"
+        android:layout_marginTop="19dp"
+        android:text="@string/grezzana"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black" />
 
@@ -108,10 +82,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextBenati"
-        android:layout_below="@+id/TextBenati"
-        android:layout_marginTop="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
         android:text="@string/bianchi"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/TextIervasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextBenati"
+        android:layout_alignBottom="@+id/TextBenati"
+        android:layout_alignLeft="@+id/TextDebla"
+        android:layout_marginLeft="18dp"
+        android:maxWidth="100dp"
+        android:text="@string/iervasi"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/TextDev"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/TextOtdev"
+        android:layout_marginTop="28dp"
+        android:text="@string/dev"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/black" />
 
 </RelativeLayout>
