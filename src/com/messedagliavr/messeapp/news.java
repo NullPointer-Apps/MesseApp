@@ -11,6 +11,7 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -27,7 +28,7 @@ public class news extends ListActivity {
 	public static final String DESC = "description";
 	public String[] titolim;
 	public String[] descrizionim;
-	public Boolean canceled=true;
+	public Boolean canceled = true;
 	ProgressDialog mDialog;
 
 	@Override
@@ -50,10 +51,12 @@ public class news extends ListActivity {
 			Intent main = new Intent(news.this, MainActivity.class);
 			main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(main);
-			Toast.makeText(news.this, R.string.cancelednews,
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(news.this, R.string.cancelednews, Toast.LENGTH_LONG)
+					.show();
 		}
-
+		public void onCanceled() {
+			mDialog.dismiss();
+		}
 		public void onPreExecute() {
 			mDialog = ProgressDialog.show(news.this, "Scaricando",
 					"Sto scaricando le news", true, true,
@@ -67,69 +70,73 @@ public class news extends ListActivity {
 
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
 				Void... params) {
-				HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
-				ArrayList<Spanned> titoli = new ArrayList<Spanned>();
-				ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
-				// All static variables
-				final String URL = "http://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
-				// XML node keys
-				final String ITEM = "item"; // parent node
-				final String TITLE = "title";
-				final String DESC = "description";
-				Element e = null;
-				ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
-				XMLParser parser = new XMLParser();
-				String xml = parser.getXmlFromUrl(URL); // getting XML
-				Document doc = parser.getDomElement(xml); // getting DOM element
-				NodeList nl = doc.getElementsByTagName(ITEM);
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
+			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
+			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
+			// All static variables
+			final String URL = "http://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
+			// XML node keys
+			final String ITEM = "item"; // parent node
+			final String TITLE = "title";
+			final String DESC = "description";
+			Element e = null;
+			ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
+			XMLParser parser = new XMLParser();
+			String xml = parser.getXmlFromUrl(URL); // getting XML
+			Document doc = parser.getDomElement(xml); // getting DOM element
+			NodeList nl = doc.getElementsByTagName(ITEM);
 
-				for (int i = 0; i < nl.getLength(); i++) {
-					HashMap<String, Spanned> map = new HashMap<String, Spanned>();
-					e = (Element) nl.item(i);
-					map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
-					map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
-					// adding HashList to ArrayList
-					menuItems.add(map);
+			System.out.println("prova2");
+			
+			for (int i = 0; i < nl.getLength(); i++) {
+				HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+				e = (Element) nl.item(i);
+				map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
+				map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 
-				}
+				titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
+				descrizioni.add(Html.fromHtml(parser.getValue(e, DESC)));
+				
+				DataElements.insertElement(db, parser.getValue(e, TITLE)/*,
+						parser.getValue(e, DESC)*/);
+				// adding HashList to ArrayList
+				menuItems.add(map);
 
-				for (int c = 0; c < nl.getLength(); c++) {
-					e = (Element) nl.item(c);
+			}
 
-					titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
-					descrizioni.add(Html.fromHtml(parser.getValue(e, DESC)));
-				}
-				temhashmap.put("titoli", titoli);
-				temhashmap.put("descrizioni", descrizioni);
-				return temhashmap;
+			temhashmap.put("titoli", titoli);
+			temhashmap.put("descrizioni", descrizioni);
+			return temhashmap;
 		}
 
 		public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
-				if (resultmap.size() > 0) {
-					final ArrayList<Spanned> titoli = resultmap.get("titoli");
-					final ArrayList<Spanned> descrizioni = resultmap
-							.get("descrizioni");
-					ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
-							news.this, android.R.layout.simple_list_item_1,
-							titoli);
-					setContentView(R.layout.list_item);
-					ListView listView = (ListView) news.this
-							.findViewById(android.R.id.list);
-					listView.setAdapter(adapter);
-					listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-						public void onItemClick(AdapterView<?> parentView,
-								View childView, int position, long id) {
-							Intent intent = new Intent(news.this,
-									ListItemSelectedNews.class);
-							intent.putExtra(TITLE,
-									Html.toHtml(titoli.get(position)));
-							intent.putExtra(DESC,
-									Html.toHtml(descrizioni.get(position)));
-							startActivity(intent);
-						}
-					});
-				}
-				mDialog.dismiss();
+			if (resultmap.size() > 0) {
+				final ArrayList<Spanned> titoli = resultmap.get("titoli");
+				final ArrayList<Spanned> descrizioni = resultmap
+						.get("descrizioni");
+				
+				ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
+						news.this, android.R.layout.simple_list_item_1, titoli);
+				setContentView(R.layout.list_item);
+				ListView listView = (ListView) news.this
+						.findViewById(android.R.id.list);
+				listView.setAdapter(adapter);
+				listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					public void onItemClick(AdapterView<?> parentView,
+							View childView, int position, long id) {
+						Intent intent = new Intent(news.this,
+								ListItemSelectedNews.class);
+						intent.putExtra(TITLE,
+								Html.toHtml(titoli.get(position)));
+						intent.putExtra(DESC,
+								Html.toHtml(descrizioni.get(position)));
+						startActivity(intent);
+					}
+				});
 			}
+			mDialog.dismiss();
 		}
+	}
 }

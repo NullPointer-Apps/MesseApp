@@ -26,5 +26,7 @@
     <string name="notavailable">La funzione che vuoi usare non è ancora disponibile</string>
     <string name="cancelednews">Hai annullato il download delle News</string>
     <string name="canceledcalendar">Hai annullato il download degli Eventi</string>
+    <string name="contatti">Contatti</string>
+    <string name="orario">Orario</string>
 
 </resources>

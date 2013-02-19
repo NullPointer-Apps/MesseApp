@@ -5,5 +5,20 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/Info"/>
+    <item
+        android:id="@+id/contatti"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/contatti"/>
+    <item
+        android:id="@+id/orario"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/orario"/>
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/exit"/>
 
 </menu>

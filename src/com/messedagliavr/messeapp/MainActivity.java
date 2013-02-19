@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		System.out.println("prova");
 		layoutid = R.id.activity_main;
 	}
 
@@ -63,6 +65,24 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.exit:
 			super.finish();
+			break;
+		case R.id.orario:
+			Toast.makeText(MainActivity.this, R.string.notavailable,
+					Toast.LENGTH_LONG).show();
+			/*
+			 * new DownloadImageTask((ImageView)
+			 * findViewById(R.id.immagineOrario)) .execute(
+			 * "http://www.messedagliavr.it/images/stories/2012-13/orario/classi/edc0000127p00001sfffffffffffff_1d_ac.png"
+			 * ); setContentView(R.layout.orario); layoutid = R.id.orario;
+			 */
+			break;
+		case R.id.contatti:
+			Toast.makeText(MainActivity.this, R.string.notavailable,
+					Toast.LENGTH_LONG).show();
+			/*
+			 * setContentView(R.layout.contatti); layoutid = R.id.contatti;
+			 */
+
 			break;
 		}
 		return true;
@@ -100,13 +120,14 @@ public class MainActivity extends Activity {
 	public void news(View view) {
 		if (CheckInternet() == true) {
 			setContentView(R.layout.list_item);
+			System.out.println("prova");
 			startActivity(new Intent(this, news.class));
 		} else {
 			Toast.makeText(MainActivity.this, R.string.noconnection,
 					Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	public void calendar(View view) {
 		if (CheckInternet() == true) {
 			setContentView(R.layout.list_item);
@@ -116,7 +137,7 @@ public class MainActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	public void notavailable(View view) {
 		Toast.makeText(MainActivity.this, R.string.notavailable,
 				Toast.LENGTH_LONG).show();

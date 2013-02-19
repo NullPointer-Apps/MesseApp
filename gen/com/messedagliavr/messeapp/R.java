@@ -34,8 +34,8 @@ public final class R {
         public static final int ImageFoto=0x7f080002;
         public static final int ImageNotizie=0x7f080005;
         public static final int ImageSocial=0x7f080001;
-        public static final int ImageView01=0x7f08001c;
-        public static final int ImageView02=0x7f08001d;
+        public static final int ImageView01=0x7f08001e;
+        public static final int ImageView02=0x7f08001f;
         public static final int ImageVoti=0x7f080009;
         public static final int ScrollView01=0x7f080017;
         public static final int TextAmbro=0x7f08000e;
@@ -55,10 +55,13 @@ public final class R {
         public static final int TextVoti=0x7f08000a;
         public static final int TitoloView=0x7f080018;
         public static final int activity_main=0x7f080000;
-        public static final int exit=0x7f08001f;
-        public static final int info=0x7f08001e;
-        public static final int product_label=0x7f08001a;
-        public static final int social=0x7f08001b;
+        public static final int contatti=0x7f080021;
+        public static final int exit=0x7f080022;
+        public static final int immagineOrario=0x7f08001a;
+        public static final int info=0x7f080020;
+        public static final int orario=0x7f08001b;
+        public static final int product_label=0x7f08001c;
+        public static final int social=0x7f08001d;
         public static final int textAmbro=0x7f080016;
     }
     public static final class layout {
@@ -66,8 +69,9 @@ public final class R {
         public static final int info=0x7f030001;
         public static final int list_item=0x7f030002;
         public static final int list_item_selected=0x7f030003;
-        public static final int single_item=0x7f030004;
-        public static final int social=0x7f030005;
+        public static final int orario=0x7f030004;
+        public static final int single_item=0x7f030005;
+        public static final int social=0x7f030006;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
@@ -87,6 +91,7 @@ public final class R {
         public static final int bianchi=0x7f05000f;
         public static final int canceledcalendar=0x7f050018;
         public static final int cancelednews=0x7f050017;
+        public static final int contatti=0x7f050019;
         public static final int debla=0x7f05000c;
         public static final int dev=0x7f050011;
         public static final int exit=0x7f050009;
@@ -98,6 +103,7 @@ public final class R {
         public static final int noconnectioncalendar=0x7f050014;
         public static final int nodescription=0x7f050015;
         public static final int notavailable=0x7f050016;
+        public static final int orario=0x7f05001a;
         public static final int otdev=0x7f050013;
     }
     public static final class style {
