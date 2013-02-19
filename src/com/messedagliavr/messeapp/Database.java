@@ -7,11 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
-	public static final String NOME_DB = "data";
-	static Calendar rightNow = Calendar.getInstance();
-	public static final int VERSIONE_DB = rightNow.get(Calendar.DAY_OF_WEEK_IN_MONTH);;
+	public static final String NOME_DB = "messeapp.db";
+	public static final int VERSIONE_DB = 1;
 
-	private static final String CREATE_TABLE = "create table (" + DataElements.TITOLO + " TEXT,"/*+ DataElements.DESCRIZIONE + " TEXT"*/ + ");";
+	private static final String CREATE_TABLE = "CREATE TABLE news (id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,description text);";
 
 	public Database(Context context) {
 		super(context, NOME_DB, null, VERSIONE_DB);
@@ -21,7 +20,7 @@ public class Database extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		System.err.println("Dentro create tables - " + Calendar.DAY_OF_WEEK_IN_MONTH);
+		System.err.println("Dentro create tables - ");
 		try {
 		db.execSQL(CREATE_TABLE);
 		} catch (Exception e) {
@@ -30,7 +29,7 @@ public class Database extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Metodo usato per fare upgrade del DB se il numero di versione nuovo è
+	 * Metodo usato per fare upgrade del DB se il numero di versione nuovo ÔøΩ
 	 * maggiore del vecchio
 	 */
 	@Override

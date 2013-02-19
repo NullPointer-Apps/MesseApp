@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,7 +66,6 @@ public class news extends ListActivity {
 							connection.this.cancel(true);
 						}
 					});
-			mDialog.show();
 		}
 
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
@@ -88,24 +88,29 @@ public class news extends ListActivity {
 			Document doc = parser.getDomElement(xml); // getting DOM element
 			NodeList nl = doc.getElementsByTagName(ITEM);
 
-			System.out.println("prova2");
+
+			ContentValues values = new ContentValues();
 			
 			for (int i = 0; i < nl.getLength(); i++) {
 				HashMap<String, Spanned> map = new HashMap<String, Spanned>();
 				e = (Element) nl.item(i);
+				values.put("id", i);
+				values.put(TITLE, parser.getValue(e, TITLE));
+				values.put(DESC, parser.getValue(e, DESC));
 				map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
 				map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 
 				titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
 				descrizioni.add(Html.fromHtml(parser.getValue(e, DESC)));
-				
-				DataElements.insertElement(db, parser.getValue(e, TITLE)/*,
-						parser.getValue(e, DESC)*/);
 				// adding HashList to ArrayList
 				menuItems.add(map);
 
 			}
-
+			long newRowId;
+			newRowId = db.insert(
+			         "news",
+			         null,
+			         values);
 			temhashmap.put("titoli", titoli);
 			temhashmap.put("descrizioni", descrizioni);
 			return temhashmap;
