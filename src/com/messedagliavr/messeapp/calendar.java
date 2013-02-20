@@ -1,6 +1,9 @@
 package com.messedagliavr.messeapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.w3c.dom.Document;
@@ -9,8 +12,12 @@ import org.w3c.dom.NodeList;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -28,6 +35,22 @@ public class calendar extends ListActivity {
 		Intent main = new Intent(this, MainActivity.class);
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
+	}
+	private Long getTimeDiff(String time,String curTime) throws ParseException
+	{ 
+	    Date curDate = null ;
+	    Date oldDate = null ; 
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    try {
+			curDate =(Date)formatter.parse(curTime);
+			oldDate = (Date)formatter.parse(time);
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+		}
+	    long oldMillis=oldDate.getTime();
+	    long curMillis=curDate.getTime();
+	    long diff=curMillis-oldMillis;
+	    return diff;
 	}
 
 	public static final String TITLE = "title";
@@ -67,41 +90,91 @@ public class calendar extends ListActivity {
 
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
 				Void... params) {
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
-			// All static variables
 			final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
-			// XML node keys
-			final String ITEM = "item"; // parent node
+			final String ITEM = "item";
 			final String TITLE = "title";
 			final String DESC = "description";
 			Element e = null;
 			ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
-			XMLParser parser = new XMLParser();
-			String xml = parser.getXmlFromUrl(URL); // getting XML
-			Document doc = parser.getDomElement(xml); // getting DOM element
-			NodeList nl = doc.getElementsByTagName(ITEM);
+			String[] outdated = { "newsdate" , "calendardate"};
+	        Calendar c = Calendar.getInstance();
+	        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        String now = df.format(c.getTime());
+	        Cursor date = db.query(
+	        		"lstchk", // The table to query
+					outdated, // The columns to return
+					null, // The columns for the WHERE clause
+					null, // The values for the WHERE clause
+					null, // don't group the rows
+					null, // don't filter by row groups
+					null // The sort order
+					);
+	        date.moveToFirst();
+	        String past = date.getString(date.getColumnIndex("calendardate"));
+	        long l = getTimeDiff(past,now);
+	        if (l/10800000>=3){
+				XMLParser parser = new XMLParser();
+				String xml = parser.getXmlFromUrl(URL); // getting XML
+				Document doc = parser.getDomElement(xml); // getting DOM element
+				NodeList nl = doc.getElementsByTagName(ITEM);
+				ContentValues values = new ContentValues();
+				for (int i = 0; i < nl.getLength(); i++) {
+					HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+					e = (Element) nl.item(i);
+					values.put("id", i);
+					values.put(TITLE, parser.getValue(e, TITLE));
+					values.put(DESC, parser.getValue(e, DESC));
+					map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
+					map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 
-			for (int i = 0; i < nl.getLength(); i++) {
-				HashMap<String, Spanned> map = new HashMap<String, Spanned>();
-				e = (Element) nl.item(i);
-				map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
-				map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
-				// adding HashList to ArrayList
-				menuItems.add(map);
+					titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
+					descrizioni.add(Html.fromHtml(parser.getValue(e, DESC)));
+					// adding HashList to ArrayList
+					menuItems.add(map);
+					long newRowId = db.insert("calendar", null, values);
 
-			}
+				}
+				ContentValues nowdb = new ContentValues();
+				nowdb.put("calendardate", now);
+				long samerow= db.update("lstchk", nowdb, null,null);
+				temhashmap.put("titoli", titoli);
+				temhashmap.put("descrizioni", descrizioni);
+				return temhashmap;
+	        	
+	        } else {
+	        	String[] clmndata = { "title", "description" };
+				String sortOrder = "id";
 
-			for (int c = 0; c < nl.getLength(); c++) {
-				e = (Element) nl.item(c);
+				Cursor data = db.query("calendar", // The table to query
+						clmndata, // The columns to return
+						null, // The columns for the WHERE clause
+						null, // The values for the WHERE clause
+						null, // don't group the rows
+						null, // don't filter by row groups
+						sortOrder // The sort order
+						);
+				
+				for (data.move(0); data.moveToNext(); data.isAfterLast()) {
+					HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+					map.put(TITLE, Html.fromHtml(data.getString(data.getColumnIndex("title"))));
+					map.put(DESC, Html.fromHtml(data.getString(data.getColumnIndex("description"))));
 
-				titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
-				descrizioni.add(Html.fromHtml(parser.getValue(e, DESC)));
-			}
-			temhashmap.put("titoli", titoli);
-			temhashmap.put("descrizioni", descrizioni);
-			return temhashmap;
+					titoli.add(Html.fromHtml(data.getString(data.getColumnIndex("title"))));
+					descrizioni.add(Html.fromHtml(data.getString(data.getColumnIndex("description"))));
+					// adding HashList to ArrayList
+					menuItems.add(map);
+
+				}
+				temhashmap.put("titoli", titoli);
+				temhashmap.put("descrizioni", descrizioni);
+				return temhashmap;
+	        	
+	        }
 		}
 
 		public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
