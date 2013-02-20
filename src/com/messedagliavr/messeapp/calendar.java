@@ -53,7 +53,7 @@ public class calendar extends ListActivity {
 			Database databaseHelper = new Database(getBaseContext());
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			ContentValues nowdb = new ContentValues();
-			nowdb.put("newscalendar", "2012-02-20 15:00:00");
+			nowdb.put("calendardate", "2012-02-20 15:00:00");
 			long samerow= db.update("lstchk", nowdb, null,null);
 			new connection().execute();
 			break;
