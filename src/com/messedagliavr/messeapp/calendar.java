@@ -10,6 +10,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import com.messedagliavr.messeapp.news.connection;
+
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -22,6 +24,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +40,27 @@ public class calendar extends ListActivity {
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.list_item, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.refresh:
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			ContentValues nowdb = new ContentValues();
+			nowdb.put("newscalendar", "2012-02-20 15:00:00");
+			long samerow= db.update("lstchk", nowdb, null,null);
+			new connection().execute();
+			break;
+		}
+		return true;
+	}
+	
 	private Long getTimeDiff(String time,String curTime) throws ParseException
 	{ 
 	    Date curDate = null ;

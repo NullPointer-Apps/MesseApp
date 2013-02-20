@@ -28,5 +28,6 @@
 	<string name="canceledcalendar">You aborted Events\' download</string>
 	<string name="contatti">Contacts</string>
 	<string name="orario">School Hours</string>
+	<string name="refresh">Refresh</string>
 	
 </resources>

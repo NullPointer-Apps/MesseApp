@@ -25,6 +25,8 @@ import android.text.Spanned;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,6 +47,26 @@ public class news extends ListActivity {
 		mDialog = new ProgressDialog(news.this);
 		super.onCreate(savedInstanceState);
 		new connection().execute();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.list_item, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.refresh:
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			ContentValues nowdb = new ContentValues();
+			nowdb.put("newsdate", "2012-02-20 15:00:00");
+			long samerow= db.update("lstchk", nowdb, null,null);
+			new connection().execute();
+			break;
+		}
+		return true;
 	}
 	
 	private Long getTimeDiff(String time,String curTime) throws ParseException
