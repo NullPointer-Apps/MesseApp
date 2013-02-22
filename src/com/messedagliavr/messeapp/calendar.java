@@ -35,9 +35,13 @@ import android.widget.Toast;
 @SuppressWarnings("unused")
 @SuppressLint("SimpleDateFormat")
 public class calendar extends ListActivity {
+	public SQLiteDatabase db;
+	public Cursor data;
 
 	@Override
 	public void onBackPressed() {
+		db.close();
+		data.close();
 		Intent main = new Intent(this, MainActivity.class);
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
@@ -119,7 +123,7 @@ public class calendar extends ListActivity {
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
 				Void... params) {
 			Database databaseHelper = new Database(getBaseContext());
-			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			db = databaseHelper.getWritableDatabase();
 			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
@@ -171,6 +175,7 @@ public class calendar extends ListActivity {
 								.add(Html.fromHtml(parser.getValue(el, DESC)));
 						// adding HashList to ArrayList
 						menuItems.add(map);
+						db.delete("calendar",null,null);
 						long newRowId = db.insert("calendar", null, values);
 
 					}
@@ -186,7 +191,7 @@ public class calendar extends ListActivity {
 				String[] clmndata = { "title", "description" };
 				String sortOrder = "id";
 
-				Cursor data = db.query("calendar", // The table to query
+				 data = db.query("calendar", // The table to query
 						clmndata, // The columns to return
 						null, // The columns for the WHERE clause
 						null, // The values for the WHERE clause

@@ -45,6 +45,8 @@ public class news extends ListActivity {
 	public Boolean canceled = true;
 	ProgressDialog mDialog;
 	public Boolean unknhost = false;
+	public SQLiteDatabase db;
+	public Cursor data;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,8 @@ public class news extends ListActivity {
 
 	@Override
 	public void onBackPressed() {
+		db.close();
+		data.close();
 		Intent main = new Intent(this, MainActivity.class);
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
@@ -126,7 +130,7 @@ public class news extends ListActivity {
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
 				Void... params) {
 			Database databaseHelper = new Database(getBaseContext());
-			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			db = databaseHelper.getWritableDatabase();
 			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
@@ -184,6 +188,7 @@ public class news extends ListActivity {
 					}
 					ContentValues nowdb = new ContentValues();
 					nowdb.put("newsdate", now);
+					db.delete("news",null,null);
 					long samerow = db.update("lstchk", nowdb, null, null);
 					temhashmap.put("titoli", titoli);
 					temhashmap.put("descrizioni", descrizioni);
@@ -194,7 +199,7 @@ public class news extends ListActivity {
 				String[] clmndata = { "title", "description" };
 				String sortOrder = "id";
 
-				Cursor data = db.query("news", // The table to query
+				data = db.query("news", // The table to query
 						clmndata, // The columns to return
 						null, // The columns for the WHERE clause
 						null, // The values for the WHERE clause
@@ -237,7 +242,6 @@ public class news extends ListActivity {
 				main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(main);
 			} else {
-				System.out.println("No if onpost");
 				if (resultmap.size() > 0) {
 					final ArrayList<Spanned> titoli = resultmap.get("titoli");
 					final ArrayList<Spanned> descrizioni = resultmap
