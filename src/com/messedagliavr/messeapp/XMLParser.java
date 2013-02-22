@@ -43,6 +43,7 @@ public class XMLParser {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+			xml ="UnknownHostException";
 		}
 		return xml;
 	}

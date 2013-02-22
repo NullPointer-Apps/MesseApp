@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +16,7 @@ public class MainActivity extends Activity {
 	int layoutid;
 
 	public boolean CheckInternet() {
+		boolean connected = false;
 		ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		android.net.NetworkInfo wifi = connec
 				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -24,12 +24,18 @@ public class MainActivity extends Activity {
 				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
 		if (wifi.isConnected()) {
-			return true;
-		} else if (mobile.isConnected()) {
-			return true;
+			connected = true;
 		} else {
-			return false;
+			try {
+				if (mobile.isConnected())
+					connected = true;
+			} catch (Exception e) {
+			}
+
 		}
+
+		return connected;
+
 	}
 
 	@Override
@@ -65,16 +71,6 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.exit:
 			super.finish();
-			break;
-		case R.id.orario:
-			Toast.makeText(MainActivity.this, R.string.notavailable,
-					Toast.LENGTH_LONG).show();
-			/*
-			 * new DownloadImageTask((ImageView)
-			 * findViewById(R.id.immagineOrario)) .execute(
-			 * "http://www.messedagliavr.it/images/stories/2012-13/orario/classi/edc0000127p00001sfffffffffffff_1d_ac.png"
-			 * ); setContentView(R.layout.orario); layoutid = R.id.orario;
-			 */
 			break;
 		case R.id.contatti:
 			Toast.makeText(MainActivity.this, R.string.notavailable,

@@ -93,6 +93,7 @@ public final class R {
         public static final int bianchi=0x7f05000f;
         public static final int canceledcalendar=0x7f050018;
         public static final int cancelednews=0x7f050017;
+        public static final int connerr=0x7f05001c;
         public static final int contatti=0x7f050019;
         public static final int debla=0x7f05000c;
         public static final int dev=0x7f050011;
