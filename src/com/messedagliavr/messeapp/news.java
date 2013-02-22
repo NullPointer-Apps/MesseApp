@@ -76,6 +76,31 @@ public class news extends ListActivity {
 		return true;
 	}
 
+	public boolean checkForTables() {
+		Boolean hasTables=null;
+		Database databaseHelper = new Database(getBaseContext());
+		db = databaseHelper.getWritableDatabase();
+		Cursor cur = db.rawQuery("SELECT COUNT(*) FROM news", null);
+		if (cur != null) {
+		    cur.moveToFirst();                       // Always one row returned.
+		    if (cur.getInt (0) == 0) {               // Zero count means empty table.
+		    	hasTables = false;
+		    } else {
+		    	hasTables = true;
+		    }
+		}
+		Cursor cursor = db.rawQuery("SELECT id FROM news", null);
+		if (cursor.getCount() == 0) {
+			
+			if (cursor.getCount() > 0) {
+				hasTables = true;
+			}
+		}
+		db.close();
+		cursor.close();
+		return hasTables;
+	}
+
 	@SuppressLint("SimpleDateFormat")
 	private Long getTimeDiff(String time, String curTime) throws ParseException {
 		Date curDate = null;
@@ -156,6 +181,7 @@ public class news extends ListActivity {
 					);
 			date.moveToFirst();
 			String past = date.getString(date.getColumnIndex("newsdate"));
+			date.close();
 			long l = getTimeDiff(past, now);
 			if (l / 10800000 >= 3) {
 				XMLParser parser = new XMLParser();
@@ -163,7 +189,6 @@ public class news extends ListActivity {
 				if (xml == "UnknownHostException") {
 					unknhost = true;
 					db.close();
-					date.close();
 					return temhashmap;
 				} else {
 					Document doc = parser.getDomElement(xml);
@@ -183,12 +208,20 @@ public class news extends ListActivity {
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
 						// adding HashList to ArrayList
 						menuItems.add(map);
+						db.delete("news", null, null);
 						long newRowId = db.insert("news", null, values);
+						/*db.close();
+						if (checkForTables()==true){
+						db = databaseHelper.getWritableDatabase();
+						long newRowId = db.updateWithOnConflict("news", values, null,null,SQLiteDatabase.CONFLICT_REPLACE);	
+						}else {
+						db = databaseHelper.getWritableDatabase();
+						long newRowId = db.insert("news", null, values);
+						}*/
 
 					}
 					ContentValues nowdb = new ContentValues();
 					nowdb.put("newsdate", now);
-					db.delete("news",null,null);
 					long samerow = db.update("lstchk", nowdb, null, null);
 					temhashmap.put("titoli", titoli);
 					temhashmap.put("descrizioni", descrizioni);
@@ -236,8 +269,8 @@ public class news extends ListActivity {
 		public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
 			if (unknhost == true) {
 				mDialog.dismiss();
-				Toast.makeText(news.this, R.string.connerr,
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(news.this, R.string.connerr, Toast.LENGTH_LONG)
+						.show();
 				Intent main = new Intent(news.this, MainActivity.class);
 				main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(main);

@@ -119,6 +119,22 @@ public class calendar extends ListActivity {
 					});
 			mDialog.show();
 		}
+		
+		public boolean checkForTables() {
+			Boolean hasTables=null;
+			Database databaseHelper = new Database(getBaseContext());
+			db = databaseHelper.getWritableDatabase();
+			Cursor cursor = db.rawQuery("SELECT * FROM calendar", null);
+			if (cursor.getCount() == 0) {
+				hasTables = false;
+				if (cursor.getCount() > 0) {
+					hasTables = true;
+				}
+			}
+			db.close();
+			cursor.close();
+			return hasTables;
+		}
 
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
 				Void... params) {
@@ -131,7 +147,7 @@ public class calendar extends ListActivity {
 			final String ITEM = "item";
 			final String TITLE = "title";
 			final String DESC = "description";
-			Element el = null;
+			Element e = null;
 			ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
 			String[] outdated = { "newsdate", "calendardate" };
 			Calendar c = Calendar.getInstance();
@@ -147,6 +163,7 @@ public class calendar extends ListActivity {
 					);
 			date.moveToFirst();
 			String past = date.getString(date.getColumnIndex("calendardate"));
+			date.close();
 			long l = getTimeDiff(past, now);
 			if (l / 10800000 >= 3) {
 				XMLParser parser = new XMLParser();
@@ -154,7 +171,6 @@ public class calendar extends ListActivity {
 				if (xml == "UnknownHostException") {
 					unknhost = true;
 					db.close();
-					date.close();
 					return temhashmap;
 				} else {
 					Document doc = parser.getDomElement(xml);
@@ -162,21 +178,27 @@ public class calendar extends ListActivity {
 					ContentValues values = new ContentValues();
 					for (int i = 0; i < nl.getLength(); i++) {
 						HashMap<String, Spanned> map = new HashMap<String, Spanned>();
-						el = (Element) nl.item(i);
+						e = (Element) nl.item(i);
 						values.put("id", i);
-						values.put(TITLE, parser.getValue(el, TITLE));
-						values.put(DESC, parser.getValue(el, DESC));
+						values.put(TITLE, parser.getValue(e, TITLE));
+						values.put(DESC, parser.getValue(e, DESC));
 						map.put(TITLE,
-								Html.fromHtml(parser.getValue(el, TITLE)));
-						map.put(DESC, Html.fromHtml(parser.getValue(el, DESC)));
+								Html.fromHtml(parser.getValue(e, TITLE)));
+						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 
-						titoli.add(Html.fromHtml(parser.getValue(el, TITLE)));
+						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
 						descrizioni
-								.add(Html.fromHtml(parser.getValue(el, DESC)));
+								.add(Html.fromHtml(parser.getValue(e, DESC)));
 						// adding HashList to ArrayList
 						menuItems.add(map);
-						db.delete("calendar",null,null);
+						db.close();
+						if (checkForTables()==true){
+						db = databaseHelper.getWritableDatabase();
+						long newRowId = db.updateWithOnConflict("calendar", values, null,null,SQLiteDatabase.CONFLICT_REPLACE);	
+						}else {
+						db = databaseHelper.getWritableDatabase();
 						long newRowId = db.insert("calendar", null, values);
+						}
 
 					}
 					ContentValues nowdb = new ContentValues();
