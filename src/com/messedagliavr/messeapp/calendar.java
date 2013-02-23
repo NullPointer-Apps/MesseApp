@@ -121,7 +121,7 @@ public class calendar extends ListActivity {
 		}
 		
 		public boolean checkForTables() {
-			Boolean hasTables=null;
+			Boolean hasTables=false;
 			Database databaseHelper = new Database(getBaseContext());
 			db = databaseHelper.getWritableDatabase();
 			Cursor cursor = db.rawQuery("SELECT * FROM calendar", null);
@@ -197,7 +197,7 @@ public class calendar extends ListActivity {
 						long newRowId = db.updateWithOnConflict("calendar", values, null,null,SQLiteDatabase.CONFLICT_REPLACE);	
 						}else {
 						db = databaseHelper.getWritableDatabase();
-						long newRowId = db.insert("calendar", null, values);
+						long newRowId = db.insertWithOnConflict("calendar", null, values, SQLiteDatabase.CONFLICT_REPLACE);
 						}
 
 					}
