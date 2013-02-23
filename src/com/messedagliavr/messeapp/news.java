@@ -197,7 +197,7 @@ public class news extends ListActivity {
 					for (int i = 0; i < nl.getLength(); i++) {
 						HashMap<String, Spanned> map = new HashMap<String, Spanned>();
 						e = (Element) nl.item(i);
-						values.put("id", i);
+						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
 						values.put(DESC, parser.getValue(e, DESC));
 						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
@@ -208,8 +208,7 @@ public class news extends ListActivity {
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
 						// adding HashList to ArrayList
 						menuItems.add(map);
-						db.delete("news", null, null);
-						long newRowId = db.insert("news", null, values);
+						long newRowId = db.insertWithOnConflict("news", null, values, SQLiteDatabase.CONFLICT_REPLACE);
 						/*db.close();
 						if (checkForTables()==true){
 						db = databaseHelper.getWritableDatabase();
@@ -230,7 +229,7 @@ public class news extends ListActivity {
 				}
 			} else {
 				String[] clmndata = { "title", "description" };
-				String sortOrder = "id";
+				String sortOrder = "_id";
 
 				data = db.query("news", // The table to query
 						clmndata, // The columns to return

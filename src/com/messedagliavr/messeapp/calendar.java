@@ -86,6 +86,7 @@ public class calendar extends ListActivity {
 
 	public static final String TITLE = "title";
 	public static final String DESC = "description";
+	public static final String ICAL = "ical";
 	public String[] titolim;
 	public String[] descrizionim;
 	ProgressDialog mDialog;
@@ -119,9 +120,9 @@ public class calendar extends ListActivity {
 					});
 			mDialog.show();
 		}
-		
+
 		public boolean checkForTables() {
-			Boolean hasTables=null;
+			Boolean hasTables = null;
 			Database databaseHelper = new Database(getBaseContext());
 			db = databaseHelper.getWritableDatabase();
 			Cursor cursor = db.rawQuery("SELECT * FROM calendar", null);
@@ -143,6 +144,7 @@ public class calendar extends ListActivity {
 			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
+			ArrayList<Spanned> icalarr = new ArrayList<Spanned>();
 			final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
 			final String ITEM = "item";
 			final String TITLE = "title";
@@ -179,9 +181,31 @@ public class calendar extends ListActivity {
 					for (int i = 0; i < nl.getLength(); i++) {
 						HashMap<String, Spanned> map = new HashMap<String, Spanned>();
 						e = (Element) nl.item(i);
-						values.put("id", i);
+						String  idnp =parser.getValue(e, "link");
+						char [] idnpa =idnp.toCharArray();
+						String icalr= "";
+						int cnt=0;
+						int lnt = idnp.length();
+						for( int j=lnt-1;j>0;j--) {
+							if (idnpa[j]=='/') {
+								cnt++;
+		    							}	
+							if (cnt==2) {
+								icalr += idnpa[j-1];
+										    }
+							if (cnt>2) {
+								j=0;
+								    }
+						}
+						String ical = new 
+								StringBuffer(icalr).reverse().toString();
+						ical= ical.substring(1, ical.length());
+						System.out.println("Ical è " + ical);
+						values.put("ical",ical);	
+						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
 						values.put(DESC, parser.getValue(e, DESC));
+						map.put("ical",Html.fromHtml(ical));
 						map.put(TITLE,
 								Html.fromHtml(parser.getValue(e, TITLE)));
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
@@ -189,16 +213,9 @@ public class calendar extends ListActivity {
 						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
 						descrizioni
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
-						// adding HashList to ArrayList
+						icalarr.add(Html.fromHtml(ical));
 						menuItems.add(map);
-						db.close();
-						if (checkForTables()==true){
-						db = databaseHelper.getWritableDatabase();
-						long newRowId = db.updateWithOnConflict("calendar", values, null,null,SQLiteDatabase.CONFLICT_REPLACE);	
-						}else {
-						db = databaseHelper.getWritableDatabase();
-						long newRowId = db.insert("calendar", null, values);
-						}
+						long newRowId = db.insertWithOnConflict("calendar", null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
 					}
 					ContentValues nowdb = new ContentValues();
@@ -206,12 +223,13 @@ public class calendar extends ListActivity {
 					long samerow = db.update("lstchk", nowdb, null, null);
 					temhashmap.put("titoli", titoli);
 					temhashmap.put("descrizioni", descrizioni);
+					temhashmap.put("ical",icalarr);
 					return temhashmap;
 
 				}
 			} else {
-				String[] clmndata = { "title", "description" };
-				String sortOrder = "id";
+				String[] clmndata = { "title", "description","ical" };
+				String sortOrder = "_id";
 
 				 data = db.query("calendar", // The table to query
 						clmndata, // The columns to return
@@ -228,11 +246,15 @@ public class calendar extends ListActivity {
 							.getColumnIndex("title"))));
 					map.put(DESC, Html.fromHtml(data.getString(data
 							.getColumnIndex("description"))));
+					map.put("ical",Html.fromHtml(data.getString(data
+							.getColumnIndex("ical"))));
 
 					titoli.add(Html.fromHtml(data.getString(data
 							.getColumnIndex("title"))));
 					descrizioni.add(Html.fromHtml(data.getString(data
 							.getColumnIndex("description"))));
+					icalarr.add(Html.fromHtml(data.getString(data
+							.getColumnIndex("ical"))));
 					// adding HashList to ArrayList
 					menuItems.add(map);
 
@@ -241,6 +263,7 @@ public class calendar extends ListActivity {
 				db.close();
 				temhashmap.put("titoli", titoli);
 				temhashmap.put("descrizioni", descrizioni);
+				temhashmap.put("ical",icalarr);
 				return temhashmap;
 
 			}
@@ -260,6 +283,7 @@ public class calendar extends ListActivity {
 					final ArrayList<Spanned> titoli = resultmap.get("titoli");
 					final ArrayList<Spanned> descrizioni = resultmap
 							.get("descrizioni");
+					final ArrayList<Spanned> icalarr = resultmap.get("ical");
 					ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
 							calendar.this, android.R.layout.simple_list_item_1,
 							titoli);
@@ -277,6 +301,7 @@ public class calendar extends ListActivity {
 										Html.toHtml(titoli.get(position)));
 								intent.putExtra(DESC,
 										Html.toHtml(descrizioni.get(position)));
+								intent.putExtra(ICAL, icalarr.get(position));
 								startActivity(intent);
 							} else {
 								Toast.makeText(calendar.this,

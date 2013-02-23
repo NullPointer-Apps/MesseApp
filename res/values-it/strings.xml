@@ -30,5 +30,6 @@
     <string name="orario">Orario</string>
     <string name="refresh">Aggiorna</string>
     <string name="connerr">C\'è un problema con la tua connessione</string>
+    <string name="ical">Importa in Calendario</string>
 
 </resources>

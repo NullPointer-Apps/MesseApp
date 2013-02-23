@@ -57,6 +57,7 @@ public final class R {
         public static final int activity_main=0x7f080000;
         public static final int contatti=0x7f080021;
         public static final int exit=0x7f080022;
+        public static final int ical=0x7f080024;
         public static final int immagineOrario=0x7f08001a;
         public static final int info=0x7f080020;
         public static final int orario=0x7f08001b;
@@ -100,6 +101,7 @@ public final class R {
         public static final int exit=0x7f050009;
         public static final int graphic=0x7f050012;
         public static final int grezzana=0x7f05000d;
+        public static final int ical=0x7f05001d;
         public static final int iervasi=0x7f050010;
         public static final int main_title=0x7f050002;
         public static final int noconnection=0x7f05000a;
