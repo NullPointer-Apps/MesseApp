@@ -31,7 +31,6 @@ public class ListItemSelectedCalendar extends Activity {
 			Intent intent = getIntent();
 			String ical="http://www.messedaglia.it/index.php/calendario/icals.icalevent/-?template=component&evid="+intent.getStringExtra(calendar.ICAL);
 			Intent calendar = new Intent(Intent.ACTION_VIEW);
-			calendar.setType("text/calendar");
 			calendar.setData(Uri.parse(ical));
 			startActivity(calendar);
 			break;

@@ -1,6 +1,5 @@
 package com.messedagliavr.messeapp;
 
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +19,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ParseException;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -37,6 +37,13 @@ import android.widget.Toast;
 public class calendar extends ListActivity {
 	public SQLiteDatabase db;
 	public Cursor data;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		mDialog = new ProgressDialog(calendar.this);
+		super.onCreate(savedInstanceState);
+		new connection().execute();
+	}
 
 	@Override
 	public void onBackPressed() {
@@ -67,6 +74,7 @@ public class calendar extends ListActivity {
 		}
 		return true;
 	}
+	
 
 	private Long getTimeDiff(String time, String curTime) throws ParseException {
 		Date curDate = null;
@@ -92,12 +100,7 @@ public class calendar extends ListActivity {
 	ProgressDialog mDialog;
 	public Boolean unknhost = false;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		mDialog = new ProgressDialog(calendar.this);
-		super.onCreate(savedInstanceState);
-		new connection().execute();
-	}
+
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
@@ -197,9 +200,11 @@ public class calendar extends ListActivity {
 								j=0;
 								    }
 						}
-						String ical = new 
-								StringBuffer(icalr).reverse().toString();
-						ical= ical.substring(1, ical.length());
+						char [] icalar =icalr.toCharArray();
+						String ical = "";
+						for (int k=icalr.length()-2;k>-1;k--) {
+							ical += icalar[k];
+						}
 						System.out.println("Ical è " + ical);
 						values.put("ical",ical);	
 						values.put("_id", i);
@@ -291,6 +296,15 @@ public class calendar extends ListActivity {
 					ListView listView = (ListView) calendar.this
 							.findViewById(android.R.id.list);
 					listView.setAdapter(adapter);
+					listView.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
+						  public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
+								String ical="http://www.messedaglia.it/index.php/calendario/icals.icalevent/-?template=component&evid="+ icalarr.get(position);
+								Intent calendar = new Intent(Intent.ACTION_VIEW);
+								calendar.setData(Uri.parse(ical));
+								startActivity(calendar);
+							  return true;
+						  }
+						});
 					listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 						public void onItemClick(AdapterView<?> parentView,
 								View childView, int position, long id) {

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
 	public static final String NOME_DB = "messeapp.db";
-	public static final int VERSIONE_DB = 2;
+	public static final int VERSIONE_DB = 3;
 
 	private static final String CREATE_NEWS = "CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,description text not null);";
 	private static final String CREATE_CALENDAR = "CREATE TABLE calendar (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,description text,ical text not null);";
