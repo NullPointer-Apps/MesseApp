@@ -110,12 +110,9 @@ public class calendar extends ListActivity {
 			String xml = parser.getXmlFromUrl(ical);
 			Document doc = parser.getDomElement(xml);
 			NodeList nl = doc.getElementsByTagName("VEVENT");
-<<<<<<< HEAD
+
 			System.out.println("Dopo elements");
-			String[] dati = {"","","","",""};
-=======
 			String[] dati = { "", "", "", "", "" };
->>>>>>> Calendario FIXATO(un po' lento e descrizioni con /n)
 			Element e = (Element) nl.item(0);
 			dati[0] = parser.getValue(e, "SUMMARY");
 			dati[1] = parser.getValue(e, "DESCRIPTION");
