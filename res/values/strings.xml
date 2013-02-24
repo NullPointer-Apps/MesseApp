@@ -31,5 +31,6 @@
 	<string name="refresh">Refresh</string>
 	<string name="connerr">There\'s a problem with your internet connection</string>
 	<string name="ical">Import in Calendar</string>
+	<string name="noapilevel">You don\'t have an enough updated Android verson to use this function</string>
 	
 </resources>

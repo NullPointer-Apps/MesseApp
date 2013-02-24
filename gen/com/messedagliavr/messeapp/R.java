@@ -104,6 +104,7 @@ public final class R {
         public static final int ical=0x7f05001d;
         public static final int iervasi=0x7f050010;
         public static final int main_title=0x7f050002;
+        public static final int noapilevel=0x7f05001e;
         public static final int noconnection=0x7f05000a;
         public static final int noconnectioncalendar=0x7f050014;
         public static final int nodescription=0x7f050015;

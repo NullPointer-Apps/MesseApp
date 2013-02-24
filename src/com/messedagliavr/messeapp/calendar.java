@@ -19,9 +19,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ParseException;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.Menu;
@@ -37,7 +38,7 @@ import android.widget.Toast;
 public class calendar extends ListActivity {
 	public SQLiteDatabase db;
 	public Cursor data;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mDialog = new ProgressDialog(calendar.this);
@@ -74,7 +75,6 @@ public class calendar extends ListActivity {
 		}
 		return true;
 	}
-	
 
 	private Long getTimeDiff(String time, String curTime) throws ParseException {
 		Date curDate = null;
@@ -99,8 +99,6 @@ public class calendar extends ListActivity {
 	public String[] descrizionim;
 	ProgressDialog mDialog;
 	public Boolean unknhost = false;
-
-
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
@@ -184,35 +182,34 @@ public class calendar extends ListActivity {
 					for (int i = 0; i < nl.getLength(); i++) {
 						HashMap<String, Spanned> map = new HashMap<String, Spanned>();
 						e = (Element) nl.item(i);
-						String  idnp =parser.getValue(e, "link");
-						char [] idnpa =idnp.toCharArray();
-						String icalr= "";
-						int cnt=0;
+						String idnp = parser.getValue(e, "link");
+						char[] idnpa = idnp.toCharArray();
+						String icalr = "";
+						int cnt = 0;
 						int lnt = idnp.length();
-						for( int j=lnt-1;j>0;j--) {
-							if (idnpa[j]=='/') {
+						for (int j = lnt - 1; j > 0; j--) {
+							if (idnpa[j] == '/') {
 								cnt++;
-		    							}	
-							if (cnt==2) {
-								icalr += idnpa[j-1];
-										    }
-							if (cnt>2) {
-								j=0;
-								    }
+							}
+							if (cnt == 2) {
+								icalr += idnpa[j - 1];
+							}
+							if (cnt > 2) {
+								j = 0;
+							}
 						}
-						char [] icalar =icalr.toCharArray();
+						char[] icalar = icalr.toCharArray();
 						String ical = "";
-						for (int k=icalr.length()-2;k>-1;k--) {
+						for (int k = icalr.length() - 2; k > -1; k--) {
 							ical += icalar[k];
 						}
 						System.out.println("Ical è " + ical);
-						values.put("ical",ical);	
+						values.put("ical", ical);
 						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
 						values.put(DESC, parser.getValue(e, DESC));
-						map.put("ical",Html.fromHtml(ical));
-						map.put(TITLE,
-								Html.fromHtml(parser.getValue(e, TITLE)));
+						map.put("ical", Html.fromHtml(ical));
+						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 
 						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
@@ -220,7 +217,8 @@ public class calendar extends ListActivity {
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
 						icalarr.add(Html.fromHtml(ical));
 						menuItems.add(map);
-						long newRowId = db.insertWithOnConflict("calendar", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+						long newRowId = db.insertWithOnConflict("calendar",
+								null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
 					}
 					ContentValues nowdb = new ContentValues();
@@ -228,15 +226,15 @@ public class calendar extends ListActivity {
 					long samerow = db.update("lstchk", nowdb, null, null);
 					temhashmap.put("titoli", titoli);
 					temhashmap.put("descrizioni", descrizioni);
-					temhashmap.put("ical",icalarr);
+					temhashmap.put("ical", icalarr);
 					return temhashmap;
 
 				}
 			} else {
-				String[] clmndata = { "title", "description","ical" };
+				String[] clmndata = { "title", "description", "ical" };
 				String sortOrder = "_id";
 
-				 data = db.query("calendar", // The table to query
+				data = db.query("calendar", // The table to query
 						clmndata, // The columns to return
 						null, // The columns for the WHERE clause
 						null, // The values for the WHERE clause
@@ -251,7 +249,7 @@ public class calendar extends ListActivity {
 							.getColumnIndex("title"))));
 					map.put(DESC, Html.fromHtml(data.getString(data
 							.getColumnIndex("description"))));
-					map.put("ical",Html.fromHtml(data.getString(data
+					map.put("ical", Html.fromHtml(data.getString(data
 							.getColumnIndex("ical"))));
 
 					titoli.add(Html.fromHtml(data.getString(data
@@ -268,7 +266,7 @@ public class calendar extends ListActivity {
 				db.close();
 				temhashmap.put("titoli", titoli);
 				temhashmap.put("descrizioni", descrizioni);
-				temhashmap.put("ical",icalarr);
+				temhashmap.put("ical", icalarr);
 				return temhashmap;
 
 			}
@@ -296,15 +294,68 @@ public class calendar extends ListActivity {
 					ListView listView = (ListView) calendar.this
 							.findViewById(android.R.id.list);
 					listView.setAdapter(adapter);
-					listView.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
-						  public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
-								String ical="http://www.messedaglia.it/index.php/calendario/icals.icalevent/-?template=component&evid="+ icalarr.get(position);
-								Intent calendar = new Intent(Intent.ACTION_VIEW);
-								calendar.setData(Uri.parse(ical));
-								startActivity(calendar);
-							  return true;
-						  }
-						});
+					listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+						public int anno(char[] cs) {
+							return (cs[0] - 48) * 1000 + (cs[1] - 48) * 100
+									+ (cs[2] - 48) * 10 + cs[3] - 48;
+						}
+
+						public int mese(char[] cs) {
+							return (cs[4] - 48) * 10 + cs[5] - 49;
+						}
+
+						public int giorno(char[] cs) {
+							return (cs[6] - 48) * 10 + cs[7] - 48;
+						}
+
+						public int ora(char[] cs) {
+							return (cs[9] - 48) * 10 + cs[10] - 48;
+						}
+
+						public int minuti(char[] cs) {
+							return (cs[11] - 48) * 10 + cs[12] - 48;
+						}
+
+						public boolean onItemLongClick(AdapterView<?> parent,
+								View view, int position, long id) {
+							Calendar beginTime = Calendar.getInstance();
+							char[] inizio = "20110330T030000".toCharArray();
+							beginTime
+									.set(anno(inizio), mese(inizio),
+											giorno(inizio), ora(inizio),
+											minuti(inizio));
+							Calendar endTime = Calendar.getInstance();
+							char[] fine = "20110330T080000".toCharArray();
+							endTime.set(anno(fine), mese(fine),
+									giorno(fine), ora(fine),
+									minuti(fine));
+							try {
+								Intent intent = new Intent(Intent.ACTION_INSERT)
+										.setType(
+												"vnd.android.cursor.item/event")
+										.putExtra(
+												CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+												beginTime.getTimeInMillis())
+										.putExtra(
+												CalendarContract.EXTRA_EVENT_END_TIME,
+												endTime.getTimeInMillis())
+										.putExtra(
+												CalendarContract.EXTRA_EVENT_ALL_DAY,
+												false)
+										.putExtra(Events.TITLE,
+												"My Awesome Event")
+										.putExtra(Events.DESCRIPTION,
+												"Heading out with friends to do something awesome.")
+										.putExtra(Events.EVENT_LOCATION,
+												"Liceo Messedaglia,Verona");
+								startActivity(intent);
+							} catch (Exception e) {
+								Toast.makeText(calendar.this, R.string.noapilevel,
+										Toast.LENGTH_LONG).show();
+							}
+							return true;
+						}
+					});
 					listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 						public void onItemClick(AdapterView<?> parentView,
 								View childView, int position, long id) {
