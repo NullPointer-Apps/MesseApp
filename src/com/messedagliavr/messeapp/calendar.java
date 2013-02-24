@@ -25,7 +25,6 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -107,27 +106,24 @@ public class calendar extends ListActivity {
 		protected String[] doInBackground(Void... params) {
 			String ical = "http://lookedpath.altervista.org/test.php?id="
 					+ idical;
-			System.out.println("Prima parser  " + idical);
 			XMLParser parser = new XMLParser();
 			String xml = parser.getXmlFromUrl(ical);
-			System.out.println("Dopo get xml");
 			Document doc = parser.getDomElement(xml);
-			System.out.println("Dopo dom");
 			NodeList nl = doc.getElementsByTagName("VEVENT");
+<<<<<<< HEAD
 			System.out.println("Dopo elements");
 			String[] dati = {"","","","",""};
+=======
+			String[] dati = { "", "", "", "", "" };
+>>>>>>> Calendario FIXATO(un po' lento e descrizioni con /n)
 			Element e = (Element) nl.item(0);
-			System.out.println("Prima array");
 			dati[0] = parser.getValue(e, "SUMMARY");
 			dati[1] = parser.getValue(e, "DESCRIPTION");
 			dati[2] = parser.getValue(e, "LOCATION");
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
 			System.out.println("Dopo array");
-			return dati;
-		}
-
-		public Void onPostExecute(String[]... dati) {
+			System.out.println(dati.toString());
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
 					"yyyyMMdd'T'HHmmss");
 			Date fine = null;
@@ -135,10 +131,7 @@ public class calendar extends ListActivity {
 			try {
 				fine = dateFormat.parse(dati[4].toString());
 				inizio = dateFormat.parse(dati[3].toString());
-			} catch (java.text.ParseException e1) {
-				e1.printStackTrace();
-			}
-			try {
+				System.out.println("Prima secondo try");
 				Intent intent = new Intent(Intent.ACTION_INSERT)
 						.setType("vnd.android.cursor.item/event")
 						.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
@@ -151,13 +144,15 @@ public class calendar extends ListActivity {
 						.putExtra(Events.EVENT_LOCATION,
 								dati[2] + " A. Messedaglia");
 				startActivity(intent);
-			} catch (Exception e) {
+			} catch (java.text.ParseException e1) {
+				e1.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 				Toast.makeText(calendar.this, R.string.noapilevel,
 						Toast.LENGTH_LONG).show();
 			}
-			return null;
+			return dati;
 		}
-
 	}
 
 	public class connection extends
@@ -359,9 +354,12 @@ public class calendar extends ListActivity {
 						public boolean onItemLongClick(AdapterView<?> parent,
 								View view, int position, long id) {
 							idical = Html.toHtml(icalarr.get(position));
-							int l = idical.length()-5;
-							idical = idical.substring(3, l);
+							System.out.println(icalarr + " - " + position
+									+ " - " + icalarr.get(position));
+							int l = idical.length() - 5;
+							idical = idical.substring(11, l);
 							new eventparser().execute();
+							System.out.println("dopo event parser");
 							return true;
 						}
 					});
