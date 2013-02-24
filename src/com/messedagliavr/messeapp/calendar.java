@@ -21,6 +21,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.text.Html;
@@ -198,6 +199,7 @@ public class calendar extends ListActivity {
 								j = 0;
 							}
 						}
+						// segnalibro
 						char[] icalar = icalr.toCharArray();
 						String ical = "";
 						for (int k = icalr.length() - 2; k > -1; k--) {
@@ -318,17 +320,29 @@ public class calendar extends ListActivity {
 
 						public boolean onItemLongClick(AdapterView<?> parent,
 								View view, int position, long id) {
+							StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+							StrictMode.setThreadPolicy(policy);
+							String ical = "http://http://lookedpath.altervista.org/test.php?id="
+									+ icalarr.get(position);
+							XMLParser parser = new XMLParser();
+							Document doc = parser.getDomElement(parser
+									.getXmlFromUrl(ical));
+							NodeList nl = doc.getElementsByTagName("VEVENT");
+							Element el = null;
+							HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+							el = (Element) nl.item(position);
+							String inizio = parser.getValue(el, "DTSTART");
+							String fine = parser.getValue(el, "DTEND");
+
 							Calendar beginTime = Calendar.getInstance();
-							char[] inizio = "20110330T030000".toCharArray();
-							beginTime
-									.set(anno(inizio), mese(inizio),
-											giorno(inizio), ora(inizio),
-											minuti(inizio));
+							char[] inizioc = inizio.toCharArray();
+							beginTime.set(anno(inizioc), mese(inizioc),
+									giorno(inizioc), ora(inizioc),
+									minuti(inizioc));
 							Calendar endTime = Calendar.getInstance();
-							char[] fine = "20110330T080000".toCharArray();
-							endTime.set(anno(fine), mese(fine),
-									giorno(fine), ora(fine),
-									minuti(fine));
+							char[] finec = fine.toCharArray();
+							endTime.set(anno(finec), mese(finec),
+									giorno(finec), ora(finec), minuti(finec));
 							try {
 								Intent intent = new Intent(Intent.ACTION_INSERT)
 										.setType(
@@ -343,15 +357,16 @@ public class calendar extends ListActivity {
 												CalendarContract.EXTRA_EVENT_ALL_DAY,
 												false)
 										.putExtra(Events.TITLE,
-												"My Awesome Event")
+												parser.getValue(el, "SUMMARY"))
 										.putExtra(Events.DESCRIPTION,
-												"Heading out with friends to do something awesome.")
+												parser.getValue(el, "DESCRIPTION"))
 										.putExtra(Events.EVENT_LOCATION,
-												"Liceo Messedaglia,Verona");
+												parser.getValue(el, "LOCATION"));
 								startActivity(intent);
 							} catch (Exception e) {
-								Toast.makeText(calendar.this, R.string.noapilevel,
-										Toast.LENGTH_LONG).show();
+								Toast.makeText(calendar.this,
+										R.string.noapilevel, Toast.LENGTH_LONG)
+										.show();
 							}
 							return true;
 						}
