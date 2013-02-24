@@ -115,7 +115,7 @@ public class calendar extends ListActivity {
 			System.out.println("Dopo dom");
 			NodeList nl = doc.getElementsByTagName("VEVENT");
 			System.out.println("Dopo elements");
-			String[] dati = {};
+			String[] dati = {"","","","",""};
 			Element e = (Element) nl.item(0);
 			System.out.println("Prima array");
 			dati[0] = parser.getValue(e, "SUMMARY");
