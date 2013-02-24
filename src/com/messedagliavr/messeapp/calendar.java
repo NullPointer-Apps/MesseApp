@@ -21,11 +21,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,6 +100,65 @@ public class calendar extends ListActivity {
 	public String[] descrizionim;
 	ProgressDialog mDialog;
 	public Boolean unknhost = false;
+	public String idical = null;
+
+	public class eventparser extends AsyncTask<Void, Void, String[]> {
+		@Override
+		protected String[] doInBackground(Void... params) {
+			String ical = "http://lookedpath.altervista.org/test.php?id="
+					+ idical;
+			System.out.println("Prima parser  " + idical);
+			XMLParser parser = new XMLParser();
+			String xml = parser.getXmlFromUrl(ical);
+			System.out.println("Dopo get xml");
+			Document doc = parser.getDomElement(xml);
+			System.out.println("Dopo dom");
+			NodeList nl = doc.getElementsByTagName("VEVENT");
+			System.out.println("Dopo elements");
+			String[] dati = {};
+			Element e = (Element) nl.item(0);
+			System.out.println("Prima array");
+			dati[0] = parser.getValue(e, "SUMMARY");
+			dati[1] = parser.getValue(e, "DESCRIPTION");
+			dati[2] = parser.getValue(e, "LOCATION");
+			dati[3] = parser.getValue(e, "DTSTART");
+			dati[4] = parser.getValue(e, "DTEND");
+			System.out.println("Dopo array");
+			return dati;
+		}
+
+		public Void onPostExecute(String[]... dati) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat(
+					"yyyyMMdd'T'HHmmss");
+			Date fine = null;
+			Date inizio = null;
+			try {
+				fine = dateFormat.parse(dati[4].toString());
+				inizio = dateFormat.parse(dati[3].toString());
+			} catch (java.text.ParseException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				Intent intent = new Intent(Intent.ACTION_INSERT)
+						.setType("vnd.android.cursor.item/event")
+						.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+								inizio.getTime())
+						.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+								fine.getTime())
+						.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
+						.putExtra(Events.TITLE, dati[0])
+						.putExtra(Events.DESCRIPTION, dati[1])
+						.putExtra(Events.EVENT_LOCATION,
+								dati[2] + " A. Messedaglia");
+				startActivity(intent);
+			} catch (Exception e) {
+				Toast.makeText(calendar.this, R.string.noapilevel,
+						Toast.LENGTH_LONG).show();
+			}
+			return null;
+		}
+
+	}
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
@@ -148,6 +207,7 @@ public class calendar extends ListActivity {
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
 			ArrayList<Spanned> icalarr = new ArrayList<Spanned>();
 			final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
+			String URLE = "http://lookedpath.altervista.org/test.php?id=";
 			final String ITEM = "item";
 			final String TITLE = "title";
 			final String DESC = "description";
@@ -205,7 +265,6 @@ public class calendar extends ListActivity {
 						for (int k = icalr.length() - 2; k > -1; k--) {
 							ical += icalar[k];
 						}
-						System.out.println("Ical è " + ical);
 						values.put("ical", ical);
 						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
@@ -213,7 +272,6 @@ public class calendar extends ListActivity {
 						map.put("ical", Html.fromHtml(ical));
 						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
-
 						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
 						descrizioni
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
@@ -223,6 +281,7 @@ public class calendar extends ListActivity {
 								null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
 					}
+
 					ContentValues nowdb = new ContentValues();
 					nowdb.put("calendardate", now);
 					long samerow = db.update("lstchk", nowdb, null, null);
@@ -297,77 +356,12 @@ public class calendar extends ListActivity {
 							.findViewById(android.R.id.list);
 					listView.setAdapter(adapter);
 					listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-						public int anno(char[] cs) {
-							return (cs[0] - 48) * 1000 + (cs[1] - 48) * 100
-									+ (cs[2] - 48) * 10 + cs[3] - 48;
-						}
-
-						public int mese(char[] cs) {
-							return (cs[4] - 48) * 10 + cs[5] - 49;
-						}
-
-						public int giorno(char[] cs) {
-							return (cs[6] - 48) * 10 + cs[7] - 48;
-						}
-
-						public int ora(char[] cs) {
-							return (cs[9] - 48) * 10 + cs[10] - 48;
-						}
-
-						public int minuti(char[] cs) {
-							return (cs[11] - 48) * 10 + cs[12] - 48;
-						}
-
 						public boolean onItemLongClick(AdapterView<?> parent,
 								View view, int position, long id) {
-							StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-							StrictMode.setThreadPolicy(policy);
-							String ical = "http://http://lookedpath.altervista.org/test.php?id="
-									+ icalarr.get(position);
-							XMLParser parser = new XMLParser();
-							Document doc = parser.getDomElement(parser
-									.getXmlFromUrl(ical));
-							NodeList nl = doc.getElementsByTagName("VEVENT");
-							Element el = null;
-							HashMap<String, Spanned> map = new HashMap<String, Spanned>();
-							el = (Element) nl.item(position);
-							String inizio = parser.getValue(el, "DTSTART");
-							String fine = parser.getValue(el, "DTEND");
-
-							Calendar beginTime = Calendar.getInstance();
-							char[] inizioc = inizio.toCharArray();
-							beginTime.set(anno(inizioc), mese(inizioc),
-									giorno(inizioc), ora(inizioc),
-									minuti(inizioc));
-							Calendar endTime = Calendar.getInstance();
-							char[] finec = fine.toCharArray();
-							endTime.set(anno(finec), mese(finec),
-									giorno(finec), ora(finec), minuti(finec));
-							try {
-								Intent intent = new Intent(Intent.ACTION_INSERT)
-										.setType(
-												"vnd.android.cursor.item/event")
-										.putExtra(
-												CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-												beginTime.getTimeInMillis())
-										.putExtra(
-												CalendarContract.EXTRA_EVENT_END_TIME,
-												endTime.getTimeInMillis())
-										.putExtra(
-												CalendarContract.EXTRA_EVENT_ALL_DAY,
-												false)
-										.putExtra(Events.TITLE,
-												parser.getValue(el, "SUMMARY"))
-										.putExtra(Events.DESCRIPTION,
-												parser.getValue(el, "DESCRIPTION"))
-										.putExtra(Events.EVENT_LOCATION,
-												parser.getValue(el, "LOCATION"));
-								startActivity(intent);
-							} catch (Exception e) {
-								Toast.makeText(calendar.this,
-										R.string.noapilevel, Toast.LENGTH_LONG)
-										.show();
-							}
+							idical = Html.toHtml(icalarr.get(position));
+							int l = idical.length()-5;
+							idical = idical.substring(3, l);
+							new eventparser().execute();
 							return true;
 						}
 					});
