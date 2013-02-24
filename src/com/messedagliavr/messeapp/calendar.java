@@ -115,7 +115,8 @@ public class calendar extends ListActivity {
 			String[] dati = { "", "", "", "", "" };
 			Element e = (Element) nl.item(0);
 			dati[0] = parser.getValue(e, "SUMMARY");
-			dati[1] = parser.getValue(e, "DESCRIPTION");
+			int l=parser.getValue(e, "DESCRIPTION").length()-3;
+			dati[1] = parser.getValue(e, "DESCRIPTION").substring(4,l);
 			dati[2] = parser.getValue(e, "LOCATION");
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
@@ -354,7 +355,7 @@ public class calendar extends ListActivity {
 							System.out.println(icalarr + " - " + position
 									+ " - " + icalarr.get(position));
 							int l = idical.length() - 5;
-							idical = idical.substring(11, l);
+							idical = idical.substring(3, l);
 							new eventparser().execute();
 							System.out.println("dopo event parser");
 							return true;
