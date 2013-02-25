@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
 		int id = Integer.parseInt((String) v.getTag()); 
 		switch(id){
 		case 0:
-			intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{getString(R.string.dir_email),""});
+			intent.putExtra(android.content.Intent.EXTRA_EMAIL, getString(R.string.dir_email));
 		case 1:
 			intent.putExtra(android.content.Intent.EXTRA_EMAIL, getString(R.string.vice_email));
 			break;
