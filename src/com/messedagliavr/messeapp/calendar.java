@@ -353,10 +353,15 @@ public class calendar extends ListActivity {
 					listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 						public boolean onItemLongClick(AdapterView<?> parent,
 								View view, int position, long id) {
+							 if (Integer.valueOf(android.os.Build.VERSION.SDK)<14){
+								 Toast.makeText(calendar.this, R.string.noapilevel,
+											Toast.LENGTH_LONG).show();
+							 } else {
 							idical = Html.toHtml(icalarr.get(position));
 							int l = idical.length() - 5;
 							idical = idical.substring(3, l);
 							new eventparser().execute();
+							 }
 							return true;
 						}
 					});
