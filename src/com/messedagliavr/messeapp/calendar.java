@@ -115,8 +115,12 @@ public class calendar extends ListActivity {
 			String[] dati = { "", "", "", "", "" };
 			Element e = (Element) nl.item(0);
 			dati[0] = parser.getValue(e, "SUMMARY");
-			int l=parser.getValue(e, "DESCRIPTION").length()-3;
-			dati[1] = parser.getValue(e, "DESCRIPTION").substring(4,l);
+			int l=parser.getValue(e, "DESCRIPTION").length();
+			if (l==0) {
+				dati[1] = "Nessuna descrizione";
+			} else {
+			dati[1] = parser.getValue(e, "DESCRIPTION").substring(4,l-3);
+			}
 			dati[2] = parser.getValue(e, "LOCATION");
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
@@ -252,7 +256,6 @@ public class calendar extends ListActivity {
 								j = 0;
 							}
 						}
-						// segnalibro
 						char[] icalar = icalr.toCharArray();
 						String ical = "";
 						for (int k = icalr.length() - 2; k > -1; k--) {
@@ -312,7 +315,6 @@ public class calendar extends ListActivity {
 							.getColumnIndex("description"))));
 					icalarr.add(Html.fromHtml(data.getString(data
 							.getColumnIndex("ical"))));
-					// adding HashList to ArrayList
 					menuItems.add(map);
 
 				}
@@ -352,15 +354,13 @@ public class calendar extends ListActivity {
 						public boolean onItemLongClick(AdapterView<?> parent,
 								View view, int position, long id) {
 							idical = Html.toHtml(icalarr.get(position));
-							System.out.println(icalarr + " - " + position
-									+ " - " + icalarr.get(position));
 							int l = idical.length() - 5;
 							idical = idical.substring(3, l);
 							new eventparser().execute();
-							System.out.println("dopo event parser");
 							return true;
 						}
 					});
+
 					listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 						public void onItemClick(AdapterView<?> parentView,
 								View childView, int position, long id) {
@@ -371,7 +371,7 @@ public class calendar extends ListActivity {
 										Html.toHtml(titoli.get(position)));
 								intent.putExtra(DESC,
 										Html.toHtml(descrizioni.get(position)));
-								intent.putExtra(ICAL, icalarr.get(position));
+								intent.putExtra(ICAL, Html.toHtml(icalarr.get(position)));
 								startActivity(intent);
 							} else {
 								Toast.makeText(calendar.this,
