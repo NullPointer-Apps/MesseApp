@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="15dp"
         android:text="@string/Email" />
 
@@ -16,7 +16,7 @@
         android:id="@+id/Dir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
         android:text="@string/dir_name" />
 
@@ -26,10 +26,21 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/Dir"
         android:layout_alignBottom="@+id/Dir"
-        android:layout_alignParentRight="true"
-        android:ems="10"
+        android:layout_marginLeft="90dp"
+        android:ems="9"
         android:inputType="textEmailAddress"
         android:text="@string/dir_email" />
+
+    <Button
+        android:id="@+id/Dir_butt"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Dir_Email"
+        android:layout_alignTop="@+id/Dir"
+        android:layout_toRightOf="@+id/Dir_Email"
+        android:tag="0"
+        android:onClick="send" />
 
     <TextView
         android:id="@+id/Vice"
@@ -188,5 +199,7 @@
         android:ems="10"
         android:inputType="textPostalAddress"
         android:text="@string/succ_indi" />
+
+    
 
 </RelativeLayout>

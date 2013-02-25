@@ -51,6 +51,26 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public void send(View v) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("message/rfc822");
+		int id = Integer.parseInt((String) v.getTag()); 
+		switch(id){
+		case 0:
+			intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{getString(R.string.dir_email),""});
+		case 1:
+			intent.putExtra(android.content.Intent.EXTRA_EMAIL, getString(R.string.vice_email));
+			break;
+		case 2:
+			intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.did_email));
+			break;
+		default:
+			break;
+		}
+
+		startActivity(Intent.createChooser(intent, "Send Email"));
+	}
+
 	public void onBackPressed() {
 
 		if (layoutid == R.id.info || layoutid == R.id.social) {
