@@ -95,11 +95,16 @@ public class ListItemSelectedCalendar extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.ical:
+			 if (Integer.valueOf(android.os.Build.VERSION.SDK)<14){
+				 Toast.makeText(ListItemSelectedCalendar.this, R.string.noapilevel,
+							Toast.LENGTH_LONG).show();
+			 } else {
 			Intent intent = getIntent();
 			String ical=intent.getStringExtra(calendar.ICAL);
 			int l = ical.length() - 5;
 			idical = ical.substring(3, l);
 			new eventparser().execute();
+			 }
 			break;
 
 		}
