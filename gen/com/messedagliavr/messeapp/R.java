@@ -57,12 +57,12 @@ public final class R {
         public static final int activity_main=0x7f080000;
         public static final int contatti=0x7f080021;
         public static final int exit=0x7f080022;
-        public static final int ical=0x7f080024;
+        public static final int ical=0x7f080023;
         public static final int immagineOrario=0x7f08001a;
         public static final int info=0x7f080020;
         public static final int orario=0x7f08001b;
         public static final int product_label=0x7f08001c;
-        public static final int refresh=0x7f080023;
+        public static final int refresh=0x7f080024;
         public static final int social=0x7f08001d;
         public static final int textAmbro=0x7f080016;
     }
@@ -77,8 +77,9 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
-        public static final int list_item=0x7f070001;
-        public static final int list_item_selected=0x7f070002;
+        public static final int context_menu=0x7f070001;
+        public static final int list_item=0x7f070002;
+        public static final int list_item_selected=0x7f070003;
     }
     public static final class string {
         public static final int Calendario=0x7f050003;

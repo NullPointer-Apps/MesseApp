@@ -25,10 +25,14 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -115,11 +119,11 @@ public class calendar extends ListActivity {
 			String[] dati = { "", "", "", "", "" };
 			Element e = (Element) nl.item(0);
 			dati[0] = parser.getValue(e, "SUMMARY");
-			int l=parser.getValue(e, "DESCRIPTION").length();
-			if (l==0) {
+			int l = parser.getValue(e, "DESCRIPTION").length();
+			if (l == 0) {
 				dati[1] = "Nessuna descrizione";
 			} else {
-			dati[1] = parser.getValue(e, "DESCRIPTION").substring(4,l-3);
+				dati[1] = parser.getValue(e, "DESCRIPTION").substring(4, l - 3);
 			}
 			dati[2] = parser.getValue(e, "LOCATION");
 			dati[3] = parser.getValue(e, "DTSTART");
@@ -156,6 +160,38 @@ public class calendar extends ListActivity {
 			return dati;
 		}
 	}
+
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.context_menu, menu);
+	}
+
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+				.getMenuInfo();
+		switch (item.getItemId()) {
+		case R.id.ical:
+			System.out.println("contextmenu");
+			if (Integer.valueOf(android.os.Build.VERSION.SDK_INT) < 14) {
+				Toast.makeText(calendar.this, R.string.noapilevel,
+						Toast.LENGTH_LONG).show();
+			} else {
+				idical = Html.toHtml(icalarr.get(info.position));
+				int l = idical.length() - 5;
+				idical = idical.substring(3, l);
+				System.out.println("contextmenu2");
+				new eventparser().execute();
+			}
+
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
+	}
+
+	public ArrayList<Spanned> icalarr = new ArrayList<Spanned>();
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
@@ -202,7 +238,7 @@ public class calendar extends ListActivity {
 			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
-			ArrayList<Spanned> icalarr = new ArrayList<Spanned>();
+
 			final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
 			String URLE = "http://lookedpath.altervista.org/test.php?id=";
 			final String ITEM = "item";
@@ -350,21 +386,8 @@ public class calendar extends ListActivity {
 					ListView listView = (ListView) calendar.this
 							.findViewById(android.R.id.list);
 					listView.setAdapter(adapter);
-					listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-						public boolean onItemLongClick(AdapterView<?> parent,
-								View view, int position, long id) {
-							 if (Integer.valueOf(android.os.Build.VERSION.SDK)<14){
-								 Toast.makeText(calendar.this, R.string.noapilevel,
-											Toast.LENGTH_LONG).show();
-							 } else {
-							idical = Html.toHtml(icalarr.get(position));
-							int l = idical.length() - 5;
-							idical = idical.substring(3, l);
-							new eventparser().execute();
-							 }
-							return true;
-						}
-					});
+
+					registerForContextMenu(findViewById(android.R.id.list));
 
 					listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 						public void onItemClick(AdapterView<?> parentView,
@@ -376,7 +399,8 @@ public class calendar extends ListActivity {
 										Html.toHtml(titoli.get(position)));
 								intent.putExtra(DESC,
 										Html.toHtml(descrizioni.get(position)));
-								intent.putExtra(ICAL, Html.toHtml(icalarr.get(position)));
+								intent.putExtra(ICAL,
+										Html.toHtml(icalarr.get(position)));
 								startActivity(intent);
 							} else {
 								Toast.makeText(calendar.this,

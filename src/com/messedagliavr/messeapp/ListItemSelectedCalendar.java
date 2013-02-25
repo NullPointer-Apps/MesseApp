@@ -31,15 +31,15 @@ public class ListItemSelectedCalendar extends Activity {
 		startActivity(new Intent(this, calendar.class));
 		setContentView(R.layout.list_item);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.list_item_selected, menu);
 		return true;
 	}
-	
-	public String idical=null;
-	
+
+	public String idical = null;
+
 	public class eventparser extends AsyncTask<Void, Void, String[]> {
 		@Override
 		protected String[] doInBackground(Void... params) {
@@ -54,8 +54,8 @@ public class ListItemSelectedCalendar extends Activity {
 			String[] dati = { "", "", "", "", "" };
 			Element e = (Element) nl.item(0);
 			dati[0] = parser.getValue(e, "SUMMARY");
-			int l=parser.getValue(e, "DESCRIPTION").length()-3;
-			dati[1] = parser.getValue(e, "DESCRIPTION").substring(4,l);
+			int l = parser.getValue(e, "DESCRIPTION").length() - 3;
+			dati[1] = parser.getValue(e, "DESCRIPTION").substring(4, l);
 			dati[2] = parser.getValue(e, "LOCATION");
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
@@ -85,26 +85,26 @@ public class ListItemSelectedCalendar extends Activity {
 				e1.printStackTrace();
 			} catch (Exception e2) {
 				e2.printStackTrace();
-				Toast.makeText(ListItemSelectedCalendar.this, R.string.noapilevel,
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(ListItemSelectedCalendar.this,
+						R.string.noapilevel, Toast.LENGTH_LONG).show();
 			}
 			return dati;
 		}
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.ical:
-			 if (Integer.valueOf(android.os.Build.VERSION.SDK)<14){
-				 Toast.makeText(ListItemSelectedCalendar.this, R.string.noapilevel,
-							Toast.LENGTH_LONG).show();
-			 } else {
-			Intent intent = getIntent();
-			String ical=intent.getStringExtra(calendar.ICAL);
-			int l = ical.length() - 5;
-			idical = ical.substring(3, l);
-			new eventparser().execute();
-			 }
+			if (Integer.valueOf(android.os.Build.VERSION.SDK_INT) < 14) {
+				Toast.makeText(ListItemSelectedCalendar.this,
+						R.string.noapilevel, Toast.LENGTH_LONG).show();
+			} else {
+				Intent intent = getIntent();
+				String ical = intent.getStringExtra(calendar.ICAL);
+				int l = ical.length() - 5;
+				idical = ical.substring(3, l);
+				new eventparser().execute();
+			}
 			break;
 
 		}
@@ -117,12 +117,12 @@ public class ListItemSelectedCalendar extends Activity {
 		setContentView(R.layout.list_item_selected);
 		Intent intent = getIntent();
 		String titolorw = intent.getStringExtra(calendar.TITLE);
-		String descrizionerw = intent.getStringExtra(calendar.DESC); 
+		String descrizionerw = intent.getStringExtra(calendar.DESC);
 		TextView titoloview = (TextView) findViewById(R.id.TitoloView);
 		Spanned titolo = Html.fromHtml(titolorw);
 		titoloview.setText(titolo);
 		WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
-			descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
+		descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
 	}
 
 }
