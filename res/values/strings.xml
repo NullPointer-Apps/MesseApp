@@ -33,5 +33,23 @@
 	<string name="ical">Import in Calendar</string>
 	<string name="noapilevel">Your version of Android is too outdated to use this function</string>
 	<string name="classe">Choose a class</string>
+	<string name="Email">Email</string>
+	<string name="dir_name">Dirigente</string>
+	<string name="vice_name">Vice preside</string>
+	<string name="did_name">Didattica</string>
+	<string name="sede1_name">Sede 1</string>
+	<string name="succ_name">Succursale</string>
+	<string name="dir_email">dirigente@messedagliavr.it</string>
+	<string name="vice_email">vicepreside@messedagliavr.it</string>
+	<string name="did_email">didattica@messedagliavr.it</string>
+	<string name="tel">Telefono</string>
+	<string name="indi">Indirizzo</string>
+	<string name="sede1_num">045596432</string>
+	<string name="sede2_num">0458034772</string>
+	<string name="sede_indi">via Bertoni, 3b</string>
+	<string name="succ_num">0458004954</string>
+	<string name="succ_indi">via dello Zappatore, 2</string>
+	<string name="sede2_name">Sede 2</string>
+	<string name="sede_name">Sede</string>
 	
 </resources>

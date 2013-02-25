@@ -72,11 +72,10 @@ public class MainActivity extends Activity {
 			super.finish();
 			break;
 		case R.id.contatti:
-			Toast.makeText(MainActivity.this, R.string.notavailable,
-					Toast.LENGTH_LONG).show();
-			/*
-			 * setContentView(R.layout.contatti); layoutid = R.id.contatti;
-			 */
+
+			setContentView(R.layout.contatti);
+			layoutid = R.id.contatti;
+
 			break;
 		case R.id.orario:
 			startActivity(new Intent(this, timetable.class));
