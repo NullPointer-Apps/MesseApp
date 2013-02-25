@@ -22,10 +22,64 @@ public final class R {
         public static final int ic_launcher=0x7f020005;
         public static final int list_divider=0x7f020006;
         public static final int notizie=0x7f020007;
-        public static final int sfondomesseapp=0x7f020008;
-        public static final int social=0x7f020009;
-        public static final int voti=0x7f02000a;
-        public static final int youtube=0x7f02000b;
+        public static final int o1a=0x7f020008;
+        public static final int o1b=0x7f020009;
+        public static final int o1c=0x7f02000a;
+        public static final int o1d=0x7f02000b;
+        public static final int o1e=0x7f02000c;
+        public static final int o1f=0x7f02000d;
+        public static final int o1g=0x7f02000e;
+        public static final int o1h=0x7f02000f;
+        public static final int o1i=0x7f020010;
+        public static final int o1l=0x7f020011;
+        public static final int o2a=0x7f020012;
+        public static final int o2b=0x7f020013;
+        public static final int o2c=0x7f020014;
+        public static final int o2d=0x7f020015;
+        public static final int o2e=0x7f020016;
+        public static final int o2f=0x7f020017;
+        public static final int o2g=0x7f020018;
+        public static final int o2h=0x7f020019;
+        public static final int o3a=0x7f02001a;
+        public static final int o3b=0x7f02001b;
+        public static final int o3c=0x7f02001c;
+        public static final int o3d=0x7f02001d;
+        public static final int o3e=0x7f02001e;
+        public static final int o3f=0x7f02001f;
+        public static final int o3g=0x7f020020;
+        public static final int o3h=0x7f020021;
+        public static final int o3i=0x7f020022;
+        public static final int o3l=0x7f020023;
+        public static final int o3m=0x7f020024;
+        public static final int o3n=0x7f020025;
+        public static final int o3o=0x7f020026;
+        public static final int o4a=0x7f020027;
+        public static final int o4b=0x7f020028;
+        public static final int o4c=0x7f020029;
+        public static final int o4d=0x7f02002a;
+        public static final int o4e=0x7f02002b;
+        public static final int o4f=0x7f02002c;
+        public static final int o4g=0x7f02002d;
+        public static final int o4h=0x7f02002e;
+        public static final int o4i=0x7f02002f;
+        public static final int o4l=0x7f020030;
+        public static final int o4m=0x7f020031;
+        public static final int o4n=0x7f020032;
+        public static final int o4o=0x7f020033;
+        public static final int o5a=0x7f020034;
+        public static final int o5b=0x7f020035;
+        public static final int o5c=0x7f020036;
+        public static final int o5d=0x7f020037;
+        public static final int o5e=0x7f020038;
+        public static final int o5f=0x7f020039;
+        public static final int o5g=0x7f02003a;
+        public static final int o5h=0x7f02003b;
+        public static final int o5i=0x7f02003c;
+        public static final int o5l=0x7f02003d;
+        public static final int sfondomesseapp=0x7f02003e;
+        public static final int social=0x7f02003f;
+        public static final int voti=0x7f020040;
+        public static final int youtube=0x7f020041;
     }
     public static final class id {
         public static final int DescrizioneView=0x7f080019;
@@ -55,15 +109,17 @@ public final class R {
         public static final int TextVoti=0x7f08000a;
         public static final int TitoloView=0x7f080018;
         public static final int activity_main=0x7f080000;
-        public static final int contatti=0x7f080021;
-        public static final int exit=0x7f080022;
-        public static final int ical=0x7f080023;
+        public static final int contatti=0x7f080023;
+        public static final int exit=0x7f080024;
+        public static final int ical=0x7f080025;
+        public static final int imageorario=0x7f080021;
         public static final int immagineOrario=0x7f08001a;
-        public static final int info=0x7f080020;
+        public static final int info=0x7f080022;
         public static final int orario=0x7f08001b;
         public static final int product_label=0x7f08001c;
-        public static final int refresh=0x7f080024;
+        public static final int refresh=0x7f080026;
         public static final int social=0x7f08001d;
+        public static final int spinner=0x7f080020;
         public static final int textAmbro=0x7f080016;
     }
     public static final class layout {
@@ -74,6 +130,7 @@ public final class R {
         public static final int orario=0x7f030004;
         public static final int single_item=0x7f030005;
         public static final int social=0x7f030006;
+        public static final int timetable=0x7f030007;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
@@ -95,6 +152,7 @@ public final class R {
         public static final int bianchi=0x7f05000f;
         public static final int canceledcalendar=0x7f050018;
         public static final int cancelednews=0x7f050017;
+        public static final int classe=0x7f05001f;
         public static final int connerr=0x7f05001c;
         public static final int contatti=0x7f050019;
         public static final int debla=0x7f05000c;

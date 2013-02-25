@@ -21,7 +21,6 @@ public class Database extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		System.err.println("Dentro create tables - ");
 		try {
 		db.execSQL(CREATE_NEWS);
 		db.execSQL(CREATE_CALENDAR);
@@ -38,7 +37,6 @@ public class Database extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		System.err.println("Dentro update tables");
 		db.execSQL("DROP TABLE IF EXISTS news;");
 		db.execSQL("DROP TABLE IF EXISTS calendar;");
 		db.execSQL("DROP TABLE IF EXISTS lstchk;");

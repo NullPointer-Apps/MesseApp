@@ -50,7 +50,6 @@ public class ListItemSelectedCalendar extends Activity {
 			Document doc = parser.getDomElement(xml);
 			NodeList nl = doc.getElementsByTagName("VEVENT");
 
-			System.out.println("Dopo elements");
 			String[] dati = { "", "", "", "", "" };
 			Element e = (Element) nl.item(0);
 			dati[0] = parser.getValue(e, "SUMMARY");
@@ -59,8 +58,6 @@ public class ListItemSelectedCalendar extends Activity {
 			dati[2] = parser.getValue(e, "LOCATION");
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
-			System.out.println("Dopo array");
-			System.out.println(dati.toString());
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
 					"yyyyMMdd'T'HHmmss");
 			Date fine = null;
@@ -68,7 +65,6 @@ public class ListItemSelectedCalendar extends Activity {
 			try {
 				fine = dateFormat.parse(dati[4].toString());
 				inizio = dateFormat.parse(dati[3].toString());
-				System.out.println("Prima secondo try");
 				Intent intent = new Intent(Intent.ACTION_INSERT)
 						.setType("vnd.android.cursor.item/event")
 						.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,

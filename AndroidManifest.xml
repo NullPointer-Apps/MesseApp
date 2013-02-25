@@ -39,6 +39,8 @@
         </activity>
         <activity android:name="com.messedagliavr.messeapp.Database" >
         </activity>
+        <activity android:name="com.messedagliavr.messeapp.timetable" >
+        </activity>
     </application>
 
 </manifest>
