@@ -45,6 +45,7 @@ public class timetable extends Activity implements
 		if (position==0){
 			descrizioneview.loadData("", "text/html", "UTF-8");
 		}else {
+		descrizioneview.getSettings().setBuiltInZoomControls(true);
 		descrizioneview.loadUrl("file:///android_res/drawable/o"
 				+ items[position].toLowerCase() + ".png");
 		}
