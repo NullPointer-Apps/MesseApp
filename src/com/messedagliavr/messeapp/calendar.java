@@ -102,20 +102,20 @@ public class calendar extends ListActivity {
 	public String[] titolim;
 	public String[] descrizionim;
 	ProgressDialog mDialog;
-	public Boolean unknhost = false;
 	public String idical = null;
 
-	public class eventparser extends AsyncTask<Void, Void, String[]> {
+	public class eventparser extends AsyncTask<Void, Void, Void> {
 		@Override
-		protected String[] doInBackground(Void... params) {
+		protected Void doInBackground(Void... params) {
 			String ical = "http://lookedpath.altervista.org/test.php?id="
 					+ idical;
 			XMLParser parser = new XMLParser();
 			String xml = parser.getXmlFromUrl(ical);
+			if (xml == "UnknownHostException") {
+			} else {
 			Document doc = parser.getDomElement(xml);
 			NodeList nl = doc.getElementsByTagName("VEVENT");
 
-			System.out.println("Dopo elements");
 			String[] dati = { "", "", "", "", "" };
 			Element e = (Element) nl.item(0);
 			dati[0] = parser.getValue(e, "SUMMARY");
@@ -128,8 +128,6 @@ public class calendar extends ListActivity {
 			dati[2] = parser.getValue(e, "LOCATION");
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
-			System.out.println("Dopo array");
-			System.out.println(dati.toString());
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
 					"yyyyMMdd'T'HHmmss");
 			Date fine = null;
@@ -137,7 +135,6 @@ public class calendar extends ListActivity {
 			try {
 				fine = dateFormat.parse(dati[4].toString());
 				inizio = dateFormat.parse(dati[3].toString());
-				System.out.println("Prima secondo try");
 				Intent intent = new Intent(Intent.ACTION_INSERT)
 						.setType("vnd.android.cursor.item/event")
 						.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
@@ -157,8 +154,10 @@ public class calendar extends ListActivity {
 				Toast.makeText(calendar.this, R.string.noapilevel,
 						Toast.LENGTH_LONG).show();
 			}
-			return dati;
 		}
+			return null;
+		}
+		
 	}
 
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -173,7 +172,6 @@ public class calendar extends ListActivity {
 				.getMenuInfo();
 		switch (item.getItemId()) {
 		case R.id.ical:
-			System.out.println("contextmenu");
 			if (Integer.valueOf(android.os.Build.VERSION.SDK_INT) < 14) {
 				Toast.makeText(calendar.this, R.string.noapilevel,
 						Toast.LENGTH_LONG).show();
@@ -181,7 +179,6 @@ public class calendar extends ListActivity {
 				idical = Html.toHtml(icalarr.get(info.position));
 				int l = idical.length() - 5;
 				idical = idical.substring(3, l);
-				System.out.println("contextmenu2");
 				new eventparser().execute();
 			}
 
@@ -195,6 +192,8 @@ public class calendar extends ListActivity {
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
+		
+		Boolean unknhost = false;
 
 		protected void onCancelled() {
 			Intent main = new Intent(calendar.this, MainActivity.class);

@@ -41,6 +41,7 @@ public class XMLParser {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
+			xml ="UnknownHostException";
 		} catch (IOException e) {
 			e.printStackTrace();
 			xml ="UnknownHostException";
