@@ -76,8 +76,13 @@ public class MainActivity extends Activity {
 			setContentView(R.layout.contatti);
 			layoutid = R.id.contatti;
 			break;
-		case R.id.orario:
-			startActivity(new Intent(this, timetable.class));
+		case R.id.moodle:
+
+			Intent voti = new Intent(Intent.ACTION_VIEW);
+			voti.setData(Uri.parse("http://corsi.messedaglia.it"));
+			startActivity(voti);
+			
+			
 			break;
 		}
 		return true;
@@ -131,7 +136,9 @@ public class MainActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 		}
 	}
-
+	public void orario(View view){
+		startActivity(new Intent(this, timetable.class));
+	}
 	public void notavailable(View view) {
 		Toast.makeText(MainActivity.this, R.string.notavailable,
 				Toast.LENGTH_LONG).show();

@@ -6,26 +6,26 @@
     android:background="@drawable/sfondomesseapp" >
 
     <ImageView
-        android:id="@+id/ImageView01"
+        android:id="@+id/Facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ImageView02"
-        android:layout_marginRight="21dp"
-        android:contentDescription="@string/Calendario"
-        android:onClick="youtube"
-        android:src="@drawable/youtube" />
-
-    <ImageView
-        android:id="@+id/ImageView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="39dp"
-        android:layout_marginTop="164dp"
-        android:layout_toLeftOf="@+id/ImageView01"
+        android:layout_alignTop="@+id/YouTube"
+        android:layout_marginRight="40dp"
+        android:layout_toLeftOf="@+id/YouTube"
         android:contentDescription="@string/Calendario"
         android:onClick="facebook"
         android:src="@drawable/facebook" />
+
+    <ImageView
+        android:id="@+id/YouTube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="180dp"
+        android:contentDescription="@string/Calendario"
+        android:onClick="youtube"
+        android:src="@drawable/youtube" />
 
 </RelativeLayout>

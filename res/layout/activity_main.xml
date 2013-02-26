@@ -37,7 +37,7 @@
         android:layout_alignBottom="@+id/TextSocial"
         android:layout_alignLeft="@+id/ImageFoto"
         android:layout_marginLeft="25dp"
-        android:text="@string/Foto"
+        android:text="@string/orario"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black" />
 
@@ -134,8 +134,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/ImageSocial"
         android:layout_marginRight="16dp"
-        android:contentDescription="@string/Foto"
-        android:onClick="notavailable"
+        android:contentDescription="@string/orario"
+        android:onClick="orario"
         android:src="@drawable/foto" />
 
 </RelativeLayout>

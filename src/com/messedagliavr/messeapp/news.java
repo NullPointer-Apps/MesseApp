@@ -121,7 +121,6 @@ public class news extends ListActivity {
 	@Override
 	public void onBackPressed() {
 		db.close();
-		data.close();
 		Intent main = new Intent(this, MainActivity.class);
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);

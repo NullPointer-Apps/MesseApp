@@ -88,13 +88,14 @@ public final class R {
         public static final int Dir=0x7f08000e;
         public static final int Dir_Email=0x7f08000f;
         public static final int Email=0x7f08000d;
+        public static final int Facebook=0x7f080031;
         public static final int ImageCalendario=0x7f080007;
         public static final int ImageCircolari=0x7f08000b;
         public static final int ImageFoto=0x7f080002;
         public static final int ImageNotizie=0x7f080005;
         public static final int ImageSocial=0x7f080001;
-        public static final int ImageView01=0x7f080031;
-        public static final int ImageView02=0x7f080032;
+        public static final int ImageView01=0x7f080033;
+        public static final int ImageView02=0x7f080034;
         public static final int ImageVoti=0x7f080009;
         public static final int Indi=0x7f08001b;
         public static final int ScrollView01=0x7f08002a;
@@ -127,18 +128,20 @@ public final class R {
         public static final int TitoloView=0x7f08002b;
         public static final int Vice=0x7f080010;
         public static final int Vice_Email=0x7f080011;
+        public static final int YouTube=0x7f080032;
         public static final int activity_main=0x7f080000;
-        public static final int contatti=0x7f080036;
-        public static final int exit=0x7f080037;
-        public static final int ical=0x7f080038;
-        public static final int imageorario=0x7f080034;
+        public static final int contatti=0x7f080038;
+        public static final int exit=0x7f08003a;
+        public static final int ical=0x7f08003b;
+        public static final int imageorario=0x7f080036;
         public static final int immagineOrario=0x7f08002d;
-        public static final int info=0x7f080035;
+        public static final int info=0x7f080037;
+        public static final int moodle=0x7f080039;
         public static final int orario=0x7f08002e;
         public static final int product_label=0x7f08002f;
-        public static final int refresh=0x7f080039;
+        public static final int refresh=0x7f08003c;
         public static final int social=0x7f080030;
-        public static final int spinner=0x7f080033;
+        public static final int spinner=0x7f080035;
         public static final int textAmbro=0x7f080029;
     }
     public static final class layout {
@@ -189,6 +192,7 @@ public final class R {
         public static final int iervasi=0x7f050010;
         public static final int indi=0x7f05002a;
         public static final int main_title=0x7f050002;
+        public static final int moodle=0x7f050032;
         public static final int noapilevel=0x7f05001e;
         public static final int noconnection=0x7f05000a;
         public static final int noconnectioncalendar=0x7f050014;

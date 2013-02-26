@@ -1,5 +1,6 @@
 package com.messedagliavr.messeapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class timetable extends Activity implements
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
 	}
+
 	String[] items = { "Scegli una classe", "1A", "1B", "1C", "1D", "1E", "1F",
 			"1G", "1H", "1I", "1L", "2A", "2B", "2C", "2D", "2E", "2F", "2G",
 			"2H", "3A", "3B", "3C", "3D", "3E", "3F", "3G", "3H", "3I", "3L",
@@ -32,22 +34,25 @@ public class timetable extends Activity implements
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
 		spin.setOnItemSelectedListener(this);
 
-		ArrayAdapter aa = new ArrayAdapter(this,
+		ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
 				android.R.layout.simple_spinner_item, items);
 
 		aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(aa);
 	}
 
+	@SuppressLint("DefaultLocale")
 	public void onItemSelected(AdapterView<?> parent, View v, int position,
 			long id) {
 		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
-		if (position==0){
+		if (position == 0) {
 			descrizioneview.loadData("", "text/html", "UTF-8");
-		}else {
-		descrizioneview.getSettings().setBuiltInZoomControls(true);
-		descrizioneview.loadUrl("file:///android_res/drawable/o"
-				+ items[position].toLowerCase() + ".png");
+		} else {
+			descrizioneview.getSettings().setBuiltInZoomControls(true);
+			descrizioneview
+					.loadUrl("file:///android_res/drawable/o"
+							+ items[position].toLowerCase()
+							+ ".png");
 		}
 	}
 

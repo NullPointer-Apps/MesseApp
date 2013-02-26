@@ -2,16 +2,14 @@ package com.messedagliavr.messeapp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.messedagliavr.messeapp.calendar.eventparser;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -28,8 +26,9 @@ public class ListItemSelectedCalendar extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		startActivity(new Intent(this, calendar.class));
+
 		setContentView(R.layout.list_item);
+		startActivity(new Intent(this, calendar.class));
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class ListItemSelectedCalendar extends Activity {
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
-					"yyyyMMdd'T'HHmmss");
+					"yyyyMMdd'T'HHmmss",Locale.US);
 			Date fine = null;
 			Date inizio = null;
 			try {
