@@ -51,57 +51,16 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void send(View v) {
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType("message/rfc822");
-		int id = Integer.parseInt((String) v.getTag()); 
-		switch(id){
-		case 0:
-			intent.putExtra(android.content.Intent.EXTRA_EMAIL, getString(R.string.dir_email));
-		case 1:
-			intent.putExtra(android.content.Intent.EXTRA_EMAIL, getString(R.string.vice_email));
-			break;
-		case 2:
-			intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.did_email));
-			break;
-		default:
-			break;
-		}
-
-		startActivity(Intent.createChooser(intent, "Send Email"));
-	}
-
 	public void onBackPressed() {
 
-		if (layoutid == R.id.info || layoutid == R.id.social) {
+		if (layoutid == R.id.info || layoutid == R.id.social
+				|| layoutid == R.id.contatti) {
 			setContentView(R.layout.activity_main);
 			layoutid = R.id.activity_main;
 		} else {
 			super.finish();
 		}
 
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.info:
-			setContentView(R.layout.info);
-			layoutid = R.id.info;
-			break;
-		case R.id.exit:
-			super.finish();
-			break;
-		case R.id.contatti:
-
-			setContentView(R.layout.contatti);
-			layoutid = R.id.contatti;
-
-			break;
-		case R.id.orario:
-			startActivity(new Intent(this, timetable.class));
-			break;
-		}
-		return true;
 	}
 
 	public void social(View view) {
@@ -156,5 +115,46 @@ public class MainActivity extends Activity {
 	public void notavailable(View view) {
 		Toast.makeText(MainActivity.this, R.string.notavailable,
 				Toast.LENGTH_LONG).show();
+	}
+	
+	public void maildir(View view) {
+		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+	            "mailto","dirigente@messedagliavr.it", null));
+		startActivity(emailIntent);
+	}
+	public void mailvice(View view) {
+		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+	            "mailto","vicepreside@messedagliavr.it", null));
+		startActivity(emailIntent);
+	}
+	public void maildid(View view) {
+		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+	            "mailto","didattica@messedagliavr.it", null));
+		startActivity(emailIntent);
+	}
+	
+	public void numsede(View view) {
+		Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:045596432"));
+		startActivity(dialIntent);
+	}
+	
+	public void numsede2(View view) {
+		Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0458034772"));
+		startActivity(dialIntent);
+	}
+	
+	public void numsucc(View view) {
+		Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0458004954"));
+		startActivity(dialIntent);
+	}
+	
+	public void indisede(View view) {
+		String uri = "geo:45.437535,10.99534?q=via+don+gaspare+bertoni+3b";
+		startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
+	}
+	
+	public void indisucc(View view) {
+		String uri = "geo:45.437535,10.99534?q=via+dello+zappatore+2";
+		startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
 	}
 }

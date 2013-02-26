@@ -46,9 +46,9 @@
 	<string name="indi">Indirizzo</string>
 	<string name="sede1_num">045596432</string>
 	<string name="sede2_num">0458034772</string>
-	<string name="sede_indi">via Bertoni, 3b</string>
+	<string name="sede_indi">Via Bertoni, 3B, 37122</string>
 	<string name="succ_num">0458004954</string>
-	<string name="succ_indi">via dello Zappatore, 2</string>
+	<string name="succ_indi">Via dello Zappatore, 2, 37122</string>
 	<string name="sede2_name">Sede 2</string>
 	<string name="sede_name">Sede</string>
 	

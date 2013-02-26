@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="2dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:text="@string/Email" />
 
@@ -16,31 +16,21 @@
         android:id="@+id/Dir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="50dp"
         android:text="@string/dir_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Dir_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/Dir"
         android:layout_alignBottom="@+id/Dir"
-        android:layout_marginLeft="90dp"
-        android:ems="9"
-        android:inputType="textEmailAddress"
-        android:text="@string/dir_email" />
-
-    <Button
-        android:id="@+id/Dir_butt"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Dir_Email"
-        android:layout_alignTop="@+id/Dir"
-        android:layout_toRightOf="@+id/Dir_Email"
-        android:tag="0"
-        android:onClick="send" />
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:text="@string/dir_email"
+        android:clickable="true"
+        android:onClick="maildir" />
 
     <TextView
         android:id="@+id/Vice"
@@ -51,7 +41,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/vice_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Vice_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,8 +49,9 @@
         android:layout_alignBottom="@+id/Vice"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="@string/vice_email" />
+        android:text="@string/vice_email"
+        android:clickable="true"
+        android:onClick="mailvice" />
 
     <TextView
         android:id="@+id/Did"
@@ -71,7 +62,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/did_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Did_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,8 +70,9 @@
         android:layout_alignBottom="@+id/Did"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="@string/did_email" />
+        android:text="@string/did_email"
+        android:clickable="true"
+        android:onClick="maildid" />
 
     <TextView
         android:id="@+id/Tel"
@@ -100,15 +92,16 @@
         android:layout_marginTop="25dp"
         android:text="@string/sede1_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Sede1_Num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Sede2"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:inputType="phone"
-        android:text="@string/sede1_num" />
+        android:text="@string/sede1_num"
+        android:clickable="true"
+        android:onClick="numsede" />
 
     <TextView
         android:id="@+id/Sede2"
@@ -119,7 +112,7 @@
         android:layout_marginTop="25dp"
         android:text="@string/sede2_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Sede2_Num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,8 +120,9 @@
         android:layout_alignBottom="@+id/Sede2"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:inputType="phone"
-        android:text="@string/sede2_num" />
+        android:text="@string/sede2_num"
+        android:clickable="true"
+        android:onClick="numsede2" />
 
     <TextView
         android:id="@+id/Succ"
@@ -139,7 +133,7 @@
         android:layout_marginTop="25dp"
         android:text="@string/succ_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Succ_Num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,9 +141,10 @@
         android:layout_alignBottom="@+id/Succ"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:inputType="phone"
-        android:text="@string/succ_num" >
-    </EditText>
+        android:text="@string/succ_num"
+        android:clickable="true"
+        android:onClick="numsucc" >
+    </TextView>
 
     <TextView
         android:id="@+id/Indi"
@@ -169,7 +164,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/sede_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Sede_Indi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -177,8 +172,9 @@
         android:layout_alignBottom="@+id/Sede"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:inputType="textPostalAddress"
-        android:text="@string/sede_indi" />
+        android:text="@string/sede_indi"
+        android:clickable="true"
+        android:onClick="indisede" />
 
     <TextView
         android:id="@+id/Succ_IndiName"
@@ -189,7 +185,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/succ_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/Succ_Indi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -197,9 +193,8 @@
         android:layout_alignBottom="@+id/Succ_IndiName"
         android:layout_alignParentRight="true"
         android:ems="10"
-        android:inputType="textPostalAddress"
-        android:text="@string/succ_indi" />
-
-    
+        android:text="@string/succ_indi"
+        android:clickable="true"
+        android:onClick="indisucc" />
 
 </RelativeLayout>
