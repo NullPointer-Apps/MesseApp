@@ -107,7 +107,7 @@ public class calendar extends ListActivity {
 	public class eventparser extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {
-			String ical = "http://lookedpath.altervista.org/test.php?id="
+			String ical = "http://www.messedaglia.it/caltoxml.php?id="
 					+ idical;
 			XMLParser parser = new XMLParser();
 			String xml = parser.getXmlFromUrl(ical);
