@@ -120,7 +120,6 @@ public class news extends ListActivity {
 
 	@Override
 	public void onBackPressed() {
-		db.close();
 		Intent main = new Intent(this, MainActivity.class);
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
@@ -158,6 +157,7 @@ public class news extends ListActivity {
 			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
+			ArrayList<Spanned> titolib = new ArrayList<Spanned>();
 			// All static variables
 			final String URL = "http://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
 			// XML node keys
@@ -199,35 +199,29 @@ public class news extends ListActivity {
 						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
 						values.put(DESC, parser.getValue(e, DESC));
+						values.put("titleb", "<b>" + parser.getValue(e, TITLE) + "</b>");
 						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 
 						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
 						descrizioni
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
+						titolib.add( Html.fromHtml( "<b>" + parser.getValue(e, TITLE) + "</b>"));
 						// adding HashList to ArrayList
 						menuItems.add(map);
 						long newRowId = db.insertWithOnConflict("news", null, values, SQLiteDatabase.CONFLICT_REPLACE);
-						/*db.close();
-						if (checkForTables()==true){
-						db = databaseHelper.getWritableDatabase();
-						long newRowId = db.updateWithOnConflict("news", values, null,null,SQLiteDatabase.CONFLICT_REPLACE);	
-						}else {
-						db = databaseHelper.getWritableDatabase();
-						long newRowId = db.insert("news", null, values);
-						}*/
-
 					}
 					ContentValues nowdb = new ContentValues();
 					nowdb.put("newsdate", now);
 					long samerow = db.update("lstchk", nowdb, null, null);
 					temhashmap.put("titoli", titoli);
 					temhashmap.put("descrizioni", descrizioni);
+					temhashmap.put("titolib" , titolib);
 					return temhashmap;
 
 				}
 			} else {
-				String[] clmndata = { "title", "description" };
+				String[] clmndata = { "title", "description", "titleb" };
 				String sortOrder = "_id";
 
 				data = db.query("news", // The table to query
@@ -238,7 +232,6 @@ public class news extends ListActivity {
 						null, // don't filter by row groups
 						sortOrder // The sort order
 						);
-
 				for (data.move(0); data.moveToNext(); data.isAfterLast()) {
 					HashMap<String, Spanned> map = new HashMap<String, Spanned>();
 					map.put(TITLE, Html.fromHtml(data.getString(data
@@ -250,6 +243,8 @@ public class news extends ListActivity {
 							.getColumnIndex("title"))));
 					descrizioni.add(Html.fromHtml(data.getString(data
 							.getColumnIndex("description"))));
+					titolib.add(Html.fromHtml(data.getString(data
+							.getColumnIndex("titleb"))));
 					// adding HashList to ArrayList
 					menuItems.add(map);
 
@@ -258,6 +253,7 @@ public class news extends ListActivity {
 				db.close();
 				temhashmap.put("titoli", titoli);
 				temhashmap.put("descrizioni", descrizioni);
+				temhashmap.put("titolib" , titolib);
 				return temhashmap;
 
 			}
@@ -277,10 +273,12 @@ public class news extends ListActivity {
 					final ArrayList<Spanned> titoli = resultmap.get("titoli");
 					final ArrayList<Spanned> descrizioni = resultmap
 							.get("descrizioni");
+					final ArrayList<Spanned> titolib = resultmap
+							.get("titolib");
 
 					ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
 							news.this, android.R.layout.simple_list_item_1,
-							titoli);
+							titolib);
 					setContentView(R.layout.list_item);
 					ListView listView = (ListView) news.this
 							.findViewById(android.R.id.list);

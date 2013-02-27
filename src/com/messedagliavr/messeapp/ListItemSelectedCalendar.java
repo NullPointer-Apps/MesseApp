@@ -42,7 +42,7 @@ public class ListItemSelectedCalendar extends Activity {
 	public class eventparser extends AsyncTask<Void, Void, String[]> {
 		@Override
 		protected String[] doInBackground(Void... params) {
-			String ical = "http://lookedpath.altervista.org/test.php?id="
+			String ical = "http://www.messedaglia.it/caltoxml.php?id="
 					+ idical;
 			XMLParser parser = new XMLParser();
 			String xml = parser.getXmlFromUrl(ical);
@@ -59,6 +59,7 @@ public class ListItemSelectedCalendar extends Activity {
 			dati[4] = parser.getValue(e, "DTEND");
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
 					"yyyyMMdd'T'HHmmss",Locale.US);
+			dateFormat.setLenient(false);
 			Date fine = null;
 			Date inizio = null;
 			try {

@@ -130,7 +130,7 @@
         android:layout_marginRight="27dp"
         android:contentDescription="@string/orario"
         android:onClick="orario"
-        android:src="@drawable/foto" />
+        android:src="@drawable/orario" />
 
     <ImageView
         android:id="@+id/ImageSocial"

@@ -37,8 +37,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+@SuppressLint("InlinedApi")
 @SuppressWarnings("unused")
-@SuppressLint("SimpleDateFormat")
 public class calendar extends ListActivity {
 	public SQLiteDatabase db;
 	public Cursor data;
@@ -52,8 +52,6 @@ public class calendar extends ListActivity {
 
 	@Override
 	public void onBackPressed() {
-		db.close();
-		data.close();
 		Intent main = new Intent(this, MainActivity.class);
 		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(main);
@@ -80,6 +78,7 @@ public class calendar extends ListActivity {
 		return true;
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	private Long getTimeDiff(String time, String curTime) throws ParseException {
 		Date curDate = null;
 		Date oldDate = null;
@@ -104,60 +103,62 @@ public class calendar extends ListActivity {
 	ProgressDialog mDialog;
 	public String idical = null;
 
+	@SuppressLint("SimpleDateFormat")
 	public class eventparser extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {
-			String ical = "http://www.messedaglia.it/caltoxml.php?id="
-					+ idical;
+			String ical = "http://www.messedaglia.it/caltoxml.php?id=" + idical;
 			XMLParser parser = new XMLParser();
 			String xml = parser.getXmlFromUrl(ical);
 			if (xml == "UnknownHostException") {
 			} else {
-			Document doc = parser.getDomElement(xml);
-			NodeList nl = doc.getElementsByTagName("VEVENT");
+				Document doc = parser.getDomElement(xml);
+				NodeList nl = doc.getElementsByTagName("VEVENT");
 
-			String[] dati = { "", "", "", "", "" };
-			Element e = (Element) nl.item(0);
-			dati[0] = parser.getValue(e, "SUMMARY");
-			int l = parser.getValue(e, "DESCRIPTION").length();
-			if (l == 0) {
-				dati[1] = "Nessuna descrizione";
-			} else {
-				dati[1] = parser.getValue(e, "DESCRIPTION").substring(4, l - 3);
+				String[] dati = { "", "", "", "", "" };
+				Element e = (Element) nl.item(0);
+				dati[0] = parser.getValue(e, "SUMMARY");
+				int l = parser.getValue(e, "DESCRIPTION").length();
+				if (l == 0) {
+					dati[1] = "Nessuna descrizione";
+				} else {
+					dati[1] = parser.getValue(e, "DESCRIPTION").substring(4,
+							l - 3);
+				}
+				dati[2] = parser.getValue(e, "LOCATION");
+				dati[3] = parser.getValue(e, "DTSTART");
+				dati[4] = parser.getValue(e, "DTEND");
+				SimpleDateFormat dateFormat = new SimpleDateFormat(
+						"yyyyMMdd'T'HHmmss");
+				Date fine = null;
+				Date inizio = null;
+				try {
+					fine = dateFormat.parse(dati[4].toString());
+					inizio = dateFormat.parse(dati[3].toString());
+					Intent intent = new Intent(Intent.ACTION_INSERT)
+							.setType("vnd.android.cursor.item/event")
+							.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+									inizio.getTime())
+							.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+									fine.getTime())
+							.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY,
+									false)
+							.putExtra(Events.TITLE, dati[0])
+							.putExtra(Events.DESCRIPTION, dati[1])
+							.putExtra(Events.EVENT_LOCATION,
+									dati[2] + " A. Messedaglia");
+					startActivity(intent);
+				} catch (java.text.ParseException e1) {
+					e1.printStackTrace();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+					Toast.makeText(calendar.this, R.string.noapilevel,
+							Toast.LENGTH_LONG).show();
+				}
 			}
-			dati[2] = parser.getValue(e, "LOCATION");
-			dati[3] = parser.getValue(e, "DTSTART");
-			dati[4] = parser.getValue(e, "DTEND");
-			SimpleDateFormat dateFormat = new SimpleDateFormat(
-					"yyyyMMdd'T'HHmmss");
-			Date fine = null;
-			Date inizio = null;
-			try {
-				fine = dateFormat.parse(dati[4].toString());
-				inizio = dateFormat.parse(dati[3].toString());
-				Intent intent = new Intent(Intent.ACTION_INSERT)
-						.setType("vnd.android.cursor.item/event")
-						.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-								inizio.getTime())
-						.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
-								fine.getTime())
-						.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
-						.putExtra(Events.TITLE, dati[0])
-						.putExtra(Events.DESCRIPTION, dati[1])
-						.putExtra(Events.EVENT_LOCATION,
-								dati[2] + " A. Messedaglia");
-				startActivity(intent);
-			} catch (java.text.ParseException e1) {
-				e1.printStackTrace();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-				Toast.makeText(calendar.this, R.string.noapilevel,
-						Toast.LENGTH_LONG).show();
-			}
-		}
 			return null;
 		}
-		
+
 	}
 
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -192,7 +193,7 @@ public class calendar extends ListActivity {
 
 	public class connection extends
 			AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
-		
+
 		Boolean unknhost = false;
 
 		protected void onCancelled() {
@@ -230,6 +231,7 @@ public class calendar extends ListActivity {
 			return hasTables;
 		}
 
+		@SuppressLint("SimpleDateFormat")
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
 				Void... params) {
 			Database databaseHelper = new Database(getBaseContext());
@@ -237,7 +239,7 @@ public class calendar extends ListActivity {
 			HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
 			ArrayList<Spanned> titoli = new ArrayList<Spanned>();
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
-
+			ArrayList<Spanned> titolib = new ArrayList<Spanned>();
 			final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
 			String URLE = "http://lookedpath.altervista.org/test.php?id=";
 			final String ITEM = "item";
@@ -300,12 +302,15 @@ public class calendar extends ListActivity {
 						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
 						values.put(DESC, parser.getValue(e, DESC));
+						values.put("titleb", "<b>" + parser.getValue(e, TITLE) + "</b>");
 						map.put("ical", Html.fromHtml(ical));
 						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
 						descrizioni
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
+						titolib.add(Html.fromHtml("<b>"
+								+ parser.getValue(e, TITLE) + "</b>"));
 						icalarr.add(Html.fromHtml(ical));
 						menuItems.add(map);
 						long newRowId = db.insertWithOnConflict("calendar",
@@ -319,11 +324,12 @@ public class calendar extends ListActivity {
 					temhashmap.put("titoli", titoli);
 					temhashmap.put("descrizioni", descrizioni);
 					temhashmap.put("ical", icalarr);
+					temhashmap.put("titolib", titolib);
 					return temhashmap;
 
 				}
 			} else {
-				String[] clmndata = { "title", "description", "ical" };
+				String[] clmndata = { "title", "description", "titleb", "ical" };
 				String sortOrder = "_id";
 
 				data = db.query("calendar", // The table to query
@@ -350,6 +356,8 @@ public class calendar extends ListActivity {
 							.getColumnIndex("description"))));
 					icalarr.add(Html.fromHtml(data.getString(data
 							.getColumnIndex("ical"))));
+					titolib.add(Html.fromHtml(data.getString(data
+							.getColumnIndex("titleb"))));
 					menuItems.add(map);
 
 				}
@@ -358,6 +366,7 @@ public class calendar extends ListActivity {
 				temhashmap.put("titoli", titoli);
 				temhashmap.put("descrizioni", descrizioni);
 				temhashmap.put("ical", icalarr);
+				temhashmap.put("titolib" , titolib);
 				return temhashmap;
 
 			}
@@ -377,10 +386,12 @@ public class calendar extends ListActivity {
 					final ArrayList<Spanned> titoli = resultmap.get("titoli");
 					final ArrayList<Spanned> descrizioni = resultmap
 							.get("descrizioni");
+					final ArrayList<Spanned> titolib = resultmap
+							.get("titolib");
 					final ArrayList<Spanned> icalarr = resultmap.get("ical");
 					ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
 							calendar.this, android.R.layout.simple_list_item_1,
-							titoli);
+							titolib);
 					setContentView(R.layout.list_item);
 					ListView listView = (ListView) calendar.this
 							.findViewById(android.R.id.list);

@@ -147,6 +147,6 @@
         android:layout_marginRight="29dp"
         android:contentDescription="@string/orario"
         android:onClick="orario"
-        android:src="@drawable/foto" />
+        android:src="@drawable/orario" />
 
 </RelativeLayout>
