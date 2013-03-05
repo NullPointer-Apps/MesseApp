@@ -23,13 +23,13 @@
     <string name="otdev">Other developers:</string>
     <string name="noconnectioncalendar">You need an Internet connection to see the events in the calendar</string>
     <string name="nodescription">There\'s no description for this event</string>
-    <string name="notavailable">The function that you are trying to use is not yet available</string>
+    <string name="notavailable">The function you are trying to use is not yet available</string>
     <string name="cancelednews">You aborted News\' download</string>
     <string name="canceledcalendar">You aborted Events\' download</string>
     <string name="contatti">Contacts</string>
-    <string name="orario">School Hours</string>
+    <string name="orario">Time Table</string>
     <string name="refresh">Refresh</string>
-    <string name="connerr">There\'s a problem with your internet connection</string>
+    <string name="connerr">There\'s a problem with your Internet connection</string>
     <string name="ical">Import in Calendar</string>
     <string name="noapilevel">Your version of Android is too outdated to use this function</string>
     <string name="classe">Choose a class</string>
