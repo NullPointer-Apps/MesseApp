@@ -17,7 +17,8 @@
         android:divider="@drawable/list_divider"
         android:dividerHeight="1dip"
         android:footerDividersEnabled="true"
-        android:headerDividersEnabled="false" >
+        android:headerDividersEnabled="false"
+        android:cacheColorHint="#000000">
     </ListView>
 
 </LinearLayout>
