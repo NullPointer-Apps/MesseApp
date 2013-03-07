@@ -27,13 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.messedagliavr.messeapp.news" >
+        <activity android:name="com.messedagliavr.messeapp.news"
+        android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.messedagliavr.messeapp.calendar" >
+        <activity android:name="com.messedagliavr.messeapp.calendar"
+        android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedNews" >
+        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedNews"
+        android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedCalendar" >
+        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedCalendar"
+        android:screenOrientation="portrait">
         </activity>
         <activity android:name="com.messedagliavr.messeapp.XmlParser" >
         </activity>
