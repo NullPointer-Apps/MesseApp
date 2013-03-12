@@ -302,7 +302,8 @@ public class calendar extends ListActivity {
 						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
 						values.put(DESC, parser.getValue(e, DESC));
-						values.put("titleb", "<b>" + parser.getValue(e, TITLE) + "</b>");
+						values.put("titleb", "<b>" + parser.getValue(e, TITLE)
+								+ "</b>");
 						map.put("ical", Html.fromHtml(ical));
 						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
@@ -366,7 +367,7 @@ public class calendar extends ListActivity {
 				temhashmap.put("titoli", titoli);
 				temhashmap.put("descrizioni", descrizioni);
 				temhashmap.put("ical", icalarr);
-				temhashmap.put("titolib" , titolib);
+				temhashmap.put("titolib", titolib);
 				return temhashmap;
 
 			}
@@ -386,8 +387,7 @@ public class calendar extends ListActivity {
 					final ArrayList<Spanned> titoli = resultmap.get("titoli");
 					final ArrayList<Spanned> descrizioni = resultmap
 							.get("descrizioni");
-					final ArrayList<Spanned> titolib = resultmap
-							.get("titolib");
+					final ArrayList<Spanned> titolib = resultmap.get("titolib");
 					final ArrayList<Spanned> icalarr = resultmap.get("ical");
 					ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
 							calendar.this, android.R.layout.simple_list_item_1,
