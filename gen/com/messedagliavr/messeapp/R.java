@@ -139,12 +139,12 @@ public final class R {
         public static final int YouTube=0x7f080032;
         public static final int activity_main=0x7f080000;
         public static final int contatti=0x7f080038;
-        public static final int exit=0x7f08003a;
+        public static final int exit=0x7f08003b;
         public static final int ical=0x7f08003c;
         public static final int imageorario=0x7f080036;
         public static final int immagineOrario=0x7f08002d;
         public static final int info=0x7f080037;
-        public static final int migliora=0x7f08003b;
+        public static final int migliora=0x7f08003a;
         public static final int moodle=0x7f080039;
         public static final int orario=0x7f08002e;
         public static final int product_label=0x7f08002f;

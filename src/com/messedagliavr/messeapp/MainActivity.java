@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -88,7 +89,9 @@ public class MainActivity extends Activity {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Invia Suggerimento");
 			final EditText input = new EditText(this);
-			input.setInputType(InputType.TYPE_CLASS_TEXT);
+			input.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+			input.setVerticalScrollBarEnabled(true);
+			input.setSingleLine(false);
 			builder.setView(input);
 			builder.setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
@@ -97,10 +100,10 @@ public class MainActivity extends Activity {
 							String m_Text = input.getText().toString();
 							Intent emailIntent = new Intent(
 									Intent.ACTION_SENDTO, Uri.fromParts(
-											"mailto", "ambro.f@hotmail.com", null));
+											"mailto", "ambro.f@hotmail.com,simone.deblasiis@gmail.com", null));
 							emailIntent.putExtra(Intent.EXTRA_SUBJECT,
 									"Suggerimento");
-							emailIntent.putExtra(Intent.EXTRA_TEXT, m_Text);
+							emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(m_Text));
 							startActivity(Intent.createChooser(emailIntent,
 									"Invia Suggerimento"));
 						}
