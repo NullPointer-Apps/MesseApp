@@ -53,7 +53,6 @@
     <string name="sede_name">School</string>
     <string name="moodle">Moodle</string>
     <string name="title_activity_acra">Acra</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="migliora">Send a suggestion!</string>
 
 </resources>

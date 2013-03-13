@@ -1,15 +1,19 @@
 package com.messedagliavr.messeapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -76,12 +80,40 @@ public class MainActivity extends Activity {
 			layoutid = R.id.contatti;
 			break;
 		case R.id.moodle:
-
 			Intent moodle = new Intent(Intent.ACTION_VIEW);
 			moodle.setData(Uri.parse("http://corsi.messedaglia.it"));
 			startActivity(moodle);
-			
-			
+			break;
+		case R.id.migliora:
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Invia Suggerimento");
+			final EditText input = new EditText(this);
+			input.setInputType(InputType.TYPE_CLASS_TEXT);
+			builder.setView(input);
+			builder.setPositiveButton("OK",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							String m_Text = input.getText().toString();
+							Intent emailIntent = new Intent(
+									Intent.ACTION_SENDTO, Uri.fromParts(
+											"mailto", "ambro.f@hotmail.com", null));
+							emailIntent.putExtra(Intent.EXTRA_SUBJECT,
+									"Suggerimento");
+							emailIntent.putExtra(Intent.EXTRA_TEXT, m_Text);
+							startActivity(Intent.createChooser(emailIntent,
+									"Invia Suggerimento"));
+						}
+					});
+			builder.setNegativeButton("Cancel",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});
+
+			builder.show();
 			break;
 		}
 		return true;
@@ -135,9 +167,11 @@ public class MainActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 		}
 	}
-	public void orario(View view){
+
+	public void orario(View view) {
 		startActivity(new Intent(this, timetable.class));
 	}
+
 	public void notavailable(View view) {
 		Toast.makeText(MainActivity.this, R.string.notavailable,
 				Toast.LENGTH_LONG).show();
