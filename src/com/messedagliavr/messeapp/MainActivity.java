@@ -52,8 +52,6 @@ public class MainActivity extends Activity {
 	}
 
 	public void onBackPressed() {
-		String i=null;
-		System.out.println(i);
 		if (layoutid == R.id.info || layoutid == R.id.social
 				|| layoutid == R.id.contatti) {
 			setContentView(R.layout.activity_main);
