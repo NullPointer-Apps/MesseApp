@@ -52,7 +52,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void onBackPressed() {
-
+		String i=null;
+		System.out.println(i);
 		if (layoutid == R.id.info || layoutid == R.id.social
 				|| layoutid == R.id.contatti) {
 			setContentView(R.layout.activity_main);
@@ -78,9 +79,9 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.moodle:
 
-			Intent voti = new Intent(Intent.ACTION_VIEW);
-			voti.setData(Uri.parse("http://corsi.messedaglia.it"));
-			startActivity(voti);
+			Intent moodle = new Intent(Intent.ACTION_VIEW);
+			moodle.setData(Uri.parse("http://corsi.messedaglia.it"));
+			startActivity(moodle);
 			
 			
 			break;

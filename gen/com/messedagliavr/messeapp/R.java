@@ -11,6 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class dimen {
+        /** 
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
+    
+         */
+        public static final int activity_horizontal_margin=0x7f040001;
+        public static final int activity_vertical_margin=0x7f040002;
         public static final int ldpi_320x240=0x7f040000;
     }
     public static final class drawable {
@@ -130,17 +137,18 @@ public final class R {
         public static final int Vice=0x7f080010;
         public static final int Vice_Email=0x7f080011;
         public static final int YouTube=0x7f080032;
+        public static final int action_settings=0x7f080037;
         public static final int activity_main=0x7f080000;
-        public static final int contatti=0x7f080038;
-        public static final int exit=0x7f08003a;
-        public static final int ical=0x7f08003b;
+        public static final int contatti=0x7f080039;
+        public static final int exit=0x7f08003b;
+        public static final int ical=0x7f08003c;
         public static final int imageorario=0x7f080036;
         public static final int immagineOrario=0x7f08002d;
-        public static final int info=0x7f080037;
-        public static final int moodle=0x7f080039;
+        public static final int info=0x7f080038;
+        public static final int moodle=0x7f08003a;
         public static final int orario=0x7f08002e;
         public static final int product_label=0x7f08002f;
-        public static final int refresh=0x7f08003c;
+        public static final int refresh=0x7f08003d;
         public static final int social=0x7f080030;
         public static final int spinner=0x7f080035;
         public static final int textAmbro=0x7f080029;
@@ -157,10 +165,11 @@ public final class R {
         public static final int timetable=0x7f030008;
     }
     public static final class menu {
-        public static final int activity_main=0x7f070000;
-        public static final int context_menu=0x7f070001;
-        public static final int list_item=0x7f070002;
-        public static final int list_item_selected=0x7f070003;
+        public static final int acra=0x7f070000;
+        public static final int activity_main=0x7f070001;
+        public static final int context_menu=0x7f070002;
+        public static final int list_item=0x7f070003;
+        public static final int list_item_selected=0x7f070004;
     }
     public static final class string {
         public static final int Calendario=0x7f050003;
@@ -171,6 +180,7 @@ public final class R {
         public static final int Notizie=0x7f050006;
         public static final int Social=0x7f050004;
         public static final int Voti=0x7f050005;
+        public static final int action_settings=0x7f050034;
         public static final int ambro=0x7f05000b;
         public static final int app_name=0x7f050000;
         public static final int benati=0x7f05000e;
@@ -189,6 +199,7 @@ public final class R {
         public static final int exit=0x7f050009;
         public static final int graphic=0x7f050012;
         public static final int grezzana=0x7f05000d;
+        public static final int hello_world=0x7f050035;
         public static final int ical=0x7f05001d;
         public static final int iervasi=0x7f050010;
         public static final int indi=0x7f05002a;
@@ -212,6 +223,7 @@ public final class R {
         public static final int succ_name=0x7f050025;
         public static final int succ_num=0x7f05002e;
         public static final int tel=0x7f050029;
+        public static final int title_activity_acra=0x7f050033;
         public static final int vice_email=0x7f050027;
         public static final int vice_name=0x7f050022;
     }
