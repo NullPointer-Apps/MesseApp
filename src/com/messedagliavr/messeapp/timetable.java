@@ -54,9 +54,8 @@ public class timetable extends Activity implements
     descrizioneview.getSettings().setUseWideViewPort(true);
     descrizioneview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
     descrizioneview.setScrollbarFadingEnabled(true);
-    descrizioneview.loadDataWithBaseURL("file:///android_res/drawable/", "<img src=\"o"+  items[position].toLowerCase()  + ".png\" height=\"100%\" width=\"100%\"/>", "text/html", "utf-8", null);
-			
-			descrizioneview.getSettings().setBuiltInZoomControls(true);
+	descrizioneview.getSettings().setBuiltInZoomControls(true);
+    descrizioneview.loadUrl("file:///android_res/drawable/o" + items[position].toLowerCase() + ".png");
 		}
 	}
 
