@@ -100,9 +100,9 @@ public class MainActivity extends Activity {
 							String m_Text = input.getText().toString();
 							Intent emailIntent = new Intent(
 									Intent.ACTION_SENDTO, Uri.fromParts(
-											"mailto", "ambro.f@hotmail.com,simone.deblasiis@gmail.com", null));
+											"mailto", "null.p.apps@gmail.com", null));
 							emailIntent.putExtra(Intent.EXTRA_SUBJECT,
-									"Suggerimento");
+									"Suggerimento MesseApp");
 							emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(m_Text));
 							startActivity(Intent.createChooser(emailIntent,
 									"Invia Suggerimento"));
