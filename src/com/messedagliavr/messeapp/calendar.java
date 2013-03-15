@@ -177,9 +177,7 @@ public class calendar extends ListActivity {
 				Toast.makeText(calendar.this, R.string.noapilevel,
 						Toast.LENGTH_LONG).show();
 			} else {
-				idical = Html.toHtml(icalarr.get(info.position));
-				int l = idical.length() - 5;
-				idical = idical.substring(3, l);
+				idical = icalarr.get(info.position).toString();
 				new eventparser().execute();
 			}
 
