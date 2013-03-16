@@ -170,7 +170,7 @@
         android:layout_below="@+id/Tel"
         android:layout_marginTop="100dp"
         android:text="@string/indi"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:textStyle="bold" />
 
     <TextView
