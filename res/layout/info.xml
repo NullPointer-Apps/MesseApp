@@ -15,7 +15,8 @@
         android:maxWidth="100dp"
         android:text="@string/debla"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextGraphic"
@@ -27,7 +28,8 @@
         android:layout_marginTop="145dp"
         android:text="@string/graphic"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextOtdev"
@@ -39,7 +41,8 @@
         android:layout_marginTop="257dp"
         android:text="@string/otdev"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextBenati"
@@ -64,7 +67,8 @@
         android:maxWidth="100dp"
         android:text="@string/ambro"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextGrezz"
@@ -75,7 +79,8 @@
         android:layout_marginTop="19dp"
         android:text="@string/grezzana"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextBianchi"
@@ -86,7 +91,8 @@
         android:layout_marginBottom="40dp"
         android:text="@string/bianchi"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextIervasi"
@@ -99,7 +105,8 @@
         android:maxWidth="100dp"
         android:text="@string/iervasi"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/TextDev"
@@ -110,6 +117,19 @@
         android:layout_marginTop="28dp"
         android:text="@string/dev"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextBianchi"
+        android:layout_alignBottom="@+id/TextBianchi"
+        android:layout_alignLeft="@+id/TextIervasi"
+        android:text="@string/wu"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
 </RelativeLayout>

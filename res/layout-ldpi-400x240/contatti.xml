@@ -12,6 +12,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="13dp"
         android:text="@string/Email"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -51,7 +52,7 @@
         android:layout_alignBottom="@+id/Vice"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="9"
         android:onClick="mailvice"
         android:text="@string/vice_email" />
 
@@ -82,8 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/Email"
         android:layout_below="@+id/Email"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="115dp"
         android:text="@string/tel"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -92,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/Did"
         android:layout_below="@+id/Tel"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="18dp"
         android:text="@string/sede1_name" />
 
     <TextView
@@ -155,8 +157,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/Tel"
         android:layout_below="@+id/Tel"
-        android:layout_marginTop="138dp"
+        android:layout_marginTop="130dp"
         android:text="@string/indi"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView

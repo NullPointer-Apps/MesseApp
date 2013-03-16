@@ -12,6 +12,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="13dp"
         android:text="@string/Email"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -30,7 +31,7 @@
         android:layout_alignBottom="@+id/Dir"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="11"
         android:onClick="maildir"
         android:text="@string/dir_email" />
 
@@ -51,7 +52,7 @@
         android:layout_alignBottom="@+id/Vice"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="11"
         android:onClick="mailvice"
         android:text="@string/vice_email" />
 
@@ -72,7 +73,7 @@
         android:layout_alignBottom="@+id/Did"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="11"
         android:onClick="maildid"
         android:text="@string/did_email" />
 
@@ -82,8 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/Email"
         android:layout_below="@+id/Email"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="115dp"
         android:text="@string/tel"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -100,6 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Sede2"
+        android:layout_alignLeft="@+id/Sede2_Num"
         android:layout_alignParentRight="true"
         android:clickable="true"
         android:ems="10"
@@ -123,7 +126,7 @@
         android:layout_alignBottom="@+id/Sede2"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="11"
         android:onClick="numsede2"
         android:text="@string/sede2_num" />
 
@@ -144,7 +147,7 @@
         android:layout_alignBottom="@+id/Succ"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="11"
         android:onClick="numsucc"
         android:text="@string/succ_num" >
     </TextView>
@@ -157,6 +160,7 @@
         android:layout_below="@+id/Tel"
         android:layout_marginTop="138dp"
         android:text="@string/indi"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -176,7 +180,7 @@
         android:layout_alignBottom="@+id/Sede"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="11"
         android:onClick="indisede"
         android:text="@string/sede_indi" />
 
@@ -197,7 +201,7 @@
         android:layout_alignBottom="@+id/Succ_IndiName"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        android:ems="10"
+        android:ems="11"
         android:onClick="indisucc"
         android:text="@string/succ_indi" />
 
