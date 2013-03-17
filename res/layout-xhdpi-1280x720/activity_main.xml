@@ -136,10 +136,10 @@
         android:id="@+id/ImageSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="63dp"
-        android:layout_marginTop="36dp"
-        android:layout_toLeftOf="@+id/ImageFoto"
+        android:layout_marginLeft="46dp"
+        android:layout_marginTop="41dp"
         android:contentDescription="@string/Social"
         android:onClick="social"
         android:src="@drawable/social" />

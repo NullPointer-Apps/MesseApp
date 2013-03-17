@@ -128,17 +128,6 @@
         android:textStyle="bold"  />
 
     <ImageView
-        android:id="@+id/ImageSocial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="42dp"
-        android:layout_toLeftOf="@+id/TextFoto"
-        android:contentDescription="@string/Social"
-        android:onClick="social"
-        android:src="@drawable/social" />
-
-    <ImageView
         android:id="@+id/ImageFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -148,5 +137,16 @@
         android:contentDescription="@string/orario"
         android:onClick="orario"
         android:src="@drawable/orario" />
+
+    <ImageView
+        android:id="@+id/ImageSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="36dp"
+        android:contentDescription="@string/Social"
+        android:onClick="social"
+        android:src="@drawable/social" />
 
 </RelativeLayout>

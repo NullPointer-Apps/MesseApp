@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
 									"Invia Suggerimento"));
 						}
 					});
-			builder.setNegativeButton("Cancel",
+			builder.setNegativeButton("Annulla",
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

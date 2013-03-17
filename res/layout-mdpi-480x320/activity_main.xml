@@ -122,26 +122,26 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/ImageFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ImageSocial"
-        android:layout_marginRight="17dp"
-        android:contentDescription="@string/orario"
-        android:onClick="orario"
-        android:src="@drawable/orario" />
-
-    <ImageView
         android:id="@+id/ImageSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="17dp"
-        android:layout_toLeftOf="@+id/ImageFoto"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="21dp"
         android:contentDescription="@string/Social"
         android:onClick="social"
         android:src="@drawable/social" />
+
+    <ImageView
+        android:id="@+id/ImageFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextFoto"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"
+        android:contentDescription="@string/orario"
+        android:onClick="orario"
+        android:src="@drawable/orario" />
 
 </RelativeLayout>
