@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/activity_main"
     android:background="@drawable/sfondomesseapp" >
 
     <TextView
@@ -11,24 +11,26 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ImageSocial"
         android:layout_below="@+id/ImageSocial"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/TextFoto"
+        android:id="@+id/TextOrario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/TextSocial"
         android:layout_alignBottom="@+id/TextSocial"
-        android:layout_alignLeft="@+id/ImageFoto"
+        android:layout_alignLeft="@+id/ImageOrario"
         android:layout_marginLeft="25dp"
         android:text="@string/orario"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -41,13 +43,14 @@
         android:text="@string/Notizie"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ImageCalendario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageFoto"
+        android:layout_alignLeft="@+id/ImageOrario"
         android:layout_alignTop="@+id/ImageNotizie"
         android:contentDescription="@string/Calendario"
         android:onClick="calendar"
@@ -59,10 +62,11 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/TextNotizie"
         android:layout_alignBottom="@+id/TextNotizie"
-        android:layout_alignLeft="@+id/TextFoto"
+        android:layout_alignLeft="@+id/TextOrario"
         android:text="@string/Calendario"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -71,17 +75,17 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ImageCalendario"
         android:layout_alignTop="@+id/ImageVoti"
-        android:onClick="notavailable"
         android:contentDescription="@string/Circolari"
+        android:onClick="notavailable"
         android:src="@drawable/circolari" />
 
     <ImageView
-        android:id="@+id/ImageFoto"
+        android:id="@+id/ImageOrario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ImageSocial"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="27dp"
+        android:layout_marginRight="35dp"
         android:contentDescription="@string/orario"
         android:onClick="orario"
         android:src="@drawable/orario" />
@@ -108,6 +112,7 @@
         android:text="@string/Circolari"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -119,6 +124,7 @@
         android:text="@string/Voti"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <ImageView
