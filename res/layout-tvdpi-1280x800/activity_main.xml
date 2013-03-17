@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/activity_main"
     android:background="@drawable/sfondomesseapp" >
 
     <TextView
@@ -12,12 +12,13 @@
         android:layout_alignLeft="@+id/ImageSocial"
         android:layout_below="@+id/ImageSocial"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
+        android:textSize="23sp"
         android:textStyle="bold"
-        android:textSize="23sp" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/TextNotizie"
@@ -29,18 +30,9 @@
         android:text="@string/Notizie"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textStyle="bold" 
-        android:textSize="23sp" />
-
-    <ImageView
-        android:id="@+id/ImageCalendario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageFoto"
-        android:layout_alignTop="@+id/ImageNotizie"
-        android:contentDescription="@string/Calendario"
-        android:onClick="calendar"
-        android:src="@drawable/calendario" />
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/TextCalendario"
@@ -48,12 +40,13 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/TextNotizie"
         android:layout_alignBottom="@+id/TextNotizie"
-        android:layout_alignLeft="@+id/TextFoto"
+        android:layout_alignLeft="@+id/TextOrario"
         android:text="@string/Calendario"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textStyle="bold" 
-        android:textSize="23sp" />
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/TextVoti"
@@ -65,18 +58,9 @@
         android:text="@string/Voti"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textStyle="bold" 
-        android:textSize="23sp" />
-
-    <ImageView
-        android:id="@+id/ImageCircolari"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageCalendario"
-        android:layout_alignTop="@+id/ImageVoti"
-        android:onClick="notavailable"
-        android:contentDescription="@string/Circolari"
-        android:src="@drawable/circolari" />
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/TextCircolari"
@@ -88,14 +72,50 @@
         android:text="@string/Circolari"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textStyle="bold" 
-        android:textSize="23sp" />
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/ImageOrario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ImageSocial"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:contentDescription="@string/orario"
+        android:onClick="orario"
+        android:src="@drawable/orario" />
+
+    <TextView
+        android:id="@+id/TextOrario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextSocial"
+        android:layout_alignBottom="@+id/TextSocial"
+        android:layout_alignLeft="@+id/ImageOrario"
+        android:text="@string/orario"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/black"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/ImageSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/Social"
+        android:onClick="social"
+        android:src="@drawable/social" />
 
     <ImageView
         android:id="@+id/ImageNotizie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageSocial"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/Notizie"
         android:onClick="news"
@@ -105,47 +125,30 @@
         android:id="@+id/ImageVoti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageNotizie"
-        android:layout_below="@+id/TextNotizie"
-        android:layout_marginTop="149dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:contentDescription="@string/Voti"
         android:onClick="voti"
         android:src="@drawable/voti" />
 
     <ImageView
-        android:id="@+id/ImageSocial"
+        android:id="@+id/ImageCalendario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="98dp"
-        android:layout_marginTop="105dp"
-        android:contentDescription="@string/Social"
-        android:onClick="social"
-        android:src="@drawable/social" />
+        android:layout_above="@+id/TextCalendario"
+        android:layout_alignLeft="@+id/TextCalendario"
+        android:contentDescription="@string/Calendario"
+        android:onClick="calendar"
+        android:src="@drawable/calendario" />
 
     <ImageView
-        android:id="@+id/ImageFoto"
+        android:id="@+id/ImageCircolari"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ImageSocial"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="103dp"
-        android:contentDescription="@string/orario"
-        android:onClick="orario"
-        android:src="@drawable/orario" />
-
-    <TextView
-        android:id="@+id/TextFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/TextSocial"
-        android:layout_alignBottom="@+id/TextSocial"
-        android:layout_alignLeft="@+id/ImageFoto"
-        android:text="@string/orario"
-        android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@android:color/black"
-        android:textSize="23sp"
-        android:textStyle="bold" />
+        android:layout_alignLeft="@+id/TextCalendario"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/Circolari"
+        android:onClick="notavailable"
+        android:src="@drawable/circolari" />
 
 </RelativeLayout>
