@@ -37,8 +37,9 @@ public class timetable extends Activity implements
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
 		Database databaseHelper = new Database(getBaseContext());
                 SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                String[] columns = { "fname");
                 Cursor classe = db.query("class", // The table to query
-                                       outdated, // The columns to return
+                                       columns, // The columns to return
                                        null, // The columns for the WHERE clause
                                        null, // The values for the WHERE clause
                                        null, // don't group the rows
