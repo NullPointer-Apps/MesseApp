@@ -47,7 +47,7 @@ public class timetable extends Activity implements
                                        null // The sort order
                                       );
                 classe.moveToFirst();
-                String fname = classe.getString(date.getColumnIndex("fname"));
+                String fname = classe.getString(classe.getColumnIndex("fname"));
                 classe.close();
 		spin.setOnItemSelectedListener(this);
 
