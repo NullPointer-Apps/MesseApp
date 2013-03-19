@@ -37,7 +37,7 @@ public class timetable extends Activity implements
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
 		Database databaseHelper = new Database(getBaseContext());
                 SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                Cursor class = db.query("class", // The table to query
+                Cursor classe = db.query("class", // The table to query
                                        outdated, // The columns to return
                                        null, // The columns for the WHERE clause
                                        null, // The values for the WHERE clause
@@ -45,9 +45,9 @@ public class timetable extends Activity implements
                                        null, // don't filter by row groups
                                        null // The sort order
                                       );
-                class.moveToFirst();
-                String fname = date.getString(date.getColumnIndex("fname"));
-                class.close();
+                classe.moveToFirst();
+                String fname = classe.getString(date.getColumnIndex("fname"));
+                classe.close();
 		spin.setOnItemSelectedListener(this);
 
 		ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
@@ -55,7 +55,7 @@ public class timetable extends Activity implements
 
 		aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(aa);
-		if fname != "" {
+		if (fname != "") {
 			WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 			descrizioneview.getSettings().setJavaScriptEnabled(true);
     descrizioneview.getSettings().setLoadWithOverviewMode(true);
