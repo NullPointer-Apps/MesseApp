@@ -76,31 +76,6 @@ public class news extends ListActivity {
 		return true;
 	}
 
-	public boolean checkForTables() {
-		Boolean hasTables=null;
-		Database databaseHelper = new Database(getBaseContext());
-		db = databaseHelper.getWritableDatabase();
-		Cursor cur = db.rawQuery("SELECT COUNT(*) FROM news", null);
-		if (cur != null) {
-		    cur.moveToFirst();                       // Always one row returned.
-		    if (cur.getInt (0) == 0) {               // Zero count means empty table.
-		    	hasTables = false;
-		    } else {
-		    	hasTables = true;
-		    }
-		}
-		Cursor cursor = db.rawQuery("SELECT id FROM news", null);
-		if (cursor.getCount() == 0) {
-			
-			if (cursor.getCount() > 0) {
-				hasTables = true;
-			}
-		}
-		db.close();
-		cursor.close();
-		return hasTables;
-	}
-
 	@SuppressLint("SimpleDateFormat")
 	private Long getTimeDiff(String time, String curTime) throws ParseException {
 		Date curDate = null;

@@ -2,16 +2,16 @@ package com.messedagliavr.messeapp;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.content.ContentValues;
 
 public class timetable extends Activity implements
 		AdapterView.OnItemSelectedListener {
@@ -35,20 +35,6 @@ public class timetable extends Activity implements
 		super.onCreate(icicle);
 		setContentView(R.layout.timetable);
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
-		Database databaseHelper = new Database(getBaseContext());
-                SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                String[] columns = { "fname" };
-                Cursor classe = db.query("class", // The table to query
-                                       columns, // The columns to return
-                                       null, // The columns for the WHERE clause
-                                       null, // The values for the WHERE clause
-                                       null, // don't group the rows
-                                       null, // don't filter by row groups
-                                       null // The sort order
-                                      );
-                classe.moveToFirst();
-                String fname = classe.getString(classe.getColumnIndex("fname"));
-                classe.close();
 		spin.setOnItemSelectedListener(this);
 
 		ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
@@ -56,17 +42,7 @@ public class timetable extends Activity implements
 
 		aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(aa);
-		if (fname != "novalue") {
-			WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
-			descrizioneview.getSettings().setJavaScriptEnabled(true);
-    descrizioneview.getSettings().setLoadWithOverviewMode(true);
-    descrizioneview.getSettings().setUseWideViewPort(true);
-    descrizioneview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-    descrizioneview.setScrollbarFadingEnabled(true);
-	descrizioneview.getSettings().setBuiltInZoomControls(true);
-    descrizioneview.loadUrl("file:///android_res/drawable/o" + fname + ".png");
-		}
-		db.close();
+		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -74,27 +50,61 @@ public class timetable extends Activity implements
 			long id) {
 		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 		if (position == 0) {
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			String[] columns = { "fname" };
+			Cursor classe = db.query("class", // The table to query
+					columns, // The columns to return
+					null, // The columns for the WHERE clause
+					null, // The values for the WHERE clause
+					null, // don't group the rows
+					null, // don't filter by row groups
+					null // The sort order
+					);
+			classe.moveToFirst();
+			String fname = classe.getString(classe.getColumnIndex("fname"));
+			classe.close();
+
+			if (fname.matches("novalue")==false) {
+				descrizioneview.getSettings().setJavaScriptEnabled(true);
+				descrizioneview.getSettings().setLoadWithOverviewMode(true);
+				descrizioneview.getSettings().setUseWideViewPort(true);
+				descrizioneview
+						.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+				descrizioneview.setScrollbarFadingEnabled(true);
+				descrizioneview.getSettings().setBuiltInZoomControls(true);
+				descrizioneview.loadUrl("file:///android_res/drawable/o" + fname
+						+ ".png");
+				db.close();
+			} else {
 			descrizioneview.loadData("", "text/html", "UTF-8");
+			}
 		} else {
-		Database databaseHelper = new Database(getBaseContext());
-                SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
-                values.put("fname", items[position].toLowerCase());
-                long newRowId = db.insertWithOnConflict("class", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			ContentValues values = new ContentValues();
+			values.put("fname", items[position].toLowerCase());
+			long samerow = db.update("class", values, null, null);
 			descrizioneview.getSettings().setJavaScriptEnabled(true);
-    descrizioneview.getSettings().setLoadWithOverviewMode(true);
-    descrizioneview.getSettings().setUseWideViewPort(true);
-    descrizioneview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-    descrizioneview.setScrollbarFadingEnabled(true);
-	descrizioneview.getSettings().setBuiltInZoomControls(true);
-    descrizioneview.loadUrl("file:///android_res/drawable/o" + items[position].toLowerCase() + ".png");
-    db.close();
+			descrizioneview.getSettings().setLoadWithOverviewMode(true);
+			descrizioneview.getSettings().setUseWideViewPort(true);
+			descrizioneview
+					.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+			descrizioneview.setScrollbarFadingEnabled(true);
+			descrizioneview.getSettings().setBuiltInZoomControls(true);
+			descrizioneview.loadUrl("file:///android_res/drawable/o"
+					+ items[position].toLowerCase() + ".png");
+			db.close();
 		}
 	}
 
 	public void onNothingSelected(AdapterView<?> parent) {
-		
 		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
+		Database databaseHelper = new Database(getBaseContext());
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put("fname", "novalue");
+		long samerow = db.update("class", values, null, null);
 		descrizioneview.loadData("", "text/html", "UTF-8");
 	}
 }// class

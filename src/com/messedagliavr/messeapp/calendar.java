@@ -213,22 +213,6 @@ public class calendar extends ListActivity {
 			mDialog.show();
 		}
 
-		public boolean checkForTables() {
-			Boolean hasTables = null;
-			Database databaseHelper = new Database(getBaseContext());
-			db = databaseHelper.getWritableDatabase();
-			Cursor cursor = db.rawQuery("SELECT * FROM calendar", null);
-			if (cursor.getCount() == 0) {
-				hasTables = false;
-				if (cursor.getCount() > 0) {
-					hasTables = true;
-				}
-			}
-			db.close();
-			cursor.close();
-			return hasTables;
-		}
-
 		@SuppressLint("SimpleDateFormat")
 		public HashMap<String, ArrayList<Spanned>> doInBackground(
 				Void... params) {
