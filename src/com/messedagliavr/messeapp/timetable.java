@@ -37,7 +37,7 @@ public class timetable extends Activity implements
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
 		Database databaseHelper = new Database(getBaseContext());
                 SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                String[] columns = { "fname");
+                String[] columns = { "fname" };
                 Cursor classe = db.query("class", // The table to query
                                        columns, // The columns to return
                                        null, // The columns for the WHERE clause
@@ -56,7 +56,7 @@ public class timetable extends Activity implements
 
 		aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(aa);
-		if (fname != "") {
+		if (fname != "novalue") {
 			WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 			descrizioneview.getSettings().setJavaScriptEnabled(true);
     descrizioneview.getSettings().setLoadWithOverviewMode(true);
