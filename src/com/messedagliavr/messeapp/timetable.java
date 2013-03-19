@@ -9,6 +9,9 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
 
 public class timetable extends Activity implements
 		AdapterView.OnItemSelectedListener {
@@ -33,7 +36,7 @@ public class timetable extends Activity implements
 		setContentView(R.layout.timetable);
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
 		Database databaseHelper = new Database(getBaseContext());
-                db = databaseHelper.getWritableDatabase();
+                SQLiteDatabase db = databaseHelper.getWritableDatabase();
                 Cursor class = db.query("class", // The table to query
                                        outdated, // The columns to return
                                        null, // The columns for the WHERE clause
@@ -73,7 +76,7 @@ public class timetable extends Activity implements
 			descrizioneview.loadData("", "text/html", "UTF-8");
 		} else {
 		Database databaseHelper = new Database(getBaseContext());
-                db = databaseHelper.getWritableDatabase();
+                SQLiteDatabase db = databaseHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 values.put("fname", items[position].toLowerCase());
                 long newRowId = db.insertWithOnConflict("class", null, values, SQLiteDatabase.CONFLICT_REPLACE);
