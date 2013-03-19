@@ -13,6 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:cacheColorHint="#00000000"
+		android:background="#50FFFFFF"
         android:divider="@drawable/list_divider"
         android:dividerHeight="1dip"
         android:footerDividersEnabled="true"
