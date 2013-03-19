@@ -32,6 +32,19 @@ public class timetable extends Activity implements
 		super.onCreate(icicle);
 		setContentView(R.layout.timetable);
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
+		Database databaseHelper = new Database(getBaseContext());
+                db = databaseHelper.getWritableDatabase();
+                Cursor class = db.query("class", // The table to query
+                                       outdated, // The columns to return
+                                       null, // The columns for the WHERE clause
+                                       null, // The values for the WHERE clause
+                                       null, // don't group the rows
+                                       null, // don't filter by row groups
+                                       null // The sort order
+                                      );
+                class.moveToFirst();
+                String fname = date.getString(date.getColumnIndex("fname"));
+                class.close();
 		spin.setOnItemSelectedListener(this);
 
 		ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
@@ -39,6 +52,17 @@ public class timetable extends Activity implements
 
 		aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(aa);
+		if fname != "" {
+			WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
+			descrizioneview.getSettings().setJavaScriptEnabled(true);
+    descrizioneview.getSettings().setLoadWithOverviewMode(true);
+    descrizioneview.getSettings().setUseWideViewPort(true);
+    descrizioneview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+    descrizioneview.setScrollbarFadingEnabled(true);
+	descrizioneview.getSettings().setBuiltInZoomControls(true);
+    descrizioneview.loadUrl("file:///android_res/drawable/o" + fname + ".png");
+		}
+		db.close();
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -48,7 +72,11 @@ public class timetable extends Activity implements
 		if (position == 0) {
 			descrizioneview.loadData("", "text/html", "UTF-8");
 		} else {
-			
+		Database databaseHelper = new Database(getBaseContext());
+                db = databaseHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("fname", items[position].toLowerCase());
+                long newRowId = db.insertWithOnConflict("class", null, values, SQLiteDatabase.CONFLICT_REPLACE);
 			descrizioneview.getSettings().setJavaScriptEnabled(true);
     descrizioneview.getSettings().setLoadWithOverviewMode(true);
     descrizioneview.getSettings().setUseWideViewPort(true);
@@ -56,10 +84,12 @@ public class timetable extends Activity implements
     descrizioneview.setScrollbarFadingEnabled(true);
 	descrizioneview.getSettings().setBuiltInZoomControls(true);
     descrizioneview.loadUrl("file:///android_res/drawable/o" + items[position].toLowerCase() + ".png");
+    db.close();
 		}
 	}
 
 	public void onNothingSelected(AdapterView<?> parent) {
+		
 		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 		descrizioneview.loadData("", "text/html", "UTF-8");
 	}
