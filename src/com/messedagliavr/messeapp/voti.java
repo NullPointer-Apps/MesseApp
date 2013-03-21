@@ -1,49 +1,22 @@
 package com.messedagliavr.messeapp;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class voti extends Activity {
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.voti);
-		new registro().execute();
-
-	}
-	
-	@Override
-	public void onBackPressed() {
-		Intent main = new Intent(this, MainActivity.class);
-		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(main);
-	}
-	
-	String html = null;
-	
-public class registro extends AsyncTask<Void,Void,Void> {
-	protected Void doInBackground(Void... params) {
+		// new registro().execute();
 		Database databaseHelper = new Database(getBaseContext());
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		String[] columns = { "username", "password" };
@@ -56,53 +29,50 @@ public class registro extends AsyncTask<Void,Void,Void> {
 				null // The sort order
 				);
 		query.moveToFirst();
-		String user=query.getString(query.getColumnIndex("username"));
-		String password=query.getString(query.getColumnIndex("password"));
+		String user = query.getString(query.getColumnIndex("username"));
+		String password = query.getString(query.getColumnIndex("password"));
 		query.close();
 		db.close();
-		HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("https://web.spaggiari.eu/home/app/default/login.php");
-
-	    try {
-	        // Add your data
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	        nameValuePairs.add(new BasicNameValuePair("custcode", "VRLS0003"));
-	        nameValuePairs.add(new BasicNameValuePair("login", user));
-	        nameValuePairs.add(new BasicNameValuePair("password", password));
-	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-	        // Execute HTTP Post Request
-	        HttpResponse response = httpclient.execute(httppost);
-	        InputStream is = response.getEntity().getContent();
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-	        StringBuilder sb = new StringBuilder();
-	        String line = null;
-
-	        while ((line = reader.readLine()) != null) {
-	            sb.append(line);
-	        }
-
-	        is.close();
-	        html = sb.toString();  
-	    } catch (ClientProtocolException e) {
-	        // TODO Auto-generated catch block
-	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
-	    }
-	    return null;
-		
-	}
-	public void onPostExecute (Void...params) {
 		WebView votiview = (WebView) findViewById(R.id.voti);
 		votiview.getSettings().setJavaScriptEnabled(true);
 		votiview.getSettings().setLoadWithOverviewMode(true);
 		votiview.getSettings().setUseWideViewPort(true);
-		votiview
-				.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+		votiview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 		votiview.setScrollbarFadingEnabled(true);
 		votiview.getSettings().setBuiltInZoomControls(true);
-		votiview.loadData(html, "text/html", "UTF-8");
-	}
-}
+		votiview.setWebViewClient(new HelloWebViewClient());
+		votiview.loadDataWithBaseURL(
+				"https://web.spaggiari.eu/home/app/default/",
+				getHtml("html1") + user + getHtml("html2") + password
+						+ getHtml("html3"), "text/html", "UTF-8", null);
 
+	}
+
+	private class HelloWebViewClient extends WebViewClient {
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			view.loadUrl(url);
+			return true;
+		}
+	}
+
+	public String getHtml(String file) {
+		try {
+			InputStream is = this.getAssets().open(file + ".txt");
+			int size = is.available();
+			byte[] buffer = new byte[size];
+			is.read(buffer);
+			is.close();
+			return new String(buffer);
+		} catch (IOException ex) {
+			return "";
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		Intent main = new Intent(this, MainActivity.class);
+		main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(main);
+	}
 }
