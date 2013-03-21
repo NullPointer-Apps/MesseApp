@@ -106,12 +106,11 @@ public class MainActivity extends Activity {
 
 	public void onCheckClicked(View view) {
 		CheckBox toggle = (CheckBox) findViewById(R.id.checkBox1);
-		boolean on = toggle.isChecked();
 		EditText password = (EditText) findViewById(R.id.password);
-		if (on) {
+		if (toggle.isChecked()) {
 			password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 		} else {
-			password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+			password.setInputType(129);
 		}
 	}
 
@@ -135,6 +134,13 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.settings:
+			setContentView(R.layout.settings);
+			layoutid = R.id.settings;
+			EditText user = (EditText) findViewById(R.id.username);
+			EditText password = (EditText) findViewById(R.id.password);
+			CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
+			Button save = (Button) findViewById(R.id.savesett);
+			ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
 			Database databaseHelper = new Database(getBaseContext());
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			String[] columns = { "enabled", "username", "password" };
@@ -150,28 +156,15 @@ public class MainActivity extends Activity {
 			String enabled = query.getString(query.getColumnIndex("enabled"));
 			db.close();
 			if (enabled.matches("true")) {
-				setContentView(R.layout.settings);
-				layoutid = R.id.settings;
-				EditText user = (EditText) findViewById(R.id.username);
-				EditText password = (EditText) findViewById(R.id.password);
-				CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
-				Button save = (Button) findViewById(R.id.savesett);
-				ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
 				user.setVisibility(View.VISIBLE);
 				user.setText(query.getString(query.getColumnIndex("username")));
 				password.setVisibility(View.VISIBLE);
-				password.setText(query.getString(query.getColumnIndex("password")));
+				password.setText(query.getString(query
+						.getColumnIndex("password")));
 				save.setVisibility(View.VISIBLE);
 				check.setVisibility(View.VISIBLE);
 				toggle.setChecked(true);
 			} else {
-				setContentView(R.layout.settings);
-				layoutid = R.id.settings;
-				EditText user = (EditText) findViewById(R.id.username);
-				EditText password = (EditText) findViewById(R.id.password);
-				CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
-				Button save = (Button) findViewById(R.id.savesett);
-				ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
 				user.setVisibility(View.GONE);
 				password.setVisibility(View.GONE);
 				save.setVisibility(View.GONE);
