@@ -56,4 +56,9 @@
     <string name="title_activity_acra">Acra</string>
     <string name="migliora">Send a suggestion!</string>
     <string name="settings">Settings</string>
+    <string name="ricorda">Ricorda password del registro elettronico</string>
+    <string name="user">Username</string>
+    <string name="pass">Password</string>
+    <string name="mostrapass">Mostra Password</string>
+    <string name="salva">Salva</string>
 </resources>

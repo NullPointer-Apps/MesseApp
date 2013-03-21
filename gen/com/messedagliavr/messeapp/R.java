@@ -218,6 +218,7 @@ public final class R {
         public static final int main_title=0x7f050002;
         public static final int migliora=0x7f050035;
         public static final int moodle=0x7f050033;
+        public static final int mostrapass=0x7f05003a;
         public static final int noapilevel=0x7f05001f;
         public static final int noconnection=0x7f05000a;
         public static final int noconnectioncalendar=0x7f050015;
@@ -225,7 +226,10 @@ public final class R {
         public static final int notavailable=0x7f050017;
         public static final int orario=0x7f05001b;
         public static final int otdev=0x7f050014;
+        public static final int pass=0x7f050039;
         public static final int refresh=0x7f05001c;
+        public static final int ricorda=0x7f050037;
+        public static final int salva=0x7f05003b;
         public static final int sede1_name=0x7f050025;
         public static final int sede1_num=0x7f05002c;
         public static final int sede2_name=0x7f050031;
@@ -238,6 +242,7 @@ public final class R {
         public static final int succ_num=0x7f05002f;
         public static final int tel=0x7f05002a;
         public static final int title_activity_acra=0x7f050034;
+        public static final int user=0x7f050038;
         public static final int vice_email=0x7f050028;
         public static final int vice_name=0x7f050023;
         public static final int wu=0x7f050011;

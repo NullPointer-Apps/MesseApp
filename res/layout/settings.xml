@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="144dp"
-        android:text="Salva"
+        android:text="@string/salva"
         android:onClick="onSaveClicked"
         android:visibility="visible" />
 
@@ -22,8 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Mostra Password"
         android:onClick="onCheckClicked"
+        android:text="@string/mostrapass"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/black"
         android:visibility="visible" />
 
     <EditText
@@ -34,8 +36,10 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="28dp"
         android:ems="10"
+        android:hint="@string/pass"
         android:inputType="textPassword"
-        android:text="Password"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/darker_gray"
         android:visibility="visible" />
 
     <EditText
@@ -45,9 +49,10 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/saveenabled"
         android:layout_marginTop="14dp"
-        android:ems="10"
+        android:ems="8"
+        android:hint="@string/user"
         android:inputType="text"
-        android:text="Username"
+        android:textColorHint="@android:color/black"
         android:visibility="visible" >
 
         <requestFocus />
@@ -61,7 +66,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/saveenabled"
-        android:text="Login automatico registro elettronico"
+        android:text="@string/login"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
 
@@ -73,7 +78,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="14dp"
         android:layout_marginTop="14dp"
-        android:onClick="onToggleClicked"
-        android:text="ToggleButton" />
+        android:onClick="onToggleClicked"/>
 
 </RelativeLayout>
