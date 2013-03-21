@@ -1,0 +1,116 @@
+" size="20" tabindex="2" />
+</p>
+
+<p class="double">
+<img class="vkeyb_toggle" src="../../../img/keypad.png" alt="Tastiera" title="Tastiera" />
+<input type="submit" value="Conferma" size="10" tabindex="3" />
+</p>
+
+</td>
+<td colspan="12" class="griglia center vmiddle passreminder cursor_pointer" align="center">
+<img  src="../../../img/pass_dimenticata.png" height="50" alt="" title="Invio password via e-mail">
+<p class="graytext">Dimenticata? </p>
+</td>
+
+</tr>
+<tr height="0" align="center" valign="top"  class="bg_color_dddddd vtop center">
+<td colspan="48" align="center"><div id="vkeyb" style="width: 810px;" ></div></td>
+</tr>
+
+
+
+<table width="1005" border="0" cellspacing="0" tabspacing="0" class="griglia_tab">
+<tbody>
+<tr height="1"  align="center" valign="middle">
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+<td width="20"></td><td width="20"></td><td width="20"></td><td width="20"></td>
+</tr>
+<tr height="12"  align="center" valign="middle" >
+<td colspan="48" class="griglia_red_nover" align="left">
+&nbsp;
+</td>
+
+
+</tr>
+<tr height="300"  align="center" valign="top">
+<td colspan="1"  align="left">
+&nbsp;
+</td>
+<td colspan="12"  align="center" valign="top">
+<span class="graytext">
+Con il patrocinio di
+<br />&nbsp;
+</span>
+
+</td>
+<td colspan="22"  align="center" valign="top" class="vtop center">
+<img  src="../../../img/webis_main.jpg?v=001" alt="" />
+</td>
+<td colspan="12" align="center" valign="top" class="vtop center">
+<span class="graytext">
+Con il contributo di
+</span>
+</td>
+<td colspan="1"  align="center">
+&nbsp;
+</td>
+
+
+</tr>
+<tr height="4"  align="center" valign="middle" >
+<td colspan="48" class="bb_red" align="left" >
+&nbsp;
+</td>
+</tr>
+
+
+
+</tbody>
+</table>
+</form>
+
+
+
+
+
+
+
+
+<div id="footer_copyright">
+
+<a href="http://www.teamviewer.com/download/version_6x/TeamViewerQS.exe" >TeamViewer</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b title= 119>&copy;2012 </b>Engineered & Powered by <a href="http://www.spaggiari.eu" target="_blank">Casa Editrice Spaggiari S.p.A.</a>
+- Divisione <a href="http://www.infoschool.eu" target="_blank">Infoschool</a> -
+- P.IVA 00150470342 -
+<a href="#" onclick="return popitup('http://www.spaggiari.eu/companyinfo.php')">Company info</a>
+
+
+<script language="javascript" type="text/javascript">
+<!--
+function popitup(url) {
+newwindow=window.open(url,'name','height=380,width=800');
+if (window.focus) {newwindow.focus()}
+return false;
+}
+
+// -->
+</script>
+
+</div>
+
+<!-- no-pt -->
+</body>
+</html>
