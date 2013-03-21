@@ -84,8 +84,22 @@ public class MainActivity extends Activity {
 		Button save = (Button) findViewById(R.id.savesett);
 		CheckBox checkbox = (CheckBox) findViewById(R.id.checkBox1);
 		if (on) {
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			String[] columns = { "username", "password" };
+			Cursor query = db.query("settvoti", // The table to query
+									columns, // The columns to return
+									null, // The columns for the WHERE clause
+									null, // The values for the WHERE clause
+									null, // don't group the rows
+									null, // don't filter by row groups
+									null // The sort order
+									);
 			user.setVisibility(View.VISIBLE);
+			user.setText(query.getString(query.getColumnIndex("username")));
 			password.setVisibility(View.VISIBLE);
+			password.setText(query.getString(query
+											 .getColumnIndex("password")));
 			save.setVisibility(View.VISIBLE);
 			checkbox.setVisibility(View.VISIBLE);
 		} else {
