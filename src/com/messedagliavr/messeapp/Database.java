@@ -6,15 +6,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
 	public static final String NOME_DB = "messeapp.db";
-	public static final int VERSIONE_DB = 6;
+	public static final int VERSIONE_DB = 7;
 
 	private static final String CREATE_NEWS = "CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,titleb text not null,description text not null);";
 	private static final String CREATE_CALENDAR = "CREATE TABLE calendar (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,titleb text not null,description text,ical text not null);";
 	private static final String CREATE_CLASS = "CREATE TABLE class (fname text);";
 	private static final String CREATE_UPDATE = "CREATE TABLE lstchk (newsdate text,calendardate text);";
+	private static final String CREATE_SETTVOTI = "CREATE TABLE settvoti (enabled text,username text,password text);";
 	private static final String POPULATE_UPDATE = "INSERT INTO lstchk VALUES ('1995-01-19 23:40:20','1995-01-19 23:40:20');";
 	private static final String POPULATE_CLASS = "INSERT INTO class VALUES ('novalue');";
-
+	private static final String POPULATE_SETTVOTI = "INSERT INTO settvoti VALUES('false','','');";
 	public Database(Context context) {
 		super(context, NOME_DB, null, VERSIONE_DB);
 	}
@@ -30,6 +31,8 @@ public class Database extends SQLiteOpenHelper {
 		db.execSQL(POPULATE_UPDATE);
 		db.execSQL(CREATE_CLASS);
 		db.execSQL(POPULATE_CLASS);
+		db.execSQL(CREATE_SETTVOTI);
+		db.execSQL(POPULATE_SETTVOTI);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

@@ -55,5 +55,5 @@
     <string name="moodle">Moodle</string>
     <string name="title_activity_acra">Acra</string>
     <string name="migliora">Send a suggestion!</string>
-
+    <string name="settings">Settings</string>
 </resources>

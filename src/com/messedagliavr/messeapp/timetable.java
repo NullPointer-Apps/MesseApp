@@ -29,11 +29,30 @@ public class timetable extends Activity implements
 			"3M", "3N", "3O", "4A", "4B", "4C", "4D", "4E", "4F", "4G", "4H",
 			"4I", "4L", "4M", "4N", "4O", "5A", "5B", "5C", "5D", "5E", "5F",
 			"5G", "5H", "5I", "5L" };
+	String fname = null;
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.timetable);
+		Database databaseHelper = new Database(getBaseContext());
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		String[] columns = { "fname" };
+		Cursor classe = db.query("class", // The table to query
+				columns, // The columns to return
+				null, // The columns for the WHERE clause
+				null, // The values for the WHERE clause
+				null, // don't group the rows
+				null, // don't filter by row groups
+				null // The sort order
+				);
+		classe.moveToFirst();
+		fname = classe.getString(classe.getColumnIndex("fname"));
+		classe.close();
+		db.close();
+		if (fname.matches("novalue") == false) {
+			items[0] = "Predefinito: " + fname.toUpperCase();
+		}
 		Spinner spin = (Spinner) findViewById(R.id.spinner);
 		spin.setOnItemSelectedListener(this);
 
@@ -42,7 +61,6 @@ public class timetable extends Activity implements
 
 		aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(aa);
-		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -50,22 +68,7 @@ public class timetable extends Activity implements
 			long id) {
 		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 		if (position == 0) {
-			Database databaseHelper = new Database(getBaseContext());
-			SQLiteDatabase db = databaseHelper.getWritableDatabase();
-			String[] columns = { "fname" };
-			Cursor classe = db.query("class", // The table to query
-					columns, // The columns to return
-					null, // The columns for the WHERE clause
-					null, // The values for the WHERE clause
-					null, // don't group the rows
-					null, // don't filter by row groups
-					null // The sort order
-					);
-			classe.moveToFirst();
-			String fname = classe.getString(classe.getColumnIndex("fname"));
-			classe.close();
-
-			if (fname.matches("novalue")==false) {
+			if (fname.matches("novalue") == false) {
 				descrizioneview.getSettings().setJavaScriptEnabled(true);
 				descrizioneview.getSettings().setLoadWithOverviewMode(true);
 				descrizioneview.getSettings().setUseWideViewPort(true);
@@ -73,11 +76,10 @@ public class timetable extends Activity implements
 						.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 				descrizioneview.setScrollbarFadingEnabled(true);
 				descrizioneview.getSettings().setBuiltInZoomControls(true);
-				descrizioneview.loadUrl("file:///android_res/drawable/o" + fname
-						+ ".png");
-				db.close();
+				descrizioneview.loadUrl("file:///android_res/drawable/o"
+						+ fname + ".png");
 			} else {
-			descrizioneview.loadData("", "text/html", "UTF-8");
+				descrizioneview.loadData("", "text/html", "UTF-8");
 			}
 		} else {
 			Database databaseHelper = new Database(getBaseContext());

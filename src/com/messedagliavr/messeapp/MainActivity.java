@@ -3,11 +3,14 @@ package com.messedagliavr.messeapp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,9 +19,12 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 	int layoutid;
@@ -61,7 +67,7 @@ public class MainActivity extends Activity {
 
 	public void onBackPressed() {
 		if (layoutid == R.id.info || layoutid == R.id.social
-				|| layoutid == R.id.contatti) {
+				|| layoutid == R.id.contatti || layoutid == R.id.settings) {
 			setContentView(R.layout.activity_main);
 			layoutid = R.id.activity_main;
 		} else {
@@ -70,10 +76,111 @@ public class MainActivity extends Activity {
 
 	}
 
+	public void onToggleClicked(View view) {
+		ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
+		boolean on = toggle.isChecked();
+		EditText user = (EditText) findViewById(R.id.username);
+		EditText password = (EditText) findViewById(R.id.password);
+		Button save = (Button) findViewById(R.id.savesett);
+		CheckBox checkbox = (CheckBox) findViewById(R.id.checkBox1);
+		if (on) {
+			user.setVisibility(View.VISIBLE);
+			password.setVisibility(View.VISIBLE);
+			save.setVisibility(View.VISIBLE);
+			checkbox.setVisibility(View.VISIBLE);
+		} else {
+			user.setVisibility(View.GONE);
+			password.setVisibility(View.GONE);
+			save.setVisibility(View.GONE);
+			checkbox.setVisibility(View.GONE);
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			ContentValues values = new ContentValues();
+			values.put("enabled", "false");
+			long samerow = db.update("settvoti", values, null, null);
+			db.close();
+			Toast.makeText(MainActivity.this, "Login automatico disabilitato",
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public void onCheckClicked(View view) {
+		CheckBox toggle = (CheckBox) findViewById(R.id.checkBox1);
+		boolean on = toggle.isChecked();
+		EditText password = (EditText) findViewById(R.id.password);
+		if (on) {
+			password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+		} else {
+			password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		}
+	}
+
+	public void onSaveClicked(View view) {
+		EditText usert = (EditText) findViewById(R.id.username);
+		EditText passwordt = (EditText) findViewById(R.id.password);
+		String username = usert.getText().toString();
+		String password = passwordt.getText().toString();
+		Database databaseHelper = new Database(getBaseContext());
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put("enabled", "true");
+		values.put("username", username);
+		values.put("password", password);
+		long samerow = db.update("settvoti", values, null, null);
+		db.close();
+		Toast.makeText(MainActivity.this, "Impostazioni salvate",
+				Toast.LENGTH_LONG).show();
+	}
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.settings:
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			String[] columns = { "enabled", "username", "password" };
+			Cursor query = db.query("settvoti", // The table to query
+					columns, // The columns to return
+					null, // The columns for the WHERE clause
+					null, // The values for the WHERE clause
+					null, // don't group the rows
+					null, // don't filter by row groups
+					null // The sort order
+					);
+			query.moveToFirst();
+			String enabled = query.getString(query.getColumnIndex("enabled"));
+			db.close();
+			if (enabled.matches("true")) {
+				setContentView(R.layout.settings);
+				layoutid = R.id.settings;
+				EditText user = (EditText) findViewById(R.id.username);
+				EditText password = (EditText) findViewById(R.id.password);
+				CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
+				Button save = (Button) findViewById(R.id.savesett);
+				ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
+				user.setVisibility(View.VISIBLE);
+				user.setText(query.getString(query.getColumnIndex("username")));
+				password.setVisibility(View.VISIBLE);
+				password.setText(query.getString(query.getColumnIndex("password")));
+				save.setVisibility(View.VISIBLE);
+				check.setVisibility(View.VISIBLE);
+				toggle.setChecked(true);
+			} else {
+				setContentView(R.layout.settings);
+				layoutid = R.id.settings;
+				EditText user = (EditText) findViewById(R.id.username);
+				EditText password = (EditText) findViewById(R.id.password);
+				CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
+				Button save = (Button) findViewById(R.id.savesett);
+				ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
+				user.setVisibility(View.GONE);
+				password.setVisibility(View.GONE);
+				save.setVisibility(View.GONE);
+				check.setVisibility(View.GONE);
+			}
+			query.close();
+			break;
 		case R.id.info:
-			PackageInfo pinfo=null;
+			PackageInfo pinfo = null;
 			try {
 				pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
 			} catch (NameNotFoundException e) {
@@ -112,10 +219,12 @@ public class MainActivity extends Activity {
 							String m_Text = input.getText().toString();
 							Intent emailIntent = new Intent(
 									Intent.ACTION_SENDTO, Uri.fromParts(
-											"mailto", "null.p.apps@gmail.com", null));
+											"mailto", "null.p.apps@gmail.com",
+											null));
 							emailIntent.putExtra(Intent.EXTRA_SUBJECT,
 									"Suggerimento MesseApp");
-							emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(m_Text));
+							emailIntent.putExtra(Intent.EXTRA_TEXT,
+									Html.fromHtml(m_Text));
 							startActivity(Intent.createChooser(emailIntent,
 									"Invia Suggerimento"));
 						}
@@ -140,9 +249,28 @@ public class MainActivity extends Activity {
 	}
 
 	public void voti(View view) {
-		Intent voti = new Intent(Intent.ACTION_VIEW);
-		voti.setData(Uri.parse("http://atv.infoschool.eu/VRLS0003"));
-		startActivity(voti);
+		Database databaseHelper = new Database(getBaseContext());
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		String[] columns = { "enabled" };
+		Cursor query = db.query("settvoti", // The table to query
+				columns, // The columns to return
+				null, // The columns for the WHERE clause
+				null, // The values for the WHERE clause
+				null, // don't group the rows
+				null, // don't filter by row groups
+				null // The sort order
+				);
+		query.moveToFirst();
+		String enabled = query.getString(query.getColumnIndex("enabled"));
+		query.close();
+		db.close();
+		if (enabled.matches("true")) {
+			startActivity(new Intent(this, voti.class));
+		} else {
+			Intent voti = new Intent(Intent.ACTION_VIEW);
+			voti.setData(Uri.parse("http://atv.infoschool.eu/VRLS0003"));
+			startActivity(voti);
+		}
 	}
 
 	public void youtube(View view) {
