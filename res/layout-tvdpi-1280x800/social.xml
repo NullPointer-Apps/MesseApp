@@ -6,37 +6,37 @@
     android:background="@drawable/sfondomesseapp" >
 
     <ImageView
-        android:id="@+id/YouTube"
+        android:id="@+id/Moodle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="88dp"
-        android:contentDescription="@string/Calendario"
-        android:onClick="youtube"
-        android:src="@drawable/youtube" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="266dp"
+        android:contentDescription="@string/moodle"
+        android:onClick="moodle"
+        android:src="@drawable/moodle" />
 
     <ImageView
         android:id="@+id/Facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/YouTube"
+        android:layout_above="@+id/Moodle"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="34dp"
+        android:layout_marginBottom="144dp"
+        android:layout_marginLeft="147dp"
         android:contentDescription="@string/Calendario"
         android:onClick="facebook"
         android:src="@drawable/facebook" />
 
     <ImageView
-        android:id="@+id/Moodle"
+        android:id="@+id/YouTube"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/YouTube"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:contentDescription="@string/moodle"
-        android:onClick="moodle"
-        android:src="@drawable/moodle" />
+        android:layout_alignBottom="@+id/Facebook"
+        android:layout_marginLeft="117dp"
+        android:layout_toRightOf="@+id/Facebook"
+        android:contentDescription="@string/Calendario"
+        android:onClick="youtube"
+        android:src="@drawable/youtube" />
 
 </RelativeLayout>

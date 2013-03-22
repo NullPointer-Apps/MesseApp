@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="22dp"
-        android:layout_marginTop="117dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="88dp"
         android:contentDescription="@string/Calendario"
         android:onClick="youtube"
         android:src="@drawable/youtube" />
@@ -21,11 +21,22 @@
         android:id="@+id/Facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/YouTube"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/YouTube"
-        android:layout_marginLeft="46dp"
+        android:layout_marginLeft="34dp"
         android:contentDescription="@string/Calendario"
         android:onClick="facebook"
         android:src="@drawable/facebook" />
+
+    <ImageView
+        android:id="@+id/Moodle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/YouTube"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:contentDescription="@string/moodle"
+        android:onClick="moodle"
+        android:src="@drawable/moodle" />
 
 </RelativeLayout>

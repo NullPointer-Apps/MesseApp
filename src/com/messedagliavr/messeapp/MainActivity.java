@@ -214,11 +214,6 @@ public class MainActivity extends Activity {
 			setContentView(R.layout.contatti);
 			layoutid = R.id.contatti;
 			break;
-		case R.id.moodle:
-			Intent moodle = new Intent(Intent.ACTION_VIEW);
-			moodle.setData(Uri.parse("http://corsi.messedaglia.it"));
-			startActivity(moodle);
-			break;
 		case R.id.migliora:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Invia Suggerimento");
@@ -256,6 +251,12 @@ public class MainActivity extends Activity {
 			break;
 		}
 		return true;
+	}
+
+	public void moodle(View view) {
+		Intent moodle = new Intent(Intent.ACTION_VIEW);
+		moodle.setData(Uri.parse("http://corsi.messedaglia.it"));
+		startActivity(moodle);
 	}
 
 	public void social(View view) {
