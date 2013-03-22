@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">A. Messedaglia VR</string>
     <string name="Info">Info</string>
     <string name="main_title">A. Messedaglia VR</string>
@@ -8,20 +7,9 @@
     <string name="Social">Social</string>
     <string name="Voti">Register</string>
     <string name="Notizie">News</string>
-    <string name="Foto">Photo</string>
     <string name="Circolari">Circular</string>
     <string name="exit">Exit</string>
     <string name="noconnection">You need an Internet connection to see the news</string>
-    <string name="ambro">Francesco Ambrosini</string>
-    <string name="debla">Simone De Blasiis</string>
-    <string name="grezzana">Gabriele Grezzana</string>
-    <string name="benati">Francesco Benati</string>
-    <string name="bianchi">Davide Bianchi</string>
-    <string name="iervasi">Matteo Iervasi</string>
-    <string name="wu">Zihong Wu</string>
-    <string name="dev">Developers:</string>
-    <string name="graphic">Graphic:</string>
-    <string name="otdev">Other developers:</string>
     <string name="noconnectioncalendar">You need an Internet connection to see the events in the calendar</string>
     <string name="nodescription">There\'s no description for this event</string>
     <string name="notavailable">The function you are trying to use is not yet available</string>
@@ -33,7 +21,6 @@
     <string name="connerr">There\'s a problem with your Internet connection</string>
     <string name="ical">Import in Calendar</string>
     <string name="noapilevel">Your version of Android is too outdated to use this function</string>
-    <string name="classe">Choose a class</string>
     <string name="Email">Email</string>
     <string name="dir_name">Headmaster</string>
     <string name="vice_name">Vice Headmaster</string>
@@ -53,10 +40,8 @@
     <string name="sede2_name">School 2</string>
     <string name="sede_name">School</string>
     <string name="moodle">Moodle</string>
-    <string name="title_activity_acra">Acra</string>
     <string name="migliora">Send a suggestion!</string>
     <string name="settings">Settings</string>
-    <string name="ricorda">Ricorda password del registro elettronico</string>
     <string name="user">Username</string>
     <string name="pass">Password</string>
     <string name="mostrapass">Mostra Password</string>

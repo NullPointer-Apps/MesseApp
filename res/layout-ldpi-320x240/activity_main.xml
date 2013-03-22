@@ -16,7 +16,7 @@
         android:text="@string/Social"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:text="@string/orario"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -54,7 +54,7 @@
         android:text="@string/Notizie"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"
+        android:textSize="13sp"
         android:textStyle="bold"  />
 
     <ImageView
@@ -76,7 +76,7 @@
         android:text="@string/Calendario"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"
+        android:textSize="13sp"
         android:textStyle="bold"  />
 
     <ImageView
@@ -100,7 +100,7 @@
         android:text="@string/Voti"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"
+        android:textSize="13sp"
         android:textStyle="bold"  />
 
     <ImageView
@@ -124,7 +124,7 @@
         android:onClick="notavailable"
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/ldpi_320x240"
+        android:textSize="13sp"
         android:textStyle="bold"  />
 
     <ImageView

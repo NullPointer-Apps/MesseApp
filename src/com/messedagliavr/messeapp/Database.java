@@ -16,7 +16,7 @@ public class Database extends SQLiteOpenHelper {
 	private static final String POPULATE_UPDATE = "INSERT INTO lstchk VALUES ('1995-01-19 23:40:20','1995-01-19 23:40:20');";
 	private static final String POPULATE_CLASS = "INSERT INTO class VALUES ('novalue');";
 	private static final String POPULATE_SETTVOTI = "INSERT INTO settvoti VALUES('false','','');";
-	public Database(Context context) {
+	public Database (Context context) {
 		super(context, NOME_DB, null, VERSIONE_DB);
 	}
 

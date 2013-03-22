@@ -1,107 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/sfondomesseapp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/info"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/TextDebla"
-        android:layout_width="87dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textAmbro"
-        android:layout_alignBottom="@+id/textAmbro"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="26dp"
-        android:text="@string/debla"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextDev"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/dev"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextOtdev"
+        android:id="@+id/versionname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/TextIervasi"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="31dp"
-        android:text="@string/otdev"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextGrezz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/TextOtdev"
-        android:layout_alignRight="@+id/TextGraphic"
-        android:layout_marginBottom="23dp"
-        android:text="@string/grezzana"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextGraphic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textAmbro"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="@string/graphic"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/textAmbro"
-        android:layout_width="102dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextGrezz"
-        android:layout_below="@+id/TextDev"
-        android:layout_marginTop="21dp"
-        android:text="@string/ambro"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextBenati"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextIervasi"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="23dp"
-        android:text="@string/benati"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextBianchi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/TextBenati"
-        android:layout_alignRight="@+id/TextDebla"
-        android:layout_marginBottom="23dp"
-        android:text="@string/bianchi"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/TextIervasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/TextBianchi"
-        android:layout_alignLeft="@+id/TextGrezz"
-        android:layout_marginBottom="23dp"
-        android:text="@string/iervasi"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="11dp"
+        android:layout_marginRight="30dp"
+        android:textIsSelectable="false"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
