@@ -1,2 +1,0 @@
-" size="20" tabindex="1" />
-<input class="input_account idesk-force-focus" type="password"  name="password"  value="

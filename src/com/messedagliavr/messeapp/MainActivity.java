@@ -96,6 +96,7 @@ public class MainActivity extends Activity {
 									null // The sort order
 									);
 			user.setVisibility(View.VISIBLE);
+			query.moveToFirst();
 			user.setText(query.getString(query.getColumnIndex("username")));
 			password.setVisibility(View.VISIBLE);
 			password.setText(query.getString(query
@@ -113,6 +114,7 @@ public class MainActivity extends Activity {
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			ContentValues values = new ContentValues();
 			values.put("enabled", "false");
+			@SuppressWarnings("unused")
 			long samerow = db.update("settvoti", values, null, null);
 			db.close();
 			Toast.makeText(MainActivity.this, "Login automatico disabilitato",
@@ -141,6 +143,7 @@ public class MainActivity extends Activity {
 		values.put("enabled", "true");
 		values.put("username", username);
 		values.put("password", password);
+		@SuppressWarnings("unused")
 		long samerow = db.update("settvoti", values, null, null);
 		db.close();
 		Toast.makeText(MainActivity.this, "Impostazioni salvate",
@@ -158,7 +161,7 @@ public class MainActivity extends Activity {
 			Button save = (Button) findViewById(R.id.savesett);
 			ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
 			toggle.setTextOff("No");
-			toggle.setTextOn("Sï¿½");
+			toggle.setTextOn("Sì");
 			Database databaseHelper = new Database(getBaseContext());
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			String[] columns = { "enabled", "username", "password" };

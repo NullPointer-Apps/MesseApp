@@ -8,6 +8,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -40,6 +41,7 @@ public class ListItemSelectedCalendar extends Activity {
 	public String idical = null;
 
 	public class eventparser extends AsyncTask<Void, Void, String[]> {
+		@SuppressLint("InlinedApi")
 		@Override
 		protected String[] doInBackground(Void... params) {
 			String ical = "http://www.messedaglia.it/caltoxml.php?id="

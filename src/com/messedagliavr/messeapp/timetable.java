@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+@SuppressLint("DefaultLocale")
 public class timetable extends Activity implements
 		AdapterView.OnItemSelectedListener {
 
@@ -63,7 +64,7 @@ public class timetable extends Activity implements
 		spin.setAdapter(aa);
 	}
 
-	@SuppressLint("DefaultLocale")
+	@SuppressLint({ "DefaultLocale", "SetJavaScriptEnabled" })
 	public void onItemSelected(AdapterView<?> parent, View v, int position,
 			long id) {
 		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
@@ -86,6 +87,7 @@ public class timetable extends Activity implements
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			ContentValues values = new ContentValues();
 			values.put("fname", items[position].toLowerCase());
+			@SuppressWarnings("unused")
 			long samerow = db.update("class", values, null, null);
 			descrizioneview.getSettings().setJavaScriptEnabled(true);
 			descrizioneview.getSettings().setLoadWithOverviewMode(true);
@@ -100,6 +102,7 @@ public class timetable extends Activity implements
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void onNothingSelected(AdapterView<?> parent) {
 		WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
 		Database databaseHelper = new Database(getBaseContext());

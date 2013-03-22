@@ -33,7 +33,15 @@
     <string name="ical">Importa in Calendario</string>
     <string name="noapilevel">La tua versione di Android è troppo vecchia per utilizzare questa funzione</string>
     <string name="classe">Scegli una classe</string>
-	<string name="Email">Email</string>
+    <string name="Email">Email</string>
+        <string name="dir_email">dirigente@messedagliavr.it</string>
+    <string name="vice_email">vicepreside@messedagliavr.it</string>
+    <string name="did_email">didattica@messedagliavr.it</string>
+    <string name="sede1_num">045596432</string>
+    <string name="sede2_num">0458034772</string>
+    <string name="sede_indi">Via Bertoni, 3B, 37122</string>
+    <string name="succ_num">0458004954</string>
+    <string name="succ_indi">Via dello Zappatore, 2, 37122</string>
     <string name="dir_name">Dirigente</string>
     <string name="vice_name">Vice preside</string>
     <string name="did_name">Didattica</string>
@@ -46,4 +54,13 @@
     <string name="moodle">Moodle</string>
     <string name="migliora">Invia un suggerimento!</string>
     <string name="settings">Impostazioni</string>
+    <string name="ricorda">Ricorda password del registro elettronico</string>
+    <string name="user">Username</string>
+    <string name="pass">Password</string>
+    <string name="title_activity_acra">Acra</string>
+    <string name="mostrapass">Mostra Password</string>
+    <string name="salva">Salva</string>
+    <string name="wu">Zihong Wu</string>
+    <string name="login">Vuoi abilitare il login automatico del registro elettronico?</string>
+
 </resources>
