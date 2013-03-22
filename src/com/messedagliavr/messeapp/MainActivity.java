@@ -102,6 +102,8 @@ public class MainActivity extends Activity {
 											 .getColumnIndex("password")));
 			save.setVisibility(View.VISIBLE);
 			checkbox.setVisibility(View.VISIBLE);
+			query.close();
+			db.close();
 		} else {
 			user.setVisibility(View.GONE);
 			password.setVisibility(View.GONE);
@@ -276,7 +278,7 @@ public class MainActivity extends Activity {
 			String user = query.getString(query.getColumnIndex("username"));
 			String password = query.getString(query.getColumnIndex("password"));
 			Intent voti = new Intent(Intent.ACTION_VIEW);
-			voti.setData(Uri.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="+user+"&password="+password"));
+			voti.setData(Uri.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="+user+"&password="+password));
 			query.close();
 			startActivity(voti);
 		} else {

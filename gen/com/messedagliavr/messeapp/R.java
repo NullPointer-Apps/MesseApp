@@ -215,6 +215,7 @@ public final class R {
         public static final int ical=0x7f05001e;
         public static final int iervasi=0x7f050010;
         public static final int indi=0x7f05002b;
+        public static final int login=0x7f05003c;
         public static final int main_title=0x7f050002;
         public static final int migliora=0x7f050035;
         public static final int moodle=0x7f050033;
