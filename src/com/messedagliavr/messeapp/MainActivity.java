@@ -156,7 +156,7 @@ public class MainActivity extends Activity {
 			Button save = (Button) findViewById(R.id.savesett);
 			ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
 			toggle.setTextOff("No");
-			toggle.setTextOn("S“");
+			toggle.setTextOn("Sï¿½");
 			Database databaseHelper = new Database(getBaseContext());
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			String[] columns = { "enabled", "username", "password" };
@@ -260,7 +260,7 @@ public class MainActivity extends Activity {
 	public void voti(View view) {
 		Database databaseHelper = new Database(getBaseContext());
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
-		String[] columns = { "enabled" };
+		String[] columns = { "enabled","username","password" };
 		Cursor query = db.query("settvoti", // The table to query
 				columns, // The columns to return
 				null, // The columns for the WHERE clause
@@ -271,13 +271,18 @@ public class MainActivity extends Activity {
 				);
 		query.moveToFirst();
 		String enabled = query.getString(query.getColumnIndex("enabled"));
-		query.close();
 		db.close();
 		if (enabled.matches("true")) {
-			startActivity(new Intent(this, voti.class));
+			String user = query.getString(query.getColumnIndex("username"));
+			String password = query.getString(query.getColumnIndex("password"));
+			Intent voti = new Intent(Intent.ACTION_VIEW);
+			voti.setData(Uri.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="+user+"&password="+password"));
+			query.close();
+			startActivity(voti);
 		} else {
 			Intent voti = new Intent(Intent.ACTION_VIEW);
-			voti.setData(Uri.parse("http://atv.infoschool.eu/VRLS0003"));
+			voti.setData(Uri.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003"));
+			query.close();
 			startActivity(voti);
 		}
 	}
