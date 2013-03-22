@@ -75,9 +75,10 @@ public final class R {
         public static final int orario=0x7f02003d;
         public static final int sfondocontatti=0x7f02003e;
         public static final int sfondomesseapp=0x7f02003f;
-        public static final int social=0x7f020040;
-        public static final int voti=0x7f020041;
-        public static final int youtube=0x7f020042;
+        public static final int sfondomesseappopaco=0x7f020040;
+        public static final int social=0x7f020041;
+        public static final int voti=0x7f020042;
+        public static final int youtube=0x7f020043;
     }
     public static final class id {
         public static final int DescrizioneView=0x7f070025;

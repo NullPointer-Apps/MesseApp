@@ -1,5 +1,6 @@
 package com.messedagliavr.messeapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -88,19 +89,18 @@ public class MainActivity extends Activity {
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			String[] columns = { "username", "password" };
 			Cursor query = db.query("settvoti", // The table to query
-									columns, // The columns to return
-									null, // The columns for the WHERE clause
-									null, // The values for the WHERE clause
-									null, // don't group the rows
-									null, // don't filter by row groups
-									null // The sort order
-									);
+					columns, // The columns to return
+					null, // The columns for the WHERE clause
+					null, // The values for the WHERE clause
+					null, // don't group the rows
+					null, // don't filter by row groups
+					null // The sort order
+					);
 			user.setVisibility(View.VISIBLE);
 			query.moveToFirst();
 			user.setText(query.getString(query.getColumnIndex("username")));
 			password.setVisibility(View.VISIBLE);
-			password.setText(query.getString(query
-											 .getColumnIndex("password")));
+			password.setText(query.getString(query.getColumnIndex("password")));
 			save.setVisibility(View.VISIBLE);
 			checkbox.setVisibility(View.VISIBLE);
 			query.close();
@@ -150,6 +150,7 @@ public class MainActivity extends Activity {
 				Toast.LENGTH_LONG).show();
 	}
 
+	@SuppressLint("NewApi")
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.settings:
@@ -265,7 +266,7 @@ public class MainActivity extends Activity {
 	public void voti(View view) {
 		Database databaseHelper = new Database(getBaseContext());
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
-		String[] columns = { "enabled","username","password" };
+		String[] columns = { "enabled", "username", "password" };
 		Cursor query = db.query("settvoti", // The table to query
 				columns, // The columns to return
 				null, // The columns for the WHERE clause
@@ -281,12 +282,15 @@ public class MainActivity extends Activity {
 			String user = query.getString(query.getColumnIndex("username"));
 			String password = query.getString(query.getColumnIndex("password"));
 			Intent voti = new Intent(Intent.ACTION_VIEW);
-			voti.setData(Uri.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="+user+"&password="+password));
+			voti.setData(Uri
+					.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="
+							+ user + "&password=" + password));
 			query.close();
 			startActivity(voti);
 		} else {
 			Intent voti = new Intent(Intent.ACTION_VIEW);
-			voti.setData(Uri.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003"));
+			voti.setData(Uri
+					.parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003"));
 			query.close();
 			startActivity(voti);
 		}
