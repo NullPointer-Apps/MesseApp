@@ -26,13 +26,6 @@ import android.widget.Toast;
 public class ListItemSelectedCalendar extends Activity {
 
 	@Override
-	public void onBackPressed() {
-
-		setContentView(R.layout.list_item);
-		startActivity(new Intent(this, calendar.class));
-	}
-
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.list_item_selected, menu);
 		return true;
