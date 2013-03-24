@@ -162,7 +162,7 @@ public class MainActivity extends Activity {
 			Button save = (Button) findViewById(R.id.savesett);
 			ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
 			toggle.setTextOff("No");
-			toggle.setTextOn("Sì");
+			toggle.setTextOn("Sï¿½");
 			Database databaseHelper = new Database(getBaseContext());
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			String[] columns = { "enabled", "username", "password" };
@@ -317,7 +317,6 @@ public class MainActivity extends Activity {
 
 	public void news(View view) {
 		if (CheckInternet() == true) {
-			setContentView(R.layout.list_item);
 			startActivity(new Intent(this, news.class));
 		} else {
 			Toast.makeText(MainActivity.this, R.string.noconnection,
@@ -327,7 +326,6 @@ public class MainActivity extends Activity {
 
 	public void calendar(View view) {
 		if (CheckInternet() == true) {
-			setContentView(R.layout.list_item);
 			startActivity(new Intent(this, calendar.class));
 		} else {
 			Toast.makeText(MainActivity.this, R.string.noconnectioncalendar,
