@@ -227,7 +227,7 @@ public class calendar extends ListActivity {
 			final String ITEM = "item";
 			final String TITLE = "title";
 			final String DESC = "description";
-			Element e = null;
+			Element e, e2 = null;
 			ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
 			String[] outdated = { "newsdate", "calendardate" };
 			Calendar c = Calendar.getInstance();
@@ -245,107 +245,434 @@ public class calendar extends ListActivity {
 			String past = date.getString(date.getColumnIndex("calendardate"));
 			date.close();
 			long l = getTimeDiff(past, now);
-			if (l / 10800000 >= 3) {
-				XMLParser parser = new XMLParser();
-				String xml = parser.getXmlFromUrl(URL);
-				if (xml == "UnknownHostException") {
-					unknhost = true;
-					db.close();
-					return temhashmap;
-				} else {
-					Document doc = parser.getDomElement(xml);
-					NodeList nl = doc.getElementsByTagName(ITEM);
-					ContentValues values = new ContentValues();
-					for (int i = 0; i < nl.getLength(); i++) {
-						HashMap<String, Spanned> map = new HashMap<String, Spanned>();
-						e = (Element) nl.item(i);
-						String idnp = parser.getValue(e, "link");
-						char[] idnpa = idnp.toCharArray();
-						String icalr = "";
-						int cnt = 0;
-						int lnt = idnp.length();
-						for (int j = lnt - 1; j > 0; j--) {
-							if (idnpa[j] == '/') {
-								cnt++;
-							}
-							if (cnt == 2) {
-								icalr += idnpa[j - 1];
-							}
-							if (cnt > 2) {
-								j = 0;
-							}
+			// if (l / 10800000 >= 3) {
+			XMLParser parser = new XMLParser();
+			String xml = parser.getXmlFromUrl(URL);
+			if (xml == "UnknownHostException") {
+				unknhost = true;
+				db.close();
+				return temhashmap;
+			} else {
+				Document doc = parser.getDomElement(xml);
+				NodeList nl = doc.getElementsByTagName(ITEM);
+				ContentValues values = new ContentValues();
+				Boolean ok = false;
+				HashMap<String, Integer> doppioni = new HashMap<String, Integer>();
+				for (int i = 1; i < nl.getLength(); i++) {
+					HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+					e = (Element) nl.item(i);
+					e2 = (Element) nl.item(i - 1);
+					String idnp = parser.getValue(e, "link");
+					String idnp2 = parser.getValue(e2, "link");
+					char[] idnpa = idnp.toCharArray();
+					char[] idnpa2 = idnp2.toCharArray();
+					String icalr = "";
+					String icalr2 = "";
+					int cnt = 0;
+					int lnt = idnp.length();
+					for (int j = lnt - 1; j > 0; j--) {
+						if (idnpa[j] == '/') {
+							cnt++;
 						}
-						char[] icalar = icalr.toCharArray();
-						String ical = "";
-						for (int k = icalr.length() - 2; k > -1; k--) {
-							ical += icalar[k];
+						if (cnt == 2) {
+							icalr += idnpa[j - 1];
+							icalr2 += idnpa2[j - 1];
 						}
-						values.put("ical", ical);
-						values.put("_id", i);
-						values.put(TITLE, parser.getValue(e, TITLE));
-						values.put(DESC, parser.getValue(e, DESC));
-						values.put("titleb", "<b>" + parser.getValue(e, TITLE)
-								+ "</b>");
-						map.put("ical", Html.fromHtml(ical));
-						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
-						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
-						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
-						descrizioni
-								.add(Html.fromHtml(parser.getValue(e, DESC)));
-						titolib.add(Html.fromHtml("<b>"
-								+ parser.getValue(e, TITLE) + "</b>"));
-						icalarr.add(Html.fromHtml(ical));
-						menuItems.add(map);
-						long newRowId = db.insertWithOnConflict("calendar",
-								null, values, SQLiteDatabase.CONFLICT_REPLACE);
+						if (cnt > 2) {
+							j = 0;
+						}
+					}
+					char[] icalar = icalr.toCharArray();
+					char[] icalar2 = icalr2.toCharArray();
+					String ical = "";
+					String ical2 = "";
+					for (int k = icalr.length() - 2; k > -1; k--) {
+						ical += icalar[k];
+						ical2 += icalar2[k];
+					}
+					values.put("ical", ical);
+					values.put("_id", i);
+					map.put("ical", Html.fromHtml(ical));
+					if (doppioni.containsKey(ical)) {
+						int d = doppioni.get(ical);
+						doppioni.remove(ical);
+						d++;
+						doppioni.put(ical, d++);
+					} else {
+						doppioni.put(ical, 0);
+					}
+					String tito = parser.getValue(e, TITLE);
+					int n = tito.charAt(0);
+					int n2 = tito.charAt(1);
+					StringBuffer buf = new StringBuffer(tito);
 
+					System.out.println((n2 + doppioni.get(ical)));
+					switch (tito.charAt(3) + tito.charAt(4) + tito.charAt(5)) {
+					case 282:// GEN
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'F');
+								buf.setCharAt(4, 'e');
+								buf.setCharAt(5, 'b');
+							}
+						} else {
+							if (n == 51) {
+								if (n2 + doppioni.get(ical) <= 49) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'F');
+									buf.setCharAt(4, 'e');
+									buf.setCharAt(5, 'b');
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 269: // FEB
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 50) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'M');
+								buf.setCharAt(4, 'a');
+								buf.setCharAt(5, 'r');
+							}
+						} else {
+							if (n == 50) {
+								if (n2 + doppioni.get(ical) <= 56) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'M');
+									buf.setCharAt(4, 'a');
+									buf.setCharAt(5, 'r');
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 288: // Mar
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 <= 51&&n2 + doppioni.get(ical) >= 49) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'A');
+								buf.setCharAt(4, 'p');
+								buf.setCharAt(5, 'r');
+							}
+						} else {
+							if (n == 51) {
+								if (n2 + doppioni.get(ical) <= 49) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'A');
+									buf.setCharAt(4, 'p');
+									buf.setCharAt(5, 'r');
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 291: // Apr
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, (char)(n2 + doppioni.get(ical)-58));
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'M');
+								buf.setCharAt(4, 'a');
+								buf.setCharAt(5, 'g');
+							}
+						} else {
+							if (n == 51) {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'M');
+								buf.setCharAt(4, 'a');
+								buf.setCharAt(5, 'g');
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 277: // Mag
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, (char)(n2 + doppioni.get(ical)-58));
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'G');
+								buf.setCharAt(4, 'i');
+								buf.setCharAt(5, 'u');
+							}
+						} else {
+							if (n == 51) {
+								if (n2 + doppioni.get(ical) <= 59) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'G');
+									buf.setCharAt(4, 'i');
+									buf.setCharAt(5, 'u');
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 293: // Giu
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'L');
+								buf.setCharAt(3, 'u');
+								buf.setCharAt(3, 'g');
+							}
+						} else {
+							if (n == 51) {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'L');
+								buf.setCharAt(3, 'u');
+								buf.setCharAt(3, 'g');
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 296: // Lug
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'A');
+								buf.setCharAt(4, 'g');
+								buf.setCharAt(5, 'o');
+							}
+						} else {
+							if (n == 51) {
+								if (n2 + doppioni.get(ical) <= 49) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'A');
+									buf.setCharAt(4, 'g');
+									buf.setCharAt(5, 'o');
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 279: // Ago
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'S');
+								buf.setCharAt(4, 'e');
+								buf.setCharAt(5, 't');
+							}
+						} else {
+							if (n == 51) {
+								if (n2 + doppioni.get(ical) <= 49) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'S');
+									buf.setCharAt(4, 'e');
+									buf.setCharAt(5, 't');
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 300: // Set
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'O');
+								buf.setCharAt(4, 't');
+								buf.setCharAt(5, 't');
+							}
+						} else {
+							if (n == 51) {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'O');
+								buf.setCharAt(4, 't');
+								buf.setCharAt(5, 't');
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 311: // Ott
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'N');
+								buf.setCharAt(4, 'o');
+								buf.setCharAt(5, 'v');
+							}
+						} else {
+							if (n == 51) {
+								if (n2 + doppioni.get(ical) <= 49) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'N');
+									buf.setCharAt(4, 'o');
+									buf.setCharAt(5, 'v');
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 307: // Nov
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'D');
+								buf.setCharAt(4, 'i');
+								buf.setCharAt(5, 'c');
+							}
+						} else {
+							if (n == 51) {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'D');
+								buf.setCharAt(4, 'i');
+								buf.setCharAt(5, 'c');
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
+					case 272: // Dic
+						if (n2 + doppioni.get(ical) == 58) {
+							if (n + 1 <= 51) {
+								buf.setCharAt(0, (char) (n + 1));
+								buf.setCharAt(1, '0');
+							} else {
+								buf.setCharAt(1, '1');
+								buf.setCharAt(0, '0');
+								buf.setCharAt(3, 'G');
+								buf.setCharAt(4, 'e');
+								buf.setCharAt(5, 'n');
+							}
+						} else {
+							if (n == 51) {
+								if (n2 + doppioni.get(ical) <= 49) {
+									buf.setCharAt(1,
+											(char) (n2 + doppioni.get(ical)));
+								} else {
+									buf.setCharAt(1, '1');
+									buf.setCharAt(0, '0');
+									buf.setCharAt(3, 'G');
+									buf.setCharAt(4, 'e');
+									buf.setCharAt(5, 'n');
+									buf.setCharAt(5,
+											(char) (buf.charAt(10) + 1));
+								}
+							} else {
+								buf.setCharAt(1,
+										(char) (n2 + doppioni.get(ical)));
+							}
+						}
+						break;
 					}
 
-					ContentValues nowdb = new ContentValues();
-					nowdb.put("calendardate", now);
-					long samerow = db.update("lstchk", nowdb, null, null);
-					temhashmap.put("titoli", titoli);
-					temhashmap.put("descrizioni", descrizioni);
-					temhashmap.put("ical", icalarr);
-					temhashmap.put("titolib", titolib);
-					return temhashmap;
+					tito = buf.toString();
+					values.put(TITLE, tito);
+					map.put(TITLE, Html.fromHtml(tito));
+					titoli.add(Html.fromHtml(tito));
+					titolib.add(Html.fromHtml("<b>" + tito + "</b>"));
 
-				}
-			} else {
-				String[] clmndata = { "title", "description", "titleb", "ical" };
-				String sortOrder = "_id";
-
-				data = db.query("calendar", // The table to query
-						clmndata, // The columns to return
-						null, // The columns for the WHERE clause
-						null, // The values for the WHERE clause
-						null, // don't group the rows
-						null, // don't filter by row groups
-						sortOrder // The sort order
-						);
-
-				for (data.move(0); data.moveToNext(); data.isAfterLast()) {
-					HashMap<String, Spanned> map = new HashMap<String, Spanned>();
-					map.put(TITLE, Html.fromHtml(data.getString(data
-							.getColumnIndex("title"))));
-					map.put(DESC, Html.fromHtml(data.getString(data
-							.getColumnIndex("description"))));
-					map.put("ical", Html.fromHtml(data.getString(data
-							.getColumnIndex("ical"))));
-
-					titoli.add(Html.fromHtml(data.getString(data
-							.getColumnIndex("title"))));
-					descrizioni.add(Html.fromHtml(data.getString(data
-							.getColumnIndex("description"))));
-					icalarr.add(Html.fromHtml(data.getString(data
-							.getColumnIndex("ical"))));
-					titolib.add(Html.fromHtml(data.getString(data
-							.getColumnIndex("titleb"))));
+					values.put(DESC, parser.getValue(e, DESC));
+					values.put("titleb", "<b>" + parser.getValue(e, TITLE)
+							+ "</b>");
+					map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
+					descrizioni.add(Html.fromHtml(parser.getValue(e, DESC)));
+					icalarr.add(Html.fromHtml(ical));
 					menuItems.add(map);
+					long newRowId = db.insertWithOnConflict("calendar", null,
+							values, SQLiteDatabase.CONFLICT_REPLACE);
 
 				}
-				data.close();
-				db.close();
+
+				ContentValues nowdb = new ContentValues();
+				nowdb.put("calendardate", now);
+				long samerow = db.update("lstchk", nowdb, null, null);
 				temhashmap.put("titoli", titoli);
 				temhashmap.put("descrizioni", descrizioni);
 				temhashmap.put("ical", icalarr);
@@ -353,6 +680,40 @@ public class calendar extends ListActivity {
 				return temhashmap;
 
 			}
+			/*
+			 * } else { String[] clmndata = { "title", "description", "titleb",
+			 * "ical" }; String sortOrder = "_id";
+			 * 
+			 * data = db.query("calendar", // The table to query clmndata, //
+			 * The columns to return null, // The columns for the WHERE clause
+			 * null, // The values for the WHERE clause null, // don't group the
+			 * rows null, // don't filter by row groups sortOrder // The sort
+			 * order );
+			 * 
+			 * for (data.move(0); data.moveToNext(); data.isAfterLast()) {
+			 * HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+			 * map.put(TITLE, Html.fromHtml(data.getString(data
+			 * .getColumnIndex("title")))); map.put(DESC,
+			 * Html.fromHtml(data.getString(data
+			 * .getColumnIndex("description")))); map.put("ical",
+			 * Html.fromHtml(data.getString(data .getColumnIndex("ical"))));
+			 * 
+			 * titoli.add(Html.fromHtml(data.getString(data
+			 * .getColumnIndex("title"))));
+			 * descrizioni.add(Html.fromHtml(data.getString(data
+			 * .getColumnIndex("description"))));
+			 * icalarr.add(Html.fromHtml(data.getString(data
+			 * .getColumnIndex("ical"))));
+			 * titolib.add(Html.fromHtml(data.getString(data
+			 * .getColumnIndex("titleb")))); menuItems.add(map);
+			 * 
+			 * } data.close(); db.close(); temhashmap.put("titoli", titoli);
+			 * temhashmap.put("descrizioni", descrizioni);
+			 * temhashmap.put("ical", icalarr); temhashmap.put("titolib",
+			 * titolib); return temhashmap;
+			 * 
+			 * }
+			 */
 
 		}
 
