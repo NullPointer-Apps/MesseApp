@@ -11,12 +11,6 @@ import android.widget.TextView;
 public class ListItemSelectedNews extends Activity {
 
 	@Override
-	public void onBackPressed() {
-		startActivity(new Intent(this, news.class));
-		setContentView(R.layout.list_item);
-	}
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_item_selected);
