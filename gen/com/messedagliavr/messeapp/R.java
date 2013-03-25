@@ -183,6 +183,7 @@ public final class R {
         public static final int migliora=0x7f040028;
         public static final int moodle=0x7f040027;
         public static final int mostrapass=0x7f04002c;
+        public static final int no=0x7f040031;
         public static final int noapilevel=0x7f040014;
         public static final int noconnection=0x7f040009;
         public static final int noconnectioncalendar=0x7f04000a;
@@ -200,6 +201,7 @@ public final class R {
         public static final int sede_indi=0x7f040022;
         public static final int sede_name=0x7f040026;
         public static final int settings=0x7f040029;
+        public static final int si=0x7f040030;
         public static final int succ_indi=0x7f040024;
         public static final int succ_name=0x7f04001a;
         public static final int succ_num=0x7f040023;

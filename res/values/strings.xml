@@ -46,6 +46,8 @@
     <string name="pass">Password</string>
     <string name="mostrapass">Mostra Password</string>
     <string name="salva">Salva</string>
-	<string name="login">Vuoi abilitare il login automatico del registro elettronico?</string>
+	<string name="login">Do you want to enable automatic login to the electronic register?</string>
     <string name="palestre">Gym\'s timetable</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
 </resources>

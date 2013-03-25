@@ -49,5 +49,7 @@
     <string name="salva">Salva</string>
     <string name="login">Vuoi abilitare il login automatico del registro elettronico?</string>
     <string name="palestre">Orario palestre</string>
+    <string name="si">Sì</string>
+    <string name="no">No</string>
 
 </resources>

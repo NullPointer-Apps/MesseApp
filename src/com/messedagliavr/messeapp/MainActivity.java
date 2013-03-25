@@ -161,8 +161,6 @@ public class MainActivity extends Activity {
 			CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
 			Button save = (Button) findViewById(R.id.savesett);
 			ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
-			toggle.setTextOff("No");
-			toggle.setTextOn("S�");
 			Database databaseHelper = new Database(getBaseContext());
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			String[] columns = { "enabled", "username", "password" };

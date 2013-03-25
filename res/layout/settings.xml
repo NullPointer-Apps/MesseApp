@@ -78,6 +78,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="14dp"
         android:layout_marginTop="14dp"
-        android:onClick="onToggleClicked"/>
+        android:onClick="onToggleClicked"
+        android:textOff="@string/no"
+        android:textOn="@string/si" />
 
 </RelativeLayout>
