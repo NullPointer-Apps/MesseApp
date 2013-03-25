@@ -310,11 +310,13 @@ public class calendar extends ListActivity {
 					switch (tito.charAt(3) + tito.charAt(4) + tito.charAt(5)) {
 					case 282:// GEN
 						if (n2 + doppioni.get(ical) >= 58) {
-							if (n + 1 <= 51) {
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) <= 59)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+							
+								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+								
 							} else {
-								buf.setCharAt(1, '1');
+								buf.setCharAt(1,  (char) (n2 + doppioni.get(ical)-11));
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'F');
 								buf.setCharAt(4, 'e');
@@ -326,7 +328,7 @@ public class calendar extends ListActivity {
 									buf.setCharAt(1,
 											(char) (n2 + doppioni.get(ical)));
 								} else {
-									buf.setCharAt(1, '1');
+									buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-1) );
 									buf.setCharAt(0, '0');
 									buf.setCharAt(3, 'F');
 									buf.setCharAt(4, 'e');
@@ -339,12 +341,14 @@ public class calendar extends ListActivity {
 						}
 						break;
 					case 269: // FEB
-						if (n2 + doppioni.get(ical) == 58) {
-							if (n + 1 <= 50) {
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 < 50||(n+1==51&&n2 + doppioni.get(ical) <= 66)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+							
+								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+								
 							} else {
-								buf.setCharAt(1, '1');
+								buf.setCharAt(1,  (char) (n2 + doppioni.get(ical)-18));
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'M');
 								buf.setCharAt(4, 'a');
@@ -356,7 +360,7 @@ public class calendar extends ListActivity {
 									buf.setCharAt(1,
 											(char) (n2 + doppioni.get(ical)));
 								} else {
-									buf.setCharAt(1, '1');
+									buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-8) );
 									buf.setCharAt(0, '0');
 									buf.setCharAt(3, 'M');
 									buf.setCharAt(4, 'a');
@@ -402,36 +406,30 @@ public class calendar extends ListActivity {
 						break;
 					case 291: // Apr
 						if (n2 + doppioni.get(ical) >= 58) {
-							if (n + 1 <= 51) {
+							buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-10));
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) == 58)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, (char)(n2 + doppioni.get(ical)-58));
+								
 							} else {
-								buf.setCharAt(1, '1');
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'M');
 								buf.setCharAt(4, 'a');
 								buf.setCharAt(5, 'g');
 							}
 						} else {
-							if (n == 51) {
-								buf.setCharAt(1, '1');
-								buf.setCharAt(0, '0');
-								buf.setCharAt(3, 'M');
-								buf.setCharAt(4, 'a');
-								buf.setCharAt(5, 'g');
-							} else {
 								buf.setCharAt(1,
 										(char) (n2 + doppioni.get(ical)));
-							}
 						}
 						break;
 					case 277: // Mag
 						if (n2 + doppioni.get(ical) >= 58) {
-							if (n + 1 <= 51) {
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) <= 59)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, (char)(n2 + doppioni.get(ical)-58));
+							
+								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+								
 							} else {
-								buf.setCharAt(1, '1');
+								buf.setCharAt(1,  (char) (n2 + doppioni.get(ical)-11));
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'G');
 								buf.setCharAt(4, 'i');
@@ -439,11 +437,11 @@ public class calendar extends ListActivity {
 							}
 						} else {
 							if (n == 51) {
-								if (n2 + doppioni.get(ical) <= 59) {
+								if (n2 + doppioni.get(ical) <= 49) {
 									buf.setCharAt(1,
 											(char) (n2 + doppioni.get(ical)));
 								} else {
-									buf.setCharAt(1, '1');
+									buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-1) );
 									buf.setCharAt(0, '0');
 									buf.setCharAt(3, 'G');
 									buf.setCharAt(4, 'i');
@@ -456,41 +454,35 @@ public class calendar extends ListActivity {
 						}
 						break;
 					case 293: // Giu
-						if (n2 + doppioni.get(ical) == 58) {
-							if (n + 1 <= 51) {
+						if (n2 + doppioni.get(ical) >= 58) {
+							buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-10));
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) == 58)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+								
 							} else {
-								buf.setCharAt(1, '1');
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'L');
-								buf.setCharAt(3, 'u');
-								buf.setCharAt(3, 'g');
+								buf.setCharAt(4, 'u');
+								buf.setCharAt(5, 'g');
 							}
 						} else {
-							if (n == 51) {
-								buf.setCharAt(1, '1');
-								buf.setCharAt(0, '0');
-								buf.setCharAt(3, 'L');
-								buf.setCharAt(3, 'u');
-								buf.setCharAt(3, 'g');
-							} else {
 								buf.setCharAt(1,
 										(char) (n2 + doppioni.get(ical)));
-							}
 						}
 						break;
 					case 296: // Lug
-						if (n2 + doppioni.get(ical) == 58) {
-							if (n + 1 <= 51) {
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) <= 59)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+							
+								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+								
 							} else {
-								buf.setCharAt(1, '1');
+								buf.setCharAt(1,  (char) (n2 + doppioni.get(ical)-11));
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'A');
 								buf.setCharAt(4, 'g');
-								buf.setCharAt(5, 'o');
+								buf.setCharAt(5, 'g');
 							}
 						} else {
 							if (n == 51) {
@@ -498,7 +490,7 @@ public class calendar extends ListActivity {
 									buf.setCharAt(1,
 											(char) (n2 + doppioni.get(ical)));
 								} else {
-									buf.setCharAt(1, '1');
+									buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-1) );
 									buf.setCharAt(0, '0');
 									buf.setCharAt(3, 'A');
 									buf.setCharAt(4, 'g');
@@ -511,12 +503,14 @@ public class calendar extends ListActivity {
 						}
 						break;
 					case 279: // Ago
-						if (n2 + doppioni.get(ical) == 58) {
-							if (n + 1 <= 51) {
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) <= 59)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+							
+								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+								
 							} else {
-								buf.setCharAt(1, '1');
+								buf.setCharAt(1,  (char) (n2 + doppioni.get(ical)-11));
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'S');
 								buf.setCharAt(4, 'e');
@@ -528,7 +522,7 @@ public class calendar extends ListActivity {
 									buf.setCharAt(1,
 											(char) (n2 + doppioni.get(ical)));
 								} else {
-									buf.setCharAt(1, '1');
+									buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-1) );
 									buf.setCharAt(0, '0');
 									buf.setCharAt(3, 'S');
 									buf.setCharAt(4, 'e');
@@ -541,28 +535,20 @@ public class calendar extends ListActivity {
 						}
 						break;
 					case 300: // Set
-						if (n2 + doppioni.get(ical) == 58) {
-							if (n + 1 <= 51) {
+						if (n2 + doppioni.get(ical) >= 58) {
+							buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-10));
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) == 58)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+								
 							} else {
-								buf.setCharAt(1, '1');
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'O');
 								buf.setCharAt(4, 't');
 								buf.setCharAt(5, 't');
 							}
 						} else {
-							if (n == 51) {
-								buf.setCharAt(1, '1');
-								buf.setCharAt(0, '0');
-								buf.setCharAt(3, 'O');
-								buf.setCharAt(4, 't');
-								buf.setCharAt(5, 't');
-							} else {
 								buf.setCharAt(1,
 										(char) (n2 + doppioni.get(ical)));
-							}
 						}
 						break;
 					case 311: // Ott
@@ -596,37 +582,31 @@ public class calendar extends ListActivity {
 						}
 						break;
 					case 307: // Nov
-						if (n2 + doppioni.get(ical) == 58) {
-							if (n + 1 <= 51) {
+						if (n2 + doppioni.get(ical) >= 58) {
+							buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-10));
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) == 58)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+								
 							} else {
-								buf.setCharAt(1, '1');
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'D');
 								buf.setCharAt(4, 'i');
 								buf.setCharAt(5, 'c');
 							}
 						} else {
-							if (n == 51) {
-								buf.setCharAt(1, '1');
-								buf.setCharAt(0, '0');
-								buf.setCharAt(3, 'D');
-								buf.setCharAt(4, 'i');
-								buf.setCharAt(5, 'c');
-							} else {
 								buf.setCharAt(1,
 										(char) (n2 + doppioni.get(ical)));
-							}
 						}
 						break;
 					case 272: // Dic
-						if (n2 + doppioni.get(ical) == 58) {
-							if (n + 1 <= 51) {
+						if (n2 + doppioni.get(ical) >= 58) {
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) <= 59)) {
 								buf.setCharAt(0, (char) (n + 1));
-								buf.setCharAt(1, '0');
+							
+								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+								
 							} else {
-								buf.setCharAt(1, '1');
+								buf.setCharAt(1,  (char) (n2 + doppioni.get(ical)-11));
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'G');
 								buf.setCharAt(4, 'e');
@@ -638,13 +618,11 @@ public class calendar extends ListActivity {
 									buf.setCharAt(1,
 											(char) (n2 + doppioni.get(ical)));
 								} else {
-									buf.setCharAt(1, '1');
+									buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-1) );
 									buf.setCharAt(0, '0');
 									buf.setCharAt(3, 'G');
 									buf.setCharAt(4, 'e');
 									buf.setCharAt(5, 'n');
-									buf.setCharAt(5,
-											(char) (buf.charAt(10) + 1));
 								}
 							} else {
 								buf.setCharAt(1,

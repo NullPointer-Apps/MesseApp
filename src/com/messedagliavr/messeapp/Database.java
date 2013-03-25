@@ -19,7 +19,9 @@ public class Database extends SQLiteOpenHelper {
 	public Database (Context context) {
 		super(context, NOME_DB, null, VERSIONE_DB);
 	}
-
+	public Database() {
+		super(null, null, null, 0);
+	}
 	// crea il database se non esiste
 
 	@Override
