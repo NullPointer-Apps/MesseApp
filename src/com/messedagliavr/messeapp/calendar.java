@@ -370,11 +370,13 @@ public class calendar extends ListActivity {
 						break;
 					case 288: // Mar
 						if (n2 + doppioni.get(ical) >= 58) {
-							if (n + 1 <= 51&&n2 + doppioni.get(ical) >= 49) {
+							if (n + 1 < 51||(n+1==51&&n2 + doppioni.get(ical) <= 59)) {
 								buf.setCharAt(0, (char) (n + 1));
+							
 								buf.setCharAt(1, (char) (n2 + doppioni.get(ical)-10));
+								
 							} else {
-								buf.setCharAt(1, '1');
+								buf.setCharAt(1,  (char) (n2 + doppioni.get(ical)-11));
 								buf.setCharAt(0, '0');
 								buf.setCharAt(3, 'A');
 								buf.setCharAt(4, 'p');
@@ -386,7 +388,7 @@ public class calendar extends ListActivity {
 									buf.setCharAt(1,
 											(char) (n2 + doppioni.get(ical)));
 								} else {
-									buf.setCharAt(1, '1');
+									buf.setCharAt(1,(char) (n2 + doppioni.get(ical)-1) );
 									buf.setCharAt(0, '0');
 									buf.setCharAt(3, 'A');
 									buf.setCharAt(4, 'p');
