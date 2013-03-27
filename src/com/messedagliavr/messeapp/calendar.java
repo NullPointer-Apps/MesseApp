@@ -716,8 +716,7 @@ public class calendar extends ListActivity {
 						titolib.add(Html.fromHtml("<b>" + tito + "</b>"));
 
 						values.put(DESC, parser.getValue(e, DESC));
-						values.put("titleb", "<b>" + parser.getValue(e, TITLE)
-								+ "</b>");
+						values.put("titleb", "<b>" + tito + "</b>");
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 						descrizioni
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
