@@ -44,8 +44,8 @@
     <string name="settings">Settings</string>
     <string name="user">Username</string>
     <string name="pass">Password</string>
-    <string name="mostrapass">Mostra Password</string>
-    <string name="salva">Salva</string>
+    <string name="mostrapass">Show password</string>
+    <string name="salva">Save</string>
 	<string name="login">Do you want to enable automatic login to the electronic register?</string>
     <string name="palestre">Gym\'s timetable</string>
     <string name="si">Yes</string>
