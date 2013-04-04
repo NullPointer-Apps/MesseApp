@@ -130,15 +130,15 @@ public final class R {
         public static final int info=0x7f070035;
         public static final int migliora=0x7f070033;
         public static final int palestre=0x7f070039;
-        public static final int password=0x7f070028;
+        public static final int password=0x7f070026;
         public static final int refresh=0x7f070038;
-        public static final int saveenabled=0x7f07002a;
-        public static final int savesett=0x7f070026;
+        public static final int saveenabled=0x7f070029;
+        public static final int savesett=0x7f07002b;
         public static final int settings=0x7f070034;
         public static final int social=0x7f07002c;
         public static final int spinner=0x7f070030;
-        public static final int textView1=0x7f07002b;
-        public static final int username=0x7f070029;
+        public static final int textView1=0x7f070028;
+        public static final int username=0x7f07002a;
         public static final int versionname=0x7f070022;
     }
     public static final class layout {
