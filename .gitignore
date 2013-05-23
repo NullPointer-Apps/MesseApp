@@ -4,7 +4,10 @@
 
 *.pydevproject
 .metadata
+out/
 bin/
+.idea/
+.settings/
 tmp/
 *.tmp
 *.bak
