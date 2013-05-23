@@ -223,7 +223,7 @@ public class calendar extends ListActivity {
 			ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
 			ArrayList<Spanned> titolib = new ArrayList<Spanned>();
 			final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
-			String URLE = "http://lookedpath.altervista.org/test.php?id=";
+			String URLE = "http://www.messedaglia.it/caltoxml.php?id=";
 			final String ITEM = "item";
 			final String TITLE = "title";
 			final String DESC = "description";
@@ -254,8 +254,9 @@ public class calendar extends ListActivity {
 					return temhashmap;
 				} else {
 					Document doc = parser.getDomElement(xml);
-					NodeList nl = doc.getElementsByTagName(ITEM);
-					ContentValues values = new ContentValues();
+					NodeList nl;
+                    nl = doc.getElementsByTagName(ITEM);
+                    ContentValues values = new ContentValues();
 					Boolean ok = false;
 					HashMap<String, Integer> doppioni = new HashMap<String, Integer>();
 					for (int i = 1; i < nl.getLength(); i++) {
