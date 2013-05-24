@@ -46,6 +46,9 @@ public class XMLParser {
 			e.printStackTrace();
 			xml ="UnknownHostException";
 		}
+      /* if(xml.indexOf("<?xml-stylesheet href=\"/components/com_jevents/views/ext/assets/css/modstyle.css\" type=\"text/css\"?>")!= 0){
+           xml=xml.substring(205);
+        }*/
 		return xml;
 	}
 

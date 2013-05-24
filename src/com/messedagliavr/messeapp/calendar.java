@@ -247,7 +247,7 @@ public class calendar extends ListActivity {
 			long l = getTimeDiff(past, now);
 			if (l / 10800000 >= 3) {
 				XMLParser parser = new XMLParser();
-				String xml = parser.getXmlFromUrl(URL);
+				String xml = parser.getXmlFromUrl(URL).substring(205);
 				if (xml == "UnknownHostException") {
 					unknhost = true;
 					db.close();
@@ -307,7 +307,6 @@ public class calendar extends ListActivity {
 						int n2 = tito.charAt(1);
 						StringBuffer buf = new StringBuffer(tito);
 
-						System.out.println((n2 + doppioni.get(ical)));
 						switch (tito.charAt(3) + tito.charAt(4)
 								+ tito.charAt(5)) {
 						case 282:// GEN
