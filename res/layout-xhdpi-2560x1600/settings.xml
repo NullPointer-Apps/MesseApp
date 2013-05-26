@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/sfondomesseappopaco" >
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/pass"
+        android:inputType="textPassword"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/darker_gray"
+        android:visibility="visible"
+        android:layout_below="@+id/username" android:layout_alignParentLeft="true" android:layout_marginTop="14dp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/saveenabled"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/saveenabled"
+        android:text="@string/login"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <ToggleButton
+        android:id="@+id/saveenabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="14dp"
+        android:onClick="onToggleClicked"
+        android:textOff="@string/no"
+        android:textOn="@string/si" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        android:hint="@string/user"
+        android:inputType="text"
+        android:textColorHint="@android:color/black"
+        android:visibility="visible"
+        android:layout_below="@+id/textView1" android:layout_alignParentLeft="true" android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/savesett"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onSaveClicked"
+        android:text="@string/salva"
+        android:visibility="visible" android:layout_below="@+id/checkBox1" android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckClicked"
+        android:text="@string/mostrapass"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/black"
+        android:visibility="visible" android:layout_below="@+id/password" android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"/>
+
+</RelativeLayout>
