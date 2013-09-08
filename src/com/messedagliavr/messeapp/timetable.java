@@ -43,11 +43,10 @@ public class timetable extends Activity implements
 	}
 
 	String[] items = { "Scegli una classe", "1A", "1B", "1C", "1D", "1E", "1F",
-			"1G", "1H", "1I", "1L", "2A", "2B", "2C", "2D", "2E", "2F", "2G",
-			"2H", "3A", "3B", "3C", "3D", "3E", "3F", "3G", "3H", "3I", "3L",
-			"3M", "3N", "3O", "4A", "4B", "4C", "4D", "4E", "4F", "4G", "4H",
-			"4I", "4L", "4M", "4N", "4O", "5A", "5B", "5C", "5D", "5E", "5F",
-			"5G", "5H", "5I", "5L" };
+			"1G", "1H", "1I", "1L", "1M", "1N", "2A", "2B", "2C", "2D", "2E", "2F", "2G",
+			"2H", "2I", "2L", "3A", "3B", "3C", "3D", "3E", "3F", "3G", "4A", "4B", "4C",
+            "4D", "4E", "4F", "4G", "4H", "4I", "4L", "4M", "4N", "4O", "5A", "5B", "5C",
+            "5D", "5E", "5F", "5G", "5H", "5I", "5L", "5M", "5N", "5O" };
 	String fname = null;
 
 	@Override

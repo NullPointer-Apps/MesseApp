@@ -323,12 +323,15 @@ public class MainActivity extends Activity {
 	}
 
 	public void calendar(View view) {
+        /*
 		if (CheckInternet() == true) {
 			startActivity(new Intent(this, calendar.class));
 		} else {
 			Toast.makeText(MainActivity.this, R.string.noconnectioncalendar,
 					Toast.LENGTH_LONG).show();
-		}
+		}*/
+        Toast.makeText(MainActivity.this, R.string.nocalendarclass,
+                Toast.LENGTH_LONG).show();
 	}
 
 	public void orario(View view) {

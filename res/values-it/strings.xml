@@ -51,5 +51,7 @@
     <string name="palestre">Orario palestre</string>
     <string name="si">Sì</string>
     <string name="no">No</string>
+    <string name="nocalendarclass">Siamo davvero dispiaciuti ma questa funzione ha qualche problema quindi l\'abbiamo disabilitata. Sarà riabilitata nella prossima versione che verrà rilasciata il prima possibile.</string>
+
 
 </resources>
