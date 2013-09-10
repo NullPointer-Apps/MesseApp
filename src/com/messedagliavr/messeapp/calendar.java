@@ -247,7 +247,7 @@ public class calendar extends ListActivity {
 			long l = getTimeDiff(past, now);
 			if (l / 10800000 >= 3) {
 				XMLParser parser = new XMLParser();
-				String xml = parser.getXmlFromUrl(URL).substring(205);
+				String xml = parser.getXmlFromUrl(URL);
 				if (xml == "UnknownHostException") {
 					unknhost = true;
 					db.close();
