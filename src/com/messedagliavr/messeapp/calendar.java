@@ -14,10 +14,12 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -50,6 +52,29 @@ public class calendar extends ListActivity {
 		new connection().execute();
 	}
 
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected())
+                    connected = true;
+            } catch (Exception e) {
+            }
+
+        }
+
+        return connected;
+
+    }
+
 	@Override
 	public void onBackPressed() {
 		Intent main = new Intent(this, MainActivity.class);
@@ -66,13 +91,18 @@ public class calendar extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.refresh:
+            if (CheckInternet() == true) {
 			Database databaseHelper = new Database(getBaseContext());
 			SQLiteDatabase db = databaseHelper.getWritableDatabase();
 			ContentValues nowdb = new ContentValues();
 			nowdb.put("calendardate", "2012-02-20 15:00:00");
 			long samerow = db.update("lstchk", nowdb, null, null);
 			db.close();
+            MainActivity.nointernet="false";
 			new connection().execute();
+            } else {Toast.makeText(this, R.string.noconnectionupdatecal,
+                    Toast.LENGTH_LONG).show();
+            }
 			break;
 		}
 		return true;
@@ -203,6 +233,16 @@ public class calendar extends ListActivity {
 		}
 
 		public void onPreExecute() {
+            if(MainActivity.nointernet=="true"){
+                mDialog = ProgressDialog.show(calendar.this, "Recuperando",
+                        "Sto recuperando gli eventi dal database", true, true,
+                        new DialogInterface.OnCancelListener() {
+                            public void onCancel(DialogInterface dialog) {
+                                connection.this.cancel(true);
+                            }
+                        });
+
+            } else{
 			mDialog = ProgressDialog.show(calendar.this, "Scaricando",
 					"Sto scaricando gli eventi", true, true,
 					new DialogInterface.OnCancelListener() {
@@ -210,6 +250,7 @@ public class calendar extends ListActivity {
 							connection.this.cancel(true);
 						}
 					});
+            }
 			mDialog.show();
 		}
 
@@ -245,7 +286,7 @@ public class calendar extends ListActivity {
 			String past = date.getString(date.getColumnIndex("calendardate"));
 			date.close();
 			long l = getTimeDiff(past, now);
-			if (l / 10800000 >= 3) {
+			if (l / 10800000 >= 3 && MainActivity.nointernet!="true") {
 				XMLParser parser = new XMLParser();
 				String xml = parser.getXmlFromUrl(URL);
 				if (xml == "UnknownHostException") {

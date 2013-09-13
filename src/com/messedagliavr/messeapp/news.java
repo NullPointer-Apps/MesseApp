@@ -14,10 +14,12 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -61,16 +63,46 @@ public class news extends ListActivity {
 		return true;
 	}
 
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected())
+                    connected = true;
+            } catch (Exception e) {
+            }
+
+        }
+
+        return connected;
+
+    }
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.refresh:
-			Database databaseHelper = new Database(getBaseContext());
-			SQLiteDatabase db = databaseHelper.getWritableDatabase();
-			ContentValues nowdb = new ContentValues();
-			nowdb.put("newsdate", "2012-02-20 15:00:00");
-			long samerow = db.update("lstchk", nowdb, null, null);
-			db.close();
-			new connection().execute();
+            if (CheckInternet() == true) {
+                Database databaseHelper = new Database(getBaseContext());
+                SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                ContentValues nowdb = new ContentValues();
+                nowdb.put("newsdate", "2012-02-20 15:00:00");
+                long samerow = db.update("lstchk", nowdb, null, null);
+                db.close();
+                MainActivity.nointernet="false";
+                new connection().execute();
+            } else {Toast.makeText(this, R.string.noconnectionupdate,
+                    Toast.LENGTH_LONG).show();
+            }
+
+
 			break;
 		}
 		return true;
@@ -115,13 +147,23 @@ public class news extends ListActivity {
 		}
 
 		public void onPreExecute() {
-			mDialog = ProgressDialog.show(news.this, "Scaricando",
-					"Sto scaricando le news", true, true,
+            if(MainActivity.nointernet=="true"){
+			mDialog = ProgressDialog.show(news.this, "Recuperando",
+					"Sto recuperando le news dal database", true, true,
 					new DialogInterface.OnCancelListener() {
 						public void onCancel(DialogInterface dialog) {
 							connection.this.cancel(true);
 						}
 					});
+            } else {
+                mDialog = ProgressDialog.show(news.this, "Scaricando",
+                        "Sto scaricando le news", true, true,
+                        new DialogInterface.OnCancelListener() {
+                            public void onCancel(DialogInterface dialog) {
+                                connection.this.cancel(true);
+                            }
+                        });
+            }
 			mDialog.show();
 		}
 
@@ -157,7 +199,7 @@ public class news extends ListActivity {
 			String past = date.getString(date.getColumnIndex("newsdate"));
 			date.close();
 			long l = getTimeDiff(past, now);
-			if (l / 10800000 >= 3) {
+            if (l / 10800000 >= 3 && MainActivity.nointernet!="true") {
 				XMLParser parser = new XMLParser();
 				String xml = parser.getXmlFromUrl(URL);
 				if (xml == "UnknownHostException") {

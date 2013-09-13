@@ -50,5 +50,7 @@
     <string name="palestre">Gym\'s timetable</string>
     <string name="si">Yes</string>
     <string name="no">No</string>
+    <string name="noconnectionupdate">You can\'t update news without any internet connection!</string>
+    <string name="noconnectionupdatecal">you can\'t update events without any interent connection!</string>
     <string name="nocalendarclass">We are sorry for the incovenience but this function has some problem at this time so we disabled it. It will be available since next version.</string>
 </resources>

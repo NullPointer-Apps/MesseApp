@@ -27,8 +27,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+
 public class MainActivity extends Activity {
 	int layoutid;
+    static String nointernet="false";
+
 
 	public boolean CheckInternet() {
 		boolean connected = false;
@@ -315,23 +318,63 @@ public class MainActivity extends Activity {
 
 	public void news(View view) {
 		if (CheckInternet() == true) {
-			startActivity(new Intent(this, news.class));
+            nointernet="false";
+            startActivity(new Intent(this,news.class));
 		} else {
+            String[] outdated = { "newsdate", "calendardate" };
+            Database databaseHelper = new Database(getBaseContext());
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            String nodata ="1995-01-19 23:40:20";
+            Cursor date = db.query("lstchk", // The table to query
+                    outdated, // The columns to return
+                    null, // The columns for the WHERE clause
+                    null, // The values for the WHERE clause
+                    null, // don't group the rows
+                    null, // don't filter by row groups
+                    null // The sort order
+            );
+            date.moveToFirst();
+            String verifydatenews = date.getString(date.getColumnIndex("newsdate"));
+            date.close();
+            if (nodata!= verifydatenews) {
+                nointernet="true";
+                startActivity(new Intent(this,news.class));
+            } else {
 			Toast.makeText(MainActivity.this, R.string.noconnection,
 					Toast.LENGTH_LONG).show();
+            }
 		}
 	}
 
 	public void calendar(View view) {
 
 		if (CheckInternet() == true) {
-			startActivity(new Intent(this, calendar.class));
-		} else {
+            nointernet="false";
+            startActivity(new Intent(this,calendar.class));
+        } else {
+            String[] outdated = { "newsdate", "calendardate" };
+            Database databaseHelper = new Database(getBaseContext());
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            String nodata ="1995-01-19 23:40:20";
+            Cursor date = db.query("lstchk", // The table to query
+                    outdated, // The columns to return
+                    null, // The columns for the WHERE clause
+                    null, // The values for the WHERE clause
+                    null, // don't group the rows
+                    null, // don't filter by row groups
+                    null // The sort order
+            );
+            date.moveToFirst();
+            String verifydatenews = date.getString(date.getColumnIndex("newsdate"));
+            date.close();
+            if (nodata!= verifydatenews) {
+                nointernet="true";
+                startActivity(new Intent(this,calendar.class));
+            } else {
 			Toast.makeText(MainActivity.this, R.string.noconnectioncalendar,
 					Toast.LENGTH_LONG).show();
+            }
 		}
-        /*Toast.makeText(MainActivity.this, R.string.nocalendarclass,
-                Toast.LENGTH_LONG).show();*/
 	}
 
 	public void orario(View view) {
