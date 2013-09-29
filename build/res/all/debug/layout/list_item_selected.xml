@@ -1,0 +1,35 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        tools:context=".ListItemSelected" >
+
+        <TextView
+            android:id="@+id/TitoloView"
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:textIsSelectable="false" />
+
+        <WebView
+            android:id="@+id/DescrizioneView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/DescrizioneView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="72dp" />
+    </RelativeLayout>
+
+</ScrollView><!-- From: file:/C:/Users/Simone/Documents/GitHub/MesseApp/res/layout/list_item_selected.xml -->

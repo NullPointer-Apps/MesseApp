@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/C:/Users/Simone/Documents/GitHub/MesseApp/res/values/strings.xml -->
+    <string name="Calendario">Events</string>
+    <string name="Circolari">Circular</string>
+    <string name="Email">Email</string>
+    <string name="Info">Info</string>
+    <string name="Notizie">News</string>
+    <string name="Social">Social</string>
+    <string name="Voti">Register</string>
+    <string name="app_name">A. Messedaglia VR</string>
+    <string name="canceledcalendar">You aborted Events\' download</string>
+    <string name="cancelednews">You aborted News\' download</string>
+    <string name="connerr">There\'s a problem with your Internet connection</string>
+    <string name="contatti">Contacts</string>
+    <string name="did_email">didattica@messedagliavr.it</string>
+    <string name="did_name">Didactics</string>
+    <string name="dir_email">dirigente@messedagliavr.it</string>
+    <string name="dir_name">Headmaster</string>
+    <string name="exit">Exit</string>
+    <string name="ical">Import in Calendar</string>
+    <string name="indi">Address</string>
+    <string name="login">Do you want to enable automatic login to the electronic register?</string>
+    <string name="main_title">A. Messedaglia VR</string>
+    <string name="migliora">Send a suggestion!</string>
+    <string name="moodle">Moodle</string>
+    <string name="mostrapass">Show password</string>
+    <string name="no">No</string>
+    <string name="noapilevel">Your version of Android is too outdated to use this function</string>
+    <string name="nocalendarclass">We are sorry for the incovenience but this function has some problem at this time so we disabled it. It will be available since next version.</string>
+    <string name="noconnection">You need an Internet connection to see the news</string>
+    <string name="noconnectioncalendar">You need an Internet connection to see the events in the calendar</string>
+    <string name="noconnectionupdate">You can\'t update news without any internet connection!</string>
+    <string name="noconnectionupdatecal">you can\'t update events without any interent connection!</string>
+    <string name="nodescription">There\'s no description for this event</string>
+    <string name="notavailable">The function you are trying to use is not yet available</string>
+    <string name="orario">Time Table</string>
+    <string name="palestre">Gym\'s timetable</string>
+    <string name="pass">Password</string>
+    <string name="refresh">Refresh</string>
+    <string name="salva">Save</string>
+    <string name="sede1_name">School 1</string>
+    <string name="sede1_num">045596432</string>
+    <string name="sede2_name">School 2</string>
+    <string name="sede2_num">0458034772</string>
+    <string name="sede_indi">Via Bertoni, 3B, 37122</string>
+    <string name="sede_name">School</string>
+    <string name="settings">Settings</string>
+    <string name="si">Yes</string>
+    <string name="succ_indi">Via dello Zappatore, 2, 37122</string>
+    <string name="succ_name">Branch</string>
+    <string name="succ_num">0458004954</string>
+    <string name="tel">Telephone</string>
+    <string name="user">Username</string>
+    <string name="vice_email">vicepreside@messedagliavr.it</string>
+    <string name="vice_name">Vice Headmaster</string>
+    <!-- From: file:/C:/Users/Simone/Documents/GitHub/MesseApp/res/values/styles.xml -->
+    <style name="AppTheme" parent="android:Theme.Light">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+</resources>

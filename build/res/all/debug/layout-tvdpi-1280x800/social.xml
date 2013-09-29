@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/social"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sfondomesseapp" >
+
+    <ImageView
+        android:id="@+id/Moodle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="266dp"
+        android:contentDescription="@string/moodle"
+        android:onClick="moodle"
+        android:src="@drawable/moodle" />
+
+    <ImageView
+        android:id="@+id/Facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Moodle"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="144dp"
+        android:layout_marginLeft="147dp"
+        android:contentDescription="@string/Calendario"
+        android:onClick="facebook"
+        android:src="@drawable/facebook" />
+
+    <ImageView
+        android:id="@+id/YouTube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Facebook"
+        android:layout_marginLeft="117dp"
+        android:layout_toRightOf="@+id/Facebook"
+        android:contentDescription="@string/Calendario"
+        android:onClick="youtube"
+        android:src="@drawable/youtube" />
+
+</RelativeLayout><!-- From: file:/C:/Users/Simone/Documents/GitHub/MesseApp/res/layout-tvdpi-1280x800/social.xml -->

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/C:/Users/Simone/Documents/GitHub/MesseApp/res/values-it/strings.xml -->
+    <string name="Calendario">Eventi</string>
+    <string name="Circolari">Circolari</string>
+    <string name="Email">Email</string>
+    <string name="Info">Info</string>
+    <string name="Notizie">Notizie</string>
+    <string name="Social">Social</string>
+    <string name="Voti">Registro</string>
+    <string name="app_name">A. Messedaglia VR</string>
+    <string name="canceledcalendar">Hai annullato il download degli Eventi</string>
+    <string name="cancelednews">Hai annullato il download delle News</string>
+    <string name="connerr">C\'è un problema con la tua connessione</string>
+    <string name="contatti">Contatti</string>
+    <string name="did_email">didattica@messedagliavr.it</string>
+    <string name="did_name">Didattica</string>
+    <string name="dir_email">dirigente@messedagliavr.it</string>
+    <string name="dir_name">Dirigente</string>
+    <string name="exit">Esci</string>
+    <string name="ical">Importa in Calendario</string>
+    <string name="indi">Indirizzo</string>
+    <string name="login">Vuoi abilitare il login automatico del registro elettronico?</string>
+    <string name="main_title">A. Messedaglia VR</string>
+    <string name="migliora">Invia un suggerimento!</string>
+    <string name="moodle">Moodle</string>
+    <string name="mostrapass">Mostra Password</string>
+    <string name="no">No</string>
+    <string name="noapilevel">La tua versione di Android è troppo vecchia per utilizzare questa funzione</string>
+    <string name="nocalendarclass">Siamo davvero dispiaciuti ma questa funzione ha qualche problema quindi l\'abbiamo disabilitata. Sarà riabilitata nella prossima versione che verrà rilasciata il prima possibile.</string>
+    <string name="noconnection">Ti serve una connessione ad internet per vedere le news</string>
+    <string name="noconnectioncalendar">Ti serve una connessione ad internet per vedere gli eventi del calendario</string>
+    <string name="noconnectionupdate">Non puoi aggiornare le news senza una connessione ad internet!</string>
+    <string name="noconnectionupdatecal">Non puoi aggiornare gli eventi senza una connessione ad internet!</string>
+    <string name="nodescription">Non c\'è nessuna descrizione per questo evento</string>
+    <string name="notavailable">La funzione che vuoi usare non è ancora disponibile</string>
+    <string name="orario">Orario</string>
+    <string name="palestre">Orario palestre</string>
+    <string name="pass">Password</string>
+    <string name="refresh">Aggiorna</string>
+    <string name="salva">Salva</string>
+    <string name="sede1_name">Sede 1</string>
+    <string name="sede1_num">045596432</string>
+    <string name="sede2_name">Sede 2</string>
+    <string name="sede2_num">0458034772</string>
+    <string name="sede_indi">Via Bertoni, 3B, 37122</string>
+    <string name="sede_name">Sede</string>
+    <string name="settings">Impostazioni</string>
+    <string name="si">Sì</string>
+    <string name="succ_indi">Via dello Zappatore, 2, 37122</string>
+    <string name="succ_name">Succursale</string>
+    <string name="succ_num">0458004954</string>
+    <string name="tel">Telefono</string>
+    <string name="user">Username</string>
+    <string name="vice_email">vicepreside@messedagliavr.it</string>
+    <string name="vice_name">Vice preside</string>
+
+</resources>
