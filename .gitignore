@@ -13,6 +13,8 @@ tmp/
 *.bak
 *.swp
 *~.nib
+build/
+.gradle/
 
 # External tool builders
 .externalToolBuilders/
