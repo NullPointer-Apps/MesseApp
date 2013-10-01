@@ -900,9 +900,9 @@
                 </string>
                 <string name="noconnectionupdate" >You can\'t update news without any internet connection!
                 </string>
-                <string name="no" >No
-                </string>
                 <string name="did_email" >didattica@messedagliavr.it
+                </string>
+                <string name="no" >No
                 </string>
                 <string name="refresh" >Refresh
                 </string>
@@ -1003,9 +1003,9 @@
                 </string>
                 <string name="moodle" >Moodle
                 </string>
-                <string name="refresh" >Aggiorna
-                </string>
                 <string name="noconnectioncalendar" >Ti serve una connessione ad internet per vedere gli eventi del calendario
+                </string>
+                <string name="refresh" >Aggiorna
                 </string>
                 <string name="Social" >Social
                 </string>
@@ -1025,9 +1025,9 @@
                 </string>
                 <string name="indi" >Indirizzo
                 </string>
-                <string name="noconnectionupdatecal" >Non puoi aggiornare gli eventi senza una connessione ad internet!
-                </string>
                 <string name="Info" >Info
+                </string>
+                <string name="noconnectionupdatecal" >Non puoi aggiornare gli eventi senza una connessione ad internet!
                 </string>
                 <string name="contatti" >Contatti
                 </string>
@@ -1083,9 +1083,9 @@
                 </string>
                 <string name="noapilevel" >La tua versione di Android è troppo vecchia per utilizzare questa funzione
                 </string>
-                <string name="ical" >Importa in Calendario
-                </string>
                 <string name="vice_name" >Vice preside
+                </string>
+                <string name="ical" >Importa in Calendario
                 </string>
             </file>
             <file
