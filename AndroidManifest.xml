@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.messedagliavr.messeapp"
-    android:versionCode="19"
-    android:versionName="1.62"
+    android:versionCode="20"
+    android:versionName="1.63"
 	android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,6 +34,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.messedagliavr.messeapp.contacts"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.messedagliavr.messeapp.calendar"
             android:screenOrientation="portrait" >
         </activity>
@@ -44,10 +48,6 @@
         <activity
             android:name="com.messedagliavr.messeapp.ListItemSelectedCalendar"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name="com.messedagliavr.messeapp.XMLParser" >
-        </activity>
-        <activity android:name="com.messedagliavr.messeapp.Database" >
         </activity>
         <activity android:name="com.messedagliavr.messeapp.timetable" >
         </activity>

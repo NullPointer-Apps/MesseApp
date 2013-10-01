@@ -212,8 +212,7 @@ public class MainActivity extends Activity {
 			super.finish();
 			break;
 		case R.id.contatti:
-			setContentView(R.layout.contatti);
-			layoutid = R.id.contatti;
+			startActivity(new Intent(this,contacts.class));
 			break;
 		case R.id.migliora:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -386,51 +385,5 @@ public class MainActivity extends Activity {
 				Toast.LENGTH_LONG).show();
 	}
 
-	public void maildir(View view) {
-		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-				"mailto", "dirigente@messedagliavr.it", null));
-		startActivity(emailIntent);
-	}
 
-	public void mailvice(View view) {
-		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-				"mailto", "vicepreside@messedagliavr.it", null));
-		startActivity(emailIntent);
-	}
-
-	public void maildid(View view) {
-		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-				"mailto", "didattica@messedagliavr.it", null));
-		startActivity(emailIntent);
-	}
-
-	public void numsede(View view) {
-		Intent dialIntent = new Intent(Intent.ACTION_DIAL,
-				Uri.parse("tel:045596432"));
-		startActivity(dialIntent);
-	}
-
-	public void numsede2(View view) {
-		Intent dialIntent = new Intent(Intent.ACTION_DIAL,
-				Uri.parse("tel:0458034772"));
-		startActivity(dialIntent);
-	}
-
-	public void numsucc(View view) {
-		Intent dialIntent = new Intent(Intent.ACTION_DIAL,
-				Uri.parse("tel:0458004954"));
-		startActivity(dialIntent);
-	}
-
-	public void indisede(View view) {
-		String uri = "geo:45.437535,10.99534?q=via+don+gaspare+bertoni+3b";
-		startActivity(new Intent(android.content.Intent.ACTION_VIEW,
-				Uri.parse(uri)));
-	}
-
-	public void indisucc(View view) {
-		String uri = "geo:45.437535,10.99534?q=via+dello+zappatore+2";
-		startActivity(new Intent(android.content.Intent.ACTION_VIEW,
-				Uri.parse(uri)));
-	}
 }
