@@ -34,6 +34,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.messedagliavr.messeapp.social"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.messedagliavr.messeapp.contacts"
             android:screenOrientation="portrait" >
         </activity>

@@ -3,7 +3,6 @@ package com.messedagliavr.messeapp;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,26 +11,29 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnTouchListener {
 	int layoutid;
-    static String nointernet="false";
-
+	static String nointernet = "false";
 
 	public boolean CheckInternet() {
 		boolean connected = false;
@@ -40,7 +42,6 @@ public class MainActivity extends Activity {
 				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 		android.net.NetworkInfo mobile = connec
 				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
 		if (wifi.isConnected()) {
 			connected = true;
 		} else {
@@ -49,9 +50,7 @@ public class MainActivity extends Activity {
 					connected = true;
 			} catch (Exception e) {
 			}
-
 		}
-
 		return connected;
 
 	}
@@ -60,6 +59,10 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		View iv = findViewById(R.id.activity_main);
+		if (iv != null) {
+			iv.setOnTouchListener(this);
+		}
 		layoutid = R.id.activity_main;
 	}
 
@@ -73,6 +76,10 @@ public class MainActivity extends Activity {
 		if (layoutid == R.id.info || layoutid == R.id.social
 				|| layoutid == R.id.contatti || layoutid == R.id.settings) {
 			setContentView(R.layout.activity_main);
+			View iv = findViewById(R.id.activity_main);
+			if (iv != null) {
+				iv.setOnTouchListener(this);
+			}
 			layoutid = R.id.activity_main;
 		} else {
 			super.finish();
@@ -153,6 +160,49 @@ public class MainActivity extends Activity {
 				Toast.LENGTH_LONG).show();
 	}
 
+	public boolean onTouch(View v, MotionEvent ev) {
+		final int action = ev.getAction();
+		final int evX = (int) ev.getX();
+		final int evY = (int) ev.getY();
+		if (action == MotionEvent.ACTION_DOWN) {
+			int touchColor = getHotspotColor(R.id.image_areas, evX, evY);
+			ColorTool ct = new ColorTool();
+			int tolerance = 20;
+			if (ct.closeMatch(Color.WHITE, touchColor, tolerance))
+				orario();
+			else if (ct.closeMatch(Color.BLUE, touchColor, tolerance))
+				news();
+			else if (ct.closeMatch(Color.RED, touchColor, tolerance))
+				social();
+			else if (ct.closeMatch(Color.YELLOW, touchColor, tolerance))
+				notavailable();
+			else if (ct.closeMatch(Color.GREEN, touchColor, tolerance))
+				voti();
+			else if (ct.closeMatch(Color.CYAN, touchColor, tolerance))
+				calendar();
+		}
+		return true;
+	}
+
+	/** Get the color from the hotspot image at point x-y. */
+	public int getHotspotColor(int hotspotId, int x, int y) {
+		ImageView img = (ImageView) findViewById(hotspotId);
+		if (img == null) {
+			Log.d("ImageAreasActivity", "Hot spot image not found");
+			return 0;
+		} else {
+			img.setDrawingCacheEnabled(true);
+			Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
+			if (hotspots == null) {
+				Log.d("ImageAreasActivity", "Hot spot bitmap was not created");
+				return 0;
+			} else {
+				img.setDrawingCacheEnabled(false);
+				return hotspots.getPixel(x, y);
+			}
+		}
+	}
+
 	@SuppressLint("NewApi")
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -212,7 +262,7 @@ public class MainActivity extends Activity {
 			super.finish();
 			break;
 		case R.id.contatti:
-			startActivity(new Intent(this,contacts.class));
+			startActivity(new Intent(this, contacts.class));
 			break;
 		case R.id.migliora:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -253,18 +303,12 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void moodle(View view) {
-		Intent moodle = new Intent(Intent.ACTION_VIEW);
-		moodle.setData(Uri.parse("http://corsi.messedaglia.it"));
-		startActivity(moodle);
-	}
-
-	public void social(View view) {
-		setContentView(R.layout.social);
+	public void social() {
+		startActivity(new Intent(this, social.class));
 		layoutid = R.id.social;
 	}
 
-	public void voti(View view) {
+	public void voti() {
 		Database databaseHelper = new Database(getBaseContext());
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		String[] columns = { "enabled", "username", "password" };
@@ -297,93 +341,76 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	public void youtube(View view) {
-		Intent youtube = new Intent(Intent.ACTION_VIEW);
-		youtube.setData(Uri.parse("http://www.youtube.com/user/MessedagliaWeb"));
-		startActivity(youtube);
-	}
-
-	public void facebook(View view) {
-		String fbapp = "fb://group/110918169016604";
-		Intent fbappi = new Intent(Intent.ACTION_VIEW, Uri.parse(fbapp));
-		try {
-			startActivity(fbappi);
-		} catch (ActivityNotFoundException ex) {
-			String uriMobile = "http://touch.facebook.com/groups/110918169016604";
-			Intent fb = new Intent(Intent.ACTION_VIEW, Uri.parse(uriMobile));
-			startActivity(fb);
-		}
-	}
-
-	public void news(View view) {
+	public void news() {
 		if (CheckInternet() == true) {
-            nointernet="false";
-            startActivity(new Intent(this,news.class));
+			nointernet = "false";
+			startActivity(new Intent(this, news.class));
 		} else {
-            String[] outdated = { "newsdate", "calendardate" };
-            Database databaseHelper = new Database(getBaseContext());
-            SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            String nodata ="1995-01-19 23:40:20";
-            Cursor date = db.query("lstchk", // The table to query
-                    outdated, // The columns to return
-                    null, // The columns for the WHERE clause
-                    null, // The values for the WHERE clause
-                    null, // don't group the rows
-                    null, // don't filter by row groups
-                    null // The sort order
-            );
-            date.moveToFirst();
-            String verifydatenews = date.getString(date.getColumnIndex("newsdate"));
-            date.close();
-            if (nodata!= verifydatenews) {
-                nointernet="true";
-                startActivity(new Intent(this,news.class));
-            } else {
-			Toast.makeText(MainActivity.this, R.string.noconnection,
-					Toast.LENGTH_LONG).show();
-            }
+			String[] outdated = { "newsdate", "calendardate" };
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			String nodata = "1995-01-19 23:40:20";
+			Cursor date = db.query("lstchk", // The table to query
+					outdated, // The columns to return
+					null, // The columns for the WHERE clause
+					null, // The values for the WHERE clause
+					null, // don't group the rows
+					null, // don't filter by row groups
+					null // The sort order
+					);
+			date.moveToFirst();
+			String verifydatenews = date.getString(date
+					.getColumnIndex("newsdate"));
+			date.close();
+			if (nodata != verifydatenews) {
+				nointernet = "true";
+				startActivity(new Intent(this, news.class));
+			} else {
+				Toast.makeText(MainActivity.this, R.string.noconnection,
+						Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 
-	public void calendar(View view) {
-
+	public void calendar() {
 		if (CheckInternet() == true) {
-            nointernet="false";
-            startActivity(new Intent(this,calendar.class));
-        } else {
-            String[] outdated = { "newsdate", "calendardate" };
-            Database databaseHelper = new Database(getBaseContext());
-            SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            String nodata ="1995-01-19 23:40:20";
-            Cursor date = db.query("lstchk", // The table to query
-                    outdated, // The columns to return
-                    null, // The columns for the WHERE clause
-                    null, // The values for the WHERE clause
-                    null, // don't group the rows
-                    null, // don't filter by row groups
-                    null // The sort order
-            );
-            date.moveToFirst();
-            String verifydatenews = date.getString(date.getColumnIndex("newsdate"));
-            date.close();
-            if (nodata!= verifydatenews) {
-                nointernet="true";
-                startActivity(new Intent(this,calendar.class));
-            } else {
-			Toast.makeText(MainActivity.this, R.string.noconnectioncalendar,
-					Toast.LENGTH_LONG).show();
-            }
+			nointernet = "false";
+			startActivity(new Intent(this, calendar.class));
+		} else {
+			String[] outdated = { "newsdate", "calendardate" };
+			Database databaseHelper = new Database(getBaseContext());
+			SQLiteDatabase db = databaseHelper.getWritableDatabase();
+			String nodata = "1995-01-19 23:40:20";
+			Cursor date = db.query("lstchk", // The table to query
+					outdated, // The columns to return
+					null, // The columns for the WHERE clause
+					null, // The values for the WHERE clause
+					null, // don't group the rows
+					null, // don't filter by row groups
+					null // The sort order
+					);
+			date.moveToFirst();
+			String verifydatenews = date.getString(date
+					.getColumnIndex("newsdate"));
+			date.close();
+			if (nodata != verifydatenews) {
+				nointernet = "true";
+				startActivity(new Intent(this, calendar.class));
+			} else {
+				Toast.makeText(MainActivity.this,
+						R.string.noconnectioncalendar, Toast.LENGTH_LONG)
+						.show();
+			}
 		}
 	}
 
-	public void orario(View view) {
+	public void orario() {
 		startActivity(new Intent(this, timetable.class));
 	}
 
-	public void notavailable(View view) {
+	public void notavailable() {
 		Toast.makeText(MainActivity.this, R.string.notavailable,
 				Toast.LENGTH_LONG).show();
 	}
-
 
 }

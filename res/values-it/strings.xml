@@ -22,24 +22,6 @@
     <string name="connerr">C\'è un problema con la tua connessione</string>
     <string name="ical">Importa in Calendario</string>
     <string name="noapilevel">La tua versione di Android è troppo vecchia per utilizzare questa funzione</string>
-    <string name="Email">Email</string>
-    <string name="dir_email">dirigente@messedagliavr.it</string>
-    <string name="vice_email">vicepreside@messedagliavr.it</string>
-    <string name="did_email">didattica@messedagliavr.it</string>
-    <string name="sede1_num">045596432</string>
-    <string name="sede2_num">0458034772</string>
-    <string name="sede_indi">Via Bertoni, 3B, 37122</string>
-    <string name="succ_num">0458004954</string>
-    <string name="succ_indi">Via dello Zappatore, 2, 37122</string>
-    <string name="dir_name">Dirigente</string>
-    <string name="vice_name">Vice preside</string>
-    <string name="did_name">Didattica</string>
-    <string name="sede1_name">Sede 1</string>
-    <string name="succ_name">Succursale</string>
-    <string name="tel">Telefono</string>
-    <string name="indi">Indirizzo</string>
-    <string name="sede2_name">Sede 2</string>
-    <string name="sede_name">Sede</string>
     <string name="moodle">Moodle</string>
     <string name="migliora">Invia un suggerimento!</string>
     <string name="settings">Impostazioni</string>
@@ -54,6 +36,7 @@
     <string name="noconnectionupdate">Non puoi aggiornare le news senza una connessione ad internet!</string>
     <string name="noconnectionupdatecal">Non puoi aggiornare gli eventi senza una connessione ad internet!</string>
     <string name="nocalendarclass">Siamo davvero dispiaciuti ma questa funzione ha qualche problema quindi l\'abbiamo disabilitata. Sarà riabilitata nella prossima versione che verrà rilasciata il prima possibile.</string>
-
+	<string name="touchReceiver">Ricevitore dei touch</string>
+	<string name="background">Sfondo</string>
 
 </resources>

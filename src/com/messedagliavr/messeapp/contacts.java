@@ -16,7 +16,7 @@ public class contacts extends Activity implements View.OnTouchListener  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contatti);
-        ImageView iv = (ImageView) findViewById (R.id.sfondocontattiimgv);
+        View iv =findViewById (R.id.contatti);
         if (iv != null) {
             iv.setOnTouchListener (this);
         }
@@ -32,13 +32,9 @@ public class contacts extends Activity implements View.OnTouchListener  {
         int methodtobcalled=-1;			
 
         // If we cannot find the imageView, return.
-        ImageView imageView = (ImageView) v.findViewById (R.id.sfondocontattiimgv);
-        if (imageView == null) return false;
-
         // When the action is Down, see if we should show the "pressed" image for the default image.
         // We do this when the default image is showing. That condition is detectable by looking at the
         // tag of the view. If it is null or contains the resource number of the default image, display the pressed image.
-
         // Now that we know the current resource being displayed we can handle the DOWN and UP events.
 
         switch (action) {
@@ -49,7 +45,6 @@ public class contacts extends Activity implements View.OnTouchListener  {
                 // The colors are red, blue, and yellow.
                 // Use image_areas to determine which region the user touched.
                 int touchColor = getHotspotColor (R.id.image_areas, evX, evY);
-
                 // Compare the touchColor to the expected values. Switch to a different image, depending on what color was touched.
                 // Note that we use a Color Tool object to test whether the observed color is close enough to the real color to
                 // count as a match. We do this because colors on the screen do not match the map exactly because of scaling and
@@ -75,7 +70,6 @@ public class contacts extends Activity implements View.OnTouchListener  {
         } // end switch
 
         if (handledHere) {
-
             switch(methodtobcalled) {
                 case 0:
                     maildir();
@@ -106,15 +100,7 @@ public class contacts extends Activity implements View.OnTouchListener  {
         return handledHere;
     }
 
-/**
- */
-// More methods
-
-    /**
-     * Get the color from the hotspot image at point x-y.
-     *
-     */
-
+    /**Get the color from the hotspot image at point x-y.*/
     public int getHotspotColor (int hotspotId, int x, int y) {
         ImageView img = (ImageView) findViewById (hotspotId);
         if (img == null) {
