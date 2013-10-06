@@ -1,11 +1,14 @@
 # incremental data. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1379509732853 3104 316da7e99aac8b1b022fa1176b4a65e9a3e13ab1 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\XMLParser.java
-1379509732853 15146 badef18c9ad9e8a8625d4c61e51ab6d7b470a5de C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\MainActivity.java
-1379509732854 11267 8008cffb6d11f2a0885e075e7d6226782a86d89a C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\news.java
-1379509732854 27481 04dcdc5c2d164e577c7ba26f9f7c287aff4771d9 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\calendar.java
-1379509732852 2229 00884f21733f6b1d2c70b27d2f9af58a6007b7c3 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\Database.java
-1379509732854 4965 623ccfac15fc9cdec3522da2c1dc5b8383498125 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\timetable.java
-1379509732852 3953 7ab3a24effa03e0a36d4ec6dbb6f71ff0a33d5d0 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\ListItemSelectedCalendar.java
-1379509732853 904 ecea9833cd4d717781c3ff7970c713a95c9d44fc C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\ListItemSelectedNews.java
+1381040116000 3001 289a38175383a62565c5da6cac3ce8ce9fdf2677 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\XMLParser.java
+1381040116000 787 ba552abe65274554987bc1c422ef323998a6ca7c C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\ColorTool.java
+1381040116000 13759 6afa51fb463f9b6a41ff74ff4963e219ba232772 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\MainActivity.java
+1381040116000 10947 e51c1bdaea0e5a9d1ac346fb42346596acc4ea5a C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\news.java
+1381040116000 26602 62073d72360ed09229870647b93c23822b83be4a C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\calendar.java
+1381040116000 2174 61ab15b14c8b03b3f12874783e168af8aeba9fc8 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\Database.java
+1381040116000 4832 551ea744b3e56b750272d6af5a458f7dadc2dfd1 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\timetable.java
+1381040116000 3834 ef9e9f2b2e04a8fcd29a0571b1ae386ee1fef4db C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\ListItemSelectedCalendar.java
+1381040116000 877 9c67db11053e4350a82fbcc7b6f6adee3959eeb8 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\ListItemSelectedNews.java
+1381040116000 6555 0128e21df5bcd2545223b79caf4f39d6fa0daaab C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\contacts.java
+1381040116000 2581 4b4cefda1a1d0e65b3c6c46ce374e6d08104f179 C:\Users\Simone\Documents\GitHub\MesseApp\src\com\messedagliavr\messeapp\social.java

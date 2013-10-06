@@ -295,7 +295,12 @@
                 type="drawable" />
             <file
                 name="sfondocontatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondocontatti.png"
+                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondocontatti.jpg"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="sfondocontattisel"
+                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondocontattisel.png"
                 qualifiers=""
                 type="drawable" />
             <file
@@ -304,24 +309,29 @@
                 qualifiers=""
                 type="drawable" />
             <file
+                name="sfondomesseappdb"
+                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondomesseappdb.png"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="sfondomesseappdbsel"
+                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondomesseappdbsel.png"
+                qualifiers=""
+                type="drawable" />
+            <file
                 name="sfondomesseappopaco"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondomesseappopaco.jpg"
                 qualifiers=""
                 type="drawable" />
             <file
-                name="calendario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\calendario.png"
-                qualifiers="1280x800"
+                name="sfondosocial"
+                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondosocial.png"
+                qualifiers=""
                 type="drawable" />
             <file
-                name="circolari"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\circolari.png"
-                qualifiers="1280x800"
-                type="drawable" />
-            <file
-                name="facebook"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\facebook.png"
-                qualifiers="1280x800"
+                name="sfondosocialsel"
+                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable\sfondosocialsel.png"
+                qualifiers=""
                 type="drawable" />
             <file
                 name="ic_launcher"
@@ -329,99 +339,9 @@
                 qualifiers="1280x800"
                 type="drawable" />
             <file
-                name="moodle"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\moodle.png"
-                qualifiers="1280x800"
-                type="drawable" />
-            <file
-                name="notizie"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\notizie.png"
-                qualifiers="1280x800"
-                type="drawable" />
-            <file
-                name="orario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\orario.png"
-                qualifiers="1280x800"
-                type="drawable" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\social.png"
-                qualifiers="1280x800"
-                type="drawable" />
-            <file
-                name="voti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\voti.png"
-                qualifiers="1280x800"
-                type="drawable" />
-            <file
-                name="youtube"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-1280x800\youtube.png"
-                qualifiers="1280x800"
-                type="drawable" />
-            <file
-                name="calendario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\calendario.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="circolari"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\circolari.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="facebook"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\facebook.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
                 name="ic_launcher"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\ic_launcher.png"
                 qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="moodle"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\moodle.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="notizie"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\notizie.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="orario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\orario.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\social.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="voti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\voti.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="youtube"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-800x480\youtube.png"
-                qualifiers="800x480"
-                type="drawable" />
-            <file
-                name="calendario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\calendario.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="circolari"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\circolari.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="facebook"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\facebook.png"
-                qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
@@ -429,99 +349,9 @@
                 qualifiers="hdpi"
                 type="drawable" />
             <file
-                name="moodle"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\moodle.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="notizie"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\notizie.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="orario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\orario.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\social.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="voti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\voti.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="youtube"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-hdpi\youtube.png"
-                qualifiers="hdpi"
-                type="drawable" />
-            <file
-                name="calendario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\calendario.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="circolari"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\circolari.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="facebook"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\facebook.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
                 name="ic_launcher"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\ic_launcher.png"
                 qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="moodle"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\moodle.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="notizie"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\notizie.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="orario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\orario.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\social.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="voti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\voti.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="youtube"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-ldpi\youtube.png"
-                qualifiers="ldpi"
-                type="drawable" />
-            <file
-                name="calendario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\calendario.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="circolari"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\circolari.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="facebook"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\facebook.png"
-                qualifiers="mdpi-1280x800"
                 type="drawable" />
             <file
                 name="ic_launcher"
@@ -529,128 +359,13 @@
                 qualifiers="mdpi-1280x800"
                 type="drawable" />
             <file
-                name="moodle"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\moodle.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="notizie"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\notizie.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="orario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\orario.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\social.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="voti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\voti.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="youtube"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-mdpi-1280x800\youtube.png"
-                qualifiers="mdpi-1280x800"
-                type="drawable" />
-            <file
-                name="calendario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\calendario.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="circolari"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\circolari.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="facebook"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\facebook.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
                 name="ic_launcher"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\ic_launcher.png"
                 qualifiers="tvdpi"
                 type="drawable" />
             <file
-                name="moodle"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\moodle.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="notizie"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\notizie.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="orario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\orario.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\social.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="voti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\voti.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="youtube"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-tvdpi\youtube.png"
-                qualifiers="tvdpi"
-                type="drawable" />
-            <file
-                name="calendario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\calendario.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
-                name="circolari"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\circolari.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
-                name="facebook"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\facebook.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
                 name="ic_launcher"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\ic_launcher.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
-                name="notizie"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\notizie.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
-                name="orario"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\orario.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\social.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
-                name="voti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\voti.png"
-                qualifiers="xhdpi-2560x1600"
-                type="drawable" />
-            <file
-                name="youtube"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\drawable-xhdpi-2560x1600\youtube.png"
                 qualifiers="xhdpi-2560x1600"
                 type="drawable" />
             <file
@@ -694,124 +409,14 @@
                 qualifiers=""
                 type="layout" />
             <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-hdpi-800x480\activity_main.xml"
-                qualifiers="hdpi-800x480"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-hdpi-800x480\contatti.xml"
-                qualifiers="hdpi-800x480"
-                type="layout" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-hdpi-800x480\social.xml"
-                qualifiers="hdpi-800x480"
-                type="layout" />
-            <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-ldpi-320x240\activity_main.xml"
-                qualifiers="ldpi-320x240"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-ldpi-320x240\contatti.xml"
-                qualifiers="ldpi-320x240"
-                type="layout" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-ldpi-320x240\social.xml"
-                qualifiers="ldpi-320x240"
-                type="layout" />
-            <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-ldpi-400x240\activity_main.xml"
-                qualifiers="ldpi-400x240"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-ldpi-400x240\contatti.xml"
-                qualifiers="ldpi-400x240"
-                type="layout" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-ldpi-400x240\social.xml"
-                qualifiers="ldpi-400x240"
-                type="layout" />
-            <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-mdpi-1280x800\activity_main.xml"
-                qualifiers="mdpi-1280x800"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-mdpi-1280x800\contatti.xml"
-                qualifiers="mdpi-1280x800"
-                type="layout" />
-            <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-mdpi-480x320\activity_main.xml"
-                qualifiers="mdpi-480x320"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-mdpi-480x320\contatti.xml"
-                qualifiers="mdpi-480x320"
-                type="layout" />
-            <file
                 name="info"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-mdpi-480x320\info.xml"
                 qualifiers="mdpi-480x320"
                 type="layout" />
             <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-mdpi-480x320\social.xml"
-                qualifiers="mdpi-480x320"
-                type="layout" />
-            <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-tvdpi-1280x800\activity_main.xml"
-                qualifiers="tvdpi-1280x800"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-tvdpi-1280x800\contatti.xml"
-                qualifiers="tvdpi-1280x800"
-                type="layout" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-tvdpi-1280x800\social.xml"
-                qualifiers="tvdpi-1280x800"
-                type="layout" />
-            <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-1280x720\activity_main.xml"
-                qualifiers="xhdpi-1280x720"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-1280x720\contatti.xml"
-                qualifiers="xhdpi-1280x720"
-                type="layout" />
-            <file
                 name="info"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-1280x720\info.xml"
                 qualifiers="xhdpi-1280x720"
-                type="layout" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-1280x720\social.xml"
-                qualifiers="xhdpi-1280x720"
-                type="layout" />
-            <file
-                name="activity_main"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-2560x1600\activity_main.xml"
-                qualifiers="xhdpi-2560x1600"
-                type="layout" />
-            <file
-                name="contatti"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-2560x1600\contatti.xml"
-                qualifiers="xhdpi-2560x1600"
                 type="layout" />
             <file
                 name="info"
@@ -821,11 +426,6 @@
             <file
                 name="settings"
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-2560x1600\settings.xml"
-                qualifiers="xhdpi-2560x1600"
-                type="layout" />
-            <file
-                name="social"
-                path="C:\Users\Simone\Documents\GitHub\MesseApp\res\layout-xhdpi-2560x1600\social.xml"
                 qualifiers="xhdpi-2560x1600"
                 type="layout" />
             <file
@@ -856,41 +456,57 @@
             <file
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\values\strings.xml"
                 qualifiers="" >
+                <string name="si" >Yes
+                </string>
                 <string name="contatti" >Contacts
                 </string>
-                <string name="dir_email" >dirigente@messedagliavr.it
+                <string name="noconnection" >An internet connection is necessary to see the news
                 </string>
-                <string name="succ_indi" >Via dello Zappatore, 2, 37122
-                </string>
-                <string name="noconnection" >You need an Internet connection to see the news
+                <string name="connerr" >There\'s a problem with your Internet connection
                 </string>
                 <string name="Circolari" >Circular
                 </string>
-                <string name="did_name" >Didactics
+                <string name="nodescription" >There\'s no description for this event
                 </string>
                 <string name="Calendario" >Events
                 </string>
-                <string name="indi" >Address
+                <string name="ical" >Import in Calendar
                 </string>
                 <string name="Notizie" >News
                 </string>
-                <string name="noconnectionupdatecal" >you can\'t update events without any interent connection!
+                <string name="noconnectionupdatecal" >An internet connection is necessary to update events.
+                </string>
+                <string name="exit" >Exit
                 </string>
                 <string name="main_title" >A. Messedaglia VR
                 </string>
+                <string name="notavailable" >The function you are trying to use is not yet available
+                </string>
+                <string name="touchReceiver" >TouchReceiver
+                </string>
+                <string name="pass" >Password
+                </string>
                 <string name="salva" >Save
                 </string>
+                <string name="user" >Username
+                </string>
+                <string name="login" >Do you want to enable automatic login to the electronic register?
+                </string>
                 <string name="moodle" >Moodle
+                </string>
+                <string name="canceledcalendar" >You aborted Events\' download
                 </string>
                 <string name="Info" >Info
                 </string>
                 <string name="mostrapass" >Show password
                 </string>
+                <string name="palestre" >Gym\'s timetable
+                </string>
                 <string name="Social" >Social
                 </string>
                 <string name="cancelednews" >You aborted News\' download
                 </string>
-                <string name="dir_name" >Headmaster
+                <string name="nocalendarclass" >We are sorry for the incovenience but this function has some problem at this time so we disabled it. It will be available since next version.
                 </string>
                 <string name="orario" >Time Table
                 </string>
@@ -898,67 +514,19 @@
                 </string>
                 <string name="settings" >Settings
                 </string>
-                <string name="noconnectionupdate" >You can\'t update news without any internet connection!
-                </string>
-                <string name="did_email" >didattica@messedagliavr.it
-                </string>
-                <string name="no" >No
-                </string>
-                <string name="refresh" >Refresh
-                </string>
-                <string name="Email" >Email
-                </string>
-                <string name="migliora" >Send a suggestion!
-                </string>
-                <string name="si" >Yes
-                </string>
-                <string name="connerr" >There\'s a problem with your Internet connection
-                </string>
-                <string name="nodescription" >There\'s no description for this event
-                </string>
-                <string name="ical" >Import in Calendar
-                </string>
-                <string name="sede1_num" >045596432
-                </string>
-                <string name="vice_name" >Vice Headmaster
-                </string>
-                <string name="vice_email" >vicepreside@messedagliavr.it
-                </string>
-                <string name="notavailable" >The function you are trying to use is not yet available
-                </string>
-                <string name="exit" >Exit
-                </string>
-                <string name="sede_indi" >Via Bertoni, 3B, 37122
-                </string>
-                <string name="pass" >Password
-                </string>
-                <string name="sede2_name" >School 2
-                </string>
-                <string name="user" >Username
-                </string>
-                <string name="login" >Do you want to enable automatic login to the electronic register?
-                </string>
-                <string name="canceledcalendar" >You aborted Events\' download
-                </string>
-                <string name="palestre" >Gym\'s timetable
-                </string>
-                <string name="sede_name" >School
-                </string>
-                <string name="tel" >Telephone
-                </string>
-                <string name="sede2_num" >0458034772
-                </string>
-                <string name="nocalendarclass" >We are sorry for the incovenience but this function has some problem at this time so we disabled it. It will be available since next version.
-                </string>
-                <string name="sede1_name" >School 1
-                </string>
-                <string name="noconnectioncalendar" >You need an Internet connection to see the events in the calendar
+                <string name="noconnectioncalendar" >An internet connection is necessary to see events in calendar
                 </string>
                 <string name="app_name" >A. Messedaglia VR
                 </string>
-                <string name="succ_name" >Branch
+                <string name="noconnectionupdate" >An internet connection is necessary to update news.
                 </string>
-                <string name="succ_num" >0458004954
+                <string name="no" >No
+                </string>
+                <string name="background" >Background
+                </string>
+                <string name="refresh" >Refresh
+                </string>
+                <string name="migliora" >Send a suggestion!
                 </string>
                 <string name="Voti" >Register
                 </string>
@@ -981,25 +549,23 @@
             <file
                 path="C:\Users\Simone\Documents\GitHub\MesseApp\res\values-it\strings.xml"
                 qualifiers="it" >
-                <string name="sede2_num" >0458034772
+                <string name="contatti" >Contatti
+                </string>
+                <string name="si" >Sì
                 </string>
                 <string name="canceledcalendar" >Hai annullato il download degli Eventi
                 </string>
                 <string name="noconnectionupdate" >Non puoi aggiornare le news senza una connessione ad internet!
                 </string>
-                <string name="vice_email" >vicepreside@messedagliavr.it
-                </string>
                 <string name="palestre" >Orario palestre
                 </string>
                 <string name="main_title" >A. Messedaglia VR
                 </string>
-                <string name="Circolari" >Circolari
-                </string>
                 <string name="mostrapass" >Mostra Password
                 </string>
-                <string name="migliora" >Invia un suggerimento!
+                <string name="Circolari" >Circolari
                 </string>
-                <string name="succ_num" >0458004954
+                <string name="migliora" >Invia un suggerimento!
                 </string>
                 <string name="moodle" >Moodle
                 </string>
@@ -1007,67 +573,37 @@
                 </string>
                 <string name="refresh" >Aggiorna
                 </string>
-                <string name="Social" >Social
-                </string>
-                <string name="nocalendarclass" >Siamo davvero dispiaciuti ma questa funzione ha qualche problema quindi l\'abbiamo disabilitata. Sarà riabilitata nella prossima versione che verrà rilasciata il prima possibile.
-                </string>
-                <string name="dir_email" >dirigente@messedagliavr.it
-                </string>
-                <string name="pass" >Password
-                </string>
-                <string name="Calendario" >Eventi
-                </string>
-                <string name="nodescription" >Non c\'è nessuna descrizione per questo evento
-                </string>
-                <string name="dir_name" >Dirigente
-                </string>
-                <string name="login" >Vuoi abilitare il login automatico del registro elettronico?
-                </string>
-                <string name="indi" >Indirizzo
-                </string>
-                <string name="Info" >Info
-                </string>
-                <string name="noconnectionupdatecal" >Non puoi aggiornare gli eventi senza una connessione ad internet!
-                </string>
-                <string name="contatti" >Contatti
-                </string>
-                <string name="sede1_num" >045596432
-                </string>
-                <string name="si" >Sì
-                </string>
-                <string name="sede_name" >Sede
-                </string>
-                <string name="tel" >Telefono
-                </string>
-                <string name="succ_indi" >Via dello Zappatore, 2, 37122
-                </string>
-                <string name="succ_name" >Succursale
-                </string>
-                <string name="did_email" >didattica@messedagliavr.it
-                </string>
                 <string name="no" >No
+                </string>
+                <string name="Social" >Social
                 </string>
                 <string name="settings" >Impostazioni
                 </string>
-                <string name="orario" >Orario
+                <string name="exit" >Esci
                 </string>
                 <string name="Notizie" >Notizie
                 </string>
-                <string name="exit" >Esci
+                <string name="orario" >Orario
                 </string>
-                <string name="did_name" >Didattica
-                </string>
-                <string name="sede1_name" >Sede 1
+                <string name="nocalendarclass" >Siamo davvero dispiaciuti ma questa funzione ha qualche problema quindi l\'abbiamo disabilitata. Sarà riabilitata nella prossima versione che verrà rilasciata il prima possibile.
                 </string>
                 <string name="user" >Username
                 </string>
                 <string name="app_name" >A. Messedaglia VR
                 </string>
+                <string name="pass" >Password
+                </string>
+                <string name="Calendario" >Eventi
+                </string>
                 <string name="connerr" >C\'è un problema con la tua connessione
+                </string>
+                <string name="background" >Sfondo
+                </string>
+                <string name="nodescription" >Non c\'è nessuna descrizione per questo evento
                 </string>
                 <string name="Voti" >Registro
                 </string>
-                <string name="sede2_name" >Sede 2
+                <string name="touchReceiver" >Ricevitore dei touch
                 </string>
                 <string name="salva" >Salva
                 </string>
@@ -1075,15 +611,15 @@
                 </string>
                 <string name="notavailable" >La funzione che vuoi usare non è ancora disponibile
                 </string>
-                <string name="sede_indi" >Via Bertoni, 3B, 37122
+                <string name="login" >Vuoi abilitare il login automatico del registro elettronico?
                 </string>
                 <string name="noconnection" >Ti serve una connessione ad internet per vedere le news
                 </string>
-                <string name="Email" >Email
+                <string name="noconnectionupdatecal" >Non puoi aggiornare gli eventi senza una connessione ad internet!
+                </string>
+                <string name="Info" >Info
                 </string>
                 <string name="noapilevel" >La tua versione di Android è troppo vecchia per utilizzare questa funzione
-                </string>
-                <string name="vice_name" >Vice preside
                 </string>
                 <string name="ical" >Importa in Calendario
                 </string>
