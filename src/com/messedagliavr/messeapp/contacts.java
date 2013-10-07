@@ -16,7 +16,7 @@ public class contacts extends Activity implements View.OnTouchListener  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contatti);
-        ImageView iv = (ImageView) findViewById (R.id.sfondocontattiimgv);
+        ImageView iv = (ImageView) findViewById (R.id.sfondocontattisel);
         if (iv != null) {
             iv.setOnTouchListener (this);
         }
