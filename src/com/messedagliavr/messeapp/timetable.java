@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 @SuppressLint("DefaultLocale")
 public class timetable extends Activity implements
 		AdapterView.OnItemSelectedListener {
@@ -43,10 +45,11 @@ public class timetable extends Activity implements
 	}
 
 	String[] items = { "Scegli una classe", "1A", "1B", "1C", "1D", "1E", "1F",
-			"1G", "1H", "1I", "1L", "1M", "1N", "2A", "2B", "2C", "2D", "2E", "2F", "2G",
-			"2H", "2I", "2L", "3A", "3B", "3C", "3D", "3E", "3F", "3G", "4A", "4B", "4C",
-            "4D", "4E", "4F", "4G", "4H", "4I", "4L", "4M", "4N", "4O", "5A", "5B", "5C",
-            "5D", "5E", "5F", "5G", "5H", "5I", "5L", "5M", "5N", "5O" };
+			"1G", "1H", "1I", "1L", "1M", "1N", "2A", "2B", "2C", "2D", "2E",
+			"2F", "2G", "2H", "2I", "2L", "3A", "3B", "3C", "3D", "3E", "3F",
+			"3G", "4A", "4B", "4C", "4D", "4E", "4F", "4G", "4H", "4I", "4L",
+			"4M", "4N", "4O", "5A", "5B", "5C", "5D", "5E", "5F", "5G", "5H",
+			"5I", "5L", "5M", "5N", "5O" };
 	String fname = null;
 
 	@Override
@@ -129,5 +132,16 @@ public class timetable extends Activity implements
 		long samerow = db.update("class", values, null, null);
 		descrizioneview.loadData("", "text/html", "UTF-8");
 	}
-}// class
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+}

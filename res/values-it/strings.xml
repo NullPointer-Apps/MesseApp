@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">A. Messedaglia VR</string>
     <string name="Info">Info</string>
     <string name="main_title">A. Messedaglia VR</string>
-    <string name="Calendario">Eventi</string>
-    <string name="Social">Social</string>
-    <string name="Voti">Registro</string>
-    <string name="Notizie">Notizie</string>
-    <string name="Circolari">Circolari</string>
     <string name="exit">Esci</string>
     <string name="noconnection">Ti serve una connessione ad internet per vedere le news</string>
     <string name="noconnectioncalendar">Ti serve una connessione ad internet per vedere gli eventi del calendario</string>
@@ -17,12 +11,10 @@
     <string name="cancelednews">Hai annullato il download delle News</string>
     <string name="canceledcalendar">Hai annullato il download degli Eventi</string>
     <string name="contatti">Contatti</string>
-    <string name="orario">Orario</string>
     <string name="refresh">Aggiorna</string>
     <string name="connerr">C\'è un problema con la tua connessione</string>
     <string name="ical">Importa in Calendario</string>
     <string name="noapilevel">La tua versione di Android è troppo vecchia per utilizzare questa funzione</string>
-    <string name="moodle">Moodle</string>
     <string name="migliora">Invia un suggerimento!</string>
     <string name="settings">Impostazioni</string>
     <string name="user">Username</string>
@@ -35,8 +27,9 @@
     <string name="no">No</string>
     <string name="noconnectionupdate">Non puoi aggiornare le news senza una connessione ad internet!</string>
     <string name="noconnectionupdatecal">Non puoi aggiornare gli eventi senza una connessione ad internet!</string>
-    <string name="nocalendarclass">Siamo davvero dispiaciuti ma questa funzione ha qualche problema quindi l\'abbiamo disabilitata. Sarà riabilitata nella prossima versione che verrà rilasciata il prima possibile.</string>
 	<string name="touchReceiver">Ricevitore dei touch</string>
-	<string name="background">Sfondo</string>
-
+	<string name="downloading">Scaricando</string>
+	<string name="retrieving">Retrieving</string>
+	<string name="downloadNews">Sto scaricando le notizie</string>
+	<string name="retrievingNews">Sto recuperando le notizie dal database</string>
 </resources>

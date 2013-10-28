@@ -3,11 +3,6 @@
     <string name="app_name">A. Messedaglia VR</string>
     <string name="Info">Info</string>
     <string name="main_title">A. Messedaglia VR</string>
-    <string name="Calendario">Events</string>
-    <string name="Social">Social</string>
-    <string name="Voti">Register</string>
-    <string name="Notizie">News</string>
-    <string name="Circolari">Circular</string>
     <string name="exit">Exit</string>
     <string name="noconnection">An internet connection is necessary to see the news</string>
     <string name="noconnectioncalendar">An internet connection is necessary to see events in calendar</string>
@@ -16,12 +11,10 @@
     <string name="cancelednews">You aborted News\' download</string>
     <string name="canceledcalendar">You aborted Events\' download</string>
     <string name="contatti">Contacts</string>
-    <string name="orario">Time Table</string>
     <string name="refresh">Refresh</string>
     <string name="connerr">There\'s a problem with your Internet connection</string>
     <string name="ical">Import in Calendar</string>
     <string name="noapilevel">Your version of Android is too outdated to use this function</string>
-    <string name="moodle">Moodle</string>
     <string name="migliora">Send a suggestion!</string>
     <string name="settings">Settings</string>
     <string name="user">Username</string>
@@ -34,7 +27,9 @@
     <string name="no">No</string>
     <string name="noconnectionupdate">An internet connection is necessary to update news.</string>
     <string name="noconnectionupdatecal">An internet connection is necessary to update events.</string>
-    <string name="nocalendarclass">We are sorry for the incovenience but this function has some problem at this time so we disabled it. It will be available since next version.</string>
 	<string name="touchReceiver">TouchReceiver</string>
-	<string name="background">Background</string>
+	<string name="downloading">Downloading</string>
+	<string name="retrieving">Retrieving</string>
+	<string name="downloadNews">I\'m downloading the news</string>
+	<string name="retrievingNews">I\'m retrieving the news from database</string>
 </resources>

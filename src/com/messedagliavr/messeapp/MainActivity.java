@@ -31,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 public class MainActivity extends Activity implements View.OnTouchListener {
 	int layoutid;
 	static String nointernet = "false";
@@ -413,4 +415,15 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 				Toast.LENGTH_LONG).show();
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 }

@@ -25,9 +25,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +32,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressWarnings("unused")
 @SuppressLint("SimpleDateFormat")
@@ -51,6 +50,18 @@ public class news extends ListActivity {
 	public Cursor data;
 
 	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mDialog = new ProgressDialog(news.this);
 		super.onCreate(savedInstanceState);
@@ -63,45 +74,45 @@ public class news extends ListActivity {
 		return true;
 	}
 
-    public boolean CheckInternet() {
-        boolean connected = false;
-        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        android.net.NetworkInfo wifi = connec
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        android.net.NetworkInfo mobile = connec
-                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+	public boolean CheckInternet() {
+		boolean connected = false;
+		ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		android.net.NetworkInfo wifi = connec
+				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		android.net.NetworkInfo mobile = connec
+				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-        if (wifi.isConnected()) {
-            connected = true;
-        } else {
-            try {
-                if (mobile.isConnected())
-                    connected = true;
-            } catch (Exception e) {
-            }
+		if (wifi.isConnected()) {
+			connected = true;
+		} else {
+			try {
+				if (mobile.isConnected())
+					connected = true;
+			} catch (Exception e) {
+			}
 
-        }
+		}
 
-        return connected;
+		return connected;
 
-    }
+	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.refresh:
-            if (CheckInternet() == true) {
-                Database databaseHelper = new Database(getBaseContext());
-                SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                ContentValues nowdb = new ContentValues();
-                nowdb.put("newsdate", "2012-02-20 15:00:00");
-                long samerow = db.update("lstchk", nowdb, null, null);
-                db.close();
-                MainActivity.nointernet="false";
-                new connection().execute();
-            } else {Toast.makeText(this, R.string.noconnectionupdate,
-                    Toast.LENGTH_LONG).show();
-            }
-
+			if (CheckInternet() == true) {
+				Database databaseHelper = new Database(getBaseContext());
+				SQLiteDatabase db = databaseHelper.getWritableDatabase();
+				ContentValues nowdb = new ContentValues();
+				nowdb.put("newsdate", "2012-02-20 15:00:00");
+				long samerow = db.update("lstchk", nowdb, null, null);
+				db.close();
+				MainActivity.nointernet = "false";
+				new connection().execute();
+			} else {
+				Toast.makeText(this, R.string.noconnectionupdate,
+						Toast.LENGTH_LONG).show();
+			}
 
 			break;
 		}
@@ -147,23 +158,23 @@ public class news extends ListActivity {
 		}
 
 		public void onPreExecute() {
-            if(MainActivity.nointernet=="true"){
-			mDialog = ProgressDialog.show(news.this, "Recuperando",
-					"Sto recuperando le news dal database", true, true,
-					new DialogInterface.OnCancelListener() {
-						public void onCancel(DialogInterface dialog) {
-							connection.this.cancel(true);
-						}
-					});
-            } else {
-                mDialog = ProgressDialog.show(news.this, "Scaricando",
-                        "Sto scaricando le news", true, true,
-                        new DialogInterface.OnCancelListener() {
-                            public void onCancel(DialogInterface dialog) {
-                                connection.this.cancel(true);
-                            }
-                        });
-            }
+			if (MainActivity.nointernet == "true") {
+				mDialog = ProgressDialog.show(news.this, getString(R.string.retrieving),
+						getString(R.string.retrievingNews), true, true,
+						new DialogInterface.OnCancelListener() {
+							public void onCancel(DialogInterface dialog) {
+								connection.this.cancel(true);
+							}
+						});
+			} else {
+				mDialog = ProgressDialog.show(news.this, getString(R.string.downloading),
+						getString(R.string.downloadNews), true, true,
+						new DialogInterface.OnCancelListener() {
+							public void onCancel(DialogInterface dialog) {
+								connection.this.cancel(true);
+							}
+						});
+			}
 			mDialog.show();
 		}
 
@@ -199,7 +210,7 @@ public class news extends ListActivity {
 			String past = date.getString(date.getColumnIndex("newsdate"));
 			date.close();
 			long l = getTimeDiff(past, now);
-            if (l / 10800000 >= 3 && MainActivity.nointernet!="true") {
+			if (l / 10800000 >= 3 && MainActivity.nointernet != "true") {
 				XMLParser parser = new XMLParser();
 				String xml = parser.getXmlFromUrl(URL);
 				if (xml == "UnknownHostException") {
@@ -216,24 +227,27 @@ public class news extends ListActivity {
 						values.put("_id", i);
 						values.put(TITLE, parser.getValue(e, TITLE));
 						values.put(DESC, parser.getValue(e, DESC));
-						values.put("titleb", "<b>" + parser.getValue(e, TITLE) + "</b>");
+						values.put("titleb", "<b>" + parser.getValue(e, TITLE)
+								+ "</b>");
 						map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
 						map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
 
 						titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
 						descrizioni
 								.add(Html.fromHtml(parser.getValue(e, DESC)));
-						titolib.add( Html.fromHtml( "<b>" + parser.getValue(e, TITLE) + "</b>"));
+						titolib.add(Html.fromHtml("<b>"
+								+ parser.getValue(e, TITLE) + "</b>"));
 						// adding HashList to ArrayList
 						menuItems.add(map);
-						long newRowId = db.insertWithOnConflict("news", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+						long newRowId = db.insertWithOnConflict("news", null,
+								values, SQLiteDatabase.CONFLICT_REPLACE);
 					}
 					ContentValues nowdb = new ContentValues();
 					nowdb.put("newsdate", now);
 					long samerow = db.update("lstchk", nowdb, null, null);
 					temhashmap.put("titoli", titoli);
 					temhashmap.put("descrizioni", descrizioni);
-					temhashmap.put("titolib" , titolib);
+					temhashmap.put("titolib", titolib);
 					return temhashmap;
 
 				}
@@ -270,7 +284,7 @@ public class news extends ListActivity {
 				db.close();
 				temhashmap.put("titoli", titoli);
 				temhashmap.put("descrizioni", descrizioni);
-				temhashmap.put("titolib" , titolib);
+				temhashmap.put("titolib", titolib);
 				return temhashmap;
 
 			}
@@ -290,8 +304,7 @@ public class news extends ListActivity {
 					final ArrayList<Spanned> titoli = resultmap.get("titoli");
 					final ArrayList<Spanned> descrizioni = resultmap
 							.get("descrizioni");
-					final ArrayList<Spanned> titolib = resultmap
-							.get("titolib");
+					final ArrayList<Spanned> titolib = resultmap.get("titolib");
 
 					ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
 							news.this, android.R.layout.simple_list_item_1,

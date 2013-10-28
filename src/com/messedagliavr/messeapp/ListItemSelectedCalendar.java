@@ -23,7 +23,20 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 public class ListItemSelectedCalendar extends Activity {
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,8 +50,7 @@ public class ListItemSelectedCalendar extends Activity {
 		@SuppressLint("InlinedApi")
 		@Override
 		protected String[] doInBackground(Void... params) {
-			String ical = "http://www.messedaglia.it/caltoxml.php?id="
-					+ idical;
+			String ical = "http://www.messedaglia.it/caltoxml.php?id=" + idical;
 			XMLParser parser = new XMLParser();
 			String xml = parser.getXmlFromUrl(ical);
 			Document doc = parser.getDomElement(xml);
@@ -53,7 +65,7 @@ public class ListItemSelectedCalendar extends Activity {
 			dati[3] = parser.getValue(e, "DTSTART");
 			dati[4] = parser.getValue(e, "DTEND");
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
-					"yyyyMMdd'T'HHmmss",Locale.US);
+					"yyyyMMdd'T'HHmmss", Locale.US);
 			dateFormat.setLenient(false);
 			Date fine = null;
 			Date inizio = null;
