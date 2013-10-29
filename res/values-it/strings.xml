@@ -28,8 +28,5 @@
     <string name="noconnectionupdate">Non puoi aggiornare le news senza una connessione ad internet!</string>
     <string name="noconnectionupdatecal">Non puoi aggiornare gli eventi senza una connessione ad internet!</string>
 	<string name="touchReceiver">Ricevitore dei touch</string>
-	<string name="downloading">Scaricando</string>
-	<string name="retrieving">Retrieving</string>
-	<string name="downloadNews">Sto scaricando le notizie</string>
-	<string name="retrievingNews">Sto recuperando le notizie dal database</string>
+
 </resources>

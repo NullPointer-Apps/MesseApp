@@ -135,8 +135,6 @@ public final class R {
         public static final int cancelednews=0x7f040009;
         public static final int connerr=0x7f04000d;
         public static final int contatti=0x7f04000b;
-        public static final int downloadNews=0x7f04001f;
-        public static final int downloading=0x7f04001d;
         public static final int exit=0x7f040004;
         /** Replace placeholder ID with your tracking ID
          */
@@ -157,8 +155,6 @@ public final class R {
         public static final int palestre=0x7f040017;
         public static final int pass=0x7f040013;
         public static final int refresh=0x7f04000c;
-        public static final int retrieving=0x7f04001e;
-        public static final int retrievingNews=0x7f040020;
         public static final int salva=0x7f040015;
         public static final int settings=0x7f040011;
         public static final int si=0x7f040018;

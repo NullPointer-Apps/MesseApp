@@ -28,8 +28,4 @@
     <string name="noconnectionupdate">An internet connection is necessary to update news.</string>
     <string name="noconnectionupdatecal">An internet connection is necessary to update events.</string>
 	<string name="touchReceiver">TouchReceiver</string>
-	<string name="downloading">Downloading</string>
-	<string name="retrieving">Retrieving</string>
-	<string name="downloadNews">I\'m downloading the news</string>
-	<string name="retrievingNews">I\'m retrieving the news from database</string>
 </resources>
