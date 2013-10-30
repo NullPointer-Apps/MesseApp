@@ -115,7 +115,7 @@ public class calendar extends ListActivity {
 				MainActivity.nointernet = "false";
 				new connection().execute();
 			} else {
-				Toast.makeText(this, R.string.noconnectionupdatecal,
+				Toast.makeText(this, R.string.noconnection,
 						Toast.LENGTH_LONG).show();
 			}
 			break;

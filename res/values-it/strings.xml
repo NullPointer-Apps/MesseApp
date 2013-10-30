@@ -4,7 +4,6 @@
     <string name="Info">Info</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="exit">Esci</string>
-    //Impostazioni
     <string name="settings">Impostazioni</string>
     <string name="user">Username</string>
     <string name="pass">Password</string>
@@ -13,8 +12,7 @@
     <string name="login">Vuoi abilitare il login automatico del registro elettronico?</string>
     <string name="settingssaved">Le nuove impostazioni sono state salvate</string>
     <string name="noautologin">Il login automatico è stato disattivato</string>
-    //Notizie ed Eventi
-    <string name="noconnection">E' necessaria una conessione internet</string>
+    <string name="noconnection">E\' necessaria una conessione internet</string>
     <string name="nodescription">Non c\'è nessuna descrizione disponibile per questo evento</string>
     <string name="ical">Importa in Calendario</string>
     <string name="cancelednews">Hai annullato il download delle News</string>
@@ -26,7 +24,6 @@
     <string name="retrievingNews">Sto recuperando le notizie dal database...</string>
     <string name="downloadingEvents">Sto scaricando gli eventi...</string>
     <string name="retrievingEvents">Sto recuperando gli eventi dal database...</string>
-   //Altre
     <string name="connerr">C\'è un problema con la tua connessione</string>
     <string name="noapilevel">La tua versione di Android è troppo vecchia per utilizzare questa funzione</string>
     <string name="notavailable">La funzione che vuoi usare non è ancora disponibile</string>
