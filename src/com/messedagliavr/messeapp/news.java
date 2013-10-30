@@ -110,7 +110,7 @@ public class news extends ListActivity {
 				MainActivity.nointernet = "false";
 				new connection().execute();
 			} else {
-				Toast.makeText(this, R.string.noconnectionupdate,
+				Toast.makeText(this, R.string.noconnection,
 						Toast.LENGTH_LONG).show();
 			}
 
@@ -159,7 +159,7 @@ public class news extends ListActivity {
 
 		public void onPreExecute() {
 			if (MainActivity.nointernet == "true") {
-				mDialog = ProgressDialog.show(news.this, "Recuperando",
+				mDialog = ProgressDialog.show(news.this, getString(R.string.retrieving),
 						"Sto recuperando le news dal database", true, true,
 						new DialogInterface.OnCancelListener() {
 							public void onCancel(DialogInterface dialog) {
@@ -167,7 +167,7 @@ public class news extends ListActivity {
 							}
 						});
 			} else {
-				mDialog = ProgressDialog.show(news.this, "Scaricando",
+				mDialog = ProgressDialog.show(news.this, getString(R.string.downloading),
 						"Sto scaricando le news", true, true,
 						new DialogInterface.OnCancelListener() {
 							public void onCancel(DialogInterface dialog) {

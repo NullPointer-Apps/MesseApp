@@ -129,7 +129,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 			@SuppressWarnings("unused")
 			long samerow = db.update("settvoti", values, null, null);
 			db.close();
-			Toast.makeText(MainActivity.this, "Login automatico disabilitato",
+			Toast.makeText(MainActivity.this, getString(R.string.noautologin),
 					Toast.LENGTH_LONG).show();
 		}
 	}
@@ -158,7 +158,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 		@SuppressWarnings("unused")
 		long samerow = db.update("settvoti", values, null, null);
 		db.close();
-		Toast.makeText(MainActivity.this, "Impostazioni salvate",
+		Toast.makeText(MainActivity.this, getString(R.string.settingssaved),
 				Toast.LENGTH_LONG).show();
 	}
 
@@ -268,7 +268,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 			break;
 		case R.id.migliora:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Invia Suggerimento");
+			builder.setTitle(getString(R.string.suggestion));
 			final EditText input = new EditText(this);
 			input.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 			input.setVerticalScrollBarEnabled(true);
@@ -284,14 +284,14 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 											"mailto", "null.p.apps@gmail.com",
 											null));
 							emailIntent.putExtra(Intent.EXTRA_SUBJECT,
-									"Suggerimento MesseApp");
+                                    getString(R.string.suggestion));
 							emailIntent.putExtra(Intent.EXTRA_TEXT,
-									Html.fromHtml(m_Text));
+								 	Html.fromHtml(m_Text));
 							startActivity(Intent.createChooser(emailIntent,
-									"Invia Suggerimento"));
+                                    getString(R.string.suggestion)));
 						}
 					});
-			builder.setNegativeButton("Annulla",
+			builder.setNegativeButton(getString(R.string.cancel),
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -400,7 +400,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 				startActivity(new Intent(this, calendar.class));
 			} else {
 				Toast.makeText(MainActivity.this,
-						R.string.noconnectioncalendar, Toast.LENGTH_LONG)
+						R.string.noconnection, Toast.LENGTH_LONG)
 						.show();
 			}
 		}
