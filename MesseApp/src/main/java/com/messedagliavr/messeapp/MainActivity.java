@@ -12,7 +12,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,17 +25,57 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.util.ArrayList;
+
 public class MainActivity extends Activity implements View.OnTouchListener {
     int layoutid;
     static String nointernet = "false";
+    GridView gridView;
+    ArrayList<Item> gridArray = new ArrayList<Item>();
+    CustomGridViewAdapter customGridAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Bitmap social = BitmapFactory.decodeResource(this.getResources(), R.drawable.social);
+        Bitmap orario = BitmapFactory.decodeResource(this.getResources(), R.drawable.orario);
+        Bitmap notizie = BitmapFactory.decodeResource(this.getResources(), R.drawable.notizie);
+        Bitmap calendario = BitmapFactory.decodeResource(this.getResources(), R.drawable.calendario);
+        Bitmap registro = BitmapFactory.decodeResource(this.getResources(), R.drawable.voti);
+        Bitmap circolari = BitmapFactory.decodeResource(this.getResources(), R.drawable.circolari);
+        gridArray.add(new Item(social,"Social"));
+        gridArray.add(new Item(orario,"Orario"));
+        gridArray.add(new Item(notizie,"News"));
+        gridArray.add(new Item(calendario,"Eventi"));
+        gridArray.add(new Item(registro,"Registro"));
+        gridArray.add(new Item(circolari,"Circolari"));
+
+        gridView = (GridView) findViewById(R.id.gridView1);
+        gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        customGridAdapter = new CustomGridViewAdapter(this, R.layout.activity_main_item, gridArray);
+        gridView.setAdapter(customGridAdapter);
+        gridView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View v, int position,
+                                    long arg3) {
+                Toast.makeText(getApplicationContext(),gridArray.get(position).getTitle()+ " " + gridArray.get(position), Toast.LENGTH_SHORT).show();
+            } });
+    }
+
+
 
     public boolean CheckInternet() {
         boolean connected = false;
@@ -55,7 +97,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
     }
 
-    @Override
+   /* @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -64,7 +106,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             iv.setOnTouchListener(this);
         }
         layoutid = R.id.activity_main;
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,7 +114,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         return true;
     }
 
-    public void onBackPressed() {
+   /* public void onBackPressed() {
         if (layoutid == R.id.info || layoutid == R.id.social
                 || layoutid == R.id.contatti || layoutid == R.id.settings) {
             setContentView(R.layout.activity_main);
@@ -85,7 +127,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             super.finish();
         }
 
-    }
+    }*/
 
     public void onToggleClicked(View view) {
         ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
