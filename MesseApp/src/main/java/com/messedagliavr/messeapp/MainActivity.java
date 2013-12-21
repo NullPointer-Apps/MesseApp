@@ -20,10 +20,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,14 +29,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity implements View.OnTouchListener {
+public class MainActivity extends Activity  {
     int layoutid;
     static String nointernet = "false";
     GridView gridView;
@@ -57,11 +54,11 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         Bitmap registro = BitmapFactory.decodeResource(this.getResources(), R.drawable.voti);
         Bitmap circolari = BitmapFactory.decodeResource(this.getResources(), R.drawable.circolari);
         gridArray.add(new Item(social,"Social"));
-        gridArray.add(new Item(orario,"Orario"));
-        gridArray.add(new Item(notizie,"News"));
-        gridArray.add(new Item(calendario,"Eventi"));
-        gridArray.add(new Item(registro,"Registro"));
-        gridArray.add(new Item(circolari,"Circolari"));
+        gridArray.add(new Item(orario,this.getResources().getString(R.string.orario)));
+        gridArray.add(new Item(notizie,this.getResources().getString(R.string.notizie)));
+        gridArray.add(new Item(calendario,this.getResources().getString(R.string.eventi)));
+        gridArray.add(new Item(registro,this.getResources().getString(R.string.registro)));
+        gridArray.add(new Item(circolari,this.getResources().getString(R.string.circolari)));
 
         gridView = (GridView) findViewById(R.id.gridView1);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -71,7 +68,29 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position,
                                     long arg3) {
-                Toast.makeText(getApplicationContext(),gridArray.get(position).getTitle()+ " " + gridArray.get(position), Toast.LENGTH_SHORT).show();
+                if(gridArray.get(position).getTitle().equals("Social")) {
+                    social();
+                }
+                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.orario))) {
+                    orario();
+                }
+
+                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.notizie))) {
+                    news();
+                }
+
+                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.eventi))) {
+                    calendar();
+                }
+
+                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.registro))) {
+                    voti();
+                }
+
+                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.circolari))) {
+                    notavailable();
+                }
+
             } });
     }
 
@@ -114,14 +133,11 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         return true;
     }
 
-   /* public void onBackPressed() {
+  /*  public void onBackPressed() {
         if (layoutid == R.id.info || layoutid == R.id.social
                 || layoutid == R.id.contatti || layoutid == R.id.settings) {
             setContentView(R.layout.activity_main);
             View iv = findViewById(R.id.activity_main);
-            if (iv != null) {
-                iv.setOnTouchListener(this);
-            }
             layoutid = R.id.activity_main;
         } else {
             super.finish();
@@ -202,48 +218,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                 Toast.LENGTH_LONG).show();
     }
 
-    public boolean onTouch(View v, MotionEvent ev) {
-        final int action = ev.getAction();
-        final int evX = (int) ev.getX();
-        final int evY = (int) ev.getY();
-        if (action == MotionEvent.ACTION_DOWN) {
-            int touchColor = getHotspotColor(R.id.image_areas, evX, evY);
-            ColorTool ct = new ColorTool();
-            int tolerance = 20;
-            if (ct.closeMatch(Color.WHITE, touchColor, tolerance))
-                orario();
-            else if (ct.closeMatch(Color.BLUE, touchColor, tolerance))
-                news();
-            else if (ct.closeMatch(Color.RED, touchColor, tolerance))
-                social();
-            else if (ct.closeMatch(Color.YELLOW, touchColor, tolerance))
-                notavailable();
-            else if (ct.closeMatch(Color.GREEN, touchColor, tolerance))
-                voti();
-            else if (ct.closeMatch(Color.CYAN, touchColor, tolerance))
-                calendar();
-        }
-        return true;
-    }
-
-    /** Get the color from the hotspot image at point x-y. */
-    public int getHotspotColor(int hotspotId, int x, int y) {
-        ImageView img = (ImageView) findViewById(hotspotId);
-        if (img == null) {
-            Log.d("ImageAreasActivity", "Hot spot image not found");
-            return 0;
-        } else {
-            img.setDrawingCacheEnabled(true);
-            Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
-            if (hotspots == null) {
-                Log.d("ImageAreasActivity", "Hot spot bitmap was not created");
-                return 0;
-            } else {
-                img.setDrawingCacheEnabled(false);
-                return hotspots.getPixel(x, y);
-            }
-        }
-    }
 
     @SuppressLint("NewApi")
     public boolean onOptionsItemSelected(MenuItem item) {

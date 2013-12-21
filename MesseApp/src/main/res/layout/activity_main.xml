@@ -6,8 +6,7 @@
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
     android:paddingTop="0dp"
-    android:background="@drawable/sfondomesseapp"
-    tools:context=".MainActivity" >
+    android:background="@drawable/sfondomesseapp" >
 
             <GridView
                 android:id="@+id/gridView1"
