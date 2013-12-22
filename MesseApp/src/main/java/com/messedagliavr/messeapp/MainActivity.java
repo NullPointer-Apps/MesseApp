@@ -16,22 +16,63 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity  {
+public class MainActivity extends Activity implements View.OnTouchListener {
     int layoutid;
     static String nointernet = "false";
+<<<<<<< HEAD
+=======
+    GridView gridView;
+    ArrayList<Item> gridArray = new ArrayList<Item>();
+    CustomGridViewAdapter customGridAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Bitmap social = BitmapFactory.decodeResource(this.getResources(), R.drawable.social);
+        Bitmap orario = BitmapFactory.decodeResource(this.getResources(), R.drawable.orario);
+        Bitmap notizie = BitmapFactory.decodeResource(this.getResources(), R.drawable.notizie);
+        Bitmap calendario = BitmapFactory.decodeResource(this.getResources(), R.drawable.calendario);
+        Bitmap registro = BitmapFactory.decodeResource(this.getResources(), R.drawable.voti);
+        Bitmap circolari = BitmapFactory.decodeResource(this.getResources(), R.drawable.circolari);
+        gridArray.add(new Item(social,"Social"));
+        gridArray.add(new Item(orario,"Orario"));
+        gridArray.add(new Item(notizie,"News"));
+        gridArray.add(new Item(calendario,"Eventi"));
+        gridArray.add(new Item(registro,"Registro"));
+        gridArray.add(new Item(circolari,"Circolari"));
+
+        gridView = (GridView) findViewById(R.id.gridView1);
+        gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        customGridAdapter = new CustomGridViewAdapter(this, R.layout.activity_main_item, gridArray);
+        gridView.setAdapter(customGridAdapter);
+        gridView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View v, int position,
+                                    long arg3) {
+                Toast.makeText(getApplicationContext(),gridArray.get(position).getTitle()+ " " + gridArray.get(position), Toast.LENGTH_SHORT).show();
+            } });
+    }
+
+
+>>>>>>> 756db24f01476d89b32763aa74f7b9777c0a682f
 
     public boolean CheckInternet() {
         boolean connected = false;
@@ -66,10 +107,21 @@ public class MainActivity extends Activity  {
         return true;
     }
 
+<<<<<<< HEAD
     public void onBackPressed() {
         if (layoutid == R.id.info || layoutid == R.id.social
                 || layoutid == R.id.contatti || layoutid == R.id.settings) {
             setContentView(R.layout.activity_main);
+=======
+   /* public void onBackPressed() {
+        if (layoutid == R.id.info || layoutid == R.id.social
+                || layoutid == R.id.contatti || layoutid == R.id.settings) {
+            setContentView(R.layout.activity_main);
+            View iv = findViewById(R.id.activity_main);
+            if (iv != null) {
+                iv.setOnTouchListener(this);
+            }
+>>>>>>> 756db24f01476d89b32763aa74f7b9777c0a682f
             layoutid = R.id.activity_main;
         } else {
             super.finish();
@@ -150,6 +202,48 @@ public class MainActivity extends Activity  {
                 Toast.LENGTH_LONG).show();
     }
 
+    public boolean onTouch(View v, MotionEvent ev) {
+        final int action = ev.getAction();
+        final int evX = (int) ev.getX();
+        final int evY = (int) ev.getY();
+        if (action == MotionEvent.ACTION_DOWN) {
+            int touchColor = getHotspotColor(R.id.image_areas, evX, evY);
+            ColorTool ct = new ColorTool();
+            int tolerance = 20;
+            if (ct.closeMatch(Color.WHITE, touchColor, tolerance))
+                orario();
+            else if (ct.closeMatch(Color.BLUE, touchColor, tolerance))
+                news();
+            else if (ct.closeMatch(Color.RED, touchColor, tolerance))
+                social();
+            else if (ct.closeMatch(Color.YELLOW, touchColor, tolerance))
+                notavailable();
+            else if (ct.closeMatch(Color.GREEN, touchColor, tolerance))
+                voti();
+            else if (ct.closeMatch(Color.CYAN, touchColor, tolerance))
+                calendar();
+        }
+        return true;
+    }
+
+    /** Get the color from the hotspot image at point x-y. */
+    public int getHotspotColor(int hotspotId, int x, int y) {
+        ImageView img = (ImageView) findViewById(hotspotId);
+        if (img == null) {
+            Log.d("ImageAreasActivity", "Hot spot image not found");
+            return 0;
+        } else {
+            img.setDrawingCacheEnabled(true);
+            Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
+            if (hotspots == null) {
+                Log.d("ImageAreasActivity", "Hot spot bitmap was not created");
+                return 0;
+            } else {
+                img.setDrawingCacheEnabled(false);
+                return hotspots.getPixel(x, y);
+            }
+        }
+    }
 
     @SuppressLint("NewApi")
     public boolean onOptionsItemSelected(MenuItem item) {
