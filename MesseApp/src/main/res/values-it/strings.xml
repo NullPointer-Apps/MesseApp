@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">A. Messedaglia VR</string>
+    <string name="orario">Orario</string>
+    <string name="notizie">Notizie</string>
+    <string name="eventi">Eventi</string>
+    <string name="registro">Registro</string>
+    <string name="circolari">Circolari</string>
     <string name="Info">Info</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="exit">Esci</string>
