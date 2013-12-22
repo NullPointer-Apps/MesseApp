@@ -1,15 +1,5 @@
 package com.messedagliavr.messeapp;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -32,6 +22,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 
 @SuppressWarnings("unused")
@@ -113,8 +113,8 @@ public class news extends ListActivity {
         Date oldDate = null;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            curDate = (Date) formatter.parse(curTime);
-            oldDate = (Date) formatter.parse(time);
+            curDate = formatter.parse(curTime);
+            oldDate = formatter.parse(time);
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
@@ -148,7 +148,7 @@ public class news extends ListActivity {
         public void onPreExecute() {
             if (MainActivity.nointernet == "true") {
                 mDialog = ProgressDialog.show(news.this, getString(R.string.retrieving),
-                        "Sto recuperando le news dal database", true, true,
+                        getString(R.string.retrievingNews), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
                                 connection.this.cancel(true);
@@ -156,7 +156,7 @@ public class news extends ListActivity {
                         });
             } else {
                 mDialog = ProgressDialog.show(news.this, getString(R.string.downloading),
-                        "Sto scaricando le news", true, true,
+                        getString(R.string.downloadingNews), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
                                 connection.this.cancel(true);

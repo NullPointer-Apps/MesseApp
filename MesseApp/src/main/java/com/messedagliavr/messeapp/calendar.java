@@ -1,15 +1,5 @@
 package com.messedagliavr.messeapp;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -38,6 +28,16 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 
 @SuppressLint("InlinedApi")
@@ -237,8 +237,8 @@ public class calendar extends ListActivity {
 
         public void onPreExecute() {
             if (MainActivity.nointernet == "true") {
-                mDialog = ProgressDialog.show(calendar.this, "Recuperando",
-                        "Sto recuperando gli eventi dal database", true, true,
+                mDialog = ProgressDialog.show(calendar.this, getString(R.string.retrieving),
+                        getString(R.string.retrievingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
                                 connection.this.cancel(true);
@@ -246,8 +246,8 @@ public class calendar extends ListActivity {
                         });
 
             } else {
-                mDialog = ProgressDialog.show(calendar.this, "Scaricando",
-                        "Sto scaricando gli eventi", true, true,
+                mDialog = ProgressDialog.show(calendar.this, getString(R.string.downloading),
+                        getString(R.string.downloadingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
                                 connection.this.cancel(true);

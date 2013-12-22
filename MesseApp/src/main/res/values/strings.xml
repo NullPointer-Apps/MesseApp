@@ -22,10 +22,10 @@
     <string name="cancelednews">You aborted News\'s download</string>
     <string name="canceledcalendar">You aborted Events\'s download</string>
     <string name="ical">Import in Calendar</string>
-    <string name="downloadingNews">Downloading News...</string>
-    <string name="retrievingNews">Retrieving News...</string>
-    <string name="downloadingEvents">Downloading Events...</string>
-    <string name="retrievingEvents">Retrieving Events...</string>
+    <string name="downloadingNews">Downloading News…</string>
+    <string name="retrievingNews">Retrieving News from database…</string>
+    <string name="downloadingEvents">Downloading Events…</string>
+    <string name="retrievingEvents">Retrieving Events from database…</string>
     <string name="palestre">Gym\'s timetable</string>
     <string name="si">Yes</string>
     <string name="no">No</string>

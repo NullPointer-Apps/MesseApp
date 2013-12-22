@@ -11,10 +11,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,8 +19,6 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,63 +32,6 @@ import java.util.ArrayList;
 public class MainActivity extends Activity  {
     int layoutid;
     static String nointernet = "false";
-    GridView gridView;
-    ArrayList<Item> gridArray = new ArrayList<Item>();
-    CustomGridViewAdapter customGridAdapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Bitmap social = BitmapFactory.decodeResource(this.getResources(), R.drawable.social);
-        Bitmap orario = BitmapFactory.decodeResource(this.getResources(), R.drawable.orario);
-        Bitmap notizie = BitmapFactory.decodeResource(this.getResources(), R.drawable.notizie);
-        Bitmap calendario = BitmapFactory.decodeResource(this.getResources(), R.drawable.calendario);
-        Bitmap registro = BitmapFactory.decodeResource(this.getResources(), R.drawable.voti);
-        Bitmap circolari = BitmapFactory.decodeResource(this.getResources(), R.drawable.circolari);
-        gridArray.add(new Item(social,"Social"));
-        gridArray.add(new Item(orario,this.getResources().getString(R.string.orario)));
-        gridArray.add(new Item(notizie,this.getResources().getString(R.string.notizie)));
-        gridArray.add(new Item(calendario,this.getResources().getString(R.string.eventi)));
-        gridArray.add(new Item(registro,this.getResources().getString(R.string.registro)));
-        gridArray.add(new Item(circolari,this.getResources().getString(R.string.circolari)));
-
-        gridView = (GridView) findViewById(R.id.gridView1);
-        gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        customGridAdapter = new CustomGridViewAdapter(this, R.layout.activity_main_item, gridArray);
-        gridView.setAdapter(customGridAdapter);
-        gridView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View v, int position,
-                                    long arg3) {
-                if(gridArray.get(position).getTitle().equals("Social")) {
-                    social();
-                }
-                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.orario))) {
-                    orario();
-                }
-
-                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.notizie))) {
-                    news();
-                }
-
-                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.eventi))) {
-                    calendar();
-                }
-
-                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.registro))) {
-                    voti();
-                }
-
-                if(gridArray.get(position).getTitle().equals(getResources().getString(R.string.circolari))) {
-                    notavailable();
-                }
-
-            } });
-    }
-
-
 
     public boolean CheckInternet() {
         boolean connected = false;
@@ -116,16 +53,12 @@ public class MainActivity extends Activity  {
 
     }
 
-   /* @Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        View iv = findViewById(R.id.activity_main);
-        if (iv != null) {
-            iv.setOnTouchListener(this);
-        }
         layoutid = R.id.activity_main;
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,17 +66,16 @@ public class MainActivity extends Activity  {
         return true;
     }
 
-  /*  public void onBackPressed() {
+    public void onBackPressed() {
         if (layoutid == R.id.info || layoutid == R.id.social
                 || layoutid == R.id.contatti || layoutid == R.id.settings) {
             setContentView(R.layout.activity_main);
-            View iv = findViewById(R.id.activity_main);
             layoutid = R.id.activity_main;
         } else {
             super.finish();
         }
 
-    }*/
+    }
 
     public void onToggleClicked(View view) {
         ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
@@ -319,12 +251,12 @@ public class MainActivity extends Activity  {
         return true;
     }
 
-    public void social() {
+    public void social(View v) {
         startActivity(new Intent(this, social.class));
         layoutid = R.id.social;
     }
 
-    public void voti() {
+    public void voti(View v) {
         Database databaseHelper = new Database(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = { "enabled", "username", "password" };
@@ -357,7 +289,7 @@ public class MainActivity extends Activity  {
         }
     }
 
-    public void news() {
+    public void news(View v) {
         if (CheckInternet() == true) {
             nointernet = "false";
             startActivity(new Intent(this, news.class));
@@ -388,7 +320,7 @@ public class MainActivity extends Activity  {
         }
     }
 
-    public void calendar() {
+    public void calendar(View v) {
         if (CheckInternet() == true) {
             nointernet = "false";
             startActivity(new Intent(this, calendar.class));
@@ -420,11 +352,11 @@ public class MainActivity extends Activity  {
         }
     }
 
-    public void orario() {
+    public void orario(View v) {
         startActivity(new Intent(this, timetable.class));
     }
 
-    public void notavailable() {
+    public void notavailable(View v) {
         Toast.makeText(MainActivity.this, R.string.notavailable,
                 Toast.LENGTH_LONG).show();
     }

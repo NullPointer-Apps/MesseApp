@@ -25,10 +25,10 @@
     <string name="contatti">Contatti</string>
     <string name="downloading">Scaricando</string>
     <string name="retrieving">Recuperando</string>
-    <string name="downloadingNews">Sto scaricando le notizie...</string>
-    <string name="retrievingNews">Sto recuperando le notizie dal database...</string>
-    <string name="downloadingEvents">Sto scaricando gli eventi...</string>
-    <string name="retrievingEvents">Sto recuperando gli eventi dal database...</string>
+    <string name="downloadingNews">Sto scaricando le notizie…</string>
+    <string name="retrievingNews">Sto recuperando le notizie dal database…</string>
+    <string name="downloadingEvents">Sto scaricando gli eventi…</string>
+    <string name="retrievingEvents">Sto recuperando gli eventi dal database…</string>
     <string name="connerr">C\'è un problema con la tua connessione</string>
     <string name="noapilevel">La tua versione di Android è troppo vecchia per utilizzare questa funzione</string>
     <string name="notavailable">La funzione che vuoi usare non è ancora disponibile</string>
