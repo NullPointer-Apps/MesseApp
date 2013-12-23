@@ -11,7 +11,7 @@
     <TableRow
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="75"
+        android:layout_weight="67"
         android:paddingTop="20dp">
 
         <ImageView
@@ -59,7 +59,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:text="TimeTable"
+            android:text="@string/orario"
             android:id="@+id/textView2"
             android:textColor="@android:color/black" />
     </TableRow>
@@ -68,7 +68,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:layout_weight="75"
+        android:layout_weight="67"
         android:id="@+id/tableRow3"
         android:weightSum="10"
         android:paddingTop="10dp">
@@ -108,7 +108,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="@android:color/black"
-            android:text="News"
+            android:text="@string/notizie"
             android:id="@+id/textView1" />
 
         <TextView
@@ -117,7 +117,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:text="Calendar"
+            android:text="@string/eventi"
             android:id="@+id/textView1"
             android:textColor="@android:color/black" />
     </TableRow>
@@ -126,7 +126,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:baselineAligned="false"
-        android:layout_weight="75"
+        android:layout_weight="67"
         android:id="@+id/tableRow4"
         android:paddingTop="10dp">
 
@@ -162,7 +162,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:text="Marks"
+            android:text="@string/registro"
             android:id="@+id/textView1"
             android:textColor="@android:color/black" />
 
@@ -172,7 +172,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:text="Notices"
+            android:text="@string/circolari"
             android:id="@+id/textView1"
             android:textColor="@android:color/black" />
     </TableRow>

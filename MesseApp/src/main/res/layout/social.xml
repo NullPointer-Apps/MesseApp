@@ -1,15 +1,50 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-     android:background="@drawable/sfondosocial"
+    android:layout_height="fill_parent"
+    android:shrinkColumns="*"
+    android:stretchColumns="*"
+    android:weightSum="190"
+    android:background="@drawable/sfondomesseapp"
     android:id="@+id/social">
 
-    <ImageView
-        android:id="@+id/image_areas"
-        android:layout_width="333dp"
+    <TableRow
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:contentDescription="@string/touchReceiver"
-        android:src="@drawable/sfondosocialsel"
-        android:visibility="invisible" />
+        android:layout_weight="70"
+        android:paddingTop="20dp">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imgfb"
+        android:src="@drawable/facebook"
+        android:scaleType="centerInside"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:onClick="facebook"/>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imgyt"
+            android:src="@drawable/youtube"
+            android:scaleType="centerInside"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:onClick="youtube"/>
+    </TableRow>
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgMood"
+            android:src="@drawable/moodle"
+            android:scaleType="centerInside"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="120dp"
+            android:onClick="moodle"/>
+
+
+
+
+</TableLayout>
+

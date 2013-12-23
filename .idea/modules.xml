@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MesseApp/src/main/main.iml" filepath="$PROJECT_DIR$/MesseApp/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MesseApp.iml" filepath="$PROJECT_DIR$/MesseApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MesseApp/MesseApp-MesseApp.iml" filepath="$PROJECT_DIR$/MesseApp/MesseApp-MesseApp.iml" />
     </modules>
   </component>
 </project>
