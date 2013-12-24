@@ -1,7 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/sfondocontatti" >
+    android:background="@drawable/sfondocontatti"
+    android:id="@+id/contattibg">
 
     <ImageView
         android:id="@+id/image_areas"

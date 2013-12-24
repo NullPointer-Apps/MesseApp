@@ -39,4 +39,6 @@
     <string name="contatti">Contacts</string>
     <string name="connerr">There\'s a problem with your Internet connection</string>
     <string name="noapilevel">Your version of Android is too outdated to use this function</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 </resources>

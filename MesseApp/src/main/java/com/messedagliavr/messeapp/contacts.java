@@ -19,10 +19,10 @@ public class contacts extends Activity implements View.OnTouchListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contatti);
-        View iv = findViewById(R.id.contatti);
-        if (iv != null) {
+        View iv = findViewById(R.id.contattibg);
+    //    if (iv != null) {
             iv.setOnTouchListener(this);
-        }
+     //   }
     }
 
     public boolean onTouch(View v, MotionEvent ev) {
@@ -60,6 +60,7 @@ public class contacts extends Activity implements View.OnTouchListener {
                 // count as a match. We do this because colors on the screen do not
                 // match the map exactly because of scaling and
                 // varying pixel density.
+                System.out.println(touchColor);
                 ColorTool ct = new ColorTool();
                 int tolerance = 25;
                 if (ct.closeMatch(-13893888, touchColor, tolerance))
