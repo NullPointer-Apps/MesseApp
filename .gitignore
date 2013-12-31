@@ -1,4 +1,10 @@
-.gradle
+/.gradle
+/gradlew
+/gradlew.bat
+/gradle.properties
 /local.properties
-/.idea/workspace.xml
-.DS_Store
+/settings.gradle
+/MesseApp.iml
+/.idea
+/gradle
+/.DS_Store

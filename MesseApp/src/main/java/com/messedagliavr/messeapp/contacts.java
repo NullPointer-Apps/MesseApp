@@ -20,9 +20,9 @@ public class contacts extends Activity implements View.OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contatti);
         View iv = findViewById(R.id.contattibg);
-    //    if (iv != null) {
+       if (iv != null) {
             iv.setOnTouchListener(this);
-     //   }
+       }
     }
 
     public boolean onTouch(View v, MotionEvent ev) {
