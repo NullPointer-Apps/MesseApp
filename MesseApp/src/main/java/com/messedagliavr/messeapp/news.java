@@ -77,8 +77,8 @@ public class news extends ListActivity {
                 if (mobile.isConnected())
                     connected = true;
             } catch (Exception e) {
+                e.printStackTrace();
             }
-
         }
 
         return connected;

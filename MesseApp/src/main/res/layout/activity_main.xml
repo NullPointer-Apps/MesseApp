@@ -92,7 +92,7 @@
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:onClick="calendar"/>
+                android:onClick="panini"/>
         </TableRow>
         <TableRow
             android:layout_width="fill_parent"

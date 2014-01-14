@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Cotoletta"
+        android:id="@+id/nomepanino"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:gravity="center" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/minus"
+        android:layout_alignBottom="@+id/nomepanino"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/plus"
+        android:layout_alignBottom="@+id/nomepanino"
+        android:layout_toLeftOf="@+id/nomepanino"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/numordine"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/minus"
+        android:layout_toRightOf="@+id/minus"
+        android:layout_toLeftOf="@+id/plus"
+        android:layout_alignTop="@+id/minus" />
+</RelativeLayout>

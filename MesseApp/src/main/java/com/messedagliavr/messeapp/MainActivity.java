@@ -353,6 +353,9 @@ public class MainActivity extends Activity  {
     public void orario(View v) {
         startActivity(new Intent(this, timetable.class));
     }
+    public void panini(View v) {
+        startActivity(new Intent(this, Panini.class));
+    }
 
     public void notavailable(View v) {
         Toast.makeText(MainActivity.this, R.string.notavailable,
