@@ -170,11 +170,11 @@ public class Panini extends Activity {
         int totale=0;
         int numpanini;
         for(int i=0;i<nomipanini.size();i++){
-            numpanini=list.;
+            /*numpanini=;
             if (list.get(i)!=0) {
                 text+=nomipanini.get(i)+" x "+numpanini+"\n";
                 totale+=numpanini*prezzipanini.get(i);
-            }
+            }*/
         }
         text+="Totale:  "+totale+"€";
         return text;
