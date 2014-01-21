@@ -89,6 +89,7 @@ public class MainActivity extends Activity  {
             getActionBar().setHomeButtonEnabled(true);
         }
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -387,13 +388,12 @@ public class MainActivity extends Activity  {
                 PackageInfo pinfo = null;
                 try {
                     pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                } catch (PackageManager.NameNotFoundException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 String versionName = pinfo.versionName;
                 setContentView(R.layout.info);
-                ListView tempList =(ListView) findViewById(R.id.left_drawer);
-                mDrawerList = tempList;
+                mDrawerList = (ListView) findViewById(R.id.left_drawer);
                 TextView vername = (TextView) findViewById(R.id.versionname);
                 vername.setText(versionName);
                 layoutid = R.id.info;
@@ -420,7 +420,7 @@ public class MainActivity extends Activity  {
                                 String m_Text = input.getText().toString();
                                 Intent emailIntent = new Intent(
                                         Intent.ACTION_SENDTO, Uri.fromParts(
-                                        "mailto", "null.p.apps@gmail.com",
+                                        "mailto", "support@nullpointerapps.com",
                                         null));
                                 emailIntent.putExtra(Intent.EXTRA_SUBJECT,
                                         getString(R.string.suggestion));
