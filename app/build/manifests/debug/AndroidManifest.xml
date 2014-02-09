@@ -1,0 +1,26 @@
+<!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="29" android:versionName="1.80" package="com.messedagliavr.messeapp">
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+
+    <application android:allowBackup="true" android:debuggable="false" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <activity android:label="@string/app_name" android:name="com.messedagliavr.messeapp.MainActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.messedagliavr.messeapp.contacts" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedNews" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.messedagliavr.messeapp.ListItemSelectedCalendar" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.messedagliavr.messeapp.timetable"/>
+    </application>
+
+</manifest>

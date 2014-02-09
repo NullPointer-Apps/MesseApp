@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">A. Messedaglia VR</string>
+    <string name="Info">Info</string>
+    <string name="orario">Timetable</string>
+    <string name="notizie">News</string>
+    <string name="eventi">Calendar</string>
+    <string name="registro">Marks</string>
+    <string name="circolari">Notices</string>
+    <string name="main_title">A. Messedaglia VR</string>
+    <string name="exit">Exit</string>
+    <string name="settings">Settings</string>
+    <string name="user">Username</string>
+    <string name="pass">Password</string>
+    <string name="mostrapass">Show password</string>
+    <string name="salva">Save</string>
+    <string name="login">Enable auto login to the electronic register</string>
+    <string name="settingssaved">Your new settings have been saved</string>
+    <string name="noautologin">Auto login has been disabled</string>
+    <string name="noconnection">An internet connection is required</string>
+    <string name="nodescription">There\'s no description for this event</string>
+    <string name="cancelednews">You aborted News\'s download</string>
+    <string name="canceledcalendar">You aborted Events\'s download</string>
+    <string name="ical">Import in Calendar</string>
+    <string name="downloadingNews">Downloading News…</string>
+    <string name="retrievingNews">Retrieving News from database…</string>
+    <string name="downloadingEvents">Downloading Events…</string>
+    <string name="retrievingEvents">Retrieving Events from database…</string>
+    <string name="palestre">Gym\'s timetable</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+    <string name="refresh">Refresh</string>
+    <string name="downloading">Downloading</string>
+    <string name="retrieving">Retrieving</string>
+    <string name="touchReceiver">TouchReceiver</string>
+    <string name="suggestion">Send a suggestion</string>
+    <string name="notavailable">The function you are trying to use is not yet available</string>
+    <string name="contatti">Contacts</string>
+    <string name="connerr">There\'s a problem with your Internet connection</string>
+    <string name="noapilevel">Your version of Android is too outdated to use this function</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="panini">Panini</string>
+    <string name="fine_scuola">School\'s End</string>
+    <string name="ondevelopment">This function is still on development, expect new updates soon!</string>
+</resources>

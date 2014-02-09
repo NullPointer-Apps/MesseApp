@@ -1,5 +1,4 @@
-/.gradle
-/MesseApp.iml
-/.idea
-/.DS_Store
+.gradle
 /local.properties
+/.idea/workspace.xml
+.DS_Store

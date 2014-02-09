@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/timetoend"
+        app:showAsAction="always"
+        android:icon="@drawable/clock">
+        <menu></menu>
+    </item>
+
+</menu><!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/menu/activity_main.xml -->
