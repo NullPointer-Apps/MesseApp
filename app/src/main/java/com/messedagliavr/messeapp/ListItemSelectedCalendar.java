@@ -109,13 +109,15 @@ public class ListItemSelectedCalendar extends Activity {
         setContentView(R.layout.list_item_selected);
         Intent intent = getIntent();
         String titolorw = intent.getStringExtra(MainActivity.TITLE);
-        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body style=\"background-color: transparent;\">" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";
+        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body style=\"background-color: transparent; color:#white\">" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";
         TextView titoloview = (TextView) findViewById(R.id.TitoloView);
         Spanned titolo = Html.fromHtml(titolorw);
         titoloview.setText(titolo);
         WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
         descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
-        descrizioneview.setBackgroundColor(0x00000000);
+        if (Integer.valueOf(android.os.Build.VERSION.SDK_INT) <= 15) {
+            descrizioneview.setBackgroundColor(0x00000000);
+        }
 
     }
 
