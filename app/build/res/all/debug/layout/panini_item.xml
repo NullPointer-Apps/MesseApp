@@ -1,49 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="105dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:baselineAligned="false"
+        android:background="@drawable/sfondomesseappopaco"
+        android:id="@+id/panini_item"
+        android:measureWithLargestChild="false">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Cotoletta"
-        android:id="@+id/nomepanino"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="20dp"
-        android:gravity="center" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/firstLinear">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:id="@+id/minus"
-        android:layout_alignBottom="@+id/nomepanino"
-        android:layout_alignParentLeft="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="nomepanino"
+                android:id="@+id/nomeItemPanino"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/plus"
-        android:layout_alignBottom="@+id/nomepanino"
-        android:layout_toLeftOf="@+id/nomepanino"
-        android:layout_marginRight="20dp" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="0"
-        android:id="@+id/numordine"
-        android:gravity="center"
-        android:layout_alignBottom="@+id/minus"
-        android:layout_toRightOf="@+id/minus"
-        android:layout_toLeftOf="@+id/plus"
-        android:layout_alignTop="@+id/minus" />
-</RelativeLayout><!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/layout/panini_item.xml -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:id="@+id/button"
+                android:textSize="45sp"
+                android:background="@android:color/transparent"
+                android:paddingRight="-10dp"
+                android:onClick="paniniminus" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numeroPanini"
+                android:text="0"
+                android:textSize="30sp"
+                android:focusable="true"/>
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/button2"
+                android:textSize="37sp"
+                android:background="@android:color/transparent"
+                android:paddingLeft="-10dp"
+                android:onClick="paniniplus" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="x 0,00€"
+                android:id="@+id/prezzoItemPanino"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/position"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:layout_width="38dp"
+                android:layout_height="match_parent"
+                android:id="@+id/infoPanini"
+                android:src="@drawable/infoiconpanini"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="false"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="25dp"
+                android:onClick="showInfoPanino" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout><!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/layout/panini_item.xml -->

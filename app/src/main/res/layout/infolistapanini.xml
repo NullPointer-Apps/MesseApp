@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ListaPanini"
+        android:id="@+id/titleInfoLista"
+        android:layout_gravity="center_horizontal"
+        android:textIsSelectable="false"
+        android:textSize="40sp"
+        android:paddingTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="by NullPointer Apps"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:paddingTop="-15dp" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="281dp"
+            android:id="@+id/istruzioniListaPanini"
+            android:paddingLeft="20dp"
+            android:textSize="20sp"
+            android:paddingRight="20dp"
+            android:text="@string/istruzioni"/>
+    </ScrollView>
+
+</LinearLayout>

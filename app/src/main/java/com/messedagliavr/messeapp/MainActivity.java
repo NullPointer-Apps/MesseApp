@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -26,7 +27,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.InputType;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -36,12 +36,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -52,6 +55,7 @@ import org.w3c.dom.NodeList;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -61,7 +65,9 @@ public class MainActivity extends ActionBarActivity
     //GENERAL
     public static String nointernet;
     public static View rootView;
+    static Context context;
     public static int section=0;
+
     //NEWS
     public Boolean unknhost = false;
     public SQLiteDatabase db;
@@ -73,7 +79,13 @@ public class MainActivity extends ActionBarActivity
     public static final String ICAL = "ical";
     ProgressDialog mDialog;
     public String idical = null;
-
+    //PANINI
+    public static ListView listViewpanini;
+    public static ArrayList<String> names;
+    public static ArrayList<String> prices;
+    public static ArrayList<Integer> numbers=new ArrayList<Integer>();;
+    public static String[] classi;
+    public static String myClass="Scegli una classe";
     //INFO
     static PackageInfo pinfo = null;
      /**
@@ -91,6 +103,8 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context=getBaseContext();
+
         try {
             pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (Exception e) {
@@ -107,21 +121,48 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
+    public void paniniplus(View i){
+        View parent= (View)(i.getParent());
+        TextView num = (TextView) parent.findViewById(R.id.numeroPanini);
+        TextView hidden = (TextView) parent.findViewById(R.id.position);
+        int numint = Integer.parseInt((num.getText()).toString());
+        numint++;
+        num.setText(String.valueOf(numint));
+        int position = Integer.parseInt((hidden.getText()).toString());
+        numbers.set(position,numint);
+    }
 
+    public void paniniminus(View i){
+        View parent= (View)(i.getParent());
+        TextView num = (TextView) parent.findViewById(R.id.numeroPanini);
+        TextView hidden = (TextView) parent.findViewById(R.id.position);
+        int numint = Integer.parseInt((num.getText()).toString());
+        if (numint>0) numint--;
+        num.setText(String.valueOf(numint));
+        int position = Integer.parseInt((hidden.getText()).toString());
+        numbers.set(position,numint);
+    }
+
+    public void showInfoPanino(View i){
+        View parent = (View)i.getParent().getParent();
+        TextView title =(TextView) parent.findViewById(R.id.firstLinear).findViewById(R.id.nomeItemPanino);
+        DialogFragment infoDialog = new InfoPaninoDialog(title.getText().toString());
+        infoDialog.show(getSupportFragmentManager(), "InfoDialogFragment");
+    }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         if (position==1){
-            Toast.makeText(MainActivity.this, R.string.notavailable,
-                    Toast.LENGTH_LONG).show();
-        } else {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position))
-                        .commit();
+            names=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_array)));
+            prices=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_prices_array)));
+            for (int i=0;i<names.size();i++) numbers.add(i,0);
         }
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PlaceholderFragment.newInstance(position))
+                    .commit();
     }
 
     @Override
@@ -143,7 +184,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.app_name);
                 break;
             case 1:
-                //mTitle = getString(R.string.panini);
+                mTitle = getString(R.string.panini);
                 break;
             case 2:
                 mTitle = getString(R.string.settings);
@@ -179,6 +220,10 @@ public class MainActivity extends ActionBarActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             switch(section){
+                case 1:
+                    //Panini
+                    getMenuInflater().inflate(R.menu.panini, menu);
+                    break;
                 case 7:
                     //News
                     getMenuInflater().inflate(R.menu.news, menu);
@@ -207,6 +252,10 @@ public class MainActivity extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.clear();
         switch(section){
+            case 1:
+                //News
+                getMenuInflater().inflate(R.menu.panini, menu);
+                break;
             case 8:
                 //News
                 getMenuInflater().inflate(R.menu.news, menu);
@@ -251,6 +300,31 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
         MyDifferenceFromToday diff;
         switch (id){
+            case R.id.help:
+                DialogFragment helpDialog = new HelpPaninoDialog();
+                helpDialog.show(getSupportFragmentManager(), "ScontrinoDialogFragment");
+                break;
+            case R.id.sendlist:
+                if (!myClass.equals("Scegli una classe")){
+                    String[] prices=getResources().getStringArray(R.array.panini_prices_array);
+                    ArrayList<Double> totals=new ArrayList<Double>();
+                    ArrayList<Integer> coolposition=new ArrayList<Integer>();
+                    for (int i=0;i<prices.length;i++){
+                        totals.add(i,numbers.get(i)*Double.parseDouble(prices[i]));
+                        if(numbers.get(i)!=0){
+                            coolposition.add(i);
+                        }
+                    }
+                    if (coolposition.size()>0){
+                        DialogFragment scontrinoDialog = new ScontrinoPaninoDialog(numbers, totals, this, coolposition);
+                        scontrinoDialog.show(getSupportFragmentManager(), "ScontrinoDialogFragment");
+                    } else {
+                        Toast.makeText(this,"Devi selezionare almeno un panino", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this,"Devi selezionare una classe prima di inviare l'ordine", Toast.LENGTH_SHORT).show();
+                }
+                break;
             case R.id.refreshend:
                 diff = new MyDifferenceFromToday(2014,6,7,13,0);
                 TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
@@ -271,7 +345,7 @@ public class MainActivity extends ActionBarActivity
                 item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + "min").setEnabled(false);
                 break;
             case R.id.refresh:
-                if (CheckInternet() == true) {
+                if (CheckInternet()) {
                     Database databaseHelper = new Database(getBaseContext());
                     SQLiteDatabase db = databaseHelper.getWritableDatabase();
                     ContentValues nowdb = new ContentValues();
@@ -286,7 +360,7 @@ public class MainActivity extends ActionBarActivity
                 }
                 break;
             case R.id.refreshcal:
-                if (CheckInternet() == true) {
+                if (CheckInternet()) {
                     Database databaseHelper = new Database(getBaseContext());
                     SQLiteDatabase db = databaseHelper.getWritableDatabase();
                     ContentValues nowdb = new ContentValues();
@@ -313,7 +387,7 @@ public class MainActivity extends ActionBarActivity
                 .getMenuInfo();
         switch (item.getItemId()) {
             case R.id.ical:
-                if (Integer.valueOf(android.os.Build.VERSION.SDK_INT) < 14) {
+                if (android.os.Build.VERSION.SDK_INT < 14) {
                     Toast.makeText(this, R.string.noapilevel,
                             Toast.LENGTH_LONG).show();
                 } else {
@@ -627,8 +701,6 @@ public class MainActivity extends ActionBarActivity
         public PlaceholderFragment() {
         }
 
-
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -641,7 +713,60 @@ public class MainActivity extends ActionBarActivity
                     break;
                 case 1:
                     //Panini
-                    rootView = inflater.inflate(R.layout.home, container, false);
+                    rootView = inflater.inflate(R.layout.panini, container, false);
+                    ListAdapter adapter=new PaniniAdapter(context,names,prices);
+                    listViewpanini = (ListView) rootView.findViewById(R.id.listView);
+                    listViewpanini.setAdapter(adapter);
+                    classi = getResources().getStringArray(R.array.classi);
+                    Spinner spin = (Spinner) rootView.findViewById(R.id.spinnerpanini);
+                    Database databaseHelper = new Database(context);
+                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                    String[] columns = { "fname" };
+                    Cursor classe = db.query("class", // The table to query
+                            columns, // The columns to return
+                            null, // The columns for the WHERE clause
+                            null, // The values for the WHERE clause
+                            null, // don't group the rows
+                            null, // don't filter by row groups
+                            null // The sort order
+                    );
+                    classe.moveToFirst();
+                    String classname = classe.getString(classe.getColumnIndex("fname"));
+                    classe.close();
+                    db.close();
+                    if (!classname.matches("novalue")) {
+                        classi[0] = "Predefinito: " + classname.toUpperCase();
+                        myClass = classi[0];
+                    }
+                    spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            if (i!=0){
+                                Database databaseHelper = new Database(context);
+                                SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                                ContentValues values = new ContentValues();
+                                values.put("fname", classi[i].toLowerCase());
+                                @SuppressWarnings("unused")
+                                long samerow = db.update("class", values, null, null);
+                                db.close();
+                                myClass = classi[i];
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            Database databaseHelper = new Database(context);
+                            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                            ContentValues values = new ContentValues();
+                            values.put("fname", "novalue");
+                            long samerow = db.update("class", values, null, null);
+                        }
+                    });
+                    ArrayAdapter<?> aa = new ArrayAdapter<Object>(context,
+                            android.R.layout.simple_spinner_item, classi);
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spin.setAdapter(aa);
                     break;
                 case 2:
                     //settings
@@ -651,11 +776,11 @@ public class MainActivity extends ActionBarActivity
                     CheckBox check = (CheckBox) rootView.findViewById(R.id.checkBox1);
                     Button save = (Button) rootView.findViewById(R.id.savesett);
                     ToggleButton toggle = (ToggleButton) rootView.findViewById(R.id.saveenabled);
-                    Database databaseHelper = new Database(getActivity());
-                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                    String[] columns = { "enabled", "username", "password" };
-                    Cursor query = db.query("settvoti", // The table to query
-                            columns, // The columns to return
+                    Database databaseHelpersettings = new Database(getActivity());
+                    SQLiteDatabase dbsettings = databaseHelpersettings.getWritableDatabase();
+                    String[] columnssettings = { "enabled", "username", "password" };
+                    Cursor query = dbsettings.query("settvoti", // The table to query
+                            columnssettings, // The columns to return
                             null, // The columns for the WHERE clause
                             null, // The values for the WHERE clause
                             null, // don't group the rows
@@ -664,7 +789,7 @@ public class MainActivity extends ActionBarActivity
                     );
                     query.moveToFirst();
                     String enabled = query.getString(query.getColumnIndex("enabled"));
-                    db.close();
+                    dbsettings.close();
                     if (enabled.matches("true")) {
                         user.setVisibility(View.VISIBLE);
                         user.setText(query.getString(query.getColumnIndex("username")));
@@ -917,6 +1042,8 @@ public class MainActivity extends ActionBarActivity
                     final ArrayList<Spanned> descrizioni = resultmap
                             .get("descrizioni");
                     final ArrayList<Spanned> titolib = resultmap.get("titolib");
+
+
 
                     ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
                             MainActivity.this, android.R.layout.simple_list_item_1,

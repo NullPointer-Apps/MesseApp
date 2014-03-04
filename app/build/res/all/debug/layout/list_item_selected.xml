@@ -3,8 +3,7 @@
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/sfondomesseappopaco"
-    android:layerType="software">
+    android:background="@drawable/sfondomesseappopaco" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -38,4 +37,4 @@
             android:layout_marginTop="72dp" />
     </RelativeLayout>
 
-</ScrollView><!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/layout/list_item_selected.xml -->
+</ScrollView><!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/layout/list_item_selected.xml -->

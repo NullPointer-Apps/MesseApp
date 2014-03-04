@@ -12,16 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/sfondomesseapp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Caricamento . . ."
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal|top"
-            android:paddingTop="150dp"
-            android:textStyle="bold" />
     </FrameLayout>
 
     <!-- The drawer is given a fixed width in dp and extends the full height of
@@ -33,4 +23,4 @@
         android:name="com.messedagliavr.messeapp.NavigationDrawerFragment" />
 
 </android.support.v4.widget.DrawerLayout>
-<!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/layout/activity_main.xml -->

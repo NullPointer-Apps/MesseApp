@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/values-w480dp/values.xml -->
+    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/values-w480dp/values.xml -->
     <eat-comment />
 
     <bool name="abc_action_bar_embed_tabs_pre_jb">true</bool>

@@ -44,4 +44,132 @@
     <string name="panini">Panini</string>
     <string name="fine_scuola">School\'s End</string>
     <string name="ondevelopment">This function is still on development, expect new updates soon!</string>
+    <string name="howdoesitwork">How does it work?</string>
+    <string name="send">Send</string>
+    <string name="istruzioni">ISTRUZIONI: \n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo.\n COME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa.\nRESPONSABILITÀ:\n Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari."</string>
+    <string-array name="panini_array">
+        <item>Cotoletta</item>
+        <item>Piadina Crudo</item>
+        <item>Piadina Cotto</item>
+        <item>Pizza Wurstel</item>
+        <item>Pizza Salamino</item>
+
+        <item>Panzerotto</item>
+
+        <item>Cotto e Funghi (P)</item>
+        <item>Cotto e Funghi (F)</item>
+        <item>Caprese</item>
+        <item>Crudo</item>
+        <item>Pizzetta Margherita</item>
+        <item>Pizzetta Wurstel</item>
+        <item>Pizzetta Salamino</item>
+        <item>Tonnata Grande</item>
+
+        <item>Tonnata Piccola</item>
+        <item>Cotto</item>
+        <item>Pancetta</item>
+        <item>Salame</item>
+    </string-array>
+    <string-array name="panini_prices_array">
+        <item>2.00</item>
+        <item>2.00</item>
+        <item>2.00</item>
+        <item>2.00</item>
+        <item>2.00</item>
+
+        <item>1.50</item>
+
+        <item>1.20</item>
+        <item>1.20</item>
+        <item>1.20</item>
+        <item>1.20</item>
+        <item>1.20</item>
+        <item>1.20</item>
+        <item>1.20</item>
+        <item>1.20</item>
+
+        <item>0.80</item>
+        <item>0.80</item>
+        <item>0.80</item>
+        <item>0.80</item>
+
+    </string-array>
+    <string-array name="panini_ingredients_array">
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>pane, pomodori, insalata, cotoletta</item>
+    </string-array>
+    <string-array name="classi">
+        <item>Scegli una classe</item>
+        <item>1A</item>
+        <item>1B</item>
+        <item>1C</item>
+        <item>1D</item>
+        <item>1E</item>
+        <item>1F</item>
+        <item>1G</item>
+        <item>1H</item>
+        <item>1I</item>
+        <item>1L</item>
+        <item>1M</item>
+        <item>1N</item>
+        <item>2A</item>
+        <item>2B</item>
+        <item>2C</item>
+        <item>2D</item>
+        <item>2E</item>
+        <item>2F</item>
+        <item>2G</item>
+        <item>2H</item>
+        <item>2I</item>
+        <item>2L</item>
+        <item>3A</item>
+        <item>3B</item>
+        <item>3C</item>
+        <item>3D</item>
+        <item>3E</item>
+        <item>3F</item>
+        <item>3G</item>
+        <item>4A</item>
+        <item>4B</item>
+        <item>4C</item>
+        <item>4D</item>
+        <item>4E</item>
+        <item>4F</item>
+        <item>4G</item>
+        <item>4H</item>
+        <item>4I</item>
+        <item>4L</item>
+        <item>4M</item>
+        <item>4N</item>
+        <item>4O</item>
+        <item>5A</item>
+        <item>5B</item>
+        <item>5C</item>
+        <item>5D</item>
+        <item>5E</item>
+        <item>5F</item>
+        <item>5G</item>
+        <item>5H</item>
+        <item>5I</item>
+        <item>5L</item>
+        <item>5M</item>
+        <item>5N</item>
+        <item>5O</item>
+    </string-array>
 </resources>

@@ -3,8 +3,7 @@
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/sfondomesseappopaco"
-    android:layerType="software">
+    android:background="@drawable/sfondomesseappopaco" >
 
     <RelativeLayout
         android:layout_width="wrap_content"

@@ -19,4 +19,4 @@
         android:id="@+id/expanded_menu"
         android:layout_width="?attr/panelMenuListWidth"
         android:layout_height="wrap_content"/>
-<!-- From: file:/Volumes/Android/int/klp-dev/frameworks/support/v7/appcompat/res/layout/abc_expanded_menu_layout.xml --><!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/layout/abc_expanded_menu_layout.xml -->
+<!-- From: file:/Volumes/Android/int/klp-dev/frameworks/support/v7/appcompat/res/layout/abc_expanded_menu_layout.xml --><!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/layout/abc_expanded_menu_layout.xml -->

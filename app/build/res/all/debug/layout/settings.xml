@@ -71,4 +71,4 @@
         android:textColorLink="@android:color/black"
         android:visibility="visible" android:layout_below="@+id/password" android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"/>
-</RelativeLayout><!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/layout/settings.xml -->
+</RelativeLayout><!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/layout/settings.xml -->

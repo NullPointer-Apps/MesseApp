@@ -97,18 +97,24 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                R.layout.drawer_item,
-                R.id.text1,
-                new String[]{
-                        "Home",
-                        "Panini",
-                        getString(R.string.settings),
-                        getString(R.string.contatti),
-                        getString(R.string.suggestion),
-                        "Info"
-                }));
+        String[] titles = new String[]{
+                "Home",
+                "Panini",
+                getString(R.string.settings),
+                getString(R.string.contatti),
+                getString(R.string.suggestion),
+                "Info"
+        };
+
+        String [] images = new String [] {
+                "homeicon",
+                "paniniicon",
+                "settingsicon",
+                "contactsicon",
+                "consiglioicon",
+                "infoicon"
+        };
+        mDrawerListView.setAdapter(new NavDrawerListAdapter(getActivity(),titles,images));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }

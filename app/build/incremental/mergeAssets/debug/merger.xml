@@ -2,13 +2,13 @@
 <merger>
 
     <dataSet config="ComAndroidSupportAppcompatV71901.aar" >
-        <source path="C:\Users\maste_000\Documents\GitHub\MesseApp\app\build\exploded-bundles\ComAndroidSupportAppcompatV71901.aar\assets" />
+        <source path="/Users/simonedeblasiis/Documents/Android Studio/MessedagliaVr/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/assets" />
     </dataSet>
     <dataSet config="main" >
-        <source path="C:\Users\maste_000\Documents\GitHub\MesseApp\app\src\main\assets" />
+        <source path="/Users/simonedeblasiis/Documents/Android Studio/MessedagliaVr/app/src/main/assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="C:\Users\maste_000\Documents\GitHub\MesseApp\app\src\debug\assets" />
+        <source path="/Users/simonedeblasiis/Documents/Android Studio/MessedagliaVr/app/src/debug/assets" />
     </dataSet>
 
 </merger>

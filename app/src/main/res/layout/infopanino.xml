@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cotoletta"
+        android:id="@+id/nomePanino"
+        android:layout_gravity="center_horizontal"
+        android:textIsSelectable="false"
+        android:textSize="40sp"
+        android:paddingTop="5dp" />
+
+    <ImageView
+        android:layout_width="172dp"
+        android:layout_height="129dp"
+        android:id="@+id/imagePanino"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/coto"
+        android:paddingTop="5dp"
+        android:paddingBottom="7dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prezzo:"
+            android:id="@+id/prezzo"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:paddingLeft="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2,00 €"
+            android:id="@+id/prezzoPanino"
+            android:paddingLeft="10dp"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:id="@+id/linearLayout"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredienti:"
+            android:id="@+id/ingredienti"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:text="pane, pomodori, insalata, cotoletta"
+            android:id="@+id/ingredientiPanino"
+            android:paddingLeft="10dp"
+            android:textSize="20sp"
+            android:paddingRight="5dp" />
+    </LinearLayout>
+
+</LinearLayout>
