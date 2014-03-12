@@ -22,6 +22,8 @@ public class PaniniSender {
     ArrayList<Integer> numbers;
     Boolean success=true;
     Context context;
+    public static String username;
+    public static String password;
 
     public PaniniSender (ArrayList<Integer> numbers,Context context) {
         this.numbers=numbers;

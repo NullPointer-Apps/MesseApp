@@ -66,7 +66,7 @@ public class MainActivity extends ActionBarActivity
     public static View rootView;
     static Context context;
     public static int section=0;
-
+    public static FragmentManager sFm;
     //NEWS
     public Boolean unknhost = false;
     public SQLiteDatabase db;
@@ -105,6 +105,7 @@ public class MainActivity extends ActionBarActivity
         setContentView(R.layout.activity_main);
 
         context=getBaseContext();
+        sFm = getSupportFragmentManager();
 
         try {
             pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -785,6 +786,9 @@ public class MainActivity extends ActionBarActivity
 
                     aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(aa2);
+                    DialogFragment scontrinoDialog = new AutPaninoDialog();
+
+                    scontrinoDialog.show(sFm, "ScontrinoDialogFragment");
                     break;
                 case 2:
                     //settings
