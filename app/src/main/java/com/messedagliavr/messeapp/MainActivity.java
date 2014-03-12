@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -87,6 +88,8 @@ public class MainActivity extends ActionBarActivity
     public static String myClass="Scegli una classe";
     public static String[] piani;
     public static String myPiano="Primo Piano";
+    public static String username;
+    public static String password;
     //INFO
     static PackageInfo pinfo = null;
      /**
@@ -786,9 +789,17 @@ public class MainActivity extends ActionBarActivity
 
                     aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(aa2);
-                    DialogFragment scontrinoDialog = new AutPaninoDialog();
+                    SharedPreferences prefs = context.getSharedPreferences(
+                            "paniniauth", Context.MODE_PRIVATE);
 
-                    scontrinoDialog.show(sFm, "ScontrinoDialogFragment");
+                    username=prefs.getString("username","default");
+                    password=prefs.getString("password","default");
+                    if(username.equals("default")||password.equals("default")) {
+                        DialogFragment scontrinoDialog = new AutPaninoDialog();
+                        scontrinoDialog.show(sFm, "ScontrinoDialogFragment");
+                    }
+
+
                     break;
                 case 2:
                     //settings

@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class AutPaninoDialog extends DialogFragment {
@@ -23,8 +25,17 @@ public class AutPaninoDialog extends DialogFragment {
         builder.setView(autPanino)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        PaniniSender.username = ((TextView)autPanino.findViewById(R.id.username)).getText().toString();
-                        PaniniSender.password = ((TextView)autPanino.findViewById(R.id.username)).getText().toString();
+                        MainActivity.username = ((TextView) autPanino.findViewById(R.id.username)).getText().toString();
+                        MainActivity.password = ((TextView) autPanino.findViewById(R.id.username)).getText().toString();
+                        Boolean isChecked = ((CheckBox) autPanino.findViewById(R.id.checkBoxPanini)).isChecked();
+                        if (isChecked) {
+                            SharedPreferences prefs = MainActivity.context.getSharedPreferences(
+                                    "paniniauth", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("username",MainActivity.username);
+                            editor.putString("password",MainActivity.password);
+                            editor.commit();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

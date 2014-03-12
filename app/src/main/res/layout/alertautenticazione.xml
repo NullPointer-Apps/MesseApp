@@ -4,6 +4,13 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inserisci il nome utente e la password che ti sono stati consegnati"
+        android:id="@+id/textView" />
+
     <EditText
         android:id="@+id/username"
         android:inputType="textEmailAddress"
@@ -25,5 +32,11 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif"
         android:hint="Password"/>
-    H
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ricorda"
+        android:id="@+id/checkBoxPanini" />
+
 </LinearLayout>
