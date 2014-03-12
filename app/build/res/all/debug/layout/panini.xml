@@ -5,19 +5,38 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
 
-    <Spinner
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
-        android:id="@+id/spinnerpanini"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="#dbdbdb"
-        android:paddingBottom="5dp" />
+        android:layout_height="fill_parent"
+        android:background="#dbdbdb">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spinnerpanini"
+            android:layout_weight="0.5"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="2dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spinnerpiani"
+            android:layout_weight="0.5"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp" />
+    </LinearLayout>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:dividerHeight="4dp" />
+        android:dividerHeight="4dp"
+        android:clickable="false"
+        android:drawSelectorOnTop="false"
+        android:headerDividersEnabled="false" />
 
-</LinearLayout><!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/layout/panini.xml -->
+</LinearLayout><!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/layout/panini.xml -->

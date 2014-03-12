@@ -172,4 +172,9 @@
         <item>5N</item>
         <item>5O</item>
     </string-array>
+    <string-array name="piani">
+        <item>Piano Terra</item>
+        <item>Secondo Piano</item>
+        <item>Zappatore</item>
+    </string-array>
 </resources>

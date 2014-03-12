@@ -8,4 +8,4 @@
     android:dividerHeight="1dp"
     android:background="#dbdbdb"
     tools:context="com.messedagliavr.messeapp.NavigationDrawerFragment" />
-<!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/layout/fragment_navigation_drawer.xml -->
+<!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/layout/fragment_navigation_drawer.xml -->

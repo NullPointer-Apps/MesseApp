@@ -55,7 +55,7 @@ package com.messedagliavr.messeapp;
                             if (CheckInternet()) {
                                 new PaniniSender(numbers, context);
                             } else {
-                                Toast.makeText(context,"Devi avere una connesione alla rete wifi della scuola per poter inviare la lista panini",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,"Devi avere una connessione alla rete wifi della scuola per poter inviare la lista panini",Toast.LENGTH_LONG).show();
                             }
 
                         }

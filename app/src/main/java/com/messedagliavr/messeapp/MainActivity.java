@@ -36,7 +36,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -86,6 +85,8 @@ public class MainActivity extends ActionBarActivity
     public static ArrayList<Integer> numbers=new ArrayList<Integer>();;
     public static String[] classi;
     public static String myClass="Scegli una classe";
+    public static String[] piani;
+    public static String myPiano="Primo Piano";
     //INFO
     static PackageInfo pinfo = null;
      /**
@@ -718,7 +719,9 @@ public class MainActivity extends ActionBarActivity
                     listViewpanini = (ListView) rootView.findViewById(R.id.listView);
                     listViewpanini.setAdapter(adapter);
                     classi = getResources().getStringArray(R.array.classi);
+                    piani = getResources().getStringArray(R.array.piani);
                     Spinner spin = (Spinner) rootView.findViewById(R.id.spinnerpanini);
+                    Spinner spin2 = (Spinner) rootView.findViewById(R.id.spinnerpiani);
                     Database databaseHelper = new Database(context);
                     SQLiteDatabase db = databaseHelper.getWritableDatabase();
                     String[] columns = { "fname" };
@@ -762,11 +765,26 @@ public class MainActivity extends ActionBarActivity
                             long samerow = db.update("class", values, null, null);
                         }
                     });
+                    spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            myPiano = piani[i];
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }
+                    });
                     ArrayAdapter<?> aa = new ArrayAdapter<Object>(context,
                             android.R.layout.simple_spinner_item, classi);
 
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin.setAdapter(aa);
+                    ArrayAdapter<?> aa2 = new ArrayAdapter<Object>(context,
+                            android.R.layout.simple_spinner_item, piani);
+
+                    aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spin2.setAdapter(aa2);
                     break;
                 case 2:
                     //settings
@@ -896,7 +914,7 @@ public class MainActivity extends ActionBarActivity
 
         public void onPreExecute() {
             if (MainActivity.nointernet == "true") {
-                mDialog = ProgressDialog.show(MainActivity.this, getString(R.string.retrieving),
+                mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.retrievingNews), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
@@ -904,7 +922,7 @@ public class MainActivity extends ActionBarActivity
                             }
                         });
             } else {
-                mDialog = ProgressDialog.show(MainActivity.this, getString(R.string.downloading),
+                mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.downloadingNews), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {

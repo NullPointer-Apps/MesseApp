@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string-array name="classi">
@@ -122,7 +122,12 @@
         <item>0.80</item>
         <item>0.80</item>
     </string-array>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/values/values.xml -->
+    <string-array name="piani">
+        <item>Piano Terra</item>
+        <item>Secondo Piano</item>
+        <item>Zappatore</item>
+    </string-array>
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <attr name="actionBarDivider" format="reference" />
@@ -603,13 +608,13 @@
     <dimen name="abc_panel_menu_list_width">296dp</dimen>
     <dimen name="abc_search_view_preferred_width">320dip</dimen>
     <dimen name="abc_search_view_text_min_width">160dip</dimen>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/dimens.xml -->
     <eat-comment />
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="navigation_drawer_width">280dp</dimen>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/values/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <item name="action_bar_activity_content" type="id"/>
@@ -620,11 +625,11 @@
     <item name="progress_horizontal" type="id"/>
 
     <integer name="abc_max_action_buttons">2</integer>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="Info">Info</string>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/values/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -640,7 +645,7 @@
     <string name="abc_searchview_description_voice">Voice search</string>
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="app_name">A. Messedaglia VR</string>
@@ -689,13 +694,13 @@
     <string name="suggestion">Send a suggestion</string>
     <string name="touchReceiver">TouchReceiver</string>
     <string name="user">Username</string>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/styles.xml -->
     <eat-comment />
 
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
-    <!-- From: file:/Users/simonedeblasiis/Documents/Android%20Studio/MessedagliaVr/app/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res/values/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <style name="TextAppearance.AppCompat.Base.CompactMenu.Dialog" parent="android:TextAppearance.Medium">

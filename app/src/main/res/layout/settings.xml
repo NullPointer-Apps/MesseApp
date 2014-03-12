@@ -27,7 +27,9 @@
         android:layout_toLeftOf="@+id/saveenabled"
         android:text="@string/login"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp" />
 
     <ToggleButton
         android:id="@+id/saveenabled"

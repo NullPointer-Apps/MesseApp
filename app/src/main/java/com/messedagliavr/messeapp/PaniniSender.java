@@ -33,7 +33,7 @@ public class PaniniSender {
         @Override
         protected Void doInBackground(Void... voids) {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://www.nullpointerapps.com/listapanini.php");
+            HttpPost httppost=null;
 
             try {
 
@@ -57,6 +57,15 @@ public class PaniniSender {
                 nameValuePairs.add(new BasicNameValuePair("cotto", numbers.get(15).toString()));
                 nameValuePairs.add(new BasicNameValuePair("pancetta", numbers.get(16).toString()));
                 nameValuePairs.add(new BasicNameValuePair("salame", numbers.get(17).toString()));
+                if(MainActivity.myPiano.equals(MainActivity.piani[0])){
+                    httppost = new HttpPost("http://www.nullpointerapps.com/Messedaglia/listapaninipiano0.php");
+                }
+                if(MainActivity.myPiano.equals(MainActivity.piani[1])){
+                    httppost = new HttpPost("http://www.nullpointerapps.com/Messedaglia/listapaninipiano2.php");
+                }
+                if(MainActivity.myPiano.equals(MainActivity.piani[2])){
+                    httppost = new HttpPost("http://www.nullpointerapps.com/Messedaglia/listapaninizappatore.php");
+                }
 
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -72,7 +81,7 @@ public class PaniniSender {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if(success==true) {
+            if(success) {
                 Toast.makeText(context,"Invio lista panini riuscito correttamente",Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(context,"Invio lista panini fallito, riprova più tardi",Toast.LENGTH_LONG).show();
