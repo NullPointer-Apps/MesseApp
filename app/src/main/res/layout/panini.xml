@@ -14,15 +14,6 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/spinnerpanini"
-            android:layout_weight="0.5"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:paddingLeft="2dp" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/spinnerpiani"
             android:layout_weight="0.5"
             android:paddingBottom="5dp"

@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/sfondomesseappopaco" >
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/pass"
-        android:inputType="textPassword"
-        android:textColorHint="@android:color/black"
-        android:textColorLink="@android:color/darker_gray"
-        android:visibility="visible"
-        android:layout_below="@+id/username" android:layout_alignParentLeft="true" android:layout_marginTop="14dp"/>
+    android:background="@drawable/sfondomesseappopaco"
+    android:onClick="onCheckClickedPanini">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_alignBottom="@+id/saveenabled"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -29,7 +22,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold"
         android:paddingTop="5dp"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="8dp" />
 
     <ToggleButton
         android:id="@+id/saveenabled"
@@ -54,6 +47,29 @@
         android:visibility="visible"
         android:layout_below="@+id/textView1" android:layout_alignParentLeft="true" android:layout_marginTop="15dp"/>
 
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/pass"
+        android:inputType="textPassword"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/darker_gray"
+        android:visibility="visible"
+        android:layout_below="@+id/username" android:layout_alignParentLeft="true" android:layout_marginTop="14dp"/>
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckClickedRegistro"
+        android:text="@string/mostrapass"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/black"
+        android:visibility="visible" android:layout_below="@+id/password" android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"/>
+
     <Button
         android:id="@+id/savesett"
         android:layout_width="wrap_content"
@@ -63,14 +79,67 @@
         android:visibility="visible" android:layout_below="@+id/checkBox1" android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 
-    <CheckBox
-        android:id="@+id/checkBox1"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onCheckClicked"
-        android:text="@string/mostrapass"
+        android:text="Nome utente e password per la lista panini"
+        android:id="@+id/textView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/savesett"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="57dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernamepanini"
+        android:hint="@string/user"
+        android:inputType="text"
         android:textColorHint="@android:color/black"
-        android:textColorLink="@android:color/black"
-        android:visibility="visible" android:layout_below="@+id/password" android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"/>
+        android:paddingLeft="8dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwordpanini"
+        android:layout_below="@+id/usernamepanini"
+        android:hint="@string/pass"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/darker_gray"
+        android:paddingLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mostrapass"
+        android:id="@+id/checkBoxPaniniSettings"
+        android:onClick="onCheckClickedPanini"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/passwordpanini" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/salvapanini"
+        android:onClick="salvaPanini"
+        android:text="@string/salva"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/checkBoxPaniniSettings" />
+
 </RelativeLayout>
+    </ScrollView>

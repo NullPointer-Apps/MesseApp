@@ -14,7 +14,7 @@
     <string name="pass">Password</string>
     <string name="mostrapass">Mostra Password</string>
     <string name="salva">Salva</string>
-    <string name="login">Vuoi abilitare il login automatico del registro elettronico?</string>
+    <string name="login">Abilitare login automatico del registro elettronico?</string>
     <string name="settingssaved">Le nuove impostazioni sono state salvate</string>
     <string name="noautologin">Il login automatico è stato disattivato</string>
     <string name="noconnection">E\' necessaria una conessione internet</string>

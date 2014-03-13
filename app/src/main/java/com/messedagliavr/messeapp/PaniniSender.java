@@ -1,11 +1,12 @@
 package com.messedagliavr.messeapp;
 
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 import android.content.Context;
 
-import org.apache.http.HttpResponse;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -27,7 +28,7 @@ public class PaniniSender {
     Context context;
     public static String username=MainActivity.username;
     public static String password=MainActivity.password;
-    public static String authentication;
+    public static String authentication,response,classe;
 
     public PaniniSender (ArrayList<Integer> numbers,Context context) {
         this.numbers=numbers;
@@ -52,7 +53,7 @@ public class PaniniSender {
 
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-                authentication = httpclient.execute(httppost, responseHandler);
+                response = httpclient.execute(httppost, responseHandler);
 
 
             } catch (ClientProtocolException e) {
@@ -60,13 +61,19 @@ public class PaniniSender {
             } catch (IOException e) {
                 success=false;
             }
+            if(response.length()==6){
+                authentication=response.substring(0,4);
+                classe=response.substring(4);
+            } else {
+                authentication=response;
+            }
             if(authentication.equals("true")) {
 
 
                 try {
 
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                    nameValuePairs.add(new BasicNameValuePair("classe", MainActivity.myClass));
+                    nameValuePairs.add(new BasicNameValuePair("classe", classe));
                     nameValuePairs.add(new BasicNameValuePair("cotoletta", numbers.get(0).toString()));
                     nameValuePairs.add(new BasicNameValuePair("piadacrudo", numbers.get(1).toString()));
                     nameValuePairs.add(new BasicNameValuePair("piadacotto", numbers.get(2).toString()));
@@ -119,6 +126,12 @@ public class PaniniSender {
                 Toast.makeText(context,"Invio lista panini fallito, riprova più tardi",Toast.LENGTH_LONG).show();
             } else if (success==true&&authproblem==true){
                 Toast.makeText(context,"Hai inserito un nome utente o una password errati",Toast.LENGTH_LONG).show();
+                SharedPreferences prefs = context.getSharedPreferences(
+                        "paniniauth", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("username","default");
+                editor.putString("password","dafault");
+                editor.commit();
             }
         }
     }

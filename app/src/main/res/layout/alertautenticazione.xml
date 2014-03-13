@@ -9,7 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Inserisci il nome utente e la password che ti sono stati consegnati"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/username"
@@ -20,7 +24,9 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="Username" />
+        android:hint="Username"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
     <EditText
         android:id="@+id/password"
         android:inputType="textPassword"
@@ -31,7 +37,9 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif"
-        android:hint="Password"/>
+        android:hint="Password"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
 
     <CheckBox
         android:layout_width="wrap_content"

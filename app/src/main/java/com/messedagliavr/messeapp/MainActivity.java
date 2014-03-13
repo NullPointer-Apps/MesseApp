@@ -310,7 +310,6 @@ public class MainActivity extends ActionBarActivity
                 helpDialog.show(getSupportFragmentManager(), "ScontrinoDialogFragment");
                 break;
             case R.id.sendlist:
-                if (!myClass.equals("Scegli una classe")){
                     String[] prices=getResources().getStringArray(R.array.panini_prices_array);
                     ArrayList<Double> totals=new ArrayList<Double>();
                     ArrayList<Integer> coolposition=new ArrayList<Integer>();
@@ -326,9 +325,7 @@ public class MainActivity extends ActionBarActivity
                     } else {
                         Toast.makeText(this,"Devi selezionare almeno un panino", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(this,"Devi selezionare una classe prima di inviare l'ordine", Toast.LENGTH_SHORT).show();
-                }
+
                 break;
             case R.id.refreshend:
                 diff = new MyDifferenceFromToday(2014,6,7,13,0);
@@ -458,9 +455,19 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    public void onCheckClicked(View view) {
+    public void onCheckClickedRegistro(View view) {
         CheckBox toggle = (CheckBox) findViewById(R.id.checkBox1);
         EditText password = (EditText) findViewById(R.id.password);
+        if (toggle.isChecked()) {
+            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        } else {
+            password.setInputType(129);
+        }
+    }
+
+    public void onCheckClickedPanini(View view) {
+        CheckBox toggle = (CheckBox) findViewById(R.id.checkBoxPaniniSettings);
+        EditText password = (EditText) findViewById(R.id.passwordpanini);
         if (toggle.isChecked()) {
             password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         } else {
@@ -722,53 +729,8 @@ public class MainActivity extends ActionBarActivity
                     ListAdapter adapter=new PaniniAdapter(context,names,prices);
                     listViewpanini = (ListView) rootView.findViewById(R.id.listView);
                     listViewpanini.setAdapter(adapter);
-                    classi = getResources().getStringArray(R.array.classi);
                     piani = getResources().getStringArray(R.array.piani);
-                    Spinner spin = (Spinner) rootView.findViewById(R.id.spinnerpanini);
                     Spinner spin2 = (Spinner) rootView.findViewById(R.id.spinnerpiani);
-                    Database databaseHelper = new Database(context);
-                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                    String[] columns = { "fname" };
-                    Cursor classe = db.query("class", // The table to query
-                            columns, // The columns to return
-                            null, // The columns for the WHERE clause
-                            null, // The values for the WHERE clause
-                            null, // don't group the rows
-                            null, // don't filter by row groups
-                            null // The sort order
-                    );
-                    classe.moveToFirst();
-                    String classname = classe.getString(classe.getColumnIndex("fname"));
-                    classe.close();
-                    db.close();
-                    if (!classname.matches("novalue")) {
-                        classi[0] = "Predefinito: " + classname.toUpperCase();
-                        myClass = classi[0];
-                    }
-                    spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if (i!=0){
-                                Database databaseHelper = new Database(context);
-                                SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                                ContentValues values = new ContentValues();
-                                values.put("fname", classi[i].toLowerCase());
-                                @SuppressWarnings("unused")
-                                long samerow = db.update("class", values, null, null);
-                                db.close();
-                                myClass = classi[i];
-                            }
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-                            Database databaseHelper = new Database(context);
-                            SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                            ContentValues values = new ContentValues();
-                            values.put("fname", "novalue");
-                            long samerow = db.update("class", values, null, null);
-                        }
-                    });
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -779,25 +741,12 @@ public class MainActivity extends ActionBarActivity
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
                     });
-                    ArrayAdapter<?> aa = new ArrayAdapter<Object>(context,
-                            android.R.layout.simple_spinner_item, classi);
-
-                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spin.setAdapter(aa);
                     ArrayAdapter<?> aa2 = new ArrayAdapter<Object>(context,
                             android.R.layout.simple_spinner_item, piani);
 
                     aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(aa2);
-                    SharedPreferences prefs = context.getSharedPreferences(
-                            "paniniauth", Context.MODE_PRIVATE);
 
-                    username=prefs.getString("username","default");
-                    password=prefs.getString("password","default");
-                    if(username.equals("default")||password.equals("default")) {
-                        DialogFragment scontrinoDialog = new AutPaninoDialog();
-                        scontrinoDialog.show(sFm, "ScontrinoDialogFragment");
-                    }
 
 
                     break;
@@ -839,6 +788,17 @@ public class MainActivity extends ActionBarActivity
                         check.setVisibility(View.GONE);
                     }
                     query.close();
+
+                    EditText usernamepanini = (EditText) rootView.findViewById(R.id.usernamepanini);
+                    EditText passwordpanini = (EditText) rootView.findViewById(R.id.passwordpanini);
+                    SharedPreferences prefs = context.getSharedPreferences(
+                            "paniniauth", Context.MODE_PRIVATE);
+                    String usernsett= prefs.getString("username", "default");
+                    String passwsett=prefs.getString("password", "default");
+                    if(!usernsett.equals("default")&&!passwsett.equals("default")) {
+                        usernamepanini.setText(usernsett);
+                        passwordpanini.setText(passwsett);
+                    }
                     break;
                 case 3:
                     //contacts
@@ -1809,6 +1769,16 @@ public class MainActivity extends ActionBarActivity
             return null;
         }
 
+    }
+
+    public void salvaPanini(View v){
+        SharedPreferences prefs = MainActivity.context.getSharedPreferences(
+                "paniniauth", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("username",((EditText) findViewById(R.id.usernamepanini)).getText().toString());
+        editor.putString("password",((EditText) findViewById(R.id.passwordpanini)).getText().toString());
+        editor.commit();
+        Toast.makeText(this,"Impostazione correttamente salvate",Toast.LENGTH_LONG).show();
     }
 
 }

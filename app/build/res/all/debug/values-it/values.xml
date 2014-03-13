@@ -38,7 +38,7 @@
     <string name="exit">Esci</string>
     <string name="fine_scuola">Fine Scuola</string>
     <string name="ical">Importa in Calendario</string>
-    <string name="login">Vuoi abilitare il login automatico del registro elettronico?</string>
+    <string name="login">Abilitare login automatico del registro elettronico?</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="mostrapass">Mostra Password</string>
     <string name="no">No</string>

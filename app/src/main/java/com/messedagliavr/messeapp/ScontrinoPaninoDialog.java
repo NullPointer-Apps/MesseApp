@@ -4,6 +4,7 @@ package com.messedagliavr.messeapp;
     import android.app.Dialog;
     import android.content.Context;
     import android.content.DialogInterface;
+    import android.content.SharedPreferences;
     import android.net.ConnectivityManager;
     import android.os.Bundle;
     import android.support.v4.app.DialogFragment;
@@ -53,9 +54,19 @@ package com.messedagliavr.messeapp;
                     .setPositiveButton("Conferma e invia", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             if (CheckInternet()) {
-                                new PaniniSender(numbers, context);
+                                SharedPreferences prefs = context.getSharedPreferences(
+                                        "paniniauth", Context.MODE_PRIVATE);
+
+                                MainActivity.username = prefs.getString("username", "default");
+                                MainActivity.password = prefs.getString("password", "default");
+                                if (MainActivity.username.equals("default") || MainActivity.password.equals("default")) {
+                                    DialogFragment scontrinoDialog = new AutPaninoDialog(numbers,context);
+                                    scontrinoDialog.show(MainActivity.sFm, "ScontrinoDialogFragment");
+                                } else {
+                                    paninisender(numbers,context);
+                                }
                             } else {
-                                Toast.makeText(context,"Devi avere una connessione alla rete wifi della scuola per poter inviare la lista panini",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "Devi avere una connessione alla rete wifi della scuola per poter inviare la lista panini", Toast.LENGTH_LONG).show();
                             }
 
                         }
@@ -78,6 +89,10 @@ package com.messedagliavr.messeapp;
 
             return connected;
 
+        }
+
+        public static void paninisender(ArrayList<Integer> numbers,Context context) {
+            new PaniniSender(numbers, context);
         }
     }
 
