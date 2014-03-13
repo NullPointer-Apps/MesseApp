@@ -127,9 +127,9 @@
         android:text="@string/mostrapass"
         android:id="@+id/checkBoxPaniniSettings"
         android:onClick="onCheckClickedPanini"
-        android:layout_centerVertical="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/passwordpanini" />
+        android:layout_below="@+id/passwordpanini"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -137,9 +137,10 @@
         android:id="@+id/salvapanini"
         android:onClick="salvaPanini"
         android:text="@string/salva"
-        android:layout_centerVertical="true"
         android:layout_marginTop="25dp"
-        android:layout_below="@+id/checkBoxPaniniSettings" />
+        android:layout_below="@+id/checkBoxPaniniSettings"
+        android:layout_alignParentEnd="false"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
-    </ScrollView><!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/layout/settings.xml -->
+    </ScrollView><!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/layout/settings.xml -->

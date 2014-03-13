@@ -17,10 +17,13 @@ import java.util.ArrayList;
 public class AutPaninoDialog extends DialogFragment {
     ArrayList<Integer> numbers;
     Context context;
+
     public AutPaninoDialog(ArrayList<Integer> numbers,Context context){
         this.numbers=numbers;
         this.context=context;
     }
+
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -50,7 +53,6 @@ public class AutPaninoDialog extends DialogFragment {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
                     }
                 });
         return builder.create();

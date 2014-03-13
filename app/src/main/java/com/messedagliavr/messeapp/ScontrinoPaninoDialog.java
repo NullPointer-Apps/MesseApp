@@ -60,8 +60,8 @@ package com.messedagliavr.messeapp;
                                 MainActivity.username = prefs.getString("username", "default");
                                 MainActivity.password = prefs.getString("password", "default");
                                 if (MainActivity.username.equals("default") || MainActivity.password.equals("default")) {
-                                    DialogFragment scontrinoDialog = new AutPaninoDialog(numbers,context);
-                                    scontrinoDialog.show(MainActivity.sFm, "ScontrinoDialogFragment");
+                                    DialogFragment autDialog = new AutPaninoDialog(numbers,context);
+                                    autDialog.show(MainActivity.sFm, "AutenticationDialogFragment");
                                 } else {
                                     paninisender(numbers,context);
                                 }
