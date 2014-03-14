@@ -17,7 +17,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
+                android:id="@+id/imageView1"
                 android:src="@drawable/social"
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
@@ -76,7 +76,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
+                android:id="@+id/imageView3"
                 android:src="@drawable/notizie"
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
@@ -86,7 +86,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
+                android:id="@+id/imageView4"
                 android:src="@drawable/calendario"
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
@@ -98,7 +98,7 @@
             android:layout_height="fill_parent"
             android:baselineAligned="false"
             android:layout_weight="1"
-            android:id="@+id/tableRow6"
+            android:id="@+id/tableRow4"
             android:weightSum="10">
 
             <TextView
@@ -109,7 +109,7 @@
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:text="@string/notizie"
-                android:id="@+id/textView1" />
+                android:id="@+id/textView3" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text="@string/eventi"
-                android:id="@+id/textView1"
+                android:id="@+id/textView4"
                 android:textColor="@android:color/black" />
         </TableRow>
 
@@ -127,13 +127,13 @@
             android:layout_height="fill_parent"
             android:baselineAligned="false"
             android:layout_weight="67"
-            android:id="@+id/tableRow4"
+            android:id="@+id/tableRow5"
             android:paddingTop="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
+                android:id="@+id/imageView5"
                 android:src="@drawable/voti"
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
@@ -143,7 +143,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
+                android:id="@+id/imageView6"
                 android:src="@drawable/circolari"
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
@@ -163,7 +163,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text="@string/registro"
-                android:id="@+id/textView1"
+                android:id="@+id/textView5"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -173,7 +173,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text="@string/circolari"
-                android:id="@+id/textView1"
+                android:id="@+id/textView6"
                 android:textColor="@android:color/black" />
         </TableRow>
 </TableLayout>

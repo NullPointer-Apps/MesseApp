@@ -5,7 +5,7 @@
     <eat-comment />
 
     <string-array name="classi">
-        <item>Scegli una classe</item>
+        <item>Choose a Class</item>
         <item>1A</item>
         <item>1B</item>
         <item>1C</item>
@@ -68,7 +68,12 @@
         <item>Piadina Cotto</item>
         <item>Pizza Wurstel</item>
         <item>Pizza Salamino</item>
+        <item>Pizza Funghi</item>
+        <item>Rustico</item>
+        <item>Ghiotto</item>
+        <item>Delicato</item>
         <item>Panzerotto</item>
+        <item>Cotto e Maio</item>
         <item>Cotto e Funghi (P)</item>
         <item>Cotto e Funghi (F)</item>
         <item>Caprese</item>
@@ -79,30 +84,40 @@
         <item>Tonnata Grande</item>
         <item>Tonnata Piccola</item>
         <item>Cotto</item>
+        <item>Mortadella</item>
         <item>Pancetta</item>
         <item>Salame</item>
     </string-array>
     <string-array name="panini_ingredients_array">
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
-        <item>pane, pomodori, insalata, cotoletta</item>
+        <item>Cotoletta di pollo, insalata, maionese</item>
+        <item>Prosciutto crudo, mozzarella</item>
+        <item>Prosciutto cotto, mozzarella</item>
+        <item>Wurstel, mozzarella, pomodoro</item>
+        <item>Salamino, mozzarella, pomodoro</item>
+        <item>Funghi, mozzarella, pomodoro</item>
+        <item>Speck, scamorza, funghi</item>
+        <item>Mozzarella, pomodoro, origano, prosciutto cotto e olio e.v.</item>
+        <item>Speck, Philadelphia</item>
+        <item>Pomodoro, mozzarella</item>
+        <item>Prosciutto cotto e maionese</item>
+        <item>Prosciutto cotto e salsa ai funghi</item>
+        <item>Prosciutto cotto, maionese e funghi</item>
+        <item>Pomodoro, mozzarella, rucola e olio e.v.</item>
+        <item>Prosciutto crudo</item>
+        <item>Pomodoro, mozzarella</item>
+        <item>Pomodoro, mozzarella, wurstel</item>
+        <item>Pomodoro, mozzarella e salamino</item>
+        <item>Salsa tonnata e insalata</item>
+        <item>Salsa tonnata e insalata</item>
+        <item>Prosciutto cotto</item>
+        <item>Mortadella</item>
+        <item>Pancetta</item>
+        <item>Salame</item>
     </string-array>
     <string-array name="panini_prices_array">
+        <item>2.00</item>
+        <item>2.00</item>
+        <item>2.00</item>
         <item>2.00</item>
         <item>2.00</item>
         <item>2.00</item>
@@ -117,14 +132,16 @@
         <item>1.20</item>
         <item>1.20</item>
         <item>1.20</item>
+        <item>1.20</item>
+        <item>0.80</item>
         <item>0.80</item>
         <item>0.80</item>
         <item>0.80</item>
         <item>0.80</item>
     </string-array>
     <string-array name="piani">
-        <item>Piano Terra</item>
-        <item>Secondo Piano</item>
+        <item>Ground Floor</item>
+        <item>Second Floor</item>
         <item>Zappatore</item>
     </string-array>
     <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
@@ -663,7 +680,7 @@
     <string name="fine_scuola">School\'s End</string>
     <string name="howdoesitwork">How does it work?</string>
     <string name="ical">Import in Calendar</string>
-    <string name="istruzioni">ISTRUZIONI: \n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo.\n COME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa.\nRESPONSABILITÀ:\n Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari."</string>
+    <string name="istruzioni">ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order.\nRESPONSIBILITY:\n An improper use of this app will be punished by the school with appropriate disciplinary actions.</string>
     <string name="login">Enable auto login to the electronic register</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="mostrapass">Show password</string>
@@ -683,6 +700,7 @@
     <string name="pass">Password</string>
     <string name="refresh">Refresh</string>
     <string name="registro">Marks</string>
+    <string name="rembember">Remember</string>
     <string name="retrieving">Retrieving</string>
     <string name="retrievingEvents">Retrieving Events from database…</string>
     <string name="retrievingNews">Retrieving News from database…</string>
@@ -693,6 +711,8 @@
     <string name="si">Yes</string>
     <string name="suggestion">Send a suggestion</string>
     <string name="touchReceiver">TouchReceiver</string>
+    <string name="upgiven">Insert the username and the password that have been given to you.</string>
+    <string name="uppanini">username and password for the Panini\'s List</string>
     <string name="user">Username</string>
     <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/styles.xml -->
     <eat-comment />

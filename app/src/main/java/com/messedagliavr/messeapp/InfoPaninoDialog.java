@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,7 +36,13 @@ public class InfoPaninoDialog extends DialogFragment {
             if (name.equals(names.get(i))){
                 ((TextView)(infoPanino.findViewById(R.id.prezzoPanino))).setText(prices.get(i));
                 ((TextView)(infoPanino.findViewById(R.id.ingredientiPanino))).setText(ingredients.get(i));
-                //((ImageView)(infoPanino.findViewById(R.id.imagePanino))).setImageDrawable(getResources().getDrawable(getResources().getIdentifier(name,"drawable",getActivity().getPackageName())));
+                name=name.replace(" ","").replace("(","").replace(")","").toLowerCase();
+                int id= getResources().getIdentifier(name, "drawable", getActivity().getPackageName());
+                if (id!=0) {
+                    ((ImageView) (infoPanino.findViewById(R.id.imagePanino))).setImageDrawable(getResources().getDrawable(id));
+                } else {
+                    ((ImageView) (infoPanino.findViewById(R.id.imagePanino))).setImageDrawable(getResources().getDrawable(R.drawable.noimage));
+                }
             }
         }
         builder.setView(infoPanino)
