@@ -48,7 +48,7 @@ public class PaniniSender {
                 nameValuePairs.add(new BasicNameValuePair("username", username));
                 nameValuePairs.add(new BasicNameValuePair("password", password));
 
-                httppost = new HttpPost("http://www.nullpointerapps.com/Messedaglia/authentication.php");
+                httppost = new HttpPost("http://192.168.5.1/authentication.php");
 
 
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -93,13 +93,13 @@ public class PaniniSender {
                     nameValuePairs.add(new BasicNameValuePair("pancetta", numbers.get(16).toString()));
                     nameValuePairs.add(new BasicNameValuePair("salame", numbers.get(17).toString()));
                     if (MainActivity.myPiano.equals(MainActivity.piani[0])) {
-                        httppost = new HttpPost("http://www.nullpointerapps.com/Messedaglia/listapaninipiano0.php");
+                        httppost = new HttpPost("http://192.168.5.1/listapaninipiano0.php");
                     }
                     if (MainActivity.myPiano.equals(MainActivity.piani[1])) {
-                        httppost = new HttpPost("http://www.nullpointerapps.com/Messedaglia/listapaninipiano2.php");
+                        httppost = new HttpPost("http://192.168.5.1/listapaninipiano2.php");
                     }
                     if (MainActivity.myPiano.equals(MainActivity.piani[2])) {
-                        httppost = new HttpPost("http://www.nullpointerapps.com/Messedaglia/listapaninizappatore.php");
+                        httppost = new HttpPost("http://192.168.5.1/listapaninizappatore.php");
                     }
 
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
