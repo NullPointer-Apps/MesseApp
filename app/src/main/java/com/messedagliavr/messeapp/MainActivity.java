@@ -83,9 +83,7 @@ public class MainActivity extends ActionBarActivity
     public static ListView listViewpanini;
     public static ArrayList<String> names;
     public static ArrayList<String> prices;
-    public static ArrayList<Integer> numbers=new ArrayList<Integer>();;
-    public static String[] classi;
-    public static String myClass="Scegli una classe";
+    public static ArrayList<Integer> numbers=new ArrayList<Integer>();
     public static String[] piani;
     public static String myPiano="Primo Piano";
     public static String username;
@@ -131,7 +129,7 @@ public class MainActivity extends ActionBarActivity
         TextView num = (TextView) parent.findViewById(R.id.numeroPanini);
         TextView hidden = (TextView) parent.findViewById(R.id.position);
         int numint = Integer.parseInt((num.getText()).toString());
-        numint++;
+        if (numint<10) numint++;
         num.setText(String.valueOf(numint));
         int position = Integer.parseInt((hidden.getText()).toString());
         numbers.set(position,numint);
@@ -342,9 +340,9 @@ public class MainActivity extends ActionBarActivity
                 diff = new MyDifferenceFromToday(2014,6,7,13,0);
                 item.getSubMenu().clear();
                 item.getSubMenu().add(Menu.NONE, Menu.NONE, Menu.NONE, "Fine della scuola in:");
-                item.getSubMenu().add(""+diff.getDays(diff.getDiff())+"giorni").setEnabled(false);
-                item.getSubMenu().add(""+diff.getHours(diff.getDiff())+"ore").setEnabled(false);
-                item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + "min").setEnabled(false);
+                item.getSubMenu().add(""+diff.getDays(diff.getDiff())+" giorni").setEnabled(false);
+                item.getSubMenu().add(""+diff.getHours(diff.getDiff())+" ore").setEnabled(false);
+                item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + " min").setEnabled(false);
                 break;
             case R.id.refresh:
                 if (CheckInternet()) {
@@ -730,8 +728,8 @@ public class MainActivity extends ActionBarActivity
                     listViewpanini = (ListView) rootView.findViewById(R.id.listView);
                     listViewpanini.setAdapter(adapter);
                     piani = getResources().getStringArray(R.array.piani);
-                    Spinner spin2 = (Spinner) rootView.findViewById(R.id.spinnerpiani);
-                    spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    Spinner spin = (Spinner) rootView.findViewById(R.id.spinnerpiani);
+                    spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             myPiano = piani[i];
@@ -741,11 +739,11 @@ public class MainActivity extends ActionBarActivity
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
                     });
-                    ArrayAdapter<?> aa2 = new ArrayAdapter<Object>(context,
+                    ArrayAdapter<?> aa = new ArrayAdapter<Object>(context,
                             android.R.layout.simple_spinner_item, piani);
 
-                    aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spin2.setAdapter(aa2);
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spin.setAdapter(aa);
 
 
 
@@ -1036,8 +1034,6 @@ public class MainActivity extends ActionBarActivity
                             .get("descrizioni");
                     final ArrayList<Spanned> titolib = resultmap.get("titolib");
 
-
-
                     ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
                             MainActivity.this, android.R.layout.simple_list_item_1,
                             titolib);
@@ -1109,7 +1105,6 @@ public class MainActivity extends ActionBarActivity
             final String TITLE = "title";
             final String DESC = "description";
             Element e, e2 = null;
-            ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
             String[] outdated = { "newsdate", "calendardate" };
             Calendar c = Calendar.getInstance();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1602,7 +1597,6 @@ public class MainActivity extends ActionBarActivity
                         descrizioni
                                 .add(Html.fromHtml(parser.getValue(e, DESC)));
                         icalarr.add(Html.fromHtml(ical));
-                        menuItems.add(map);
                         long newRowId = db.insertWithOnConflict("calendar",
                                 null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
@@ -1650,7 +1644,6 @@ public class MainActivity extends ActionBarActivity
                             .getColumnIndex("ical"))));
                     titolib.add(Html.fromHtml(data.getString(data
                             .getColumnIndex("titleb"))));
-                    menuItems.add(map);
 
                 }
                 data.close();

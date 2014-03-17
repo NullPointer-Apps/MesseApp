@@ -18,6 +18,7 @@ public class ScontrinoAdapter implements ListAdapter {
     ArrayList<Integer> numbers;
     ArrayList<Double> totals;
     ArrayList<Integer> coolposition;
+    int lastcool=0;
     Context ctx;
 
     public ScontrinoAdapter(Context ctx, ArrayList<String> names, ArrayList<String> prices,  ArrayList<Integer> numbers, ArrayList<Double> totals,ArrayList<Integer> coolposition) {
@@ -76,7 +77,7 @@ public class ScontrinoAdapter implements ListAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater li = (LayoutInflater) ctx
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        while(!coolposition.contains(i))i++;
+        i=coolposition.get(i);
         view=li.inflate(R.layout.scontrino_item,null);
         TextView name= (TextView) view.findViewById(R.id.nomeItemScontrino);
         TextView price= (TextView) view.findViewById(R.id.prezzoItemScontrino);

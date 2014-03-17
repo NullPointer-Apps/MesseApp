@@ -72,10 +72,15 @@ public class PaniniAdapter implements ListAdapter {
         view=li.inflate(R.layout.panini_item,null);
         TextView name= (TextView) view.findViewById(R.id.nomeItemPanino);
         TextView price= (TextView) view.findViewById(R.id.prezzoItemPanino);
+        TextView num= (TextView) view.findViewById(R.id.numeroPanini);
         TextView hidden= (TextView) view.findViewById(R.id.position);
         name.setText(names.get(i));
         price.setText("x "+prices.get(i)+"€");
         hidden.setText(String.valueOf(i));
+        if (MainActivity.numbers.get(i)!=null) {
+            num.setText(String.valueOf(MainActivity.numbers.get(i)));
+        }
+
         return view;
     }
 
