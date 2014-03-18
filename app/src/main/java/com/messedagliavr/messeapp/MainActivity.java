@@ -129,7 +129,9 @@ public class MainActivity extends ActionBarActivity
         TextView num = (TextView) parent.findViewById(R.id.numeroPanini);
         TextView hidden = (TextView) parent.findViewById(R.id.position);
         int numint = Integer.parseInt((num.getText()).toString());
-        if (numint<10) numint++;
+        int tot=0;
+        for (Integer number : numbers) tot += number;
+        if (numint<8&&tot<40) numint++;
         num.setText(String.valueOf(numint));
         int position = Integer.parseInt((hidden.getText()).toString());
         numbers.set(position,numint);
