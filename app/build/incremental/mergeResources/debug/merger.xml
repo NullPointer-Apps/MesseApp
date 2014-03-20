@@ -8683,6 +8683,8 @@ Salame
                 </string>
                 <string name="salva" >Save
                 </string>
+                <string name="downloadingNotices" >Downloading Notices…
+                </string>
                 <string name="navigation_drawer_open" >Open navigation drawer
                 </string>
                 <string name="Info" >Info
@@ -9227,6 +9229,8 @@ Scegli una classe
                 </string>
                 <string name="login" >Abilitare login automatico del registro elettronico?
                 </string>
+                <string name="downloadingNotices" >Sto scaricando le circolari…
+                </string>
                 <string name="Info" >Info
                 </string>
                 <string name="contatti" >Contatti
@@ -9449,6 +9453,11 @@ Zappatore
                 <dimen name="activity_horizontal_margin" >64dp
                 </dimen>
             </file>
+            <file
+                name="notices"
+                path="/Users/Ambrof/MesseApp/app/src/main/res/menu/notices.xml"
+                qualifiers=""
+                type="menu" />
         </source>
         <source path="/Users/Ambrof/MesseApp/app/build/res/rs/debug" />
         <source path="/Users/Ambrof/MesseApp/app/build/res/generated/debug" />

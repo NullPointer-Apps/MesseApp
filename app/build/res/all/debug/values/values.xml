@@ -676,6 +676,7 @@
     <string name="downloading">Downloading</string>
     <string name="downloadingEvents">Downloading Events…</string>
     <string name="downloadingNews">Downloading News…</string>
+    <string name="downloadingNotices">Downloading Notices…</string>
     <string name="eventi">Calendar</string>
     <string name="exit">Exit</string>
     <string name="fine_scuola">School\'s End</string>

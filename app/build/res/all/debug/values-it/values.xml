@@ -176,6 +176,7 @@
     <string name="downloading">Scaricando</string>
     <string name="downloadingEvents">Sto scaricando gli eventi…</string>
     <string name="downloadingNews">Sto scaricando le notizie…</string>
+    <string name="downloadingNotices">Sto scaricando le circolari…</string>
     <string name="eventi">Eventi</string>
     <string name="exit">Esci</string>
     <string name="fine_scuola">Fine Scuola</string>

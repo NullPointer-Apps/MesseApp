@@ -28,6 +28,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.InputType;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -53,10 +54,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -203,6 +210,8 @@ public class MainActivity extends ActionBarActivity
             case 8:
                 mTitle = getString(R.string.eventi);
                 break;
+            case 10:
+                mTitle = getString(R.string.circolari);
             case 11:
                 mTitle = getString(R.string.fine_scuola);
         }
@@ -237,6 +246,10 @@ public class MainActivity extends ActionBarActivity
                     //Calendar
                     getMenuInflater().inflate(R.menu.calendar, menu);
                     break;
+                case 10:
+                    //Circolari
+                    getMenuInflater().inflate(R.menu.notices, menu);
+                    break;
                 case 11:
                     //Fine Scuola
                     getMenuInflater().inflate(R.menu.fine_scuola, menu);
@@ -268,6 +281,10 @@ public class MainActivity extends ActionBarActivity
             case 9:
                 //Calendar
                 getMenuInflater().inflate(R.menu.calendar, menu);
+                break;
+            case 10:
+                //Circolari
+                getMenuInflater().inflate(R.menu.notices, menu);
                 break;
             case 11:
                 //Fine Scuola
@@ -371,6 +388,15 @@ public class MainActivity extends ActionBarActivity
                     db.close();
                     MainActivity.nointernet = "false";
                     new connectioncalendar().execute();
+                } else {
+                    Toast.makeText(this, R.string.noconnection,
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.refreshnotices:
+                if (CheckInternet()) {
+                    MainActivity.nointernet = "false";
+                    new getNotices().execute();
                 } else {
                     Toast.makeText(this, R.string.noconnection,
                             Toast.LENGTH_LONG).show();
@@ -662,6 +688,22 @@ public class MainActivity extends ActionBarActivity
         startActivity(new Intent(this, timetable.class));
     }
 
+    public void notices(View v){
+        supportInvalidateOptionsMenu();
+        if (CheckInternet()) {
+            nointernet = "false";
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PlaceholderFragment.newInstance(7))
+                    .commit();
+            new getNotices().execute();
+        } else {
+            nointernet="true";
+            Toast.makeText(this, R.string.noconnection,
+                       Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void notavailable(View v) {
         Toast.makeText(this, R.string.notavailable,
                 Toast.LENGTH_LONG).show();
@@ -858,6 +900,10 @@ public class MainActivity extends ActionBarActivity
                     //Calendar
                     rootView = inflater.inflate(R.layout.list_item, container, false);
                     break;
+                case 10:
+                    //Circolari
+                    rootView = inflater.inflate(R.layout.list_item, container, false);
+                    break;
                 case 11:
                     //Fine Scuola
                     rootView = inflater.inflate(R.layout.fine_scuola, container, false);
@@ -874,6 +920,112 @@ public class MainActivity extends ActionBarActivity
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+    }
+
+    public class getNotices extends AsyncTask<String, Void, ArrayList<String>>{
+
+        ArrayList<String> titoli = new ArrayList<String>();
+        ArrayList<String> titolir = new ArrayList<String>();
+        String find = "/index.php/component/jdownloads/finish/";
+
+        public void onPreExecute() {
+            mDialog = ProgressDialog.show(MainActivity.this, null,
+                        getString(R.string.downloadingNotices), true, true,
+                        new DialogInterface.OnCancelListener() {
+                            public void onCancel(DialogInterface dialog) {
+                                getNotices.this.cancel(true);
+                         }
+                        });
+        }
+
+        @Override
+        protected void onPostExecute(final ArrayList<String> strings) {
+            mDialog.dismiss();
+            if (strings.size()>20){
+                for (int i=0;i<20;i++) {
+                    titoli.add(strings.get(strings.size()-i-1));
+                }
+                Collections.reverse(titoli);
+            } else {
+                titoli.addAll(strings);
+            }
+
+            for (String aTitoli : titoli) {
+                String titolo=aTitoli.substring(find.length());
+                Log.i("???",titolo);
+                for (int k=0;k<titolo.length()-3;k++){
+                    if (titolo.substring(k,k+4).equals("-14-")){
+                        titolo=titolo.substring(k+3);
+                        Log.i("???",titolo);
+                        break;
+                    }
+                }
+                titolo=titolo.replace('-',' ');
+                titolo=titolo.substring(3,titolo.length()-9);
+                char[] ctit = titolo.toCharArray();
+                ctit[0]=String.valueOf(titolo.charAt(0)).toUpperCase().charAt(0);
+                titolo=String.copyValueOf(ctit);
+                titolir.add(titolo);
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    MainActivity.this, android.R.layout.simple_list_item_1,
+                    titolir);
+            ListView listView = (ListView) rootView.findViewById(android.R.id.list);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parentView,
+                                        View childView, int position, long id){
+                    Intent notices = new Intent(Intent.ACTION_VIEW);
+                    notices.setData(Uri
+                            .parse("http://www.messedaglia.it"+titoli.get(position)));
+                    startActivity(notices);
+                }
+            });
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(String... strings) {
+            ArrayList<String> links = new ArrayList<String>();
+            final String URL = "http://www.messedaglia.it/index.php/component/jdownloads/viewdownload/6/";
+            int id=2120;
+            boolean found=false;
+            do{
+                try {
+                    java.net.URL url1 = new URL(URL+id);
+                    InputStream is = (InputStream) url1.getContent();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    String line;
+                    StringBuffer sb = new StringBuffer();
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    String htmlContent = sb.toString();
+                    for (int j = 0; j < htmlContent.length() - find.length(); j++) {
+                        String sub = htmlContent.substring(j, j + find.length());
+                        String link = "";
+                        if (sub.equals(find)) {
+                            for (int k = j+find.length(); k < htmlContent.length() - find.length(); k++) {
+                                String charToFind = "\"";
+                                String compare = String.valueOf(htmlContent.charAt(k));
+                                if (compare.equals(charToFind)) {
+                                    link = htmlContent.substring(j, k);
+                                    break;
+                                }
+                            }
+                            found=true;
+                            links.add(link);
+                            break;
+                        } else found=false;
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                id++;
+            } while(found);
+
+            return links;
         }
     }
 
@@ -1073,7 +1225,7 @@ public class MainActivity extends ActionBarActivity
 
         public void onPreExecute() {
             if (MainActivity.nointernet == "true") {
-                mDialog = ProgressDialog.show(MainActivity.this, getString(R.string.retrieving),
+                mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.retrievingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
@@ -1082,7 +1234,7 @@ public class MainActivity extends ActionBarActivity
                         });
 
             } else {
-                mDialog = ProgressDialog.show(MainActivity.this, getString(R.string.downloading),
+                mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.downloadingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {

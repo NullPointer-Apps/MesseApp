@@ -148,7 +148,7 @@
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:onClick="notavailable"/>
+                android:onClick="notices"/>
         </TableRow>
         <TableRow
             android:layout_width="fill_parent"

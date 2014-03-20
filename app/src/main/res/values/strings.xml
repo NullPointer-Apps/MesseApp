@@ -26,6 +26,7 @@
     <string name="retrievingNews">Retrieving News from database…</string>
     <string name="downloadingEvents">Downloading Events…</string>
     <string name="retrievingEvents">Retrieving Events from database…</string>
+    <string name="downloadingNotices">Downloading Notices…</string>
     <string name="palestre">Gym\'s timetable</string>
     <string name="si">Yes</string>
     <string name="no">No</string>
