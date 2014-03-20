@@ -3,6 +3,7 @@ package com.messedagliavr.messeapp;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
@@ -50,15 +51,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -137,7 +136,9 @@ public class MainActivity extends ActionBarActivity
         TextView hidden = (TextView) parent.findViewById(R.id.position);
         int numint = Integer.parseInt((num.getText()).toString());
         int tot=0;
+        Log.i("???",String.valueOf(tot));
         for (Integer number : numbers) tot += number;
+        Log.i("???",String.valueOf(tot));
         if (numint<8&&tot<40) numint++;
         num.setText(String.valueOf(numint));
         int position = Integer.parseInt((hidden.getText()).toString());
@@ -168,7 +169,14 @@ public class MainActivity extends ActionBarActivity
         if (position==1){
             names=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_array)));
             prices=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_prices_array)));
-            for (int i=0;i<names.size();i++) numbers.add(i,0);
+            int n = names.size();
+            for (int i=0;i<n;i++) {
+                if(numbers.size()<n){
+                    numbers.add(i,0);
+                } else {
+                    numbers.set(i,0);
+                }
+            }
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -212,8 +220,10 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 10:
                 mTitle = getString(R.string.circolari);
+                break;
             case 11:
                 mTitle = getString(R.string.fine_scuola);
+                break;
         }
     }
 
@@ -230,9 +240,6 @@ public class MainActivity extends ActionBarActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
             switch(section){
                 case 1:
                     //Panini
@@ -694,7 +701,7 @@ public class MainActivity extends ActionBarActivity
             nointernet = "false";
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(7))
+                    .replace(R.id.container, PlaceholderFragment.newInstance(10))
                     .commit();
             new getNotices().execute();
         } else {
@@ -707,6 +714,23 @@ public class MainActivity extends ActionBarActivity
     public void notavailable(View v) {
         Toast.makeText(this, R.string.notavailable,
                 Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case 3:
+                //CIRCOLARI
+                mDialog = new ProgressDialog(this);
+                mDialog.setMessage(getString(R.string.downloadingNotices));
+                mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                mDialog.setProgress(0);
+                mDialog.setCancelable(false);
+                mDialog.show();
+                return mDialog;
+            default:
+                return null;
+        }
     }
 
     public boolean CheckInternet() {
@@ -788,9 +812,6 @@ public class MainActivity extends ActionBarActivity
 
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin.setAdapter(aa);
-
-
-
                     break;
                 case 2:
                     //settings
@@ -923,52 +944,46 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    public class getNotices extends AsyncTask<String, Void, ArrayList<String>>{
+    public class getNotices extends AsyncTask<String, Integer, ArrayList<String>>{
 
         ArrayList<String> titoli = new ArrayList<String>();
         ArrayList<String> titolir = new ArrayList<String>();
         String find = "/index.php/component/jdownloads/finish/";
+        int n=20;
 
         public void onPreExecute() {
-            mDialog = ProgressDialog.show(MainActivity.this, null,
-                        getString(R.string.downloadingNotices), true, true,
-                        new DialogInterface.OnCancelListener() {
-                            public void onCancel(DialogInterface dialog) {
-                                getNotices.this.cancel(true);
-                         }
-                        });
+            showDialog(3);
         }
 
         @Override
         protected void onPostExecute(final ArrayList<String> strings) {
-            mDialog.dismiss();
-            if (strings.size()>20){
-                for (int i=0;i<20;i++) {
+            dismissDialog(3);
+            if (strings.size()>n){
+                for (int i=0;i<n;i++) {
                     titoli.add(strings.get(strings.size()-i-1));
                 }
                 Collections.reverse(titoli);
             } else {
                 titoli.addAll(strings);
             }
-
+            String titolo;
+            char[] ctit;
             for (String aTitoli : titoli) {
-                String titolo=aTitoli.substring(find.length());
-                Log.i("???",titolo);
-                for (int k=0;k<titolo.length()-3;k++){
-                    if (titolo.substring(k,k+4).equals("-14-")){
-                        titolo=titolo.substring(k+3);
-                        Log.i("???",titolo);
+                titolo = aTitoli.substring(find.length());
+                for (int k = 0; k < titolo.length() - 3; k++) {
+                    if (titolo.substring(k, k + 3).equals("-p-")) {
+                        titolo = titolo.substring(k + 3);
                         break;
                     }
                 }
-                titolo=titolo.replace('-',' ');
-                titolo=titolo.substring(3,titolo.length()-9);
-                char[] ctit = titolo.toCharArray();
-                ctit[0]=String.valueOf(titolo.charAt(0)).toUpperCase().charAt(0);
-                titolo=String.copyValueOf(ctit);
+                titolo = titolo.replace('-', ' ');
+                titolo = titolo.replace("/", " - ");
+                titolo = titolo.substring(0, titolo.length() - 9);
+                ctit = titolo.toCharArray();
+                ctit[0] = String.valueOf(titolo.charAt(0)).toUpperCase().charAt(0);
+                titolo = String.copyValueOf(ctit);
                 titolir.add(titolo);
             }
-
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     MainActivity.this, android.R.layout.simple_list_item_1,
                     titolir);
@@ -986,45 +1001,40 @@ public class MainActivity extends ActionBarActivity
         }
 
         @Override
+        protected void onProgressUpdate(Integer... values) {
+            mDialog.setProgress(values[0]);
+        }
+
+        @Override
         protected ArrayList<String> doInBackground(String... strings) {
             ArrayList<String> links = new ArrayList<String>();
+
             final String URL = "http://www.messedaglia.it/index.php/component/jdownloads/viewdownload/6/";
             int id=2120;
-            boolean found=false;
-            do{
-                try {
-                    java.net.URL url1 = new URL(URL+id);
-                    InputStream is = (InputStream) url1.getContent();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                    String line;
-                    StringBuffer sb = new StringBuffer();
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line);
-                    }
-                    String htmlContent = sb.toString();
-                    for (int j = 0; j < htmlContent.length() - find.length(); j++) {
-                        String sub = htmlContent.substring(j, j + find.length());
-                        String link = "";
-                        if (sub.equals(find)) {
-                            for (int k = j+find.length(); k < htmlContent.length() - find.length(); k++) {
-                                String charToFind = "\"";
-                                String compare = String.valueOf(htmlContent.charAt(k));
-                                if (compare.equals(charToFind)) {
-                                    link = htmlContent.substring(j, k);
-                                    break;
-                                }
-                            }
-                            found=true;
-                            links.add(link);
-                            break;
-                        } else found=false;
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+            Elements linkss;
+            String n;
+            boolean found=true;
+            for (int i=0;found;i++){
+                org.jsoup.nodes.Document doc = null;
                 id++;
-            } while(found);
-
+                try {
+                    doc = Jsoup.connect(URL + id).get();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                linkss= doc.select("a[href]");
+                for (org.jsoup.nodes.Element link : linkss) {
+                    n=link.attr("abs:href");
+                    if(n.contains(find)){
+                        links.add(n);
+                        publishProgress((int) (( i/ (float) this.n) * 100));
+                        found=true;
+                        break;
+                    } else {
+                        found=false;
+                    }
+                }
+            }
             return links;
         }
     }
@@ -1040,7 +1050,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         public void onPreExecute() {
-            if (MainActivity.nointernet == "true") {
+            if (MainActivity.nointernet.equals("true")) {
                 mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.retrievingNews), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -1925,7 +1935,7 @@ public class MainActivity extends ActionBarActivity
         editor.putString("username",((EditText) findViewById(R.id.usernamepanini)).getText().toString());
         editor.putString("password",((EditText) findViewById(R.id.passwordpanini)).getText().toString());
         editor.commit();
-        Toast.makeText(this,"Impostazione correttamente salvate",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Impostazioni correttamente salvate",Toast.LENGTH_LONG).show();
     }
 
 }
