@@ -79,7 +79,11 @@ public class PaniniSender {
                     nameValuePairs.add(new BasicNameValuePair("piadacotto", numbers.get(2).toString()));
                     nameValuePairs.add(new BasicNameValuePair("pizzawurst", numbers.get(3).toString()));
                     nameValuePairs.add(new BasicNameValuePair("pizzasal", numbers.get(4).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("panzerotto", numbers.get(5).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("pizzafunghi", numbers.get(5).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("rustico", numbers.get(6).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("ghiotto", numbers.get(7).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("delicato", numbers.get(8).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("panzerotto", numbers.get(9).toString()));
                     nameValuePairs.add(new BasicNameValuePair("cottofunghip", numbers.get(6).toString()));
                     nameValuePairs.add(new BasicNameValuePair("cottofunghif", numbers.get(7).toString()));
                     nameValuePairs.add(new BasicNameValuePair("caprese", numbers.get(8).toString()));
