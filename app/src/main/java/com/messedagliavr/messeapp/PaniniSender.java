@@ -84,18 +84,20 @@ public class PaniniSender {
                     nameValuePairs.add(new BasicNameValuePair("ghiotto", numbers.get(7).toString()));
                     nameValuePairs.add(new BasicNameValuePair("delicato", numbers.get(8).toString()));
                     nameValuePairs.add(new BasicNameValuePair("panzerotto", numbers.get(9).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("cottofunghip", numbers.get(6).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("cottofunghif", numbers.get(7).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("caprese", numbers.get(8).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("crudo", numbers.get(9).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("pizzettamarg", numbers.get(10).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("pizzettawurst", numbers.get(11).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("pizzettasal", numbers.get(12).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("tonnatag", numbers.get(13).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("tonnatap", numbers.get(14).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("cotto", numbers.get(15).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("pancetta", numbers.get(16).toString()));
-                    nameValuePairs.add(new BasicNameValuePair("salame", numbers.get(17).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("cottomaio", numbers.get(10).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("cottofunghip", numbers.get(11).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("cottofunghif", numbers.get(12).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("caprese", numbers.get(13).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("crudo", numbers.get(14).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("pizzettamarg", numbers.get(15).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("pizzettawurst", numbers.get(16).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("pizzettasal", numbers.get(17).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("tonnatag", numbers.get(18).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("tonnatap", numbers.get(19).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("cotto", numbers.get(20).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("mortadella", numbers.get(21).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("pancetta", numbers.get(22).toString()));
+                    nameValuePairs.add(new BasicNameValuePair("salame", numbers.get(23).toString()));
                     if (MainActivity.myPiano.equals(MainActivity.piani[0])) {
                         httppost = new HttpPost("http://192.168.5.1/listapaninipiano0.php");
                     }

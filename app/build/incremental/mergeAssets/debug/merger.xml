@@ -2,13 +2,13 @@
 <merger>
 
     <dataSet config="19.0.1" >
-        <source path="/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/assets" />
+        <source path="C:\Users\maste_000\Documents\GitHub\MesseApp\app\build\exploded-aar\com.android.support\appcompat-v7\19.0.1\assets" />
     </dataSet>
     <dataSet config="main" >
-        <source path="/Users/Ambrof/MesseApp/app/src/main/assets" />
+        <source path="C:\Users\maste_000\Documents\GitHub\MesseApp\app\src\main\assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/Users/Ambrof/MesseApp/app/src/debug/assets" />
+        <source path="C:\Users\maste_000\Documents\GitHub\MesseApp\app\src\debug\assets" />
     </dataSet>
 
 </merger>
