@@ -1,11 +1,11 @@
 package com.messedagliavr.messeapp;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
-import android.content.Context;
-
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -42,19 +42,19 @@ public class PaniniSender {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost=null;
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            try {
 
+            try {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                Log.i("PREF",username);
+                Log.i("PREF",password);
                 nameValuePairs.add(new BasicNameValuePair("username", username));
                 nameValuePairs.add(new BasicNameValuePair("password", password));
 
                 httppost = new HttpPost("http://192.168.5.1/authentication.php");
 
-
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 response = httpclient.execute(httppost, responseHandler);
-
 
             } catch (ClientProtocolException e) {
                 success=false;
@@ -68,8 +68,6 @@ public class PaniniSender {
                 authentication=response;
             }
             if(authentication.equals("true")) {
-
-
                 try {
 
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);

@@ -356,7 +356,6 @@ public class MainActivity extends ActionBarActivity
                     } else {
                         Toast.makeText(this,"Devi selezionare almeno un panino", Toast.LENGTH_SHORT).show();
                     }
-
                 break;
             case R.id.refreshend:
                 diff = new MyDifferenceFromToday(2014,6,7,13,0);
