@@ -45,7 +45,7 @@
     <string name="remember">Ricorda</string>
     <string name="howdoesitwork">Come funziona?</string>
     <string name="send">Invia</string>
-    <string name="istruzioni">ISTRUZIONI:\n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo.\nCOME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa. L\'addetto alla vendita dei panini provvederà poi alla preparazione dell\'ordine che verrà poi pagato a ricreazione. Eventuali indisponibilità di panini ordinati verranno semplicemente scalati dal totale\nRESPONSABILITÀ:\n Lo username e la password consegnati sono unici per classe e permettono pertanto di risalire ai suoi rappresentanti che sono responsabili di esse. Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari.</string>
+    <string name="istruzioni">ISTRUZIONI:\n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo. La lista è aperta dalle 7.45 alle 10.15.\nCOME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa. L\'addetto alla vendita dei panini provvederà poi alla preparazione dell\'ordine che verrà poi pagato a ricreazione. Eventuali indisponibilità di panini ordinati verranno semplicemente scalati dal totale\nRESPONSABILITÀ:\n Lo username e la password consegnati sono unici per classe e permettono pertanto di risalire ai suoi rappresentanti che sono responsabili di esse. Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari.</string>
     <string name="upgiven">Inserisci il nome utente e la password che ti sono stati consegnati</string>
     <string name="uppanini">Nome utente e password per la Lista Panini</string>
 
@@ -70,9 +70,9 @@
         <item>Pizzetta Margherita</item>
         <item>Pizzetta Wurstel</item>
         <item>Pizzetta Salamino</item>
-        <item>Tonnata Grande</item>
+        <item>Tonnata Big</item>
 
-        <item>Tonnata Piccola</item>
+        <item>Tonnata Small</item>
         <item>Cotto</item>
         <item>Mortadella</item>
         <item>Pancetta</item>
@@ -124,7 +124,6 @@
         <item>Prosciutto cotto e salsa ai funghi</item>
         <item>Prosciutto cotto, maionese e funghi</item>
         <item>Pomodoro, mozzarella, rucola e olio e.v.</item>
-        
         <item>Prosciutto crudo</item>
         <item>Pomodoro, mozzarella</item>
         <item>Pomodoro, mozzarella, wurstel</item>
@@ -198,6 +197,5 @@
     <string-array name="piani">
         <item>Piano Terra</item>
         <item>Secondo Piano</item>
-        <item>Zappatore</item>
     </string-array>
 </resources>

@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity
         Log.i("???",String.valueOf(tot));
         for (Integer number : numbers) tot += number;
         Log.i("???",String.valueOf(tot));
-        if (numint<8&&tot<40) numint++;
+        if (numint<12&&tot<45) numint++;
         num.setText(String.valueOf(numint));
         int position = Integer.parseInt((hidden.getText()).toString());
         numbers.set(position,numint);
@@ -343,7 +343,14 @@ public class MainActivity extends ActionBarActivity
                             coolposition.add(i);
                         }
                     }
-                    if (coolposition.size()>0){
+                Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                boolean go = (hour==10&&minute<=15)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
+                    if (!go) {
+                        Toast.makeText(this,"La lista panini è chiusa", Toast.LENGTH_SHORT).show();
+                    } else if (coolposition.size()>0){
                         DialogFragment scontrinoDialog = new ScontrinoPaninoDialog(numbers, totals, this, coolposition);
                         scontrinoDialog.show(getSupportFragmentManager(), "ScontrinoDialogFragment");
                     } else {
@@ -791,27 +798,35 @@ public class MainActivity extends ActionBarActivity
                     break;
                 case 1:
                     //Panini
-                    rootView = inflater.inflate(R.layout.panini, container, false);
-                    ListAdapter adapter=new PaniniAdapter(context,names,prices);
-                    listViewpanini = (ListView) rootView.findViewById(R.id.listView);
-                    listViewpanini.setAdapter(adapter);
-                    piani = getResources().getStringArray(R.array.piani);
-                    Spinner spin = (Spinner) rootView.findViewById(R.id.spinnerpiani);
-                    spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            myPiano = piani[i];
-                        }
+                    Calendar c = Calendar.getInstance();
+                    int hour = c.get(Calendar.HOUR_OF_DAY);
+                    int minute = c.get(Calendar.MINUTE);
+                    boolean go = (hour==10&&minute<=15)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
+                    if (go){
+                        rootView = inflater.inflate(R.layout.panini, container, false);
+                        ListAdapter adapter = new PaniniAdapter(context, names, prices);
+                        listViewpanini = (ListView) rootView.findViewById(R.id.listView);
+                        listViewpanini.setAdapter(adapter);
+                        piani = getResources().getStringArray(R.array.piani);
+                        Spinner spin = (Spinner) rootView.findViewById(R.id.spinnerpiani);
+                        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                myPiano = piani[i];
+                            }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-                        }
-                    });
-                    ArrayAdapter<?> aa = new ArrayAdapter<Object>(context,
-                            android.R.layout.simple_spinner_item, piani);
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+                            }
+                        });
+                        ArrayAdapter<?> aa = new ArrayAdapter<Object>(context,
+                                android.R.layout.simple_spinner_item, piani);
 
-                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spin.setAdapter(aa);
+                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spin.setAdapter(aa);
+                    } else {
+                        rootView = inflater.inflate(R.layout.paninichiusa, container, false);
+                    }
                     break;
                 case 2:
                     //settings

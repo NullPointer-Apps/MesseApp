@@ -47,7 +47,7 @@
     <string name="ondevelopment">This function is still on development, expect new updates soon!</string>
     <string name="howdoesitwork">How does it work?</string>
     <string name="send">Send</string>
-    <string name="istruzioni">ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.</string>
+    <string name="istruzioni">ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order. The list is opens at 7.45 and closes at 10.15.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.</string>
     <string name="rembember">Remember</string>
     <string name="upgiven">Insert the username and the password that have been given to you.</string>
     <string name="uppanini">username and password for the Panini\'s List</string>
@@ -113,33 +113,34 @@
     </string-array>
 
     <string-array name="panini_ingredients_array">
-        <item>Cotoletta di pollo, insalata, maionese</item>
+        <item>Chicken cootoletta, salad, maioneese</item>
         <item>Prosciutto crudo, mozzarella</item>
-        <item>Prosciutto cotto, mozzarella</item>
-        <item>Wurstel, mozzarella, pomodoro</item>
-        <item>Salamino, mozzarella, pomodoro</item>
-        <item>Funghi, mozzarella, pomodoro</item>
-        <item>Speck, scamorza, funghi</item>
-        <item>Mozzarella, pomodoro, origano, prosciutto cotto e olio e.v.</item>
+        <item>Baked Ham, mozzarella</item>
+        <item>Wurstel, mozzarella, tomatoes</item>
+        <item>Salamino, mozzarella, tomatoes</item>
+        <item>Mushrooms, mozzarella, tomatoes</item>
+        <item>Speck, scamorza, mushrooms</item>
+        <item>Mozzarella, tomatoes, origano, Baked Ham e olio e.v.</item>
         <item>Speck, Philadelphia</item>
 
-        <item>Pomodoro, mozzarella</item>
+        <item>Tomatoes, mozzarella</item>
 
-        <item>Prosciutto cotto e maionese</item>
-        <item>Prosciutto cotto e salsa ai funghi</item>
-        <item>Prosciutto cotto, maionese e funghi</item>
-        <item>Pomodoro, mozzarella, rucola e olio e.v.</item>
-        <item>Prosciutto crudo</item>
-        <item>Pomodoro, mozzarella</item>
-        <item>Pomodoro, mozzarella, wurstel</item>
-        <item>Pomodoro, mozzarella e salamino</item>
-        <item>Salsa tonnata e insalata</item>
+        <item>Baked Ham e maionese</item>
+        <item>Baked Ham e mushrooms sauce</item>
+        <item>Baked Ham, maionese e mushrooms</item>
+        <item>Tomatoes, mozzarella, rucola e olio e.v.</item>
 
-        <item>Salsa tonnata e insalata</item>
-        <item>Prosciutto cotto</item>
+        <item>Ham</item>
+        <item>Tomatoes, mozzarella</item>
+        <item>Tomatoes, mozzarella, wurstel</item>
+        <item>Tomatoes, mozzarella e hot salami</item>
+        <item>Tuna sauce e salad</item>
+
+        <item>Tuna sauce e salad</item>
+        <item>Baked Ham</item>
         <item>Mortadella</item>
-        <item>Pancetta</item>
-        <item>Salame</item>
+        <item>Bacon</item>
+        <item>Salami</item>
     </string-array>
     <string-array name="classi">
         <item>Choose a Class</item>
@@ -202,6 +203,5 @@
     <string-array name="piani">
         <item>Ground Floor</item>
         <item>Second Floor</item>
-        <item>Zappatore</item>
     </string-array>
 </resources>

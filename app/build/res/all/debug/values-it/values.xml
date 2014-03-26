@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/values-it/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values-it/strings.xml -->
     <eat-comment />
 
     <string-array name="classi">
@@ -81,8 +81,8 @@
         <item>Pizzetta Margherita</item>
         <item>Pizzetta Wurstel</item>
         <item>Pizzetta Salamino</item>
-        <item>Tonnata Grande</item>
-        <item>Tonnata Piccola</item>
+        <item>Tonnata Big</item>
+        <item>Tonnata Small</item>
         <item>Cotto</item>
         <item>Mortadella</item>
         <item>Pancetta</item>
@@ -143,11 +143,10 @@
     <string-array name="piani">
         <item>Piano Terra</item>
         <item>Secondo Piano</item>
-        <item>Zappatore</item>
     </string-array>
 
     <string name="Info">Info</string>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values-it/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values-it/values.xml -->
     <eat-comment />
 
     <string name="abc_action_bar_home_description" msgid="4600421777120114993">"Vai alla home page"</string>
@@ -163,7 +162,7 @@
     <string name="abc_searchview_description_voice" msgid="893419373245838918">"Ricerca vocale"</string>
     <string name="abc_shareactionprovider_share_with" msgid="3421042268587513524">"Condividi con"</string>
     <string name="abc_shareactionprovider_share_with_application" msgid="7165123711973476752">"Condividi con %s"</string>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/values-it/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values-it/strings.xml -->
     <eat-comment />
 
     <string name="app_name">A. Messedaglia VR</string>
@@ -182,7 +181,7 @@
     <string name="fine_scuola">Fine Scuola</string>
     <string name="howdoesitwork">Come funziona?</string>
     <string name="ical">Importa in Calendario</string>
-    <string name="istruzioni">ISTRUZIONI:\n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo.\nCOME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa. L\'addetto alla vendita dei panini provvederà poi alla preparazione dell\'ordine che verrà poi pagato a ricreazione. Eventuali indisponibilità di panini ordinati verranno semplicemente scalati dal totale\nRESPONSABILITÀ:\n Lo username e la password consegnati sono unici per classe e permettono pertanto di risalire ai suoi rappresentanti che sono responsabili di esse. Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari.</string>
+    <string name="istruzioni">ISTRUZIONI:\n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo. La lista è aperta dalle 7.45 alle 10.15.\nCOME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa. L\'addetto alla vendita dei panini provvederà poi alla preparazione dell\'ordine che verrà poi pagato a ricreazione. Eventuali indisponibilità di panini ordinati verranno semplicemente scalati dal totale\nRESPONSABILITÀ:\n Lo username e la password consegnati sono unici per classe e permettono pertanto di risalire ai suoi rappresentanti che sono responsabili di esse. Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari.</string>
     <string name="login">Abilitare login automatico del registro elettronico?</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="mostrapass">Mostra Password</string>

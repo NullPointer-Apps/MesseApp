@@ -1,4 +1,5 @@
-<!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="33" android:versionName="1.83" package="com.messedagliavr.messeapp">
+<!-- From: file:/Users/Ambrof/MesseApp/app/src/main/AndroidManifest.xml -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="33" android:versionName="1.83" package="com.messedagliavr.messeapp">
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>

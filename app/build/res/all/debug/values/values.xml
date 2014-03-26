@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string-array name="classi">
@@ -89,30 +89,30 @@
         <item>Salame</item>
     </string-array>
     <string-array name="panini_ingredients_array">
-        <item>Cotoletta di pollo, insalata, maionese</item>
+        <item>Chicken cootoletta, salad, maioneese</item>
         <item>Prosciutto crudo, mozzarella</item>
-        <item>Prosciutto cotto, mozzarella</item>
-        <item>Wurstel, mozzarella, pomodoro</item>
-        <item>Salamino, mozzarella, pomodoro</item>
-        <item>Funghi, mozzarella, pomodoro</item>
-        <item>Speck, scamorza, funghi</item>
-        <item>Mozzarella, pomodoro, origano, prosciutto cotto e olio e.v.</item>
+        <item>Baked Ham, mozzarella</item>
+        <item>Wurstel, mozzarella, tomatoes</item>
+        <item>Salamino, mozzarella, tomatoes</item>
+        <item>Mushrooms, mozzarella, tomatoes</item>
+        <item>Speck, scamorza, mushrooms</item>
+        <item>Mozzarella, tomatoes, origano, Baked Ham e olio e.v.</item>
         <item>Speck, Philadelphia</item>
-        <item>Pomodoro, mozzarella</item>
-        <item>Prosciutto cotto e maionese</item>
-        <item>Prosciutto cotto e salsa ai funghi</item>
-        <item>Prosciutto cotto, maionese e funghi</item>
-        <item>Pomodoro, mozzarella, rucola e olio e.v.</item>
-        <item>Prosciutto crudo</item>
-        <item>Pomodoro, mozzarella</item>
-        <item>Pomodoro, mozzarella, wurstel</item>
-        <item>Pomodoro, mozzarella e salamino</item>
-        <item>Salsa tonnata e insalata</item>
-        <item>Salsa tonnata e insalata</item>
-        <item>Prosciutto cotto</item>
+        <item>Tomatoes, mozzarella</item>
+        <item>Baked Ham e maionese</item>
+        <item>Baked Ham e mushrooms sauce</item>
+        <item>Baked Ham, maionese e mushrooms</item>
+        <item>Tomatoes, mozzarella, rucola e olio e.v.</item>
+        <item>Ham</item>
+        <item>Tomatoes, mozzarella</item>
+        <item>Tomatoes, mozzarella, wurstel</item>
+        <item>Tomatoes, mozzarella e hot salami</item>
+        <item>Tuna sauce e salad</item>
+        <item>Tuna sauce e salad</item>
+        <item>Baked Ham</item>
         <item>Mortadella</item>
-        <item>Pancetta</item>
-        <item>Salame</item>
+        <item>Bacon</item>
+        <item>Salami</item>
     </string-array>
     <string-array name="panini_prices_array">
         <item>2.00</item>
@@ -143,9 +143,8 @@
     <string-array name="piani">
         <item>Ground Floor</item>
         <item>Second Floor</item>
-        <item>Zappatore</item>
     </string-array>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <attr name="actionBarDivider" format="reference" />
@@ -626,13 +625,13 @@
     <dimen name="abc_panel_menu_list_width">296dp</dimen>
     <dimen name="abc_search_view_preferred_width">320dip</dimen>
     <dimen name="abc_search_view_text_min_width">160dip</dimen>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/dimens.xml -->
     <eat-comment />
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="navigation_drawer_width">280dp</dimen>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <item name="action_bar_activity_content" type="id"/>
@@ -643,11 +642,11 @@
     <item name="progress_horizontal" type="id"/>
 
     <integer name="abc_max_action_buttons">2</integer>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="Info">Info</string>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -663,7 +662,7 @@
     <string name="abc_searchview_description_voice">Voice search</string>
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="app_name">A. Messedaglia VR</string>
@@ -682,7 +681,7 @@
     <string name="fine_scuola">School\'s End</string>
     <string name="howdoesitwork">How does it work?</string>
     <string name="ical">Import in Calendar</string>
-    <string name="istruzioni">ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.</string>
+    <string name="istruzioni">ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order. The list is opens at 7.45 and closes at 10.15.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.</string>
     <string name="login">Enable auto login to the electronic register</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="mostrapass">Show password</string>
@@ -716,13 +715,13 @@
     <string name="upgiven">Insert the username and the password that have been given to you.</string>
     <string name="uppanini">username and password for the Panini\'s List</string>
     <string name="user">Username</string>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/values/styles.xml -->
     <eat-comment />
 
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
-    <!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
+    <!-- From: file:/Users/Ambrof/MesseApp/app/build/exploded-aar/com.android.support/appcompat-v7/19.0.1/res/values/values.xml -->
     <eat-comment />
 
     <style name="TextAppearance.AppCompat.Base.CompactMenu.Dialog" parent="android:TextAppearance.Medium">

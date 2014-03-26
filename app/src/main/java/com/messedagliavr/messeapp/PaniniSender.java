@@ -104,9 +104,9 @@ public class PaniniSender {
                     if (MainActivity.myPiano.equals(MainActivity.piani[1])) {
                         httppost = new HttpPost("http://192.168.5.1/listapaninipiano2.php");
                     }
-                    if (MainActivity.myPiano.equals(MainActivity.piani[2])) {
+                    /*if (MainActivity.myPiano.equals(MainActivity.piani[2])) {
                         httppost = new HttpPost("http://192.168.5.1/listapaninizappatore.php");
-                    }
+                    }*/
 
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
