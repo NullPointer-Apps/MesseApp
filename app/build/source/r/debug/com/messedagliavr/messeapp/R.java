@@ -1223,20 +1223,20 @@ containing a value of this type.
         public static final int refresh=0x7f0b0030;
         public static final int registro=0x7f0b0031;
         public static final int rembember=0x7f0b0032;
-        public static final int remember=0x7f0b0040;
-        public static final int retrieving=0x7f0b0033;
-        public static final int retrievingEvents=0x7f0b0034;
-        public static final int retrievingNews=0x7f0b0035;
-        public static final int salva=0x7f0b0036;
-        public static final int send=0x7f0b0037;
-        public static final int settings=0x7f0b0038;
-        public static final int settingssaved=0x7f0b0039;
-        public static final int si=0x7f0b003a;
-        public static final int suggestion=0x7f0b003b;
-        public static final int touchReceiver=0x7f0b003c;
-        public static final int upgiven=0x7f0b003d;
-        public static final int uppanini=0x7f0b003e;
-        public static final int user=0x7f0b003f;
+        public static final int remember=0x7f0b0033;
+        public static final int retrieving=0x7f0b0034;
+        public static final int retrievingEvents=0x7f0b0035;
+        public static final int retrievingNews=0x7f0b0036;
+        public static final int salva=0x7f0b0037;
+        public static final int send=0x7f0b0038;
+        public static final int settings=0x7f0b0039;
+        public static final int settingssaved=0x7f0b003a;
+        public static final int si=0x7f0b003b;
+        public static final int suggestion=0x7f0b003c;
+        public static final int touchReceiver=0x7f0b003d;
+        public static final int upgiven=0x7f0b003e;
+        public static final int uppanini=0x7f0b003f;
+        public static final int user=0x7f0b0040;
     }
     public static final class style {
         /**  Customize your theme here. 

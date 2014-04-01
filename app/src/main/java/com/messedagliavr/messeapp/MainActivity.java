@@ -702,7 +702,9 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void notices(View v){
-        supportInvalidateOptionsMenu();
+        Toast.makeText(this, R.string.ondevelopment,
+                Toast.LENGTH_LONG).show();
+        /*supportInvalidateOptionsMenu();
         if (CheckInternet()) {
             nointernet = "false";
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -714,7 +716,7 @@ public class MainActivity extends ActionBarActivity
             nointernet="true";
             Toast.makeText(this, R.string.noconnection,
                        Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     public void notavailable(View v) {
@@ -800,7 +802,7 @@ public class MainActivity extends ActionBarActivity
                     Calendar c = Calendar.getInstance();
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
-                    boolean go = (hour==10&&minute<=15)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
+                    boolean go = (hour==10&&minute<=5)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
                     if (go){
                         rootView = inflater.inflate(R.layout.panini, container, false);
                         ListAdapter adapter = new PaniniAdapter(context, names, prices);

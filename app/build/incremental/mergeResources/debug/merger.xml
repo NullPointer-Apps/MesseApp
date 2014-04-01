@@ -8688,7 +8688,7 @@ Salami
                 </string>
                 <string name="downloading" >Downloading
                 </string>
-                <string name="istruzioni" >ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order. The list is opens at 7.45 and closes at 10.15.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.
+                <string name="istruzioni" >ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order. The list is opens at 7.45 and closes at 10.05.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.
                 </string>
                 <string name="retrieving" >Retrieving
                 </string>
@@ -8799,6 +8799,8 @@ Salami
                 </string-array>
 
                 <string name="settings" >Settings
+                </string>
+                <string name="remember" >Ricorda
                 </string>
                 <string name="no" >No
                 </string>
@@ -8951,7 +8953,7 @@ Second Floor
             <file
                 path="/Users/Ambrof/MesseApp/app/src/main/res/values-it/strings.xml"
                 qualifiers="it" >
-                <string name="istruzioni" >ISTRUZIONI:\n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo. La lista è aperta dalle 7.45 alle 10.15.\nCOME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa. L\'addetto alla vendita dei panini provvederà poi alla preparazione dell\'ordine che verrà poi pagato a ricreazione. Eventuali indisponibilità di panini ordinati verranno semplicemente scalati dal totale\nRESPONSABILITÀ:\n Lo username e la password consegnati sono unici per classe e permettono pertanto di risalire ai suoi rappresentanti che sono responsabili di esse. Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari.
+                <string name="istruzioni" >ISTRUZIONI:\n Sfoglia la lista panini e consulta le informazioni su di essi attraverso il pulsante info (i). Quando hai deciso i panini da ordinare usa i pulsanti più (+) e meno (-) per modificare il numero delle ordinazioni. Una volta finito il pulsante INVIO, in alto a destra, ti permetterà di verificare il tuo ordine in anteprima e inviarlo. La lista è aperta dalle 7.45 alle 10.05.\nCOME FUNZIONA:\n Il tuo ordine inviato verrà processato dall\'app che si occuperà di collegarsi alla stampante apposita e mandare il tuo ordine in stampa. L\'addetto alla vendita dei panini provvederà poi alla preparazione dell\'ordine che verrà poi pagato a ricreazione. Eventuali indisponibilità di panini ordinati verranno semplicemente scalati dal totale\nRESPONSABILITÀ:\n Lo username e la password consegnati sono unici per classe e permettono pertanto di risalire ai suoi rappresentanti che sono responsabili di esse. Un uso improprio della lista panini verrà sanzionato dalla scuola con i dovuti provvedimenti disciplinari.
                 </string>
                 <string name="canceledcalendar" >Hai annullato il download degli Eventi
                 </string>

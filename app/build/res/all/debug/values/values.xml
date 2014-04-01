@@ -681,7 +681,7 @@
     <string name="fine_scuola">School\'s End</string>
     <string name="howdoesitwork">How does it work?</string>
     <string name="ical">Import in Calendar</string>
-    <string name="istruzioni">ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order. The list is opens at 7.45 and closes at 10.15.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.</string>
+    <string name="istruzioni">ISTRUCTION:\n Browse the panini list and find more info about them through the info button (i). When you\'ve chosen which paninis you want to order use the plus (+) and minus (-) button to modify the order\'s numbers. When you\'re ready the SEND button, in the top-right corner, will allow you to verify and send your order. The list is opens at 7.45 and closes at 10.05.\nHOW IT WORKS:\n Your order will be processed by the app that will connect to the printer to print your order. The salesperson will then prepare your order that will by paid later at the break. Unavailable ordered paninis will eventually be subtracted from the total.\nRESPONSIBILITY:\n The username and password given are unique for every class and allow to find the class representatives. An improper use of this app will be punished by the school with appropriate disciplinary actions.</string>
     <string name="login">Enable auto login to the electronic register</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="mostrapass">Show password</string>
@@ -702,6 +702,7 @@
     <string name="refresh">Refresh</string>
     <string name="registro">Marks</string>
     <string name="rembember">Remember</string>
+    <string name="remember">Ricorda</string>
     <string name="retrieving">Retrieving</string>
     <string name="retrievingEvents">Retrieving Events from database…</string>
     <string name="retrievingNews">Retrieving News from database…</string>
