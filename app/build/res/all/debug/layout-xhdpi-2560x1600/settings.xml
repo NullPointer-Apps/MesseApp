@@ -72,4 +72,4 @@
         android:visibility="visible" android:layout_below="@+id/password" android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"/>
 
-</RelativeLayout><!-- From: file:/Users/Ambrof/MesseApp/app/src/main/res/layout-xhdpi-2560x1600/settings.xml -->
+</RelativeLayout><!-- From: file:/C:/Users/maste_000/Documents/GitHub/MesseApp/app/src/main/res/layout-xhdpi-2560x1600/settings.xml -->
