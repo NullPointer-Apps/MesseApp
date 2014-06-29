@@ -76,7 +76,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:id="@+id/news"
             android:src="@drawable/notizie"
             android:scaleType="centerInside"
             android:paddingLeft="20dp"
@@ -86,7 +86,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
+            android:id="@+id/calendar"
             android:src="@drawable/calendario"
             android:scaleType="centerInside"
             android:paddingLeft="20dp"
@@ -98,7 +98,7 @@
         android:layout_height="fill_parent"
         android:baselineAligned="false"
         android:layout_weight="1"
-        android:id="@+id/tableRow6"
+        android:id="@+id/tbrw6"
         android:weightSum="10">
 
         <TextView
@@ -109,7 +109,7 @@
             android:gravity="center"
             android:textColor="@android:color/black"
             android:text="@string/notizie"
-            android:id="@+id/textView1" />
+            android:id="@+id/newstext" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:text="@string/eventi"
-            android:id="@+id/textView1"
+            android:id="@+id/calendartext"
             android:textColor="@android:color/black"
             android:textIsSelectable="false" />
     </TableRow>
@@ -134,7 +134,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:id="@+id/marks"
             android:src="@drawable/voti"
             android:scaleType="centerInside"
             android:paddingLeft="20dp"
@@ -144,7 +144,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
+            android:id="@+id/notices"
             android:src="@drawable/circolari"
             android:scaleType="centerInside"
             android:paddingLeft="20dp"
@@ -164,7 +164,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:text="@string/registro"
-            android:id="@+id/textView1"
+            android:id="@+id/markstext"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -174,7 +174,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:text="@string/circolari"
-            android:id="@+id/textView1"
+            android:id="@+id/noticestesxt"
             android:textColor="@android:color/black" />
     </TableRow>
 </TableLayout>

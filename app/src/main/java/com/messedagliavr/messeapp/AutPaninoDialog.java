@@ -18,6 +18,10 @@ public class AutPaninoDialog extends DialogFragment {
     ArrayList<Integer> numbers;
     Context context;
 
+    public AutPaninoDialog() {
+
+    }
+
     public AutPaninoDialog(ArrayList<Integer> numbers,Context context){
         this.numbers=numbers;
         this.context=context;
