@@ -22,7 +22,7 @@ public class AutPaninoDialog extends DialogFragment {
 
     }
 
-    public AutPaninoDialog(ArrayList<Integer> numbers,Context context){
+    /*public AutPaninoDialog(ArrayList<Integer> numbers,Context context){
         this.numbers=numbers;
         this.context=context;
     }
@@ -60,5 +60,5 @@ public class AutPaninoDialog extends DialogFragment {
                     }
                 });
         return builder.create();
-    }
+    }*/
 }

@@ -24,7 +24,10 @@ package com.messedagliavr.messeapp;
         ArrayList<Double> totals;
         Context context;
 
-        public ScontrinoPaninoDialog(ArrayList<Integer> numbers, ArrayList<Double> totals, Context context, ArrayList<Integer> coolposition){
+        public ScontrinoPaninoDialog(){
+
+        }
+        /*public ScontrinoPaninoDialog(ArrayList<Integer> numbers, ArrayList<Double> totals, Context context, ArrayList<Integer> coolposition){
             this.numbers = numbers;
             this.coolposition = coolposition;
             this.totals = totals;
@@ -93,6 +96,6 @@ package com.messedagliavr.messeapp;
 
         public static void paninisender(ArrayList<Integer> numbers,Context context) {
             new PaniniSender(numbers, context);
-        }
+        }*/
     }
 

@@ -154,11 +154,11 @@ public class MainActivity extends ActionBarActivity
         numbers.set(position,numint);
     }
 
-    public void showInfoPanino(View i){
+    public void showInfoPanino(View i){/*
         View parent = (View)i.getParent().getParent();
         TextView title =(TextView) parent.findViewById(R.id.firstLinear).findViewById(R.id.nomeItemPanino);
         DialogFragment infoDialog = new InfoPaninoDialog(title.getText().toString());
-        infoDialog.show(getSupportFragmentManager(), "InfoDialogFragment");
+        infoDialog.show(getSupportFragmentManager(), "InfoDialogFragment");*/
     }
 
     @Override
@@ -350,15 +350,23 @@ public class MainActivity extends ActionBarActivity
                 boolean go = (hour==10&&minute<=15)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
                     if (!go) {
                         Toast.makeText(this,"La lista panini è chiusa", Toast.LENGTH_SHORT).show();
-                    } else if (coolposition.size()>0){
-                        DialogFragment scontrinoDialog = new ScontrinoPaninoDialog(numbers, totals, this, coolposition);
+                    }/* else if (coolposition.size()>0){
+                        //
+                        Bundle arg=new Bundle();
+                        double t[]= new double[totals.size()];
+                        for (int i=0;i<t.length;i++){
+                            t[i]=totals.get(i);
+                        }
+                        arg.putIntegerArrayList("numbers",numbers);
+                        arg.putDoubleArray("totals",t);
+                        DialogFragment scontrinoDialog = new ScontrinoPaninoDialog(numbers, totals, this, coolposition,numbers);
                         scontrinoDialog.show(getSupportFragmentManager(), "ScontrinoDialogFragment");
                     } else {
                         Toast.makeText(this,"Devi selezionare almeno un panino", Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
                 break;
             case R.id.refreshend:
-                diff = new MyDifferenceFromToday(2014,6,7,13,0);
+                diff = new MyDifferenceFromToday(2015,6,6,13,0);
                 TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
                 end.setText("Fine della scuola in:\n"+diff.getDays(diff.getDiff())+"g "+diff.getHours(diff.getDiff())+"h "+diff.getMinutes(diff.getDiff())+"m");
                 break;

@@ -52,6 +52,7 @@
     <string name="rembember">Remember</string>
     <string name="upgiven">Insert the username and the password that have been given to you.</string>
     <string name="uppanini">username and password for the Panini\'s List</string>
+    <string name="noevents">No Events</string>
 
     <string-array name="panini_array">
         <item>Cotoletta</item>

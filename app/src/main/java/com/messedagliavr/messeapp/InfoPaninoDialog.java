@@ -18,6 +18,10 @@ public class InfoPaninoDialog extends DialogFragment {
 
     String name;
 
+    public InfoPaninoDialog () {
+
+    }
+/*
     public InfoPaninoDialog(String t){
         name=t;
     }
@@ -51,5 +55,5 @@ public class InfoPaninoDialog extends DialogFragment {
                     }
                 });
         return builder.create();
-    }
+    }*/
 }
