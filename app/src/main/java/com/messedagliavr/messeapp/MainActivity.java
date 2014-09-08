@@ -51,8 +51,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import org.jsoup.Jsoup;
-import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -245,11 +243,12 @@ public class MainActivity extends ActionBarActivity
                     //Panini
                     getMenuInflater().inflate(R.menu.panini, menu);
                     break;
-                case 7:
+                case 8:
                     //News
                     getMenuInflater().inflate(R.menu.news, menu);
                     break;
-                case 8:
+                case 9:
+                case 12:
                     //Calendar
                     getMenuInflater().inflate(R.menu.calendar, menu);
                     break;
@@ -286,6 +285,7 @@ public class MainActivity extends ActionBarActivity
                 getMenuInflater().inflate(R.menu.news, menu);
                 break;
             case 9:
+            case 12:
                 //Calendar
                 getMenuInflater().inflate(R.menu.calendar, menu);
                 break;
@@ -369,7 +369,7 @@ public class MainActivity extends ActionBarActivity
                         .commit();
                 break;
             case R.id.timetoend:
-                diff = new MyDifferenceFromToday(2014,6,7,13,0);
+                diff = new MyDifferenceFromToday(2015,6,6,13,0);
                 item.getSubMenu().clear();
                 item.getSubMenu().add(Menu.NONE, Menu.NONE, Menu.NONE, "Fine della scuola in:");
                 item.getSubMenu().add(""+diff.getDays(diff.getDiff())+" giorni").setEnabled(false);
@@ -407,13 +407,13 @@ public class MainActivity extends ActionBarActivity
                 }
                 break;
             case R.id.refreshnotices:
-                if (CheckInternet()) {
+               /* if (CheckInternet()) {
                     MainActivity.nointernet = "false";
                     new getNotices().execute();
                 } else {
                     Toast.makeText(this, R.string.noconnection,
                             Toast.LENGTH_LONG).show();
-                }
+                }*/
                 break;
             case R.id.palestre:
                 Toast.makeText(MainActivity.this, R.string.notavailable,
@@ -802,7 +802,8 @@ public class MainActivity extends ActionBarActivity
                     Calendar c = Calendar.getInstance();
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
-                    boolean go = (hour==10&&minute<=5)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
+                    //boolean go = (hour==10&&minute<=5)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
+                    boolean go =false;
                     if (go){
                         rootView = inflater.inflate(R.layout.panini, container, false);
                         ListAdapter adapter = new PaniniAdapter(context, names, prices);
@@ -948,6 +949,9 @@ public class MainActivity extends ActionBarActivity
                     TextView end = (TextView)rootView.findViewById(R.id.fine_scuola);
                     end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                     break;
+                case 12:
+                    rootView =inflater.inflate(R.layout.noevents, container, false);
+                    break;
             }
             return rootView;
         }
@@ -960,7 +964,7 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    public class getNotices extends AsyncTask<String, Integer, ArrayList<String>>{
+    /*public class getNotices extends AsyncTask<String, Integer, ArrayList<String>>{
 
         ArrayList<String> titoli = new ArrayList<String>();
         ArrayList<String> titolir = new ArrayList<String>();
@@ -1053,7 +1057,7 @@ public class MainActivity extends ActionBarActivity
             }
             return links;
         }
-    }
+    }*/
 
     public class connection extends
             AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
@@ -1852,34 +1856,41 @@ public class MainActivity extends ActionBarActivity
                             .get("descrizioni");
                     final ArrayList<Spanned> titolib = resultmap.get("titolib");
                     final ArrayList<Spanned> icalarr = resultmap.get("ical");
-                    ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
-                            MainActivity.this, android.R.layout.simple_list_item_1,
-                            titolib);
-                    ListView listView = (ListView) rootView.findViewById(android.R.id.list);
-                    listView.setAdapter(adapter);
+                    if (titoli.size()==0) {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, PlaceholderFragment.newInstance(12))
+                                .commit();
+                    } else {
+                        ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
+                                MainActivity.this, android.R.layout.simple_list_item_1,
+                                titolib);
+                        ListView listView = (ListView) rootView.findViewById(android.R.id.list);
+                        listView.setAdapter(adapter);
 
-                    registerForContextMenu(findViewById(android.R.id.list));
+                        registerForContextMenu(findViewById(android.R.id.list));
 
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        public void onItemClick(AdapterView<?> parentView,
-                                                View childView, int position, long id) {
-                            if (Html.toHtml(descrizioni.get(position)) != "") {
-                                Intent intent = new Intent(MainActivity.this,
-                                        ListItemSelectedCalendar.class);
-                                intent.putExtra(TITLE,
-                                        Html.toHtml(titoli.get(position)));
-                                intent.putExtra(DESC,
-                                        Html.toHtml(descrizioni.get(position)));
-                                intent.putExtra(ICAL,
-                                        Html.toHtml(icalarr.get(position)));
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(MainActivity.this,
-                                        R.string.nodescription,
-                                        Toast.LENGTH_LONG).show();
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            public void onItemClick(AdapterView<?> parentView,
+                                                    View childView, int position, long id) {
+                                if (Html.toHtml(descrizioni.get(position)) != "") {
+                                    Intent intent = new Intent(MainActivity.this,
+                                            ListItemSelectedCalendar.class);
+                                    intent.putExtra(TITLE,
+                                            Html.toHtml(titoli.get(position)));
+                                    intent.putExtra(DESC,
+                                            Html.toHtml(descrizioni.get(position)));
+                                    intent.putExtra(ICAL,
+                                            Html.toHtml(icalarr.get(position)));
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(MainActivity.this,
+                                            R.string.nodescription,
+                                            Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
             mDialog.dismiss();
