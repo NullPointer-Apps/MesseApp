@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-a3e74566a2357da7eb661f11cff5d250c0106a65.jar"
+        jar="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
+    <item
+        dex="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-27e4590d46e288550910e06bef80e0b0f9711cd6.jar"
+        jar="/Users/albertoambrosini/Desktop/Android Studio.app/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+    <item
+        dex="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-8080efae54bbb8ae3b81ef044028f4ac353bc4a8.jar"
+        jar="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/jsoup-1.7.1-9cb59ad83b6f3f21d4ad774178792f2ba8f02e0f.jar"
+        jar="/Users/albertoambrosini/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.7.1/b0ff13ce3deb12f2731533a5136b9503921befdf/jsoup-1.7.1.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="b0ff13ce3deb12f2731533a5136b9503921befdf"/>
+    <item
+        dex="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-db86bbc8d1608b7a06b37e5e98b105879e9d967a.jar"
+        jar="/Users/albertoambrosini/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+
+</pre-dex-items>
