@@ -57,7 +57,7 @@ public class timetable extends Activity implements
         classe.close();
         db.close();
         if (fname.matches("novalue") == false) {
-            items[0] = "Predefinito: " + fname.toUpperCase();
+            items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
         }
         Spinner spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);

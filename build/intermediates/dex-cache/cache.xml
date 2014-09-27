@@ -2,28 +2,28 @@
 <pre-dex-items>
 
     <item
-        dex="/home/simone/Documenti/Android Studio/MesseApp/app/build/intermediates/pre-dexed/release/classes-0ff5b3834a6196965abedf830d73ef493e4d37b9.jar"
-        jar="/home/simone/Documenti/Android Studio/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        dex="/home/simone/Documenti/Progetti/Android/MesseApp/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-6d9d46685c9f56c59ae55b53b32d0451b1961cfe.jar"
+        jar="/home/simone/Documenti/Progetti/Android/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
     <item
-        dex="/home/simone/Documenti/Android Studio/MesseApp/app/build/intermediates/pre-dexed/release/classes-b87d49e68640cd227e1462138344c55acc445dab.jar"
-        jar="/home/simone/Documenti/Android Studio/MesseApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
-    <item
-        dex="/home/simone/Documenti/Android Studio/MesseApp/app/build/intermediates/pre-dexed/release/support-annotations-20.0.0-820090ec777e85e5f91abc11b0ce2cdd64f29191.jar"
+        dex="/home/simone/Documenti/Progetti/Android/MesseApp/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-820090ec777e85e5f91abc11b0ce2cdd64f29191.jar"
         jar="/usr/share/android-studio/data/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
     <item
-        dex="/home/simone/Documenti/Android Studio/MesseApp/app/build/intermediates/pre-dexed/release/internal_impl-20.0.0-149079a7aac98a62daf92d63d1c4b34535f62bac.jar"
-        jar="/home/simone/Documenti/Android Studio/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        dex="/home/simone/Documenti/Progetti/Android/MesseApp/app/build/intermediates/pre-dexed/debug/classes-3e279d2acbb25062d4feb3328656647426d84da2.jar"
+        jar="/home/simone/Documenti/Progetti/Android/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="/home/simone/Documenti/Progetti/Android/MesseApp/app/build/intermediates/pre-dexed/debug/classes-e65f05ad20ec656493ee36dcab27c67f5bdf7548.jar"
+        jar="/home/simone/Documenti/Progetti/Android/MesseApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
 
 </pre-dex-items>

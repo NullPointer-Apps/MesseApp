@@ -41,7 +41,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Metodo usato per fare upgrade del DB se il numero di versione nuovo �
+     * Metodo usato per fare upgrade del DB se il numero di versione nuovo è
      * maggiore del vecchio
      */
     @Override

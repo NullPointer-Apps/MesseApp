@@ -144,6 +144,7 @@
         <item>Bacon</item>
         <item>Salami</item>
     </string-array>
+    <string name="defaultclass">Default: </string>
     <string-array name="classi">
         <item>Choose a Class</item>
         <item>1A</item>
