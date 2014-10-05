@@ -3,6 +3,7 @@ package com.messedagliavr.messeapp;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 @SuppressLint("DefaultLocale")
 public class timetable extends Activity implements
         AdapterView.OnItemSelectedListener {
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.orarimenu, menu);
@@ -33,12 +35,24 @@ public class timetable extends Activity implements
         }
         return true;
     }
+    public String[] items() {
+        try {
+            String[] items = MainActivity.context.getResources().getStringArray(R.array.classi);
+            return items;
+        } catch (NullPointerException e) {
+            Intent i = getBaseContext().getPackageManager()
+                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        }
+    return null;
+    }
 
-    String[] items = MainActivity.context.getResources().getStringArray(R.array.classi);
     String fname = null;
 
     @Override
     public void onCreate(Bundle icicle) {
+        String[] items= items();
         super.onCreate(icicle);
         setContentView(R.layout.timetable);
         Database databaseHelper = new Database(getBaseContext());
@@ -72,6 +86,7 @@ public class timetable extends Activity implements
     @SuppressLint({ "DefaultLocale", "SetJavaScriptEnabled" })
     public void onItemSelected(AdapterView<?> parent, View v, int position,
                                long id) {
+        String[] items= items();
         WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
         if (position == 0) {
             if (fname.matches("novalue") == false) {
