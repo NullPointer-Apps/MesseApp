@@ -39,7 +39,7 @@ public class timetable extends Activity implements
         try {
             String[] items = MainActivity.context.getResources().getStringArray(R.array.classi);
             return items;
-        } catch (NullPointerException e) {
+        } catch (RuntimeException e) {
             Intent i = getBaseContext().getPackageManager()
                     .getLaunchIntentForPackage( getBaseContext().getPackageName() );
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
