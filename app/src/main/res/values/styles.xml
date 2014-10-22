@@ -3,6 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <!-- customize the color palette -->
+        <item name="colorPrimary">#dbdbdb</item>
+        <item name="colorPrimaryDark">#AFAFAF</item>
     </style>
 
 </resources>
