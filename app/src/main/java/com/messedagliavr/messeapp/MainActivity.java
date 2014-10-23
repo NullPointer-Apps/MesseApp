@@ -50,6 +50,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.os.Build;
+import android.graphics.Color;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
