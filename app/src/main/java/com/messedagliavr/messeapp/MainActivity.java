@@ -124,6 +124,15 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                // create our manager instance after the content view is set
+                SystemBarTintManager tintManager = new SystemBarTintManager(this);
+                // enable status bar tint
+                tintManager.setStatusBarTintEnabled(true);
+                // enable navigation bar tint
+                tintManager.setNavigationBarTintEnabled(true);
+                tintManager.setTintColor(Color.parseColor("#AFAFAF"));
+                }
     }
 
     public void paniniplus(View i){
