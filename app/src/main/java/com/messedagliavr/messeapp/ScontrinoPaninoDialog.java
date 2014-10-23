@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+/*package com.messedagliavr.messeapp;
 
     import android.app.AlertDialog;
     import android.app.Dialog;
@@ -96,6 +96,7 @@ package com.messedagliavr.messeapp;
 
         public static void paninisender(ArrayList<Integer> numbers,Context context) {
             new PaniniSender(numbers, context);
-        }*/
+        }
     }
 
+*/

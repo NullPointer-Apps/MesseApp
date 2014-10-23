@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+/*package com.messedagliavr.messeapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -55,5 +55,6 @@ public class InfoPaninoDialog extends DialogFragment {
                     }
                 });
         return builder.create();
-    }*/
+    }
 }
+*/

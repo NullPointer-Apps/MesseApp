@@ -1,12 +1,12 @@
 package com.messedagliavr.messeapp;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +33,9 @@ public class timetable extends ActionBarActivity implements
                 Toast.makeText(timetable.this, R.string.notavailable,
                         Toast.LENGTH_LONG).show();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
         }
         return true;
     }
@@ -56,6 +59,7 @@ public class timetable extends ActionBarActivity implements
         String[] items= items();
         super.onCreate(icicle);
         setContentView(R.layout.timetable);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Database databaseHelper = new Database(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = { "fname" };

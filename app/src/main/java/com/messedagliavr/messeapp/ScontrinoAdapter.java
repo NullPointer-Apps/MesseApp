@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+/*package com.messedagliavr.messeapp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -105,3 +105,4 @@ public class ScontrinoAdapter implements ListAdapter {
         return false;
     }
 }
+*/

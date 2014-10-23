@@ -1,22 +1,21 @@
 package com.messedagliavr.messeapp;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-
-
 
 
 public class contacts extends ActionBarActivity implements View.OnTouchListener {
@@ -28,12 +27,22 @@ public class contacts extends ActionBarActivity implements View.OnTouchListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contatti);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         View iv = findViewById(R.id.contattibg);
        if (iv != null) {
             iv.setOnTouchListener(this);
        }
 
 
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+        }
+        return true;
     }
 
     public boolean onTouch(View v, MotionEvent ev) {
@@ -72,7 +81,7 @@ public class contacts extends ActionBarActivity implements View.OnTouchListener 
                 // match the map exactly because of scaling and
                 // varying pixel density.
                 ColorTool ct = new ColorTool();
-                int tolerance = 25;
+                int tolerance = 30;
                 if (ct.closeMatch(-13893888, touchColor, tolerance)){
                     methodtobcalled = 0;handledHere = true;
                 } else { if (ct.closeMatch(Color.BLUE, touchColor, tolerance)) {

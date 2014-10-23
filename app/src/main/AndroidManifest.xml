@@ -25,7 +25,10 @@
         </activity>
         <activity
             android:name="com.messedagliavr.messeapp.contacts"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.messedagliavr.messeapp.MainActivity" />
         </activity>
         <activity
             android:name="com.messedagliavr.messeapp.ListItemSelectedNews"
@@ -35,7 +38,11 @@
             android:name="com.messedagliavr.messeapp.ListItemSelectedCalendar"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.messedagliavr.messeapp.timetable" />
+        <activity android:name="com.messedagliavr.messeapp.timetable">
+            <meta-data
+             android:name="android.support.PARENT_ACTIVITY"
+             android:value="com.messedagliavr.messeapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

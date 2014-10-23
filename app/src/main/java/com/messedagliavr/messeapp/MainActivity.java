@@ -55,12 +55,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -813,7 +811,7 @@ public class MainActivity extends ActionBarActivity
                     //boolean go = (hour==10&&minute<=5)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
                     boolean go =false;
                     if (go){
-                        rootView = inflater.inflate(R.layout.panini, container, false);
+                       /* rootView = inflater.inflate(R.layout.panini, container, false);
                         ListAdapter adapter = new PaniniAdapter(context, names, prices);
                         listViewpanini = (ListView) rootView.findViewById(R.id.listView);
                         listViewpanini.setAdapter(adapter);
@@ -834,7 +832,7 @@ public class MainActivity extends ActionBarActivity
 
                         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spin.setAdapter(aa);
-                    } else {
+                    */} else {
                         rootView = inflater.inflate(R.layout.paninichiusa, container, false);
                     }
                     break;

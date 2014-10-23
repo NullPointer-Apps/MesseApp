@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+/*package com.messedagliavr.messeapp;
 
 
 import android.content.Context;
@@ -104,7 +104,7 @@ public class PaniniSender {
                     }
                     /*if (MainActivity.myPiano.equals(MainActivity.piani[2])) {
                         httppost = new HttpPost("http://192.168.5.1/listapaninizappatore.php");
-                    }*/
+                    }
 
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -141,3 +141,4 @@ public class PaniniSender {
     }
 
 }
+*/
