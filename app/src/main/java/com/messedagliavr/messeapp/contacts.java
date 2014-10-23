@@ -32,6 +32,16 @@ public class contacts extends ActionBarActivity implements View.OnTouchListener 
        if (iv != null) {
             iv.setOnTouchListener(this);
        }
+       
+       if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                // create our manager instance after the content view is set
+                SystemBarTintManager tintManager = new SystemBarTintManager(this);
+                // enable status bar tint
+                tintManager.setStatusBarTintEnabled(true);
+                // enable navigation bar tint
+                tintManager.setNavigationBarTintEnabled(true);
+                tintManager.setTintColor(Color.parseColor("#AFAFAF"));
+                }
 
 
     }
