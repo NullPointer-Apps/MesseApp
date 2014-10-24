@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
@@ -6,7 +6,17 @@
         <!-- customize the color palette -->
         <item name="colorPrimary">#dbdbdb</item>
         <item name="colorPrimaryDark">#AFAFAF</item>
-		<item name="android:windowTranslucentStatus">true</item>
+		<item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
 	</style>
+
+    <style name="timetable" parent="AppTheme">
+        <item name="colorPrimary">#b560e8</item>
+        <item name="colorPrimaryDark">#ab46e5</item>
+    </style>
+
+    <style name="contacts" parent="AppTheme">
+        <item name="colorPrimary">#ea0030</item>
+        <item name="colorPrimaryDark">#d00045</item>
+    </style>
 
 </resources>

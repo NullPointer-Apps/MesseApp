@@ -69,8 +69,9 @@ public class timetable extends ActionBarActivity implements
                 tintManager.setStatusBarTintEnabled(true);
                 // enable navigation bar tint
                 tintManager.setNavigationBarTintEnabled(true);
+                //tintManager.setTintColor(Color.parseColor("#ab46e5"));
                 tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-                }
+        }
         Database databaseHelper = new Database(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = { "fname" };

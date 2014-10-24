@@ -41,6 +41,7 @@ public class contacts extends ActionBarActivity implements View.OnTouchListener 
                 tintManager.setStatusBarTintEnabled(true);
                 // enable navigation bar tint
                 tintManager.setNavigationBarTintEnabled(true);
+                //tintManager.setTintColor(Color.parseColor("#d00045"));
                 tintManager.setTintColor(Color.parseColor("#AFAFAF"));
                 }
 
