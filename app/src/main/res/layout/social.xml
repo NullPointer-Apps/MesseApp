@@ -19,7 +19,9 @@
         android:scaleType="centerInside"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:onClick="facebook"/>
+        android:onClick="facebook"
+        android:contentDescription="@string/link"/>
+
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -28,17 +30,18 @@
             android:scaleType="centerInside"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:onClick="youtube"/>
+            android:onClick="youtube"
+            android:contentDescription="@string/link" />
     </TableRow>
 
     <ImageView
+        android:contentDescription="@string/link"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imgMood"
         android:src="@drawable/moodle"
         android:scaleType="centerInside"
         android:onClick="moodle"
-        android:layout_span="2"
         android:paddingRight="5dp"
         android:paddingLeft="5dp" />
 

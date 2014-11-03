@@ -22,7 +22,6 @@
             android:layout_height="129dp"
             android:id="@+id/imagePanino"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/cotoletta"
             android:paddingTop="5dp"
             android:paddingBottom="7dp"
             android:contentDescription="ImmaginePanino" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">A. Messedaglia VR</string>
+    <string name="link">link</string>
     <string name="Info">Info</string>
     <string name="orario">Timetable</string>
     <string name="notizie">News</string>

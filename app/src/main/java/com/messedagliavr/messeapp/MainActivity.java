@@ -219,10 +219,10 @@ public class MainActivity extends ActionBarActivity
             case 5:
                 mTitle = getString(R.string.Info);
                 break;
-            case 7:
+            case 8:
                 mTitle = getString(R.string.notizie);
                 break;
-            case 8:
+            case 9:
                 mTitle = getString(R.string.eventi);
                 break;
             case 10:
@@ -556,6 +556,12 @@ public class MainActivity extends ActionBarActivity
                 .commit();
     }
 
+    public void npa(View v) {
+        Intent npa = new Intent(Intent.ACTION_VIEW);
+        npa.setData(Uri.parse("http://www.nullpointerapps.com"));
+        startActivity(npa);
+    }
+
     public void youtube(View v) {
         Intent youtube = new Intent(Intent.ACTION_VIEW);
         youtube.setData(Uri.parse("http://www.youtube.com/user/MessedagliaWeb"));
@@ -619,7 +625,7 @@ public class MainActivity extends ActionBarActivity
             nointernet = "false";
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(7))
+                    .replace(R.id.container, PlaceholderFragment.newInstance(8))
                     .commit();
             new connection().execute();
         } else {
@@ -644,7 +650,7 @@ public class MainActivity extends ActionBarActivity
                 nointernet = "true";
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(7))
+                        .replace(R.id.container, PlaceholderFragment.newInstance(8))
                         .commit();
                 new connection().execute();
             } else {
@@ -677,7 +683,7 @@ public class MainActivity extends ActionBarActivity
             nointernet = "false";
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(8))
+                    .replace(R.id.container, PlaceholderFragment.newInstance(9))
                     .commit();
             new connectioncalendar().execute();
         } else {
@@ -698,11 +704,11 @@ public class MainActivity extends ActionBarActivity
                     .getColumnIndex("newsdate"));
             date.close();
             db.close();
-            if (nodata != verifydatenews) {
+            if (!nodata.equals(verifydatenews)) {
                 nointernet = "true";
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(8))
+                        .replace(R.id.container, PlaceholderFragment.newInstance(9))
                         .commit();
 
                 new connectioncalendar().execute();
@@ -947,11 +953,11 @@ public class MainActivity extends ActionBarActivity
                     //social
                     rootView = inflater.inflate(R.layout.social, container, false);
                     break;
-                case 7:
+                case 8:
                     //News
                     rootView = inflater.inflate(R.layout.list_item, container, false);
                     break;
-                case 8:
+                case 9:
                     //Calendar
                     rootView = inflater.inflate(R.layout.list_item, container, false);
                     break;

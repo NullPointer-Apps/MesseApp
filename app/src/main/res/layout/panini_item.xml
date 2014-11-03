@@ -85,7 +85,7 @@
                 android:layout_width="38dp"
                 android:layout_height="match_parent"
                 android:id="@+id/infoPanini"
-                android:src="@drawable/infoiconpanini"
+                android:src="@drawable/infoicon"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="false"
