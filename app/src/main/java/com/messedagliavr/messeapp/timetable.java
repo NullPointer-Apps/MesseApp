@@ -88,7 +88,14 @@ public class timetable extends ActionBarActivity implements
         classe.close();
         db.close();
         if (fname.matches("novalue") == false) {
-            items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
+            try {
+                 items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
+            } catch (NullPointerException e) {
+                     Intent i = getBaseContext().getPackageManager()
+                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            }
         }
         Spinner spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
