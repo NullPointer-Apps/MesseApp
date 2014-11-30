@@ -556,7 +556,7 @@ public class MainActivity extends ActionBarActivity
                 .commit();
     }
 
-    public void npa(View v) {
+    public void NullPApps(View v) {
         Intent npa = new Intent(Intent.ACTION_VIEW);
         npa.setData(Uri.parse("http://www.nullpointerapps.com"));
         startActivity(npa);
