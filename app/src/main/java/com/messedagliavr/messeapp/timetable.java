@@ -90,6 +90,14 @@ public class timetable extends ActionBarActivity implements
         if (fname.matches("novalue") == false) {
             try {
                  items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
+                Spinner spin = (Spinner) findViewById(R.id.spinner);
+                spin.setOnItemSelectedListener(this);
+
+                ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
+                        android.R.layout.simple_spinner_item, items);
+
+                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spin.setAdapter(aa);
             } catch (NullPointerException e) {
                      Intent i = getBaseContext().getPackageManager()
                     .getLaunchIntentForPackage( getBaseContext().getPackageName() );
@@ -97,14 +105,7 @@ public class timetable extends ActionBarActivity implements
             startActivity(i);
             }
         }
-        Spinner spin = (Spinner) findViewById(R.id.spinner);
-        spin.setOnItemSelectedListener(this);
 
-        ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
-                android.R.layout.simple_spinner_item, items);
-
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aa);
     }
 
     @SuppressLint({ "DefaultLocale", "SetJavaScriptEnabled" })
