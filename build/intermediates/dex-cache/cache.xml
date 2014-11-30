@@ -2,28 +2,28 @@
 <pre-dex-items>
 
     <item
-        dex="/Users/Ambrof/MesseApp/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-17be85cfcb296623b9f608903a8d43439df01d53.jar"
-        jar="/Users/Ambrof/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
+        dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-04b79e227d1e7be359c5b58e18df5f6a39160c81.jar"
+        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
         jumboMode="false"
-        revision="21.0.2"
-        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0"/>
-    <item
-        dex="/Users/Ambrof/MesseApp/app/build/intermediates/pre-dexed/debug/classes-c86817be1bbfe8280352654b5cc71cca1dcc7dd8.jar"
-        jar="/Users/Ambrof/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.0.2"
+        revision="21.1.1"
         sha1="686344a780033e4ba22b926cd225f8d4941247e6"/>
     <item
-        dex="/Users/Ambrof/MesseApp/app/build/intermediates/pre-dexed/debug/classes-4ab22b97069eecd8594470b2c07af230d7dc274a.jar"
-        jar="/Users/Ambrof/MesseApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
+        dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-2b62ed2c3e36282bb047833a83e8dc385e145bab.jar"
+        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
         jumboMode="false"
-        revision="21.0.2"
-        sha1="95fd37732ec852e99f07eeb516a3650172f1d136"/>
+        revision="21.1.1"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0"/>
     <item
-        dex="/Users/Ambrof/MesseApp/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-9562159fe7b7fa47e557c996fff6f97a1bf7f859.jar"
-        jar="/Users/Ambrof/Desktop/Progetti/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
+        dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-e93b837fc85a6e8fa8ea7df65afb87b7cc540fa5.jar"
+        jar="C:\Users\Simone\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
         jumboMode="false"
-        revision="21.0.2"
+        revision="21.1.1"
         sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e"/>
+    <item
+        dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-f1467e0ff037279ab57b5b8315c3863e7ea1092c.jar"
+        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="95fd37732ec852e99f07eeb516a3650172f1d136"/>
 
 </pre-dex-items>

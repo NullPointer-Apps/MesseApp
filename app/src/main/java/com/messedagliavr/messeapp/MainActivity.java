@@ -1121,7 +1121,7 @@ public class MainActivity extends ActionBarActivity
             ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
             ArrayList<Spanned> titolib = new ArrayList<Spanned>();
             // All static variables
-            final String URL = "http://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
+            final String URL = "https://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
             // XML node keys
             final String ITEM = "item"; // parent node
             final String TITLE = "title";
@@ -1306,8 +1306,8 @@ public class MainActivity extends ActionBarActivity
             ArrayList<Spanned> titoli = new ArrayList<Spanned>();
             ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
             ArrayList<Spanned> titolib = new ArrayList<Spanned>();
-            final String URL = "http://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
-            String URLE = "http://www.messedaglia.it/caltoxml.php?id=";
+            final String URL = "https://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
+            String URLE = "https://www.messedaglia.it/caltoxml.php?id=";
             final String ITEM = "item";
             final String TITLE = "title";
             final String DESC = "description";
