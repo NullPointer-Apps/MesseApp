@@ -88,25 +88,33 @@ public class timetable extends ActionBarActivity implements
         classe.close();
         db.close();
         if (fname.matches("novalue") == false) {
-            try {
+			try {
                  items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
-                Spinner spin = (Spinner) findViewById(R.id.spinner);
+                
+			} catch (NullPointerException e) {
+				Intent i = getBaseContext().getPackageManager()
+                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+            }
+            } 
+			try{
+				Spinner spin = (Spinner) findViewById(R.id.spinner);
                 spin.setOnItemSelectedListener(this);
 
                 ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
-                        android.R.layout.simple_spinner_item, items);
+															  android.R.layout.simple_spinner_item, items);
 
                 aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spin.setAdapter(aa);
-            } catch (NullPointerException e) {
-                     Intent i = getBaseContext().getPackageManager()
+			} catch (NullPointerException e) {
+				Intent i = getBaseContext().getPackageManager()
                     .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
             }
         }
 
-    }
 
     @SuppressLint({ "DefaultLocale", "SetJavaScriptEnabled" })
     public void onItemSelected(AdapterView<?> parent, View v, int position,
