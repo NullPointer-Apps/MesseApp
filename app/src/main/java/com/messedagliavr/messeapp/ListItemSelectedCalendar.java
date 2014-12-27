@@ -3,10 +3,14 @@ package com.messedagliavr.messeapp;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.Menu;
@@ -24,7 +28,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class ListItemSelectedCalendar extends Activity {
+public class ListItemSelectedCalendar extends ActionBarActivity {
 
 
     @Override
@@ -99,6 +103,10 @@ public class ListItemSelectedCalendar extends Activity {
                 }
                 break;
 
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+
         }
         return true;
     }
@@ -107,6 +115,17 @@ public class ListItemSelectedCalendar extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_item_selected);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            // create our manager instance after the content view is set
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            // enable status bar tint
+            tintManager.setStatusBarTintEnabled(true);
+            // enable navigation bar tint
+            tintManager.setNavigationBarTintEnabled(true);
+            //tintManager.setTintColor(Color.parseColor("#ab46e5"));
+            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
+        }
         Intent intent = getIntent();
         String titolorw = intent.getStringExtra(MainActivity.TITLE);
         String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body style=\"background-color: transparent;\">" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";
@@ -115,7 +134,7 @@ public class ListItemSelectedCalendar extends Activity {
         titoloview.setText(titolo);
         WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
         descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
-        descrizioneview.setBackgroundColor(0x00000000);
+        //descrizioneview.setBackgroundColor(0x00000000);
 
     }
 
