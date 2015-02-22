@@ -1924,7 +1924,7 @@ public class MainActivity extends ActionBarActivity
     public class eventparser extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            String ical = "http://www.messedaglia.it/caltoxml.php?id=" + idical;
+            String ical = "https://www.messedaglia.it/caltoxml.php?id=" + idical;
             XMLParser parser = new XMLParser();
             String xml = parser.getXmlFromUrl(ical);
             if (xml == "UnknownHostException") {

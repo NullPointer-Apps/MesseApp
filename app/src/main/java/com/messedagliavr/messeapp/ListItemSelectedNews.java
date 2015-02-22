@@ -5,14 +5,28 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ListItemSelectedNews extends ActionBarActivity {
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.onBackPressed();
+                //NavUtils.navigateUpFromSameTask(this);
+                break;
+        }
+        return true;
+    }
 
 
     @Override
@@ -32,12 +46,14 @@ public class ListItemSelectedNews extends ActionBarActivity {
         }
         Intent intent = getIntent();
         String titolorw = intent.getStringExtra(MainActivity.TITLE);
-        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body style=\"background-color: transparent;\">" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";        TextView titoloview = (TextView) findViewById(R.id.TitoloView);
+        System.out.println(intent.getStringExtra(MainActivity.DESC));
+        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body>" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";
+        TextView titoloview = (TextView) findViewById(R.id.TitoloView);
         Spanned titolo = Html.fromHtml(titolorw);
         titoloview.setText(titolo);
         WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
         descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
-        //descrizioneview.setBackgroundColor(0x00000000);
+        descrizioneview.setBackgroundColor(Color.parseColor("#eeeeee"));
 
     }
 

@@ -31,6 +31,7 @@ import java.util.Locale;
 public class ListItemSelectedCalendar extends ActionBarActivity {
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.list_item_selected, menu);
@@ -43,7 +44,7 @@ public class ListItemSelectedCalendar extends ActionBarActivity {
         @SuppressLint("InlinedApi")
         @Override
         protected String[] doInBackground(Void... params) {
-            String ical = "http://www.messedaglia.it/caltoxml.php?id=" + idical;
+            String ical = "https://www.messedaglia.it/caltoxml.php?id=" + idical;
             XMLParser parser = new XMLParser();
             String xml = parser.getXmlFromUrl(ical);
             Document doc = parser.getDomElement(xml);
@@ -97,14 +98,17 @@ public class ListItemSelectedCalendar extends ActionBarActivity {
                 } else {
                     Intent intent = getIntent();
                     String ical = intent.getStringExtra(MainActivity.ICAL);
+                    System.out.println(ical);
                     int l = ical.length() - 5;
-                    idical = ical.substring(3, l);
+                    idical = ical.substring(13, l);
+                    System.out.println(idical);
                     new eventparser().execute();
                 }
                 break;
 
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                this.onBackPressed();
+                //NavUtils.navigateUpFromSameTask(this);
                 break;
 
         }
@@ -128,13 +132,13 @@ public class ListItemSelectedCalendar extends ActionBarActivity {
         }
         Intent intent = getIntent();
         String titolorw = intent.getStringExtra(MainActivity.TITLE);
-        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body style=\"background-color: transparent;\">" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";
+        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body>" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";
         TextView titoloview = (TextView) findViewById(R.id.TitoloView);
         Spanned titolo = Html.fromHtml(titolorw);
         titoloview.setText(titolo);
         WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
         descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
-        //descrizioneview.setBackgroundColor(0x00000000);
+        descrizioneview.setBackgroundColor(Color.parseColor("#eeeeee"));
 
     }
 

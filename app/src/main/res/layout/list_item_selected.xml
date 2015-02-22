@@ -1,16 +1,16 @@
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ScrollView01"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/sfondomesseappopaco" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ListItemSelected"
-        android:background="@android:color/transparent"
-        android:layerType="software">
+        android:background="@android:color/transparent">
 
         <TextView
             android:id="@+id/TitoloView"
@@ -23,18 +23,16 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold"
             android:background="@android:color/transparent"
-            android:layerType="software"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"
+            android:layout_marginTop="15dp" />
 
         <WebView
             android:id="@+id/DescrizioneView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:layerType="software"
-            android:layout_alignTop="@+id/DescrizioneView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="72dp" />
+            android:layout_marginTop="87dp" />
     </RelativeLayout>
 
 </ScrollView>
