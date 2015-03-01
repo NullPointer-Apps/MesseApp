@@ -1119,6 +1119,7 @@ public class MainActivity extends ActionBarActivity
             HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
             ArrayList<Spanned> titoli = new ArrayList<Spanned>();
             ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
+            ArrayList<Spanned> datePub = new ArrayList<Spanned>();
             ArrayList<Spanned> titolib = new ArrayList<Spanned>();
             // All static variables
             final String URL = "https://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
@@ -1126,6 +1127,7 @@ public class MainActivity extends ActionBarActivity
             final String ITEM = "item"; // parent node
             final String TITLE = "title";
             final String DESC = "description";
+            final String PUBDATE = "pubDate";
             Element e = null;
             ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
             String[] outdated = { "newsdate", "calendardate" };
@@ -1155,20 +1157,25 @@ public class MainActivity extends ActionBarActivity
                     Document doc = parser.getDomElement(xml);
                     NodeList nl = doc.getElementsByTagName(ITEM);
                     ContentValues values = new ContentValues();
+                    //SimpleDateFormat parserDatePub=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
                     for (int i = 0; i < nl.getLength(); i++) {
                         HashMap<String, Spanned> map = new HashMap<String, Spanned>();
                         e = (Element) nl.item(i);
                         values.put("_id", i);
                         values.put(TITLE, parser.getValue(e, TITLE));
                         values.put(DESC, parser.getValue(e, DESC));
+                        values.put(PUBDATE, parser.getValue(e, PUBDATE));
                         values.put("titleb", "<b>" + parser.getValue(e, TITLE)
                                 + "</b>");
                         map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
                         map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
+                        map.put(PUBDATE, Html.fromHtml(parser.getValue(e, PUBDATE)));
 
                         titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
                         descrizioni
                                 .add(Html.fromHtml(parser.getValue(e, DESC)));
+                        datePub
+                                .add(Html.fromHtml(parser.getValue(e, PUBDATE)));
                         titolib.add(Html.fromHtml("<b>"
                                 + parser.getValue(e, TITLE) + "</b>"));
                         // adding HashList to ArrayList
@@ -1183,11 +1190,12 @@ public class MainActivity extends ActionBarActivity
                     temhashmap.put("titoli", titoli);
                     temhashmap.put("descrizioni", descrizioni);
                     temhashmap.put("titolib", titolib);
+                    temhashmap.put("pubDate", datePub);
                     return temhashmap;
 
                 }
             } else {
-                String[] clmndata = { "title", "description", "titleb" };
+                String[] clmndata = { "title","pubdate", "description", "titleb" };
                 String sortOrder = "_id";
 
                 data = db.query("news", // The table to query
@@ -1204,6 +1212,8 @@ public class MainActivity extends ActionBarActivity
                             .getColumnIndex("title"))));
                     map.put(DESC, Html.fromHtml(data.getString(data
                             .getColumnIndex("description"))));
+                    map.put(PUBDATE, Html.fromHtml(data.getString(data
+                            .getColumnIndex("pubdate"))));
 
                     titoli.add(Html.fromHtml(data.getString(data
                             .getColumnIndex("title"))));
@@ -1211,6 +1221,8 @@ public class MainActivity extends ActionBarActivity
                             .getColumnIndex("description"))));
                     titolib.add(Html.fromHtml(data.getString(data
                             .getColumnIndex("titleb"))));
+                    datePub.add(Html.fromHtml(data.getString(data
+                            .getColumnIndex("pubdate"))));
                     // adding HashList to ArrayList
                     menuItems.add(map);
 
@@ -1220,6 +1232,7 @@ public class MainActivity extends ActionBarActivity
                 temhashmap.put("titoli", titoli);
                 temhashmap.put("descrizioni", descrizioni);
                 temhashmap.put("titolib", titolib);
+                temhashmap.put("pubdate", datePub);
                 return temhashmap;
 
             }
@@ -1239,11 +1252,13 @@ public class MainActivity extends ActionBarActivity
                     final ArrayList<Spanned> titoli = resultmap.get("titoli");
                     final ArrayList<Spanned> descrizioni = resultmap
                             .get("descrizioni");
+                    final ArrayList<Spanned> pubDate = resultmap
+                            .get("pubdate");
                     final ArrayList<Spanned> titolib = resultmap.get("titolib");
 
-                    ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
-                            MainActivity.this, android.R.layout.simple_list_item_1,
-                            titolib);
+                    NewsAdapter adapter = new NewsAdapter(
+                            MainActivity.this, R.layout.item_news,
+                            titolib, pubDate);
                     ListView listView = (ListView) rootView.findViewById(android.R.id.list);
                     listView.setAdapter(adapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

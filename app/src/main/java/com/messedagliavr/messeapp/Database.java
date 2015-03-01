@@ -6,9 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
     public static final String NOME_DB = "messeapp.db";
-    public static final int VERSIONE_DB = 8;
+    public static final int VERSIONE_DB = 9;
 
-    private static final String CREATE_NEWS = "CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,titleb text not null,description text not null);";
+    private static final String CREATE_NEWS = "CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,pubdate text not null,titleb text not null,description text not null);";
     private static final String CREATE_CALENDAR = "CREATE TABLE calendar (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,titleb text not null,description text,ical text not null);";
     private static final String CREATE_CLASS = "CREATE TABLE class (fname text);";
     private static final String CREATE_UPDATE = "CREATE TABLE lstchk (newsdate text,calendardate text);";
@@ -16,9 +16,11 @@ public class Database extends SQLiteOpenHelper {
     private static final String POPULATE_UPDATE = "INSERT INTO lstchk VALUES ('1995-01-19 23:40:20','1995-01-19 23:40:20');";
     private static final String POPULATE_CLASS = "INSERT INTO class VALUES ('novalue');";
     private static final String POPULATE_SETTVOTI = "INSERT INTO settvoti VALUES('false','','');";
+
     public Database(Context context) {
         super(context, NOME_DB, null, VERSIONE_DB);
     }
+
     public Database() {
         super(null, null, null, 0);
     }
@@ -46,10 +48,8 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS news;");
-        db.execSQL("DROP TABLE IF EXISTS calendar;");
-        db.execSQL("DROP TABLE IF EXISTS lstchk;");
-        onCreate(db);
+        if (oldVersion == 8 && newVersion == 9) {
+            db.execSQL("DROP TABLE IF EXISTS news;");
+        }
     }
-
 }
