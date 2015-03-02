@@ -19,6 +19,7 @@ import java.util.List;
 public class NewsAdapter extends ArrayAdapter<Spanned> {
     private ArrayList<Spanned> date;
     private ArrayList<Spanned> titoli;
+	private Context context;
 
 
     public NewsAdapter(Context context, int textViewResourceId) {
@@ -29,17 +30,18 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
         super(context, resource,titoli);
         this.date = date;
         this.titoli = titoli;
+		this.context=context;
     }
-
+	
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        View v = convertView;
+    public View getView(int position, View v, ViewGroup parent) {
+		
+        
 
         if (v == null) {
 
             LayoutInflater vi;
-            vi = LayoutInflater.from(getContext());
+            vi = LayoutInflater.from(context);
             v = vi.inflate(R.layout.item_news, null);
 
         }
@@ -51,12 +53,12 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
             TextView tt = (TextView) v.findViewById(R.id.datenews);
             TextView tt1 = (TextView) v.findViewById(R.id.titlenews);
 
-            if (tt != null) {
-                tt.setText(titoli.get(position));
-            }
             if (tt1 != null) {
+                tt1.setText(titoli.get(position));
+            }
+            if (tt != null && date!=null) {
 
-                tt1.setText(date.get(position));
+                tt.setText(date.get(position));
             }
 
         }
