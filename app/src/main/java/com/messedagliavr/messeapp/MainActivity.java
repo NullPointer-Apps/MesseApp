@@ -67,6 +67,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.DateFormat;
 import java.util.Locale;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -397,36 +398,7 @@ public class MainActivity extends ActionBarActivity
                 item.getSubMenu().add(""+diff.getHours(diff.getDiff())+" ore").setEnabled(false);
                 item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + " min").setEnabled(false);
                 break;
-            case R.id.refresh:
-                if (CheckInternet()) {
-                    Database databaseHelper = new Database(getBaseContext());
-                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                    ContentValues nowdb = new ContentValues();
-                    nowdb.put("newsdate", "2012-02-20 15:00:00");
-                    long samerow = db.update("lstchk", nowdb, null, null);
-                    db.close();
-                    MainActivity.nointernet = "false";
-                    new connection().execute();
-                } else {
-                    Toast.makeText(this, R.string.noconnection,
-                            Toast.LENGTH_LONG).show();
-                }
-                break;
-            case R.id.refreshcal:
-                if (CheckInternet()) {
-                    Database databaseHelper = new Database(getBaseContext());
-                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                    ContentValues nowdb = new ContentValues();
-                    nowdb.put("calendardate", "2012-02-20 15:00:00");
-                    long samerow = db.update("lstchk", nowdb, null, null);
-                    db.close();
-                    MainActivity.nointernet = "false";
-                    new connectioncalendar().execute();
-                } else {
-                    Toast.makeText(this, R.string.noconnection,
-                            Toast.LENGTH_LONG).show();
-                }
-                break;
+
             case R.id.refreshnotices:
                /* if (CheckInternet()) {
                     MainActivity.nointernet = "false";
@@ -443,6 +415,44 @@ public class MainActivity extends ActionBarActivity
         }
         return super.onOptionsItemSelected(item);
     }
+	
+	public void refreshNews() {
+	if (CheckInternet()) {
+					SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+                    Database databaseHelper = new Database(getBaseContext());
+                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                    ContentValues nowdb = new ContentValues();
+                    nowdb.put("newsdate", "2012-02-20 15:00:00");
+                    long samerow = db.update("lstchk", nowdb, null, null);
+                    db.close();
+                    MainActivity.nointernet = "false";
+					connection news = new connection (false);
+                    news.execute();
+					mSwipeRefreshLayout.setRefreshing(false);
+                } else {
+                    Toast.makeText(this, R.string.noconnection,
+                            Toast.LENGTH_LONG).show();
+                }
+	}
+	
+	public void refreshCalendar() {
+	if (CheckInternet()) {
+					SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+                    Database databaseHelper = new Database(getBaseContext());
+                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                    ContentValues nowdb = new ContentValues();
+                    nowdb.put("calendardate", "2012-02-20 15:00:00");
+                    long samerow = db.update("lstchk", nowdb, null, null);
+                    db.close();
+                    MainActivity.nointernet = "false";
+					connectioncalendar calendar = new connectioncalendar (false);
+                    calendar.execute();
+					mSwipeRefreshLayout.setRefreshing(false);
+                } else {
+                    Toast.makeText(this, R.string.noconnection,
+                            Toast.LENGTH_LONG).show();
+                }
+	}
 
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
@@ -1088,6 +1098,10 @@ public class MainActivity extends ActionBarActivity
 
     public class connection extends
             AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
+			Boolean showLoading=true;
+			public connection (Boolean showLoading) {
+			this.showLoading=showLoading;
+			}
         protected void onCancelled() {
             Intent main = new Intent(MainActivity.this, MainActivity.class);
             main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1097,7 +1111,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         public void onPreExecute() {
-            if (MainActivity.nointernet.equals("true")) {
+            if (MainActivity.nointernet.equals("true") && showLoading == true) {
                 mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.retrievingNews), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -1105,7 +1119,7 @@ public class MainActivity extends ActionBarActivity
                                 connection.this.cancel(true);
                             }
                         });
-            } else {
+            } else if (showLoading == true) {
                 mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.downloadingNews), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -1255,7 +1269,6 @@ public class MainActivity extends ActionBarActivity
         }
 
         public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
-            mDialog.dismiss();
             if (unknhost) {
                 Toast.makeText(MainActivity.this, R.string.connerr, Toast.LENGTH_LONG)
                         .show();
@@ -1264,6 +1277,12 @@ public class MainActivity extends ActionBarActivity
                 startActivity(main);
             } else {
                 if (resultmap.size() > 0) {
+					SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+					mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+					@Override
+						public void onRefresh() {
+							refreshNews();
+						}
                     final ArrayList<Spanned> titoli = resultmap.get("titoli");
                     final ArrayList<Spanned> descrizioni = resultmap
                             .get("descrizioni");
@@ -1291,12 +1310,18 @@ public class MainActivity extends ActionBarActivity
                 }
             }
         }
+		if (showLoading == true) {
+			mDialog.dismiss();
     }
 
     public class connectioncalendar extends
             AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
 
         Boolean unknhost = false;
+		Boolean showLoading=true;
+			public connectioncalendar (Boolean showLoading) {
+			this.showLoading=showLoading;
+			}
 
         protected void onCancelled() {
             Intent main = new Intent(MainActivity.this, MainActivity.class);
@@ -1307,7 +1332,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         public void onPreExecute() {
-            if (MainActivity.nointernet == "true") {
+            if (MainActivity.nointernet == "true" && showLoading == true) {
                 mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.retrievingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -1316,7 +1341,7 @@ public class MainActivity extends ActionBarActivity
                             }
                         });
 
-            } else {
+            } else if (showLoading == true) {
                 mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.downloadingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -1918,6 +1943,12 @@ public class MainActivity extends ActionBarActivity
                         ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
                                 MainActivity.this, android.R.layout.simple_list_item_1,
                                 titolib);
+						SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+						mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+						@Override
+							public void onRefresh() {
+								refreshCalendar();
+							}
                         ListView listView = (ListView) rootView.findViewById(android.R.id.list);
                         listView.setAdapter(adapter);
 
@@ -1946,7 +1977,9 @@ public class MainActivity extends ActionBarActivity
                     }
                 }
             }
-            mDialog.dismiss();
+			if (showLoading == true) {
+				mDialog.dismiss();
+			}
         }
     }
 
