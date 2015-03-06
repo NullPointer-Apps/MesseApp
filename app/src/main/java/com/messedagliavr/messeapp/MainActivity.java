@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity
     public static String nointernet;
     public static View rootView;
     static Context context;
-    public static int section=0;
+    public static int section = 0;
     public static FragmentManager sFm;
     //NEWS
     public Boolean unknhost = false;
@@ -92,14 +92,14 @@ public class MainActivity extends ActionBarActivity
     public static ListView listViewpanini;
     public static ArrayList<String> names;
     public static ArrayList<String> prices;
-    public static ArrayList<Integer> numbers=new ArrayList<Integer>();
+    public static ArrayList<Integer> numbers = new ArrayList<Integer>();
     public static String[] piani;
-    public static String myPiano="Primo Piano";
+    public static String myPiano = "Primo Piano";
     public static String username;
     public static String password;
     //INFO
     static PackageInfo pinfo = null;
-     /**
+    /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -114,7 +114,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        context=getBaseContext();
+        context = getBaseContext();
         sFm = getSupportFragmentManager();
 
         try {
@@ -131,44 +131,44 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                // create our manager instance after the content view is set
-                SystemBarTintManager tintManager = new SystemBarTintManager(this);
-                // enable status bar tint
-                tintManager.setStatusBarTintEnabled(true);
-                // enable navigation bar tint
-                tintManager.setNavigationBarTintEnabled(true);
-                tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-                }
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            // create our manager instance after the content view is set
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            // enable status bar tint
+            tintManager.setStatusBarTintEnabled(true);
+            // enable navigation bar tint
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
+        }
     }
 
-    public void paniniplus(View i){
-        View parent= (View)(i.getParent());
+    public void paniniplus(View i) {
+        View parent = (View) (i.getParent());
         TextView num = (TextView) parent.findViewById(R.id.numeroPanini);
         TextView hidden = (TextView) parent.findViewById(R.id.position);
         int numint = Integer.parseInt((num.getText()).toString());
-        int tot=0;
-        Log.i("???",String.valueOf(tot));
+        int tot = 0;
+        Log.i("???", String.valueOf(tot));
         for (Integer number : numbers) tot += number;
-        Log.i("???",String.valueOf(tot));
-        if (numint<12&&tot<45) numint++;
+        Log.i("???", String.valueOf(tot));
+        if (numint < 12 && tot < 45) numint++;
         num.setText(String.valueOf(numint));
         int position = Integer.parseInt((hidden.getText()).toString());
-        numbers.set(position,numint);
+        numbers.set(position, numint);
     }
 
-    public void paniniminus(View i){
-        View parent= (View)(i.getParent());
+    public void paniniminus(View i) {
+        View parent = (View) (i.getParent());
         TextView num = (TextView) parent.findViewById(R.id.numeroPanini);
         TextView hidden = (TextView) parent.findViewById(R.id.position);
         int numint = Integer.parseInt((num.getText()).toString());
-        if (numint>0) numint--;
+        if (numint > 0) numint--;
         num.setText(String.valueOf(numint));
         int position = Integer.parseInt((hidden.getText()).toString());
-        numbers.set(position,numint);
+        numbers.set(position, numint);
     }
 
-    public void showInfoPanino(View i){/*
+    public void showInfoPanino(View i) {/*
         View parent = (View)i.getParent().getParent();
         TextView title =(TextView) parent.findViewById(R.id.firstLinear).findViewById(R.id.nomeItemPanino);
         DialogFragment infoDialog = new InfoPaninoDialog(title.getText().toString());
@@ -178,28 +178,28 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        if (position==1){
-            names=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_array)));
-            prices=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_prices_array)));
+        if (position == 1) {
+            names = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_array)));
+            prices = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_prices_array)));
             int n = names.size();
-            for (int i=0;i<n;i++) {
-                if(numbers.size()<n){
-                    numbers.add(i,0);
+            for (int i = 0; i < n; i++) {
+                if (numbers.size() < n) {
+                    numbers.add(i, 0);
                 } else {
-                    numbers.set(i,0);
+                    numbers.set(i, 0);
                 }
             }
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(position))
-                    .commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.newInstance(position))
+                .commit();
     }
 
     @Override
     public void onBackPressed() {
-        if (section==0){
+        if (section == 0) {
             super.finish();
         } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -252,19 +252,10 @@ public class MainActivity extends ActionBarActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            switch(section){
+            switch (section) {
                 case 1:
                     //Panini
                     getMenuInflater().inflate(R.menu.panini, menu);
-                    break;
-                case 8:
-                    //News
-                    getMenuInflater().inflate(R.menu.news, menu);
-                    break;
-                case 9:
-                case 12:
-                    //Calendar
-                    getMenuInflater().inflate(R.menu.calendar, menu);
                     break;
                 case 10:
                     //Circolari
@@ -289,19 +280,10 @@ public class MainActivity extends ActionBarActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.clear();
-        switch(section){
+        switch (section) {
             case 1:
                 //News
                 getMenuInflater().inflate(R.menu.panini, menu);
-                break;
-            case 8:
-                //News
-                getMenuInflater().inflate(R.menu.news, menu);
-                break;
-            case 9:
-            case 12:
-                //Calendar
-                getMenuInflater().inflate(R.menu.calendar, menu);
                 break;
             case 10:
                 //Circolari
@@ -324,9 +306,9 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode==KeyEvent.KEYCODE_MENU){
-           DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (mNavigationDrawerFragment.isDrawerOpen()){
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (mNavigationDrawerFragment.isDrawerOpen()) {
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
             } else {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
@@ -342,29 +324,29 @@ public class MainActivity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         MyDifferenceFromToday diff;
-        switch (id){
+        switch (id) {
             case R.id.help:
                 DialogFragment helpDialog = new HelpPaninoDialog();
                 helpDialog.show(getSupportFragmentManager(), "ScontrinoDialogFragment");
                 break;
             case R.id.sendlist:
-                    String[] prices=getResources().getStringArray(R.array.panini_prices_array);
-                    ArrayList<Double> totals=new ArrayList<Double>();
-                    ArrayList<Integer> coolposition=new ArrayList<Integer>();
-                    for (int i=0;i<prices.length;i++){
-                        totals.add(i,numbers.get(i)*Double.parseDouble(prices[i]));
-                        if(numbers.get(i)!=0){
-                            coolposition.add(i);
-                        }
+                String[] prices = getResources().getStringArray(R.array.panini_prices_array);
+                ArrayList<Double> totals = new ArrayList<Double>();
+                ArrayList<Integer> coolposition = new ArrayList<Integer>();
+                for (int i = 0; i < prices.length; i++) {
+                    totals.add(i, numbers.get(i) * Double.parseDouble(prices[i]));
+                    if (numbers.get(i) != 0) {
+                        coolposition.add(i);
                     }
+                }
                 Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
-                boolean go = (hour==10&&minute<=15)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
-                    if (!go) {
-                        Toast.makeText(this,"La lista panini è chiusa", Toast.LENGTH_SHORT).show();
-                    }/* else if (coolposition.size()>0){
+                boolean go = (hour == 10 && minute <= 15) || (hour < 10 && hour >= 8) || (hour == 7 && minute >= 45);
+                if (!go) {
+                    Toast.makeText(this, "La lista panini è chiusa", Toast.LENGTH_SHORT).show();
+                }/* else if (coolposition.size()>0){
                         //
                         Bundle arg=new Bundle();
                         double t[]= new double[totals.size()];
@@ -380,9 +362,9 @@ public class MainActivity extends ActionBarActivity
                     }*/
                 break;
             case R.id.refreshend:
-                diff = new MyDifferenceFromToday(2015,6,6,13,0);
+                diff = new MyDifferenceFromToday(2015, 6, 6, 13, 0);
                 TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
-                end.setText("Fine della scuola in:\n"+diff.getDays(diff.getDiff())+"g "+diff.getHours(diff.getDiff())+"h "+diff.getMinutes(diff.getDiff())+"m");
+                end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                 break;
             case FINE_SCUOLA_ID:
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -391,11 +373,11 @@ public class MainActivity extends ActionBarActivity
                         .commit();
                 break;
             case R.id.timetoend:
-                diff = new MyDifferenceFromToday(2015,6,6,13,0);
+                diff = new MyDifferenceFromToday(2015, 6, 6, 13, 0);
                 item.getSubMenu().clear();
                 item.getSubMenu().add(Menu.NONE, Menu.NONE, Menu.NONE, "Fine della scuola in:");
-                item.getSubMenu().add(""+diff.getDays(diff.getDiff())+" giorni").setEnabled(false);
-                item.getSubMenu().add(""+diff.getHours(diff.getDiff())+" ore").setEnabled(false);
+                item.getSubMenu().add("" + diff.getDays(diff.getDiff()) + " giorni").setEnabled(false);
+                item.getSubMenu().add("" + diff.getHours(diff.getDiff()) + " ore").setEnabled(false);
                 item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + " min").setEnabled(false);
                 break;
 
@@ -415,44 +397,44 @@ public class MainActivity extends ActionBarActivity
         }
         return super.onOptionsItemSelected(item);
     }
-	
-	public void refreshNews() {
-	if (CheckInternet()) {
-					SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
-                    Database databaseHelper = new Database(getBaseContext());
-                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                    ContentValues nowdb = new ContentValues();
-                    nowdb.put("newsdate", "2012-02-20 15:00:00");
-                    long samerow = db.update("lstchk", nowdb, null, null);
-                    db.close();
-                    MainActivity.nointernet = "false";
-					connection news = new connection (false);
-                    news.execute();
-					mSwipeRefreshLayout.setRefreshing(false);
-                } else {
-                    Toast.makeText(this, R.string.noconnection,
-                            Toast.LENGTH_LONG).show();
-                }
-	}
-	
-	public void refreshCalendar() {
-	if (CheckInternet()) {
-					SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
-                    Database databaseHelper = new Database(getBaseContext());
-                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                    ContentValues nowdb = new ContentValues();
-                    nowdb.put("calendardate", "2012-02-20 15:00:00");
-                    long samerow = db.update("lstchk", nowdb, null, null);
-                    db.close();
-                    MainActivity.nointernet = "false";
-					connectioncalendar calendar = new connectioncalendar (false);
-                    calendar.execute();
-					mSwipeRefreshLayout.setRefreshing(false);
-                } else {
-                    Toast.makeText(this, R.string.noconnection,
-                            Toast.LENGTH_LONG).show();
-                }
-	}
+
+    public void refreshNews() {
+        if (CheckInternet()) {
+            Database databaseHelper = new Database(getBaseContext());
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            ContentValues nowdb = new ContentValues();
+            nowdb.put("newsdate", "2012-02-20 15:00:00");
+            long samerow = db.update("lstchk", nowdb, null, null);
+            db.close();
+            MainActivity.nointernet = "false";
+            connection news = new connection(false);
+            news.execute();
+        } else {
+            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(this, R.string.noconnection,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void refreshCalendar() {
+        if (CheckInternet()) {
+            Database databaseHelper = new Database(getBaseContext());
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            ContentValues nowdb = new ContentValues();
+            nowdb.put("calendardate", "2012-02-20 15:00:00");
+            long samerow = db.update("lstchk", nowdb, null, null);
+            db.close();
+            MainActivity.nointernet = "false";
+            connectioncalendar calendar = new connectioncalendar(false);
+            calendar.execute();
+        } else {
+            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(this, R.string.noconnection,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
 
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
@@ -490,7 +472,7 @@ public class MainActivity extends ActionBarActivity
         if (on) {
             Database databaseHelper = new Database(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            String[] columns = { "username", "password" };
+            String[] columns = {"username", "password"};
             Cursor query = db.query("settvoti", // The table to query
                     columns, // The columns to return
                     null, // The columns for the WHERE clause
@@ -603,7 +585,7 @@ public class MainActivity extends ActionBarActivity
     public void voti(View v) {
         Database databaseHelper = new Database(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        String[] columns = { "enabled", "username", "password" };
+        String[] columns = {"enabled", "username", "password"};
         Cursor query = db.query("settvoti", // The table to query
                 columns, // The columns to return
                 null, // The columns for the WHERE clause
@@ -641,9 +623,9 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, PlaceholderFragment.newInstance(8))
                     .commit();
-            new connection().execute();
+            new connection(true).execute();
         } else {
-            String[] outdated = { "newsdate", "calendardate" };
+            String[] outdated = {"newsdate", "calendardate"};
             Database databaseHelper = new Database(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             String nodata = "1995-01-19 23:40:20";
@@ -666,7 +648,7 @@ public class MainActivity extends ActionBarActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, PlaceholderFragment.newInstance(8))
                         .commit();
-                new connection().execute();
+                new connection(true).execute();
             } else {
                 Toast.makeText(this, R.string.noconnection,
                         Toast.LENGTH_LONG).show();
@@ -699,9 +681,9 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, PlaceholderFragment.newInstance(9))
                     .commit();
-            new connectioncalendar().execute();
+            new connectioncalendar(true).execute();
         } else {
-            String[] outdated = { "newsdate", "calendardate" };
+            String[] outdated = {"newsdate", "calendardate"};
             Database databaseHelper = new Database(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             String nodata = "1995-01-19 23:40:20";
@@ -725,7 +707,7 @@ public class MainActivity extends ActionBarActivity
                         .replace(R.id.container, PlaceholderFragment.newInstance(9))
                         .commit();
 
-                new connectioncalendar().execute();
+                new connectioncalendar(true).execute();
             } else {
                 Toast.makeText(this,
                         R.string.noconnection, Toast.LENGTH_LONG)
@@ -738,7 +720,7 @@ public class MainActivity extends ActionBarActivity
         startActivity(new Intent(this, timetable.class));
     }
 
-    public void notices(View v){
+    public void notices(View v) {
         Toast.makeText(this, R.string.ondevelopment,
                 Toast.LENGTH_LONG).show();
         /*supportInvalidateOptionsMenu();
@@ -813,7 +795,7 @@ public class MainActivity extends ActionBarActivity
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
-            section=sectionNumber;
+            section = sectionNumber;
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, section);
@@ -826,10 +808,10 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            if (rootView!=null) ((ViewGroup)rootView.getParent()).removeView(rootView);
+                                 Bundle savedInstanceState) {
+            if (rootView != null) ((ViewGroup) rootView.getParent()).removeView(rootView);
             getActivity().supportInvalidateOptionsMenu();
-            switch(section){
+            switch (section) {
                 case 0:
                     //home
                     rootView = inflater.inflate(R.layout.home, container, false);
@@ -840,8 +822,8 @@ public class MainActivity extends ActionBarActivity
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
                     //boolean go = (hour==10&&minute<=5)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
-                    boolean go =false;
-                    if (go){
+                    boolean go = false;
+                    if (go) {
                        /* rootView = inflater.inflate(R.layout.panini, container, false);
                         ListAdapter adapter = new PaniniAdapter(context, names, prices);
                         listViewpanini = (ListView) rootView.findViewById(R.id.listView);
@@ -863,7 +845,8 @@ public class MainActivity extends ActionBarActivity
 
                         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spin.setAdapter(aa);
-                    */} else {
+                    */
+                    } else {
                         rootView = inflater.inflate(R.layout.paninichiusa, container, false);
                     }
                     break;
@@ -877,7 +860,7 @@ public class MainActivity extends ActionBarActivity
                     ToggleButton toggle = (ToggleButton) rootView.findViewById(R.id.saveenabled);
                     Database databaseHelpersettings = new Database(getActivity());
                     SQLiteDatabase dbsettings = databaseHelpersettings.getWritableDatabase();
-                    String[] columnssettings = { "enabled", "username", "password" };
+                    String[] columnssettings = {"enabled", "username", "password"};
                     Cursor query = dbsettings.query("settvoti", // The table to query
                             columnssettings, // The columns to return
                             null, // The columns for the WHERE clause
@@ -910,9 +893,9 @@ public class MainActivity extends ActionBarActivity
                     EditText passwordpanini = (EditText) rootView.findViewById(R.id.passwordpanini);
                     SharedPreferences prefs = context.getSharedPreferences(
                             "paniniauth", Context.MODE_PRIVATE);
-                    String usernsett= prefs.getString("username", "default");
-                    String passwsett=prefs.getString("password", "default");
-                    if(!usernsett.equals("default")&&!passwsett.equals("default")) {
+                    String usernsett = prefs.getString("username", "default");
+                    String passwsett = prefs.getString("password", "default");
+                    if (!usernsett.equals("default") && !passwsett.equals("default")) {
                         usernamepanini.setText(usernsett);
                         passwordpanini.setText(passwsett);
                     }
@@ -982,12 +965,12 @@ public class MainActivity extends ActionBarActivity
                 case 11:
                     //Fine Scuola
                     rootView = inflater.inflate(R.layout.fine_scuola, container, false);
-                    MyDifferenceFromToday diff = new MyDifferenceFromToday(2014,6,7,13,0);
-                    TextView end = (TextView)rootView.findViewById(R.id.fine_scuola);
+                    MyDifferenceFromToday diff = new MyDifferenceFromToday(2014, 6, 7, 13, 0);
+                    TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
                     end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                     break;
                 case 12:
-                    rootView =inflater.inflate(R.layout.noevents, container, false);
+                    rootView = inflater.inflate(R.layout.noevents, container, false);
                     break;
             }
             return rootView;
@@ -1000,6 +983,7 @@ public class MainActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
 
     /*public class getNotices extends AsyncTask<String, Integer, ArrayList<String>>{
 
@@ -1098,10 +1082,12 @@ public class MainActivity extends ActionBarActivity
 
     public class connection extends
             AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
-			Boolean showLoading=true;
-			public connection (Boolean showLoading) {
-			this.showLoading=showLoading;
-			}
+        Boolean showLoading = true;
+
+        public connection(Boolean showLoading) {
+            this.showLoading = showLoading;
+        }
+
         protected void onCancelled() {
             Intent main = new Intent(MainActivity.this, MainActivity.class);
             main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1111,7 +1097,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         public void onPreExecute() {
-            if (MainActivity.nointernet.equals("true") && showLoading == true) {
+            if (MainActivity.nointernet.equals("true") && showLoading) {
                 mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.retrievingNews), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -1119,7 +1105,7 @@ public class MainActivity extends ActionBarActivity
                                 connection.this.cancel(true);
                             }
                         });
-            } else if (showLoading == true) {
+            } else if (showLoading) {
                 mDialog = ProgressDialog.show(MainActivity.this, null,
                         getString(R.string.downloadingNews), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -1148,7 +1134,7 @@ public class MainActivity extends ActionBarActivity
             final String PUBDATE = "pubDate";
             Element e = null;
             ArrayList<HashMap<String, Spanned>> menuItems = new ArrayList<HashMap<String, Spanned>>();
-            String[] outdated = { "newsdate", "calendardate" };
+            String[] outdated = {"newsdate", "calendardate"};
             Calendar c = Calendar.getInstance();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String now = df.format(c.getTime());
@@ -1175,38 +1161,43 @@ public class MainActivity extends ActionBarActivity
                     Document doc = parser.getDomElement(xml);
                     NodeList nl = doc.getElementsByTagName(ITEM);
                     ContentValues values = new ContentValues();
-						SimpleDateFormat parserDatePub=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz",Locale.US);
-						DateFormat datePubFormat;
-						Locale currentLocale = getResources().getConfiguration().locale;
-						datePubFormat = DateFormat.getDateInstance(DateFormat.FULL, currentLocale);
+                    SimpleDateFormat parserDatePub = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+                    DateFormat datePubFormat;
+                    Locale currentLocale = getResources().getConfiguration().locale;
+                    datePubFormat = DateFormat.getDateInstance(DateFormat.FULL, currentLocale);
+                    String datePubLocale = "";
+                    String titleb = "";
+                    String title="";
+                    String desc="";
                     for (int i = 0; i < nl.getLength(); i++) {
                         HashMap<String, Spanned> map = new HashMap<String, Spanned>();
                         e = (Element) nl.item(i);
+                        title= parser.getValue(e,TITLE);
+                        titleb="<b>" + parser.getValue(e, TITLE)
+                                + "</b>";
+                        desc=parser.getValue(e, DESC);
                         values.put("_id", i);
-                        values.put(TITLE, parser.getValue(e, TITLE));
-                        values.put(DESC, parser.getValue(e, DESC));
-							String datePubLocale="";
-						try{
-							datePubLocale=datePubFormat.format(parserDatePub.parse(parser.getValue(e, PUBDATE))).toString();
-							} catch (java.text.ParseException dateP) {
-								System.out.println(dateP);
-								datePubLocale=parser.getValue(e, PUBDATE);
-							}
-                        values.put(PUBDATE, datePubLocale);
-                        values.put("titleb", "<b>" + parser.getValue(e, TITLE)
-                                + "</b>");
-                        map.put(TITLE, Html.fromHtml(parser.getValue(e, TITLE)));
-                        map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
-						map.put(PUBDATE, Html.fromHtml(datePubLocale));
+                        values.put(TITLE, title);
+                        values.put(DESC, desc);
 
-                        titoli.add(Html.fromHtml(parser.getValue(e, TITLE)));
+                        try {
+                            datePubLocale = datePubFormat.format(parserDatePub.parse(parser.getValue(e, PUBDATE))).toString();
+                        } catch (java.text.ParseException dateP) {
+                            System.out.println(dateP);
+
+                        }
+                        values.put(PUBDATE, datePubLocale);
+                        values.put("titleb", titleb);
+                        map.put(TITLE, Html.fromHtml(title));
+                        map.put(DESC, Html.fromHtml(desc));
+                        map.put(PUBDATE, Html.fromHtml(datePubLocale));
+
+                        titoli.add(Html.fromHtml(title));
                         descrizioni
-                                .add(Html.fromHtml(parser.getValue(e, DESC)));
+                                .add(Html.fromHtml(desc));
                         datePubList
                                 .add(Html.fromHtml(datePubLocale));
-							System.out.println(Html.fromHtml(datePubLocale));
-                        titolib.add(Html.fromHtml("<b>"
-                                + parser.getValue(e, TITLE) + "</b>"));
+                        titolib.add(Html.fromHtml(titleb));
                         // adding HashList to ArrayList
                         menuItems.add(map);
                         long newRowId = db.insertWithOnConflict("news", null,
@@ -1224,7 +1215,7 @@ public class MainActivity extends ActionBarActivity
 
                 }
             } else {
-                String[] clmndata = { "title","pubdate", "description", "titleb" };
+                String[] clmndata = {"title", "pubdate", "description", "titleb"};
                 String sortOrder = "_id";
 
                 data = db.query("news", // The table to query
@@ -1269,6 +1260,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
+            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
             if (unknhost) {
                 Toast.makeText(MainActivity.this, R.string.connerr, Toast.LENGTH_LONG)
                         .show();
@@ -1276,13 +1268,15 @@ public class MainActivity extends ActionBarActivity
                 main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(main);
             } else {
+
                 if (resultmap.size() > 0) {
-					SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
-					mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-					@Override
-						public void onRefresh() {
-							refreshNews();
-						}
+
+                    mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            refreshNews();
+                        }
+                    });
                     final ArrayList<Spanned> titoli = resultmap.get("titoli");
                     final ArrayList<Spanned> descrizioni = resultmap
                             .get("descrizioni");
@@ -1309,17 +1303,18 @@ public class MainActivity extends ActionBarActivity
                     });
                 }
             }
+            if (showLoading) {
+                mDialog.dismiss();
+            }
+            mSwipeRefreshLayout.setRefreshing(false);
         }
-		if (showLoading == true) {
-			mDialog.dismiss();
     }
-
     public class connectioncalendar extends
             AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
 
         Boolean unknhost = false;
 		Boolean showLoading=true;
-			public connectioncalendar (Boolean showLoading) {
+	    public connectioncalendar (Boolean showLoading) {
 			this.showLoading=showLoading;
 			}
 
@@ -1396,6 +1391,7 @@ public class MainActivity extends ActionBarActivity
                     nl = doc.getElementsByTagName(ITEM);
                     ContentValues values = new ContentValues();
                     Boolean ok = false;
+                    String description="";
                     HashMap<String, Integer> doppioni = new HashMap<String, Integer>();
                     for (int i = 1; i < nl.getLength(); i++) {
                         HashMap<String, Spanned> map = new HashMap<String, Spanned>();
@@ -1852,12 +1848,13 @@ public class MainActivity extends ActionBarActivity
                         map.put(TITLE, Html.fromHtml(tito));
                         titoli.add(Html.fromHtml(tito));
                         titolib.add(Html.fromHtml("<b>" + tito + "</b>"));
+                        description = parser.getValue(e,DESC);
 
-                        values.put(DESC, parser.getValue(e, DESC));
+                        values.put(DESC, description);
                         values.put("titleb", "<b>" + tito + "</b>");
-                        map.put(DESC, Html.fromHtml(parser.getValue(e, DESC)));
+                        map.put(DESC, Html.fromHtml(description));
                         descrizioni
-                                .add(Html.fromHtml(parser.getValue(e, DESC)));
+                                .add(Html.fromHtml(description));
                         icalarr.add(Html.fromHtml(ical));
                         long newRowId = db.insertWithOnConflict("calendar",
                                 null, values, SQLiteDatabase.CONFLICT_REPLACE);
@@ -1921,6 +1918,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
+            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
             if (unknhost) {
                 Toast.makeText(MainActivity.this, R.string.connerr,
                         Toast.LENGTH_LONG).show();
@@ -1940,24 +1938,24 @@ public class MainActivity extends ActionBarActivity
                                 .replace(R.id.container, PlaceholderFragment.newInstance(12))
                                 .commit();
                     } else {
-                        ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(
+                        ArrayAdapter<Spanned> adapter = new ArrayAdapter<>(
                                 MainActivity.this, android.R.layout.simple_list_item_1,
                                 titolib);
-						SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
-						mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-						@Override
-							public void onRefresh() {
-								refreshCalendar();
-							}
                         ListView listView = (ListView) rootView.findViewById(android.R.id.list);
                         listView.setAdapter(adapter);
 
                         registerForContextMenu(findViewById(android.R.id.list));
+                        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                refreshCalendar();
+                            }
+                        });
 
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             public void onItemClick(AdapterView<?> parentView,
                                                     View childView, int position, long id) {
-                                if (Html.toHtml(descrizioni.get(position)) != "") {
+                                if (!Html.toHtml(descrizioni.get(position)).equals("")) {
                                     Intent intent = new Intent(MainActivity.this,
                                             ListItemSelectedCalendar.class);
                                     intent.putExtra(TITLE,
@@ -1977,11 +1975,14 @@ public class MainActivity extends ActionBarActivity
                     }
                 }
             }
-			if (showLoading == true) {
+			if (showLoading) {
 				mDialog.dismiss();
 			}
+            mSwipeRefreshLayout.setRefreshing(false);
+
         }
     }
+
 
     @SuppressLint("SimpleDateFormat")
     public class eventparser extends AsyncTask<Void, Void, Void> {
@@ -1990,7 +1991,7 @@ public class MainActivity extends ActionBarActivity
             String ical = "https://www.messedaglia.it/caltoxml.php?id=" + idical;
             XMLParser parser = new XMLParser();
             String xml = parser.getXmlFromUrl(ical);
-            if (xml == "UnknownHostException") {
+            if (xml.equals("UnknownHostException")) {
             } else {
                 Document doc = parser.getDomElement(xml);
                 NodeList nl = doc.getElementsByTagName("VEVENT");
