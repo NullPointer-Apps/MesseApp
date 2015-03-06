@@ -199,6 +199,13 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
+		SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+		Boolean mSwipeRefState=false;
+		if (mSwipeRefreshLayout!=null){
+			mSwipeRefState=mSwipeRefreshLayout.isRefreshing();
+		}
+			
+		if (!mSwipeRefState){
         if (section == 0) {
             super.finish();
         } else {
@@ -207,6 +214,7 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, PlaceholderFragment.newInstance(0))
                     .commit();
         }
+		}
     }
 
 
@@ -706,7 +714,6 @@ public class MainActivity extends ActionBarActivity
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, PlaceholderFragment.newInstance(9))
                         .commit();
-
                 new connectioncalendar(true).execute();
             } else {
                 Toast.makeText(this,
@@ -1277,6 +1284,7 @@ public class MainActivity extends ActionBarActivity
                             refreshNews();
                         }
                     });
+					mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"),Color.parseColor("#ff1a171b"));
                     final ArrayList<Spanned> titoli = resultmap.get("titoli");
                     final ArrayList<Spanned> descrizioni = resultmap
                             .get("descrizioni");
@@ -1951,7 +1959,7 @@ public class MainActivity extends ActionBarActivity
                                 refreshCalendar();
                             }
                         });
-
+						mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"),Color.parseColor("#ff1a171b"));
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             public void onItemClick(AdapterView<?> parentView,
                                                     View childView, int position, long id) {

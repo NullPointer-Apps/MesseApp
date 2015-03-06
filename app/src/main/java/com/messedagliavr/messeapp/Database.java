@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
     public static final String NOME_DB = "messeapp.db";
-    public static final int VERSIONE_DB = 9;
+    public static final int VERSIONE_DB = 10;
 
     private static final String CREATE_NEWS = "CREATE TABLE news (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,pubdate text not null,titleb text not null,description text not null);";
     private static final String CREATE_CALENDAR = "CREATE TABLE calendar (_id INTEGER PRIMARY KEY AUTOINCREMENT,title text not null,titleb text not null,description text,ical text not null);";
@@ -48,8 +48,9 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 8 && newVersion == 9) {
+        if (oldVersion < 10)  {
             db.execSQL("DROP TABLE IF EXISTS news;");
+			db.execSQL(CREATE_NEWS);
         }
     }
 }
