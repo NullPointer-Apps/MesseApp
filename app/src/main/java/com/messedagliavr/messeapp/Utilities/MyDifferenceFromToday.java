@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+package com.messedagliavr.messeapp.Utilities;
 
 import java.util.Date;
 import java.util.GregorianCalendar;

@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
@@ -18,8 +18,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.messedagliavr.messeapp.Utilities.ColorTool;
+import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
-public class contacts extends ActionBarActivity implements View.OnTouchListener {
+
+public class ContactsActivity extends ActionBarActivity implements View.OnTouchListener {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;

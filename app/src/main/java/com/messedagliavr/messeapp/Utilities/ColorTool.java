@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+package com.messedagliavr.messeapp.Utilities;
 
 import android.graphics.Color;
 

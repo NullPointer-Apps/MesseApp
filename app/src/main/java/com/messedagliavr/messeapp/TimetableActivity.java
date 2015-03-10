@@ -5,9 +5,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.os.Build;
 import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -19,8 +19,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.messedagliavr.messeapp.Databases.Database;
+import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
+
 @SuppressLint("DefaultLocale")
-public class timetable extends ActionBarActivity implements
+public class TimetableActivity extends ActionBarActivity implements
         AdapterView.OnItemSelectedListener {
 
     @Override
@@ -32,7 +35,7 @@ public class timetable extends ActionBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.palestre:
-                Toast.makeText(timetable.this, R.string.notavailable,
+                Toast.makeText(TimetableActivity.this, R.string.notavailable,
                         Toast.LENGTH_LONG).show();
                 break;
             case android.R.id.home:

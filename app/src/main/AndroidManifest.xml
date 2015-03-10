@@ -24,24 +24,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.messedagliavr.messeapp.contacts"
+            android:name=".ContactsActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.messedagliavr.messeapp.MainActivity" />
         </activity>
         <activity
-            android:name="com.messedagliavr.messeapp.ListItemSelectedNews"
+            android:name=".ListItemSelectedNewsActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.messedagliavr.messeapp.ListItemSelectedCalendar"
+            android:name=".ListItemSelectedCalendarActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.messedagliavr.messeapp.timetable">
+        <activity android:name=".TimetableActivity">
             <meta-data
              android:name="android.support.PARENT_ACTIVITY"
              android:value="com.messedagliavr.messeapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.messedagliavr.messeapp.NewsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.messedagliavr.messeapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.messedagliavr.messeapp.CalendarActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.messedagliavr.messeapp.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.messedagliavr.messeapp.SettingsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.messedagliavr.messeapp.MainActivity" />
         </activity>
     </application>
 

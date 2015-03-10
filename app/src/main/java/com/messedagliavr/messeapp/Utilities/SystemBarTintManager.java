@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.messedagliavr.messeapp;
+package com.messedagliavr.messeapp.Utilities;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

@@ -1,22 +1,20 @@
 package com.messedagliavr.messeapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.MenuItem;
 import android.webkit.WebView;
-import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 
-public class ListItemSelectedNews extends ActionBarActivity {
+public class ListItemSelectedNewsActivity extends ActionBarActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -34,6 +32,7 @@ public class ListItemSelectedNews extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_item_selected);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.notizie));
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // create our manager instance after the content view is set
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -45,9 +44,8 @@ public class ListItemSelectedNews extends ActionBarActivity {
             tintManager.setTintColor(Color.parseColor("#AFAFAF"));
         }
         Intent intent = getIntent();
-        String titolorw = intent.getStringExtra(MainActivity.TITLE);
-        System.out.println(intent.getStringExtra(MainActivity.DESC));
-        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body>" + intent.getStringExtra(MainActivity.DESC) +"</body></html>";
+        String titolorw = intent.getStringExtra("title");
+        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body>" + intent.getStringExtra("description") +"</body></html>";
         TextView titoloview = (TextView) findViewById(R.id.TitoloView);
         Spanned titolo = Html.fromHtml(titolorw);
         titoloview.setText(titolo);

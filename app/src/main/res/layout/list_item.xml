@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listview_rlayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/listview_swipe_refresh_layout"
         android:layout_width="match_parent"
@@ -7,7 +11,7 @@
 		android:background="#dbdbdb">
 
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/list"
         style="android:ListViewStyle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -16,8 +20,10 @@
         android:dividerHeight="1dip"
         android:footerDividersEnabled="true"
         android:headerDividersEnabled="true"
-        android:paddingTop="2dp">
+        android:paddingTop="2dp"
+        android:clipToPadding="false">
 
     </ListView>
 
 </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

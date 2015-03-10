@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+package com.messedagliavr.messeapp.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.messedagliavr.messeapp.R;
 
 public class NavDrawerListAdapter extends BaseAdapter {
 

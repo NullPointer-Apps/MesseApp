@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+package com.messedagliavr.messeapp.Databases;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
