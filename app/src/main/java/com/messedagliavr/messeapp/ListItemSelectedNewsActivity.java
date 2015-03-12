@@ -20,7 +20,6 @@ public class ListItemSelectedNewsActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.onBackPressed();
-                //NavUtils.navigateUpFromSameTask(this);
                 break;
         }
         return true;

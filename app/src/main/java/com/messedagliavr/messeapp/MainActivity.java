@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity
     public static String myPiano = "Primo Piano";
     public static String username;
     public static String password;
+    public static ActionBar actionBar;
     //INFO
     static PackageInfo pinfo = null;
     /**
@@ -190,6 +191,9 @@ public class MainActivity extends ActionBarActivity
             case 5:
                 mTitle = getString(R.string.Info);
                 break;
+            case 6:
+                mTitle = "Social";
+                break;
             case 11:
                 mTitle = getString(R.string.fine_scuola);
                 break;
@@ -197,12 +201,12 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+        ActionBar ActionBar = getSupportActionBar();
+        ActionBar.setDisplayHomeAsUpEnabled(true);
+        ActionBar.setHomeButtonEnabled(true);
+        ActionBar.setDisplayShowTitleEnabled(true);
+        ActionBar.setTitle(mTitle);
+        actionBar= ActionBar;
     }
 
     @Override
@@ -319,7 +323,7 @@ public class MainActivity extends ActionBarActivity
                     }*/
                 break;
             case R.id.refreshend:
-                diff = new MyDifferenceFromToday(2015, 6, 6, 13, 0);
+                diff = new MyDifferenceFromToday(2015, 6, 10, 13, 0);
                 TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
                 end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                 break;
@@ -330,12 +334,12 @@ public class MainActivity extends ActionBarActivity
                         .commit();
                 break;
             case R.id.timetoend:
-                diff = new MyDifferenceFromToday(2015, 6, 6, 13, 0);
+                diff = new MyDifferenceFromToday(2015, 6, 10, 13, 0);
                 item.getSubMenu().clear();
                 item.getSubMenu().add(Menu.NONE, Menu.NONE, Menu.NONE, "Fine della scuola in:");
-                item.getSubMenu().add("" + diff.getDays(diff.getDiff()) + " giorni").setEnabled(false);
-                item.getSubMenu().add("" + diff.getHours(diff.getDiff()) + " ore").setEnabled(false);
-                item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + " min").setEnabled(false);
+                item.getSubMenu().add("" + diff.getDays(diff.getDiff()) + " giorni");
+                item.getSubMenu().add("" + diff.getHours(diff.getDiff()) + " ore");
+                item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + " min");
                 break;
             case R.id.palestre:
                 Toast.makeText(MainActivity.this, R.string.notavailable,
@@ -483,7 +487,7 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            if (rootView != null) ((ViewGroup) rootView.getParent()).removeView(rootView);
+            if ((rootView != null) && ((rootView.getParent()) != null)  ) { ((ViewGroup) rootView.getParent()).removeView(rootView);}
             getActivity().supportInvalidateOptionsMenu();
             switch (section) {
                 case 0:
@@ -576,11 +580,12 @@ public class MainActivity extends ActionBarActivity
                 case 6:
                     //social
                     rootView = inflater.inflate(R.layout.social, container, false);
+
                     break;
                 case 11:
                     //Fine Scuola
                     rootView = inflater.inflate(R.layout.fine_scuola, container, false);
-                    MyDifferenceFromToday diff = new MyDifferenceFromToday(2014, 6, 7, 13, 0);
+                    MyDifferenceFromToday diff = new MyDifferenceFromToday(2015, 6, 10, 13, 0);
                     TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
                     end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                     break;
