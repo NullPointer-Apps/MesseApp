@@ -64,6 +64,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.messedagliavr.messeapp.MainActivity" />
         </activity>
+        <activity
+            android:name="com.messedagliavr.messeapp.SocialActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.messedagliavr.messeapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

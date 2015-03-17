@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-6a4ca1a58323ad0b3cc22507bdeda509c4c5486d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-6225d718c897b1a654315f377872198c299c9084.jar" />
-    </item>
-    <item
-        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-a1a8b4fd0e80e3013deb27a3ee290b0fc0839b27.jar" />
-    </item>
-    <item
-        jar="C:\Users\Simone\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jar="/Users/Ambrof/Desktop/Progetti/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-5b0971456db0c5af9b95a30bd4faf9ec04fff90c.jar" />
+        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-d5ba3ec49b11a5b3a8a100f74ceff45a0ed5cab5.jar" />
+    </item>
+    <item
+        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-d07ebe7d597653469e5fd85ee312343c262d6444.jar" />
+    </item>
+    <item
+        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-0c0cae8fae2d5e47ec3680975d82179557fb3564.jar" />
+    </item>
+    <item
+        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-fdb6f75a95b82e7370ff7663f6ab9c8b37960467.jar" />
     </item>
 
 </items>

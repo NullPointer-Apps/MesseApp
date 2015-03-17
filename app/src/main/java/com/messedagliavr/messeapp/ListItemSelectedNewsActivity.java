@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.Spanned;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -15,7 +18,7 @@ import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 
 public class ListItemSelectedNewsActivity extends ActionBarActivity {
-
+    static Window window;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -51,7 +54,11 @@ public class ListItemSelectedNewsActivity extends ActionBarActivity {
         WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
         descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
         descrizioneview.setBackgroundColor(Color.parseColor("#eeeeee"));
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.RIGHT));
+            window.setExitTransition(new Slide(Gravity.LEFT));
+        }
     }
 
 }

@@ -5,10 +5,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,6 +25,7 @@ import com.messedagliavr.messeapp.Databases.Database;
  * Created by Simone on 10/03/2015.
  */
 public class SettingsActivity extends ActionBarActivity {
+    static Window window;
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.settings);
@@ -71,6 +76,11 @@ public class SettingsActivity extends ActionBarActivity {
         if (!usernsett.equals("default") && !passwsett.equals("default")) {
             usernamepanini.setText(usernsett);
             passwordpanini.setText(passwsett);
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.RIGHT));
+            window.setExitTransition(new Slide(Gravity.LEFT));
         }
     }
 

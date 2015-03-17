@@ -1,6 +1,7 @@
 package com.messedagliavr.messeapp;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,8 +20,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.Spanned;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -46,9 +50,8 @@ import java.util.HashMap;
 public class CalendarActivity extends ActionBarActivity {
     ProgressDialog mDialog;
     public SQLiteDatabase db;
-    Boolean unknhost;
+    static Window window;
     public Cursor data;
-    public static View rootView;
     public static final String TITLE = "title";
     public static final String DESC = "description";
     public static final String ICAL = "ical";
@@ -102,6 +105,12 @@ public class CalendarActivity extends ActionBarActivity {
                         R.string.noconnection, Toast.LENGTH_LONG)
                         .show();
             }
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.BOTTOM));
+            window.setExitTransition(new Slide(Gravity.TOP));
         }
     }
 
@@ -889,7 +898,12 @@ public class CalendarActivity extends ActionBarActivity {
                                             Html.toHtml(descrizioni.get(position)));
                                     intent.putExtra(ICAL,
                                             Html.toHtml(icalarr.get(position)));
-                                    startActivity(intent);
+                                    if (Build.VERSION.SDK_INT >= 21) {
+                                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(CalendarActivity.this).toBundle());
+                                    } else {
+                                        startActivity(intent);
+                                    }
+
                                 } else {
                                     Toast.makeText(CalendarActivity.this,
                                             R.string.nodescription,

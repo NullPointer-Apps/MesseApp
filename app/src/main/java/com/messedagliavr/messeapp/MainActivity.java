@@ -1,8 +1,8 @@
 package com.messedagliavr.messeapp;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -359,11 +359,12 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void social(View v) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(6))
-                .commit();
-    }
+        if (Build.VERSION.SDK_INT >= 21) {
+            startActivity(new Intent(this, SocialActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, SocialActivity.class));
+        }
+        }
 
     public void NullPApps(View v) {
         Intent npa = new Intent(Intent.ACTION_VIEW);
@@ -371,29 +372,7 @@ public class MainActivity extends ActionBarActivity
         startActivity(npa);
     }
 
-    public void youtube(View v) {
-        Intent youtube = new Intent(Intent.ACTION_VIEW);
-        youtube.setData(Uri.parse("http://www.youtube.com/user/MessedagliaWeb"));
-        startActivity(youtube);
-    }
 
-    public void moodle(View v) {
-        Intent moodle = new Intent(Intent.ACTION_VIEW);
-        moodle.setData(Uri.parse("http://corsi.messedaglia.it"));
-        startActivity(moodle);
-    }
-
-    public void facebook(View v) {
-        String fbapp = "fb://group/110918169016604";
-        Intent fbappi = new Intent(Intent.ACTION_VIEW, Uri.parse(fbapp));
-        try {
-            startActivity(fbappi);
-        } catch (ActivityNotFoundException ex) {
-            String uriMobile = "http://touch.facebook.com/groups/110918169016604";
-            Intent fb = new Intent(Intent.ACTION_VIEW, Uri.parse(uriMobile));
-            startActivity(fb);
-        }
-    }
 
     public void voti(View v) {
         Database databaseHelper = new Database(getBaseContext());
@@ -435,15 +414,30 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void news(View v) {
-        startActivity(new Intent(this, NewsActivity.class));
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            startActivity(new Intent(this, NewsActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, NewsActivity.class));
+        }
+
+
     }
 
     public void calendar(View v) {
-        startActivity(new Intent(this, CalendarActivity.class));
+        if (Build.VERSION.SDK_INT >= 21) {
+            startActivity(new Intent(this, CalendarActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, CalendarActivity.class));
+        }
     }
 
     public void orario(View v) {
-        startActivity(new Intent(this, TimetableActivity.class));
+        if (Build.VERSION.SDK_INT >= 21) {
+            startActivity(new Intent(this, TimetableActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, TimetableActivity.class));
+        }
     }
 
     public void notices(View v) {

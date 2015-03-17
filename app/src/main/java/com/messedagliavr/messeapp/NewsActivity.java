@@ -1,5 +1,6 @@
 package com.messedagliavr.messeapp;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,7 +18,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.Spanned;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -51,7 +55,7 @@ public class NewsActivity extends ActionBarActivity  {
     public static final String TITLE = "title";
     public static final String DESC = "description";
     public static String nointernet;
-
+    static Window window;
 
 
     private Long getTimeDiff(String time, String curTime) throws ParseException {
@@ -153,6 +157,12 @@ public class NewsActivity extends ActionBarActivity  {
             tintManager.setNavigationBarTintEnabled(true);
             //tintManager.setTintColor(Color.parseColor("#ab46e5"));
             tintManager.setTintColor(Color.parseColor("#AFAFAF"));
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.BOTTOM));
+            window.setExitTransition(new Slide(Gravity.TOP));
         }
 
     }
@@ -375,7 +385,11 @@ public class NewsActivity extends ActionBarActivity  {
                                     Html.toHtml(titoli.get(position)));
                             intent.putExtra(DESC,
                                     Html.toHtml(descrizioni.get(position)));
-                            startActivity(intent);
+                            if (Build.VERSION.SDK_INT >= 21) {
+                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(NewsActivity.this).toBundle());
+                            } else {
+                                startActivity(intent);
+                            }
                         }
                     });
                 }

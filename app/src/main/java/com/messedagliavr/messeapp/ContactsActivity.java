@@ -11,10 +11,13 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -23,10 +26,7 @@ import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 
 public class ContactsActivity extends ActionBarActivity implements View.OnTouchListener {
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private ListView mDrawerList;
-
+    static Window window;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,11 @@ public class ContactsActivity extends ActionBarActivity implements View.OnTouchL
                 //tintManager.setTintColor(Color.parseColor("#d00045"));
                 tintManager.setTintColor(Color.parseColor("#AFAFAF"));
                 }
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.RIGHT));
+            window.setExitTransition(new Slide(Gravity.LEFT));
+        }
 
     }
 

@@ -10,9 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +28,7 @@ import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 @SuppressLint("DefaultLocale")
 public class TimetableActivity extends ActionBarActivity implements
         AdapterView.OnItemSelectedListener {
+    static Window window;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,6 +120,11 @@ public class TimetableActivity extends ActionBarActivity implements
 				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(i);
             }
+        if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.BOTTOM));
+            window.setExitTransition(new Slide(Gravity.TOP));
+        }
         }
 
 

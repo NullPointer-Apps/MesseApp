@@ -1,11 +1,19 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true">
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:shrinkColumns="*"
     android:stretchColumns="*"
     android:weightSum="190"
     android:background="@drawable/sfondomesseapp"
-    android:id="@+id/social">
+    android:id="@+id/social"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true">
 
     <TableRow
         android:layout_width="fill_parent"
@@ -20,7 +28,8 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:onClick="facebook"
-        android:contentDescription="@string/link"/>
+        android:contentDescription="@string/link"
+        android:visibility="visible" />
 
         <ImageView
             android:layout_width="fill_parent"
@@ -31,7 +40,8 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:onClick="youtube"
-            android:contentDescription="@string/link" />
+            android:contentDescription="@string/link"
+            android:visibility="visible" />
     </TableRow>
 
     <ImageView
@@ -43,8 +53,10 @@
         android:scaleType="centerInside"
         android:onClick="moodle"
         android:paddingRight="5dp"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="5dp"
+        android:visibility="visible" />
 
 
 </TableLayout>
 
+</RelativeLayout>
