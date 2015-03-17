@@ -284,6 +284,7 @@ public class CalendarActivity extends ActionBarActivity {
             date.moveToFirst();
             String past = date.getString(date.getColumnIndex("newsdate"));
             date.close();
+            db.close();
             long l = getTimeDiff(past, now);
             if (nointernet == "true" && showLoading == true && l / 10800000 >= 3) {
                 mDialog = ProgressDialog.show(CalendarActivity.this, null,
@@ -302,7 +303,17 @@ public class CalendarActivity extends ActionBarActivity {
                                 connectioncalendar.this.cancel(true);
                             }
                         });
-            } else {showLoading=false;}
+            } else if (past.equals("1995-01-19 23:40:20")){
+                mDialog = ProgressDialog.show(CalendarActivity.this, null,
+                        getString(R.string.downloadingNews), true, true,
+                        new DialogInterface.OnCancelListener() {
+                            public void onCancel(DialogInterface dialog) {
+                                connectioncalendar.this.cancel(true);
+                            }
+                        });
+            } else {
+                showLoading=false;
+            }
         }
 
         @SuppressLint("SimpleDateFormat")

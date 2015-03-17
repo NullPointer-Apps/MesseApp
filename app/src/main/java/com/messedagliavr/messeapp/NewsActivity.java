@@ -203,6 +203,7 @@ public class NewsActivity extends ActionBarActivity  {
             date.moveToFirst();
             String past = date.getString(date.getColumnIndex("newsdate"));
             date.close();
+            db.close();
             long l = getTimeDiff(past, now);
             if (nointernet.equals("true") && showLoading && l / 10800000 >= 3) {
                 mDialog = ProgressDialog.show(NewsActivity.this, null,
@@ -220,7 +221,17 @@ public class NewsActivity extends ActionBarActivity  {
                                 connection.this.cancel(true);
                             }
                         });
-            } else {showLoading=false;}
+            } else if (past.equals("1995-01-19 23:40:20")){
+                mDialog = ProgressDialog.show(NewsActivity.this, null,
+                        getString(R.string.downloadingNews), true, true,
+                        new DialogInterface.OnCancelListener() {
+                            public void onCancel(DialogInterface dialog) {
+                                connection.this.cancel(true);
+                            }
+                        });
+            } else {
+                showLoading=false;
+            }
         }
 
         public HashMap<String, ArrayList<Spanned>> doInBackground(
