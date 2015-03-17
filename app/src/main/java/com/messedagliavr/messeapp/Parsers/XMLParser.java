@@ -29,6 +29,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URLConnection;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -67,17 +73,90 @@ public class XMLParser {
             return new DefaultHttpClient();
         }
     }
+	
+	final static HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
+	public boolean verify(String hostname, SSLSession session) {
+		return true;
+	}
+};
 
-    public String getXmlFromUrl(String url) {
+/**
+ * Trust every server - dont check for any certificate
+ */
+private static void trustAllHosts() {
+	// Create a trust manager that does not validate certificate chains
+	TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+		public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+			return new java.security.cert.X509Certificate[] {};
+		}
+
+		public void checkClientTrusted(X509Certificate[] chain,
+				String authType) throws CertificateException {
+		}
+
+		public void checkServerTrusted(X509Certificate[] chain,
+				String authType) throws CertificateException {
+		}
+	} };
+
+	// Install the all-trusting trust manager
+	try {
+		SSLContext sc = SSLContext.getInstance("TLS");
+		sc.init(null, trustAllCerts, new java.security.SecureRandom());
+		HttpsURLConnection
+				.setDefaultSSLSocketFactory(sc.getSocketFactory());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+	private static String getStringFromInputStream(InputStream is) {
+ 
+		BufferedReader br = null;
+		StringBuilder sb = new StringBuilder();
+ 
+		String line;
+		try {
+ 
+			br = new BufferedReader(new InputStreamReader(is));
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+ 
+		return sb.toString();
+ 
+	}
+
+    public String getXmlFromUrl(String gUrl) {
         String xml = null;
 
         try {
-            HttpClient httpClient = getNewHttpClient();
+			URL url = new URL(gUrl);
+			HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+			https.setHostnameVerifier(DO_NOT_VERIFY);
+			InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+			xml = getStringFromInputStream(in);
+			finally {
+			urlConnection.disconnect();
+				}
+            /*HttpClient httpClient = getNewHttpClient();
             HttpPost httpPost = new HttpPost(url);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
-            xml = EntityUtils.toString(httpEntity);
+            xml = EntityUtils.toString(httpEntity);*/
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
