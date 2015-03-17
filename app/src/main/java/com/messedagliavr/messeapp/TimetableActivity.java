@@ -69,6 +69,7 @@ public class TimetableActivity extends ActionBarActivity implements
         super.onCreate(icicle);
         setContentView(R.layout.timetable);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setTitle(getString(R.string.orario));
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
                 // create our manager instance after the content view is set
                 SystemBarTintManager tintManager = new SystemBarTintManager(this);

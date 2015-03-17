@@ -135,8 +135,8 @@ public class NewsActivity extends ActionBarActivity  {
         }
         if (CheckInternet()) {
             nointernet = "false";
-
-            new connection(true).execute();
+                new connection(true).execute();
+			
         } else {
             String[] outdated = {"newsdate", "calendardate"};
             Database databaseHelper = new Database(getBaseContext());
@@ -186,7 +186,25 @@ public class NewsActivity extends ActionBarActivity  {
         }
 
         public void onPreExecute() {
-            if (nointernet.equals("true") && showLoading) {
+			Database databaseHelper = new Database(getBaseContext());
+            db = databaseHelper.getWritableDatabase();
+			String[] outdated = {"newsdate", "calendardate"};
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String now = df.format(c.getTime());
+            Cursor date = db.query("lstchk", // The table to query
+								   outdated, // The columns to return
+								   null, // The columns for the WHERE clause
+								   null, // The values for the WHERE clause
+								   null, // don't group the rows
+								   null, // don't filter by row groups
+								   null // The sort order
+								   );
+            date.moveToFirst();
+            String past = date.getString(date.getColumnIndex("newsdate"));
+            date.close();
+            long l = getTimeDiff(past, now);
+            if (nointernet.equals("true") && showLoading && l / 10800000 >= 3) {
                 mDialog = ProgressDialog.show(NewsActivity.this, null,
                         getString(R.string.retrievingNews), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -194,7 +212,7 @@ public class NewsActivity extends ActionBarActivity  {
                                 connection.this.cancel(true);
                             }
                         });
-            } else if (showLoading) {
+            } else if (showLoading && l / 10800000 >= 3) {
                 mDialog = ProgressDialog.show(NewsActivity.this, null,
                         getString(R.string.downloadingNews), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -202,7 +220,7 @@ public class NewsActivity extends ActionBarActivity  {
                                 connection.this.cancel(true);
                             }
                         });
-            }
+            } else {showLoading=false;}
         }
 
         public HashMap<String, ArrayList<Spanned>> doInBackground(

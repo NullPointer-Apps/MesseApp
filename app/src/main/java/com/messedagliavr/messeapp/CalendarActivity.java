@@ -82,7 +82,7 @@ public class CalendarActivity extends ActionBarActivity {
         }
         if (CheckInternet()) {
             nointernet = "false";
-            new connectioncalendar(true).execute();
+				new connectioncalendar(true).execute();
         } else {
             String[] outdated = {"newsdate", "calendardate"};
             Database databaseHelper = new Database(getBaseContext());
@@ -267,7 +267,25 @@ public class CalendarActivity extends ActionBarActivity {
         }
 
         public void onPreExecute() {
-            if (nointernet == "true" && showLoading == true) {
+			Database databaseHelper = new Database(getBaseContext());
+            db = databaseHelper.getWritableDatabase();
+			String[] outdated = {"newsdate", "calendardate"};
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String now = df.format(c.getTime());
+            Cursor date = db.query("lstchk", // The table to query
+								   outdated, // The columns to return
+								   null, // The columns for the WHERE clause
+								   null, // The values for the WHERE clause
+								   null, // don't group the rows
+								   null, // don't filter by row groups
+								   null // The sort order
+								   );
+            date.moveToFirst();
+            String past = date.getString(date.getColumnIndex("newsdate"));
+            date.close();
+            long l = getTimeDiff(past, now);
+            if (nointernet == "true" && showLoading == true && l / 10800000 >= 3) {
                 mDialog = ProgressDialog.show(CalendarActivity.this, null,
                         getString(R.string.retrievingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -276,7 +294,7 @@ public class CalendarActivity extends ActionBarActivity {
                             }
                         });
 
-            } else if (showLoading == true) {
+            } else if (showLoading && l / 10800000 >= 3) {
                 mDialog = ProgressDialog.show(CalendarActivity.this, null,
                         getString(R.string.downloadingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -284,7 +302,7 @@ public class CalendarActivity extends ActionBarActivity {
                                 connectioncalendar.this.cancel(true);
                             }
                         });
-            }
+            } else {showLoading=false;}
         }
 
         @SuppressLint("SimpleDateFormat")
