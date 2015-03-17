@@ -125,6 +125,8 @@ public class TimetableActivity extends ActionBarActivity implements
             window= getWindow();
             window.setEnterTransition(new Slide(Gravity.BOTTOM));
             window.setExitTransition(new Slide(Gravity.TOP));
+			WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
+			descrizioneview.setTransitionGroup(true);
         }
         }
 
