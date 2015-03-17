@@ -75,6 +75,11 @@ public class CalendarActivity extends ActionBarActivity {
             //tintManager.setTintColor(Color.parseColor("#ab46e5"));
             tintManager.setTintColor(Color.parseColor("#AFAFAF"));
         }
+		if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.BOTTOM));
+            window.setExitTransition(new Slide(Gravity.TOP));
+        }
         if (CheckInternet()) {
             nointernet = "false";
             new connectioncalendar(true).execute();
@@ -98,8 +103,11 @@ public class CalendarActivity extends ActionBarActivity {
             db.close();
             if (!nodata.equals(verifydatenews)) {
                 nointernet = "true";
-
-                new connectioncalendar(true).execute();
+				if (Build.VERSION.SDK_INT >= 21) {
+					new connectioncalendar(false).execute();
+				} else {
+					new connectioncalendar(true).execute();
+				}
             } else {
                 Toast.makeText(this,
                         R.string.noconnection, Toast.LENGTH_LONG)
@@ -107,11 +115,6 @@ public class CalendarActivity extends ActionBarActivity {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM));
-            window.setExitTransition(new Slide(Gravity.TOP));
-        }
     }
 
     private Long getTimeDiff(String time, String curTime) throws ParseException {

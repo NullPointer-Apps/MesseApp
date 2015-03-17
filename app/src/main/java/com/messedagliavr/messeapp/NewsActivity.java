@@ -118,6 +118,21 @@ public class NewsActivity extends ActionBarActivity  {
         setContentView(R.layout.list_item);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.notizie));
+		if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            // create our manager instance after the content view is set
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            // enable status bar tint
+            tintManager.setStatusBarTintEnabled(true);
+            // enable navigation bar tint
+            tintManager.setNavigationBarTintEnabled(true);
+            //tintManager.setTintColor(Color.parseColor("#ab46e5"));
+            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
+        }
+		if (Build.VERSION.SDK_INT >= 21) {
+            window= getWindow();
+            window.setEnterTransition(new Slide(Gravity.BOTTOM));
+            window.setExitTransition(new Slide(Gravity.TOP));
+        }
         if (CheckInternet()) {
             nointernet = "false";
 
@@ -142,27 +157,15 @@ public class NewsActivity extends ActionBarActivity  {
             db.close();
             if (!nodata.equals(verifydatenews)) {
                 nointernet = "true";
+				if (Build.VERSION.SDK_INT >= 21) {
+					new connection(false).execute();
+				} else {
                 new connection(true).execute();
+				}
             } else {
                 Toast.makeText(this, R.string.noconnection,
                         Toast.LENGTH_LONG).show();
             }
-        }
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            // create our manager instance after the content view is set
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            // enable status bar tint
-            tintManager.setStatusBarTintEnabled(true);
-            // enable navigation bar tint
-            tintManager.setNavigationBarTintEnabled(true);
-            //tintManager.setTintColor(Color.parseColor("#ab46e5"));
-            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-        }
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM));
-            window.setExitTransition(new Slide(Gravity.TOP));
         }
 
     }
