@@ -18,7 +18,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
@@ -38,6 +38,8 @@ import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Databases.Database;
 import com.messedagliavr.messeapp.Dialogs.HelpPaninoDialog;
+import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
+import com.messedagliavr.messeapp.Fragments.NavigationDrawerFragment;
 import com.messedagliavr.messeapp.Utilities.MyDifferenceFromToday;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
@@ -45,12 +47,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     //GENERAL
     public static String nointernet;
     public static View rootView;
-    static Context context;
+    public static Context context;
     public static int section = 0;
     public static FragmentManager sFm;
     //PANINI
@@ -79,7 +81,6 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         context = getBaseContext();
         sFm = getSupportFragmentManager();
 
@@ -375,7 +376,7 @@ public class MainActivity extends ActionBarActivity
 
 
     public void voti(View v) {
-        Database databaseHelper = new Database(getBaseContext());
+        /*Database databaseHelper = new Database(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = {"enabled", "username", "password"};
         Cursor query = db.query("settvoti", // The table to query
@@ -410,7 +411,10 @@ public class MainActivity extends ActionBarActivity
                     .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003"));
             query.close();
             startActivity(voti);
-        }
+        }*/
+        DialogFragment login = new LoginRegistroDialog();
+        login.show(getSupportFragmentManager(),"login");
+
     }
 
     public void news(View v) {

@@ -7,4 +7,4 @@
     android:divider="@android:color/darker_gray"
     android:dividerHeight="1dp"
     android:background="#dbdbdb"
-    tools:context="com.messedagliavr.messeapp.NavigationDrawerFragment" />
+    tools:context="com.messedagliavr.messeapp.Fragments.NavigationDrawerFragment" />

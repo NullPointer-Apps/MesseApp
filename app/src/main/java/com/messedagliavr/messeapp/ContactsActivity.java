@@ -11,6 +11,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,7 +26,7 @@ import com.messedagliavr.messeapp.Utilities.ColorTool;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 
-public class ContactsActivity extends ActionBarActivity implements View.OnTouchListener {
+public class ContactsActivity extends AppCompatActivity implements View.OnTouchListener {
     static Window window;
     @Override
     public void onCreate(Bundle savedInstanceState) {

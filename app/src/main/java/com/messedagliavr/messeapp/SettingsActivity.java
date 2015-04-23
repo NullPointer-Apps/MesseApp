@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.transition.Slide;
 import android.view.Gravity;
@@ -20,11 +22,12 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.messedagliavr.messeapp.Databases.Database;
+import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 /**
  * Created by Simone on 10/03/2015.
  */
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends AppCompatActivity {
     static Window window;
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -81,6 +84,16 @@ public class SettingsActivity extends ActionBarActivity {
             window= getWindow();
             window.setEnterTransition(new Slide(Gravity.RIGHT));
             window.setExitTransition(new Slide(Gravity.LEFT));
+        }
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            // create our manager instance after the content view is set
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            // enable status bar tint
+            tintManager.setStatusBarTintEnabled(true);
+            // enable navigation bar tint
+            tintManager.setNavigationBarTintEnabled(true);
+            //tintManager.setTintColor(Color.parseColor("#ab46e5"));
+            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
         }
     }
 

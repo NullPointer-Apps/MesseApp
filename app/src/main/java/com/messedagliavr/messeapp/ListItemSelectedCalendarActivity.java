@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.transition.Slide;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 
-public class ListItemSelectedCalendarActivity extends ActionBarActivity {
+public class ListItemSelectedCalendarActivity extends AppCompatActivity {
     static Window window;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -19,7 +20,7 @@ import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 /**
  * Created by Ambrof on 17/03/15.
  */
-public class SocialActivity extends ActionBarActivity {
+public class SocialActivity extends AppCompatActivity {
     static Window window;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
@@ -26,7 +27,7 @@ import com.messedagliavr.messeapp.Databases.Database;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 @SuppressLint("DefaultLocale")
-public class TimetableActivity extends ActionBarActivity implements
+public class TimetableActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
     static Window window;
 

@@ -43,6 +43,11 @@
              android:name="android.support.PARENT_ACTIVITY"
              android:value="com.messedagliavr.messeapp.MainActivity" />
         </activity>
+        <activity android:name=".RegistroActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.messedagliavr.messeapp.MainActivity" />
+        </activity>
         <activity
             android:name="com.messedagliavr.messeapp.NewsActivity"
             android:screenOrientation="portrait" >

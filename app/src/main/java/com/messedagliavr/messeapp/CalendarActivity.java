@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.transition.Slide;
@@ -47,7 +48,7 @@ import java.util.HashMap;
 /**
  * Created by Simone on 10/03/2015.
  */
-public class CalendarActivity extends ActionBarActivity {
+public class CalendarActivity extends AppCompatActivity {
     ProgressDialog mDialog;
     public SQLiteDatabase db;
     static Window window;

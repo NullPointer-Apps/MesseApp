@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.transition.Slide;
@@ -46,7 +47,7 @@ import java.util.Locale;
 /**
  * Created by Simone on 10/03/2015.
  */
-public class NewsActivity extends ActionBarActivity  {
+public class NewsActivity extends AppCompatActivity  {
     ProgressDialog mDialog;
     public SQLiteDatabase db;
     Boolean unknhost;

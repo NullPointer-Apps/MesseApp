@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+package com.messedagliavr.messeapp.Fragments;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.messedagliavr.messeapp.Adapters.NavDrawerListAdapter;
+import com.messedagliavr.messeapp.R;
 
 
 /**
@@ -271,7 +273,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private ActionBar getActionBar() {
-        return ((ActionBarActivity) getActivity()).getSupportActionBar();
+        return ((AppCompatActivity) getActivity()).getSupportActionBar();
     }
 
     /**
