@@ -9,7 +9,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
@@ -51,8 +51,7 @@ public class TimetableActivity extends AppCompatActivity implements
     }
     public String[] items() {
         try {
-            String[] items = MainActivity.context.getResources().getStringArray(R.array.classi);
-            return items;
+            return MainActivity.context.getResources().getStringArray(R.array.classi);
         } catch (RuntimeException e) {
             Intent i = getBaseContext().getPackageManager()
                     .getLaunchIntentForPackage( getBaseContext().getPackageName() );
@@ -69,8 +68,10 @@ public class TimetableActivity extends AppCompatActivity implements
         String[] items= items();
         super.onCreate(icicle);
         setContentView(R.layout.timetable);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(getString(R.string.orario));
+        ActionBar ab = getSupportActionBar();
+        assert ab != null;
+        ab.setDisplayHomeAsUpEnabled(true);
+		ab.setTitle(getString(R.string.orario));
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
                 // create our manager instance after the content view is set
                 SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -96,7 +97,7 @@ public class TimetableActivity extends AppCompatActivity implements
         fname = classe.getString(classe.getColumnIndex("fname"));
         classe.close();
         db.close();
-        if (fname.matches("novalue") == false) {
+        if (!fname.matches("novalue")) {
 			try {
                  items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
                 
@@ -138,7 +139,7 @@ public class TimetableActivity extends AppCompatActivity implements
         String[] items= items();
         WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
         if (position == 0) {
-            if (fname.matches("novalue") == false) {
+            if (!fname.matches("novalue")) {
                 descrizioneview.getSettings().setJavaScriptEnabled(true);
                 descrizioneview.getSettings().setLoadWithOverviewMode(true);
                 descrizioneview.getSettings().setUseWideViewPort(true);

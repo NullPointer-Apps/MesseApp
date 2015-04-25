@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -32,11 +30,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.messedagliavr.messeapp.Databases.Database;
 import com.messedagliavr.messeapp.Dialogs.HelpPaninoDialog;
 import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
 import com.messedagliavr.messeapp.Fragments.NavigationDrawerFragment;
@@ -56,12 +52,12 @@ public class MainActivity extends AppCompatActivity
     public static int section = 0;
     public static FragmentManager sFm;
     //PANINI
-    public static ListView listViewpanini;
+    //public static ListView listViewpanini;
     public static ArrayList<String> names;
     public static ArrayList<String> prices;
-    public static ArrayList<Integer> numbers = new ArrayList<Integer>();
-    public static String[] piani;
-    public static String myPiano = "Primo Piano";
+    public static ArrayList<Integer> numbers = new ArrayList<>();
+    //public static String[] piani;
+    //public static String myPiano = "Primo Piano";
     public static String username;
     public static String password;
     public static ActionBar actionBar;
@@ -146,8 +142,8 @@ public class MainActivity extends AppCompatActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         if (position == 1) {
-            names = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_array)));
-            prices = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.panini_prices_array)));
+            names = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.panini_array)));
+            prices = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.panini_prices_array)));
             int n = names.size();
             for (int i = 0; i < n; i++) {
                 if (numbers.size() < n) {
@@ -203,6 +199,7 @@ public class MainActivity extends AppCompatActivity
 
     public void restoreActionBar() {
         ActionBar ActionBar = getSupportActionBar();
+        assert ActionBar != null;
         ActionBar.setDisplayHomeAsUpEnabled(true);
         ActionBar.setHomeButtonEnabled(true);
         ActionBar.setDisplayShowTitleEnabled(true);
@@ -264,16 +261,14 @@ public class MainActivity extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
-    private final int FINE_SCUOLA_ID = 1;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
             DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             if (mNavigationDrawerFragment.isDrawerOpen()) {
-                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                mDrawerLayout.closeDrawer(Gravity.START);
             } else {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
+                mDrawerLayout.openDrawer(Gravity.START);
             }
         }
         return super.onKeyDown(keyCode, event);
@@ -281,6 +276,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        final int FINE_SCUOLA_ID = 1;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -292,15 +288,15 @@ public class MainActivity extends AppCompatActivity
                 helpDialog.show(getSupportFragmentManager(), "ScontrinoDialogFragment");
                 break;
             case R.id.sendlist:
-                String[] prices = getResources().getStringArray(R.array.panini_prices_array);
-                ArrayList<Double> totals = new ArrayList<Double>();
-                ArrayList<Integer> coolposition = new ArrayList<Integer>();
+                /*String[] prices = getResources().getStringArray(R.array.panini_prices_array);
+                ArrayList<Double> totals = new ArrayList<>();
+                ArrayList<Integer> coolposition = new ArrayList<>();
                 for (int i = 0; i < prices.length; i++) {
                     totals.add(i, numbers.get(i) * Double.parseDouble(prices[i]));
                     if (numbers.get(i) != 0) {
                         coolposition.add(i);
                     }
-                }
+                }*/
                 Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
@@ -494,13 +490,12 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case 1:
                     //Panini
-                    Calendar c = Calendar.getInstance();
+                    /*Calendar c = Calendar.getInstance();
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
-                    //boolean go = (hour==10&&minute<=5)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
-                    boolean go = false;
-                    if (go) {
-                       /* rootView = inflater.inflate(R.layout.panini, container, false);
+                    boolean go = (hour==10&&minute<=5)||(hour<10&&hour>=8)||(hour==7&&minute>=45);
+                     if (go) {
+                       rootView = inflater.inflate(R.layout.panini, container, false);
                         ListAdapter adapter = new PaniniAdapter(context, names, prices);
                         listViewpanini = (ListView) rootView.findViewById(R.id.listView);
                         listViewpanini.setAdapter(adapter);
@@ -521,10 +516,10 @@ public class MainActivity extends AppCompatActivity
 
                         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spin.setAdapter(aa);
-                    */
-                    } else {
+
+                    } else {*/
                         rootView = inflater.inflate(R.layout.paninichiusa, container, false);
-                    }
+                    //}
                     break;
                 case 2:
                     startActivity(new Intent(MainActivity.context, SettingsActivity.class));

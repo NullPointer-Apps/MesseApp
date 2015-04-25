@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.transition.Slide;
@@ -24,16 +24,15 @@ import android.widget.ToggleButton;
 import com.messedagliavr.messeapp.Databases.Database;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
-/**
- * Created by Simone on 10/03/2015.
- */
 public class SettingsActivity extends AppCompatActivity {
     static Window window;
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.settings);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.settings));
+        ActionBar ab= getSupportActionBar();
+        assert ab != null;
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(getString(R.string.settings));
         EditText user = (EditText) findViewById(R.id.username);
         EditText password = (EditText) findViewById(R.id.password);
         CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
@@ -76,14 +75,16 @@ public class SettingsActivity extends AppCompatActivity {
                 "paniniauth", Context.MODE_PRIVATE);
         String usernsett = prefs.getString("username", "default");
         String passwsett = prefs.getString("password", "default");
+        assert usernsett != null;
+        assert passwsett != null;
         if (!usernsett.equals("default") && !passwsett.equals("default")) {
             usernamepanini.setText(usernsett);
             passwordpanini.setText(passwsett);
         }
         if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.RIGHT));
-            window.setExitTransition(new Slide(Gravity.LEFT));
+            window.setEnterTransition(new Slide(Gravity.END));
+            window.setExitTransition(new Slide(Gravity.START));
         }
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // create our manager instance after the content view is set
@@ -188,7 +189,7 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username",((EditText) findViewById(R.id.usernamepanini)).getText().toString());
         editor.putString("password",((EditText) findViewById(R.id.passwordpanini)).getText().toString());
-        editor.commit();
+        editor.apply();
         Toast.makeText(this,"Impostazioni correttamente salvate",Toast.LENGTH_LONG).show();
     }
 }

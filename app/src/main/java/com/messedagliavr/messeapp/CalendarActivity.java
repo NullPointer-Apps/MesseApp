@@ -1,6 +1,7 @@
 package com.messedagliavr.messeapp;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -17,7 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
@@ -44,10 +45,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
-/**
- * Created by Simone on 10/03/2015.
- */
 public class CalendarActivity extends AppCompatActivity {
     ProgressDialog mDialog;
     public SQLiteDatabase db;
@@ -64,8 +63,10 @@ public class CalendarActivity extends AppCompatActivity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.list_item);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.eventi));
+        ActionBar ab = getSupportActionBar();
+        assert ab != null;
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(getString(R.string.eventi));
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // create our manager instance after the content view is set
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -121,17 +122,17 @@ public class CalendarActivity extends AppCompatActivity {
     private Long getTimeDiff(String time, String curTime) throws ParseException {
         Date curDate = null;
         Date oldDate = null;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         try {
             curDate = formatter.parse(curTime);
             oldDate = formatter.parse(time);
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
+        assert oldDate != null;
         long oldMillis = oldDate.getTime();
         long curMillis = curDate.getTime();
-        long diff = curMillis - oldMillis;
-        return diff;
+        return curMillis - oldMillis;
     }
 
     public boolean CheckInternet() {
@@ -159,7 +160,7 @@ public class CalendarActivity extends AppCompatActivity {
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             ContentValues nowdb = new ContentValues();
             nowdb.put("calendardate", "2012-02-20 15:00:00");
-            long samerow = db.update("lstchk", nowdb, null, null);
+            db.update("lstchk", nowdb, null, null);
             db.close();
             MainActivity.nointernet = "false";
             connectioncalendar calendar = new connectioncalendar(false);
@@ -194,13 +195,13 @@ public class CalendarActivity extends AppCompatActivity {
 
     @SuppressLint("SimpleDateFormat")
     public class eventparser extends AsyncTask<Void, Void, Void> {
+        @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
         @Override
         protected Void doInBackground(Void... params) {
             String ical = "https://www.messedaglia.it/caltoxml.php?id=" + idical;
             XMLParser parser = new XMLParser();
             String xml = parser.getXmlFromUrl(ical);
-            if (xml.equals("UnknownHostException")) {
-            } else {
+            if (!xml.equals("UnknownHostException")) {
                 Document doc = parser.getDomElement(xml);
                 NodeList nl = doc.getElementsByTagName("VEVENT");
 
@@ -219,11 +220,11 @@ public class CalendarActivity extends AppCompatActivity {
                 dati[4] = parser.getValue(e, "DTEND");
                 SimpleDateFormat dateFormat = new SimpleDateFormat(
                         "yyyyMMdd'T'HHmmss");
-                Date fine = null;
-                Date inizio = null;
+                Date fine;
+                Date inizio;
                 try {
-                    fine = dateFormat.parse(dati[4].toString());
-                    inizio = dateFormat.parse(dati[3].toString());
+                    fine = dateFormat.parse(dati[4]);
+                    inizio = dateFormat.parse(dati[3]);
                     Intent intent = new Intent(Intent.ACTION_INSERT)
                             .setType("vnd.android.cursor.item/event")
                             .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
@@ -272,7 +273,7 @@ public class CalendarActivity extends AppCompatActivity {
             db = databaseHelper.getWritableDatabase();
 			String[] outdated = {"newsdate", "calendardate"};
             Calendar c = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.getDefault());
             String now = df.format(c.getTime());
             Cursor date = db.query("lstchk", // The table to query
 								   outdated, // The columns to return
@@ -287,7 +288,7 @@ public class CalendarActivity extends AppCompatActivity {
             date.close();
             db.close();
             long l = getTimeDiff(past, now);
-            if (nointernet == "true" && showLoading == true && l / 10800000 >= 3) {
+            if (nointernet.equals("true") && showLoading && l / 10800000 >= 3) {
                 mDialog = ProgressDialog.show(CalendarActivity.this, null,
                         getString(R.string.retrievingEvents), true, true,
                         new DialogInterface.OnCancelListener() {
@@ -323,15 +324,14 @@ public class CalendarActivity extends AppCompatActivity {
             Database databaseHelper = new Database(getBaseContext());
             db = databaseHelper.getWritableDatabase();
             HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
-            ArrayList<Spanned> titoli = new ArrayList<Spanned>();
-            ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
-            ArrayList<Spanned> titolib = new ArrayList<Spanned>();
+            ArrayList<Spanned> titoli = new ArrayList<>();
+            ArrayList<Spanned> descrizioni = new ArrayList<>();
+            ArrayList<Spanned> titolib = new ArrayList<>();
             final String URL = "https://www.messedaglia.it/index.php?option=com_jevents&task=modlatest.rss&format=feed&type=rss&Itemid=127&modid=162";
-            String URLE = "https://www.messedaglia.it/caltoxml.php?id=";
             final String ITEM = "item";
             final String TITLE = "title";
             final String DESC = "description";
-            Element e, e2 = null;
+            Element e, e2;
             String[] outdated = { "newsdate", "calendardate" };
             Calendar c = Calendar.getInstance();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -348,10 +348,10 @@ public class CalendarActivity extends AppCompatActivity {
             String past = date.getString(date.getColumnIndex("calendardate"));
             date.close();
             long l = getTimeDiff(past, now);
-            if (l / 10800000 >= 3 && nointernet != "true") {
+            if (l / 10800000 >= 3 && !nointernet.equals("true")) {
                 XMLParser parser = new XMLParser();
                 String xml = parser.getXmlFromUrl(URL);
-                if (xml == "UnknownHostException") {
+                if (xml.equals("UnknownHostException")) {
                     unknhost = true;
                     db.close();
                     return temhashmap;
@@ -360,11 +360,10 @@ public class CalendarActivity extends AppCompatActivity {
                     NodeList nl;
                     nl = doc.getElementsByTagName(ITEM);
                     ContentValues values = new ContentValues();
-                    Boolean ok = false;
-                    String description="";
-                    HashMap<String, Integer> doppioni = new HashMap<String, Integer>();
+                    String description;
+                    HashMap<String, Integer> doppioni = new HashMap<>();
                     for (int i = 1; i < nl.getLength(); i++) {
-                        HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+                        HashMap<String, Spanned> map = new HashMap<>();
                         e = (Element) nl.item(i);
                         e2 = (Element) nl.item(i - 1);
                         String idnp = parser.getValue(e, "link");
@@ -390,10 +389,8 @@ public class CalendarActivity extends AppCompatActivity {
                         char[] icalar = icalr.toCharArray();
                         char[] icalar2 = icalr2.toCharArray();
                         String ical = "";
-                        String ical2 = "";
                         for (int k = icalr.length() - 2; k > -1; k--) {
                             ical += icalar[k];
-                            ical2 += icalar2[k];
                         }
                         values.put("ical", ical);
                         values.put("_id", i);
@@ -402,14 +399,14 @@ public class CalendarActivity extends AppCompatActivity {
                             int d = doppioni.get(ical);
                             doppioni.remove(ical);
                             d++;
-                            doppioni.put(ical, d++);
+                            doppioni.put(ical, d);
                         } else {
                             doppioni.put(ical, 0);
                         }
                         String tito = parser.getValue(e, TITLE);
                         int n = tito.charAt(0);
                         int n2 = tito.charAt(1);
-                        StringBuffer buf = new StringBuffer(tito);
+                        StringBuilder buf = new StringBuilder(tito);
 
                         switch (tito.charAt(3) + tito.charAt(4)
                                 + tito.charAt(5)) {
@@ -832,7 +829,7 @@ public class CalendarActivity extends AppCompatActivity {
                     }
                     ContentValues nowdb = new ContentValues();
                     nowdb.put("calendardate", now);
-                    long samerow = db.update("lstchk", nowdb, null, null);
+                    db.update("lstchk", nowdb, null, null);
                     db.close();
                     temhashmap.put("titoli", titoli);
                     temhashmap.put("descrizioni", descrizioni);
@@ -857,7 +854,7 @@ public class CalendarActivity extends AppCompatActivity {
                 );
 
                 for (data.move(0); data.moveToNext(); data.isAfterLast()) {
-                    HashMap<String, Spanned> map = new HashMap<String, Spanned>();
+                    HashMap<String, Spanned> map = new HashMap<>();
                     map.put(TITLE, Html.fromHtml(data.getString(data
                             .getColumnIndex("title"))));
                     map.put(DESC, Html.fromHtml(data.getString(data
