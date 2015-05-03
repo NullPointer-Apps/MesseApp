@@ -30,7 +30,7 @@ public class VotiFragment extends ListFragment {
 
         double somma=0;
         int size = v.size();
-        Log.d("SIZE",v.size()+"");
+        Log.d("SIZE",size+"");
         c=context;
 
         for (Materia m : v.values()){
@@ -38,6 +38,7 @@ public class VotiFragment extends ListFragment {
                 somma += m.mediaVoti("tutti", num + 1);
             } else size--;
         }
+
         BigDecimal bd;
         if (size!=0) {
             bd = new BigDecimal(somma / size);
@@ -56,7 +57,11 @@ public class VotiFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments()!=null) {
-            lma = new ListMaterieAdapter(c, new ArrayList<>(RegistroActivity.v.values()), "tutti", getArguments().getInt("num"));
+            ArrayList<Materia> t = new ArrayList<>();
+            for (int i = 1; i <= RegistroActivity.v.size() ; i++) {
+                t.add(RegistroActivity.v.get(i));
+            }
+            lma = new ListMaterieAdapter(c, t, "tutti", getArguments().getInt("num"));
             m=getArguments().getDouble("media");
         }
 

@@ -48,10 +48,9 @@ public class Materia
   }
 
   public boolean haVoti(String tipo, int q){
-      if (voti.size()>0) {
-          for (Voto v : voti.values()) {
-            if ((v.getQuadrimestre() == q||q==3) && (v.getTipo().equals(tipo)||tipo.equals("tutti"))) return true;
-          }
+      HashMap<Integer,Voto> vv = getVoti();
+      for (Voto v : vv.values()){
+          if ((v.getQuadrimestre() == q||q==3) && (v.getTipo().equals(tipo)||tipo.equals("tutti"))) return true;
       }
       return false;
   }

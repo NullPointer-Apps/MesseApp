@@ -69,18 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         query.close();
 
-        EditText usernamepanini = (EditText) findViewById(R.id.usernamepanini);
-        EditText passwordpanini = (EditText) findViewById(R.id.passwordpanini);
-        SharedPreferences prefs = this.getSharedPreferences(
-                "paniniauth", Context.MODE_PRIVATE);
-        String usernsett = prefs.getString("username", "default");
-        String passwsett = prefs.getString("password", "default");
-        assert usernsett != null;
-        assert passwsett != null;
-        if (!usernsett.equals("default") && !passwsett.equals("default")) {
-            usernamepanini.setText(usernsett);
-            passwordpanini.setText(passwsett);
-        }
+
         if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
             window.setEnterTransition(new Slide(Gravity.RIGHT));
@@ -98,16 +87,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    public void onCheckClickedPanini(View view) {
-        CheckBox toggle = (CheckBox) findViewById(R.id.checkBoxPaniniSettings);
-        EditText password = (EditText) findViewById(R.id.passwordpanini);
-        if (toggle.isChecked()) {
-            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        } else {
-            password.setInputType(129);
-        }
-        password.setSelection(password.getText().length());
-    }
 
     public void onSaveClicked(View view) {
         EditText usert = (EditText) findViewById(R.id.username);
@@ -183,13 +162,4 @@ public class SettingsActivity extends AppCompatActivity {
         password.setSelection(password.getText().length());
     }
 
-    public void salvaPanini(View v){
-        SharedPreferences prefs = MainActivity.context.getSharedPreferences(
-                "paniniauth", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("username",((EditText) findViewById(R.id.usernamepanini)).getText().toString());
-        editor.putString("password",((EditText) findViewById(R.id.passwordpanini)).getText().toString());
-        editor.apply();
-        Toast.makeText(this,"Impostazioni correttamente salvate",Toast.LENGTH_LONG).show();
-    }
 }

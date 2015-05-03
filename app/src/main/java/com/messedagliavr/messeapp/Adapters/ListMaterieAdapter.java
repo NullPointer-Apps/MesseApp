@@ -1,24 +1,16 @@
 package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SubscriptSpan;
-import android.text.style.SuperscriptSpan;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.messedagliavr.messeapp.Objects.Materia;
@@ -26,6 +18,7 @@ import com.messedagliavr.messeapp.Objects.Voto;
 import com.messedagliavr.messeapp.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ListMaterieAdapter extends ArrayAdapter<Materia> {
     String tipo="";
@@ -56,8 +49,10 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
         avg.setText("media: "+medie.get(position));
 
         tbVoti.removeAllViews();
-        for (Voto v : materia.getVoti().values()){
 
+        HashMap<Integer,Voto> vv = materia.getVoti();
+        for (int i = 1; i <= vv.size(); i++) {
+            Voto v = vv.get(i);
             String votos = v.getVoto();
             TextView voto = new TextView(getContext());
             SpannableString cs;

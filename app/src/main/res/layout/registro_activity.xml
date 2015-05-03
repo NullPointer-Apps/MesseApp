@@ -25,4 +25,16 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp" />
 
+    <CheckBox
+        android:id="@+id/chkBoxRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ricordami"
+        android:textColorHint="@android:color/black"
+        android:textColorLink="@android:color/black"
+        android:visibility="visible"
+        android:layout_below="@+id/editPW"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"/>
+
 </LinearLayout>

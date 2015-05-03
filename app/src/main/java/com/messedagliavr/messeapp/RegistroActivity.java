@@ -190,40 +190,48 @@ public class RegistroActivity extends AppCompatActivity {
 
     public HashMap<Integer,Materia> scaricaVoti(Element html) throws IOException {
         v = new HashMap<>();
-        int j=0,k=0;
+        int j=0,k=0,nv=0;
         Materia materia = new Materia();
 
         for (Element tr : html.select("tr")) {
             for (Element td : tr.select("td")) {
                 //ha classe font-size-14 (Materie)
+                if (td.text().equals("Test")){
+                    continue;
+                }
                 if (td.hasClass("font_size_14") && td.hasText()) {
                     materia = new Materia(td.text());
                     k++;
+                    System.out.println(td.text()+k);
                     v.put(k,materia);
                     j = 0;
+                    nv=0;
                 } else {
                     j++;
-                    Voto voto = new Voto();
-                    for (Element span : td.getElementsByTag("span")) {
-                        if (span.hasClass("voto_data") && span.hasText()) {
-                            voto.setData(span.text());
-                        }
-                    }
-                    for (Element p : td.getElementsByTag("p")) {
-                        if (p.hasText() && p.hasClass("s_reg_testo")) {
-                            if ((j <= 5) || (j > 15 && j <= 20))
-                                voto.setTipo("Scritto");
-                            else if ((j > 6 && j <= 10) || (j > 20 || j <= 25))
-                                voto.setTipo("Orale");
-                            else voto.setTipo("Pratico");
-                            if (j > 15) {
-                                voto.setQuadrimestre(2);
-                            } else {
-                                voto.setQuadrimestre(1);
+                    if (td.hasText()){
+                        nv++;
+                        Voto voto = new Voto();
+                        for (Element span : td.getElementsByTag("span")) {
+                            if (span.hasClass("voto_data") && span.hasText()) {
+                                voto.setData(span.text());
                             }
-                            voto.setVoto(p.text());
-                            materia.addVoto(j,voto);
-
+                        }
+                        for (Element p : td.getElementsByTag("p")) {
+                            if (p.hasText() && p.hasClass("s_reg_testo")) {
+                                if ((j <= 5) || (j > 15 && j <= 20))
+                                    voto.setTipo("Scritto");
+                                else if ((j > 5 && j <= 10) || (j > 20 || j <= 25))
+                                    voto.setTipo("Orale");
+                                else voto.setTipo("Pratico");
+                                if (j > 15) {
+                                    voto.setQuadrimestre(2);
+                                } else {
+                                    voto.setQuadrimestre(1);
+                                }
+                                voto.setVoto(p.text());
+                                System.out.println(p.text()+nv);
+                                materia.addVoto(nv, voto);
+                            }
                         }
                     }
                 }

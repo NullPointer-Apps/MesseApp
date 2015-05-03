@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -107,13 +109,27 @@ public class LoginRegistroDialog extends DialogFragment {
                 .setTitle("Login")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        CheckBox toggle = (CheckBox) login.findViewById(R.id.chkBoxRegistro);
 
                         EditText editU = (EditText) login.findViewById(R.id.editU);
                         EditText editPW = (EditText) login.findViewById(R.id.editPW);
+                        if (toggle.isChecked()) {
+                            String username = editU.getText().toString();
+                            String password = editPW.getText().toString();
+                            MainDB databaseHelper = new MainDB(login.getContext());
+                            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                            ContentValues values = new ContentValues();
+                            values.put("enabled", "true");
+                            values.put("username", username);
+                            values.put("password", password);
+                            @SuppressWarnings("unused")
+                            long samerow = db.update("settvoti", values, null, null);
+                            db.close();
 
-                            user = editU.getText().toString().trim();
-                            pw = editPW.getText().toString().trim();
+                        }
 
+                        user = editU.getText().toString().trim();
+                        pw = editPW.getText().toString().trim();
 
 
                         values.add(new BasicNameValuePair("custcode", custcode));
