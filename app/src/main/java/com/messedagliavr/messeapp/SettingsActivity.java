@@ -21,7 +21,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.messedagliavr.messeapp.Databases.Database;
+import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -38,7 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
         CheckBox check = (CheckBox) findViewById(R.id.checkBox1);
         Button save = (Button) findViewById(R.id.savesett);
         ToggleButton toggle = (ToggleButton) findViewById(R.id.saveenabled);
-        Database databaseHelpersettings = new Database(this);
+        MainDB databaseHelpersettings = new MainDB(this);
         SQLiteDatabase dbsettings = databaseHelpersettings.getWritableDatabase();
         String[] columnssettings = {"enabled", "username", "password"};
         Cursor query = dbsettings.query("settvoti", // The table to query
@@ -83,8 +83,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
         if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.END));
-            window.setExitTransition(new Slide(Gravity.START));
+            window.setEnterTransition(new Slide(Gravity.RIGHT));
+            window.setExitTransition(new Slide(Gravity.LEFT));
         }
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // create our manager instance after the content view is set
@@ -114,7 +114,7 @@ public class SettingsActivity extends AppCompatActivity {
         EditText passwordt = (EditText) findViewById(R.id.password);
         String username = usert.getText().toString();
         String password = passwordt.getText().toString();
-        Database databaseHelper = new Database(getBaseContext());
+        MainDB databaseHelper = new MainDB(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("enabled", "true");
@@ -135,7 +135,7 @@ public class SettingsActivity extends AppCompatActivity {
         Button save = (Button) findViewById(R.id.savesett);
         CheckBox checkbox = (CheckBox) findViewById(R.id.checkBox1);
         if (on) {
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             String[] columns = {"username", "password"};
             Cursor query = db.query("settvoti", // The table to query
@@ -160,7 +160,7 @@ public class SettingsActivity extends AppCompatActivity {
             password.setVisibility(View.GONE);
             save.setVisibility(View.GONE);
             checkbox.setVisibility(View.GONE);
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("enabled", "false");

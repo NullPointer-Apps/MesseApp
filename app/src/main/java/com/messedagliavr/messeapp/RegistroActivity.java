@@ -30,6 +30,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -165,6 +166,11 @@ public class RegistroActivity extends AppCompatActivity {
         }
     }
 
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
     //parsing della pagina
     public Document leggiPagina(String url)
     {
@@ -173,7 +179,7 @@ public class RegistroActivity extends AppCompatActivity {
             //httpGet.addHeader("If-Modified-Since", DateFormat.format("Y-m-d h-M-s", new Date()).toString());
             InputStream inputStream;
             inputStream = httpClient.execute(httpGet).getEntity().getContent();
-            Document s1 = Jsoup.parse(inputStream, null, url);
+            Document s1 = Jsoup.parse(convertStreamToString(inputStream), "UTF-8", Parser.xmlParser());
             inputStream.close();
             return s1;
         } catch (IOException e) {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class Database extends SQLiteOpenHelper {
+public class MainDB extends SQLiteOpenHelper {
     public static final String NOME_DB = "messeapp.db";
     public static final int VERSIONE_DB = 10;
 
@@ -17,11 +17,11 @@ public class Database extends SQLiteOpenHelper {
     private static final String POPULATE_CLASS = "INSERT INTO class VALUES ('novalue');";
     private static final String POPULATE_SETTVOTI = "INSERT INTO settvoti VALUES('false','','');";
 
-    public Database(Context context) {
+    public MainDB(Context context) {
         super(context, NOME_DB, null, VERSIONE_DB);
     }
 
-    public Database() {
+    public MainDB() {
         super(null, null, null, 0);
     }
     // crea il database se non esiste

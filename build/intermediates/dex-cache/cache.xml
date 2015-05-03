@@ -2,53 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/Ambrof/Desktop/Progetti/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-293f27d50c3b02fcf19d537a9f0a029367c920aa.jar" />
-    </item>
-    <item
-        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-273f950cb10432d7ff4bd95a3316d54c43abc339.jar" />
-    </item>
-    <item
-        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e0b0c35d02308b270015a74cada4887e2e49b889">
-        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-36ef820ab59642486f5dd6e50a78349b090c9442.jar" />
-    </item>
-    <item
-        jar="/Users/Ambrof/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.8.2/64238922c4006c3d0a9951c4c03983ecc6a1e1a0/jsoup-1.8.2.jar"
+        jar="C:\Users\Simone\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.8.2\64238922c4006c3d0a9951c4c03983ecc6a1e1a0\jsoup-1.8.2.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="64238922c4006c3d0a9951c4c03983ecc6a1e1a0">
-        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/jsoup-1.8.2-359ef905c933a906694d4687d19a1f54c70aefce.jar" />
-    </item>
-    <item
-        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="22886d910315028a2b34b1ba068c265534ade87a">
-        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-9afb6800659602d3c3d9f0b13d0400aa1589cf52.jar" />
-    </item>
-    <item
-        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/classes-79e72eb40f611f8781f1bf5b1442794c3bcf6230.jar" />
-    </item>
-    <item
-        jar="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="/Users/Ambrof/Desktop/Progetti/MesseApp/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-58ab30b8d56bcf485328191670ac4f0152fe8d8c.jar" />
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\jsoup-1.8.2-0a2db2340b6ec388002da8cf32bf32eefb3077ab.jar" />
     </item>
 
 </items>

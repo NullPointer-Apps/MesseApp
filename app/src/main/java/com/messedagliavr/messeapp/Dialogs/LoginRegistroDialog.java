@@ -15,20 +15,17 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.messedagliavr.messeapp.Databases.Database;
+import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.MainActivity;
 import com.messedagliavr.messeapp.R;
 import com.messedagliavr.messeapp.RegistroActivity;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -53,7 +50,7 @@ public class LoginRegistroDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         a=getActivity();
-        Database databaseHelper = new Database(MainActivity.context);
+        MainDB databaseHelper = new MainDB(MainActivity.context);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = {"enabled", "username", "password"};
         Cursor query = db.query("settvoti", // The table to query
@@ -155,7 +152,7 @@ public class LoginRegistroDialog extends DialogFragment {
             //httpGet.addHeader("If-Modified-Since", DateFormat.format("Y-m-d h-M-s", new Date()).toString());
             InputStream inputStream;
             inputStream = RegistroActivity.httpClient.execute(httpGet).getEntity().getContent();
-            Document s1 = Jsoup.parse(inputStream, null, url);
+            Document s1 = Jsoup.parse(inputStream, "UTF-8", url);
             inputStream.close();
             return s1;
         } catch (IOException e) {
@@ -173,7 +170,6 @@ public class LoginRegistroDialog extends DialogFragment {
         catch (Exception e){
             e.printStackTrace();
         }
-        Log.i("html", s2);
         return s2.substring(0, 150).contains("<html class=\"login_page\">");
     }
 

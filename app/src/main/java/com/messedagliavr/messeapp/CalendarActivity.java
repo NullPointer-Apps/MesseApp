@@ -32,7 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.messedagliavr.messeapp.Databases.Database;
+import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.Parsers.XMLParser;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
@@ -87,7 +87,7 @@ public class CalendarActivity extends AppCompatActivity {
 				new connectioncalendar(true).execute();
         } else {
             String[] outdated = {"newsdate", "calendardate"};
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             String nodata = "1995-01-19 23:40:20";
             Cursor date = db.query("lstchk", // The table to query
@@ -156,7 +156,7 @@ public class CalendarActivity extends AppCompatActivity {
 
     public void refreshCalendar() {
         if (CheckInternet()) {
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             ContentValues nowdb = new ContentValues();
             nowdb.put("calendardate", "2012-02-20 15:00:00");
@@ -269,7 +269,7 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         public void onPreExecute() {
-			Database databaseHelper = new Database(getBaseContext());
+			MainDB databaseHelper = new MainDB(getBaseContext());
             db = databaseHelper.getWritableDatabase();
 			String[] outdated = {"newsdate", "calendardate"};
             Calendar c = Calendar.getInstance();
@@ -321,7 +321,7 @@ public class CalendarActivity extends AppCompatActivity {
         @SuppressLint("SimpleDateFormat")
         public HashMap<String, ArrayList<Spanned>> doInBackground(
                 Void... params) {
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             db = databaseHelper.getWritableDatabase();
             HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
             ArrayList<Spanned> titoli = new ArrayList<>();

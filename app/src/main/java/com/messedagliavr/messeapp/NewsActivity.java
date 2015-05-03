@@ -15,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
@@ -28,7 +27,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Adapters.NewsAdapter;
-import com.messedagliavr.messeapp.Databases.Database;
+import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.Parsers.XMLParser;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
@@ -96,7 +95,7 @@ public class NewsActivity extends AppCompatActivity  {
 
     public void refreshNews() {
         if (CheckInternet()) {
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             ContentValues nowdb = new ContentValues();
             nowdb.put("newsdate", "2012-02-20 15:00:00");
@@ -140,7 +139,7 @@ public class NewsActivity extends AppCompatActivity  {
 			
         } else {
             String[] outdated = {"newsdate", "calendardate"};
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             String nodata = "1995-01-19 23:40:20";
             Cursor date = db.query("lstchk", // The table to query
@@ -187,7 +186,7 @@ public class NewsActivity extends AppCompatActivity  {
         }
 
         public void onPreExecute() {
-			Database databaseHelper = new Database(getBaseContext());
+			MainDB databaseHelper = new MainDB(getBaseContext());
             db = databaseHelper.getWritableDatabase();
 			String[] outdated = {"newsdate", "calendardate"};
             Calendar c = Calendar.getInstance();
@@ -238,7 +237,7 @@ public class NewsActivity extends AppCompatActivity  {
         public HashMap<String, ArrayList<Spanned>> doInBackground(
                 Void... params) {
             unknhost=false;
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             db = databaseHelper.getWritableDatabase();
             HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
             ArrayList<Spanned> titoli = new ArrayList<Spanned>();

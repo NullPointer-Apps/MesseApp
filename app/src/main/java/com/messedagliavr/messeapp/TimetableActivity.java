@@ -23,7 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.messedagliavr.messeapp.Databases.Database;
+import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 @SuppressLint("DefaultLocale")
@@ -82,7 +82,7 @@ public class TimetableActivity extends AppCompatActivity implements
                 //tintManager.setTintColor(Color.parseColor("#ab46e5"));
                 tintManager.setTintColor(Color.parseColor("#AFAFAF"));
         }
-        Database databaseHelper = new Database(getBaseContext());
+        MainDB databaseHelper = new MainDB(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = { "fname" };
         Cursor classe = db.query("class", // The table to query
@@ -153,7 +153,7 @@ public class TimetableActivity extends AppCompatActivity implements
                 descrizioneview.loadData("", "text/html", "UTF-8");
             }
         } else {
-            Database databaseHelper = new Database(getBaseContext());
+            MainDB databaseHelper = new MainDB(getBaseContext());
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("fname", items[position].toLowerCase());
@@ -175,7 +175,7 @@ public class TimetableActivity extends AppCompatActivity implements
     @SuppressWarnings("unused")
     public void onNothingSelected(AdapterView<?> parent) {
         WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
-        Database databaseHelper = new Database(getBaseContext());
+        MainDB databaseHelper = new MainDB(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("fname", "novalue");
