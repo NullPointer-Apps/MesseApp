@@ -157,7 +157,6 @@ public class LoginRegistroDialog extends DialogFragment {
             inputStream = RegistroActivity.httpClient.execute(httpGet).getEntity().getContent();
             Document s1 = Jsoup.parse(inputStream, null, url);
             inputStream.close();
-            System.out.println(s1.toString());
             return s1;
         } catch (IOException e) {
             e.printStackTrace();

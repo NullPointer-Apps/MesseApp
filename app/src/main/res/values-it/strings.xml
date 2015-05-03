@@ -205,4 +205,5 @@
         <item>Piano Terra</item>
         <item>Secondo Piano</item>
     </string-array>
+    <string name="gotowebsite">Vai al sito</string>
 </resources>

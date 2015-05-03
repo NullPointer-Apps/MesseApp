@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void paniniplus(View i) {
+    /*public void paniniplus(View i) {
         View parent = (View) (i.getParent());
         TextView num = (TextView) parent.findViewById(R.id.numeroPanini);
         TextView hidden = (TextView) parent.findViewById(R.id.position);
@@ -129,19 +129,19 @@ public class MainActivity extends AppCompatActivity
         num.setText(String.valueOf(numint));
         int position = Integer.parseInt((hidden.getText()).toString());
         numbers.set(position, numint);
-    }
+    }*/
 
-    public void showInfoPanino(View i) {/*
+    /*public void showInfoPanino(View i) {
         View parent = (View)i.getParent().getParent();
         TextView title =(TextView) parent.findViewById(R.id.firstLinear).findViewById(R.id.nomeItemPanino);
         DialogFragment infoDialog = new InfoPaninoDialog(title.getText().toString());
-        infoDialog.show(getSupportFragmentManager(), "InfoDialogFragment");*/
-    }
+        infoDialog.show(getSupportFragmentManager(), "InfoDialogFragment");
+    }*/
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        if (position == 1) {
+        /*if (position == 1) {
             names = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.panini_array)));
             prices = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.panini_prices_array)));
             int n = names.size();
@@ -152,6 +152,12 @@ public class MainActivity extends AppCompatActivity
                     numbers.set(i, 0);
                 }
             }
+        }*/
+        if (position==4){
+            Intent voti = new Intent(Intent.ACTION_VIEW);
+            voti.setData(Uri
+                    .parse("https://www.messedaglia.it"));
+            startActivity(voti);
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -185,13 +191,13 @@ public class MainActivity extends AppCompatActivity
             case 2:
                 mTitle = getString(R.string.settings);
                 break;
-            case 5:
+            case 6:
                 mTitle = getString(R.string.Info);
                 break;
-            case 6:
+            case 7:
                 mTitle = "Social";
                 break;
-            case 11:
+            case 12:
                 mTitle = getString(R.string.fine_scuola);
                 break;
         }
@@ -216,11 +222,11 @@ public class MainActivity extends AppCompatActivity
                     //Panini
                     getMenuInflater().inflate(R.menu.panini, menu);
                     break;
-                case 10:
+                case 11:
                     //Circolari
                     getMenuInflater().inflate(R.menu.notices, menu);
                     break;
-                case 11:
+                case 12:
                     //Fine Scuola
                     getMenuInflater().inflate(R.menu.fine_scuola, menu);
                     break;
@@ -241,14 +247,14 @@ public class MainActivity extends AppCompatActivity
         menu.clear();
         switch (section) {
             case 1:
-                //News
+                //Panini
                 getMenuInflater().inflate(R.menu.panini, menu);
                 break;
-            case 10:
+            case 11:
                 //Circolari
                 getMenuInflater().inflate(R.menu.notices, menu);
                 break;
-            case 11:
+            case 12:
                 //Fine Scuola
                 getMenuInflater().inflate(R.menu.fine_scuola, menu);
                 break;
@@ -528,7 +534,7 @@ public class MainActivity extends AppCompatActivity
                     //contacts
                     startActivity(new Intent(getActivity(), ContactsActivity.class));
                     break;
-                case 4:
+                case 5:
                     //suggestion
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle(getString(R.string.suggestion));
@@ -563,26 +569,26 @@ public class MainActivity extends AppCompatActivity
                             });
                     builder.show();
                     break;
-                case 5:
+                case 6:
                     //info
                     rootView = inflater.inflate(R.layout.info, container, false);
                     String versionName = MainActivity.pinfo.versionName;
                     TextView vername = (TextView) rootView.findViewById(R.id.versionname);
                     vername.setText(versionName);
                     break;
-                case 6:
+                case 7:
                     //social
                     rootView = inflater.inflate(R.layout.social, container, false);
 
                     break;
-                case 11:
+                case 12:
                     //Fine Scuola
                     rootView = inflater.inflate(R.layout.fine_scuola, container, false);
                     MyDifferenceFromToday diff = new MyDifferenceFromToday(2015, 6, 10, 13, 0);
                     TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
                     end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                     break;
-                case 12:
+                case 13:
                     rootView = inflater.inflate(R.layout.noevents, container, false);
                     break;
             }
@@ -596,9 +602,5 @@ public class MainActivity extends AppCompatActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
-
-
-
-
 }
 

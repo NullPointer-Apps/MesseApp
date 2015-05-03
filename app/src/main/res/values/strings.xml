@@ -208,4 +208,5 @@
         <item>Ground Floor</item>
         <item>Second Floor</item>
     </string-array>
+    <string name="gotowebsite">Go to website</string>
 </resources>

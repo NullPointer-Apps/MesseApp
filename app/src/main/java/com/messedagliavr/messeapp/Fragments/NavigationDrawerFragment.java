@@ -102,11 +102,12 @@ public class NavigationDrawerFragment extends Fragment {
         });
         String[] titles = new String[]{
                 "Home",
-                "Panini",
+                getString(R.string.panini),
                 getString(R.string.settings),
                 getString(R.string.contatti),
+                getString(R.string.gotowebsite),
                 getString(R.string.suggestion),
-                "Info"
+                getString(R.string.Info)
         };
 
         String [] images = new String [] {
@@ -114,6 +115,7 @@ public class NavigationDrawerFragment extends Fragment {
                 "paniniicon",
                 "settingsicon",
                 "contactsicon",
+                "webicon",
                 "consiglioicon",
                 "infoicon"
         };
@@ -175,7 +177,7 @@ public class NavigationDrawerFragment extends Fragment {
                     mUserLearnedDrawer = true;
                     SharedPreferences sp = PreferenceManager
                             .getDefaultSharedPreferences(getActivity());
-                    sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).commit();
+                    sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
@@ -254,11 +256,8 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 
     /**
