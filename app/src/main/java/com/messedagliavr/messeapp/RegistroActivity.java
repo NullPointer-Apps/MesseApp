@@ -3,7 +3,9 @@ package com.messedagliavr.messeapp;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -80,6 +83,14 @@ public class RegistroActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        getMenuInflater().inflate(R.menu.registro_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -97,6 +108,22 @@ public class RegistroActivity extends AppCompatActivity {
                         break;
                 }
                 return true;
+            case R.id.ftosite:
+                String user = getIntent().getStringExtra("USER");
+                String password = getIntent().getStringExtra("PWD");
+                Intent voti = new Intent(Intent.ACTION_VIEW);
+                if(user.contains("@")) {
+                    voti.setData(Uri
+                            .parse("https://web.spaggiari.eu/home/app/default/login_email.php?custcode=VRLS0003&login="
+                                    + user + "&password=" + password));
+                } else {
+                    voti.setData(Uri
+                            .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="
+                                    + user + "&password=" + password));
+                }
+                startActivity(voti);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -192,14 +219,26 @@ public class RegistroActivity extends AppCompatActivity {
         v = new HashMap<>();
         int j=0,k=0,nv=0;
         Materia materia = new Materia();
+        boolean isRec=false;
+        boolean isTest=false;
 
         for (Element tr : html.select("tr")) {
             for (Element td : tr.select("td")) {
+
                 //ha classe font-size-14 (Materie)
                 if (td.text().equals("Test")){
+                    isTest=true;
+                    isRec=false;
+                    continue;
+                } else if (td.text().equals("Prove recupero")) {
+                    isRec = true;
+                    isTest = false;
                     continue;
                 }
+
                 if (td.hasClass("font_size_14") && td.hasText()) {
+                    isRec=false;
+                    isTest=false;
                     materia = new Materia(td.text());
                     k++;
                     System.out.println(td.text()+k);
@@ -218,18 +257,21 @@ public class RegistroActivity extends AppCompatActivity {
                         }
                         for (Element p : td.getElementsByTag("p")) {
                             if (p.hasText() && p.hasClass("s_reg_testo")) {
-                                if ((j <= 5) || (j > 15 && j <= 20))
+                                if (isRec){
+                                    voto.setTipo("Recupero");
+                                } else if (isTest){
+                                    voto.setTipo("Test");
+                                } else if ((j <= 5) || (j > 15 && j <= 20))
                                     voto.setTipo("Scritto");
                                 else if ((j > 5 && j <= 10) || (j > 20 || j <= 25))
                                     voto.setTipo("Orale");
                                 else voto.setTipo("Pratico");
-                                if (j > 15) {
+                                if (j > 15&&!isRec) {
                                     voto.setQuadrimestre(2);
                                 } else {
                                     voto.setQuadrimestre(1);
                                 }
                                 voto.setVoto(p.text());
-                                System.out.println(p.text()+nv);
                                 materia.addVoto(nv, voto);
                             }
                         }

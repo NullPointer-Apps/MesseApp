@@ -222,14 +222,6 @@ public class MainActivity extends AppCompatActivity
                     //Panini
                     getMenuInflater().inflate(R.menu.panini, menu);
                     break;
-                case 11:
-                    //Circolari
-                    getMenuInflater().inflate(R.menu.notices, menu);
-                    break;
-                case 12:
-                    //Fine Scuola
-                    getMenuInflater().inflate(R.menu.fine_scuola, menu);
-                    break;
                 default:
                     getMenuInflater().inflate(R.menu.activity_main, menu);
                     break;
@@ -249,14 +241,6 @@ public class MainActivity extends AppCompatActivity
             case 1:
                 //Panini
                 getMenuInflater().inflate(R.menu.panini, menu);
-                break;
-            case 11:
-                //Circolari
-                getMenuInflater().inflate(R.menu.notices, menu);
-                break;
-            case 12:
-                //Fine Scuola
-                getMenuInflater().inflate(R.menu.fine_scuola, menu);
                 break;
             default:
                 getMenuInflater().inflate(R.menu.activity_main, menu);
@@ -324,11 +308,6 @@ public class MainActivity extends AppCompatActivity
                     } else {
                         Toast.makeText(this,"Devi selezionare almeno un panino", Toast.LENGTH_SHORT).show();
                     }*/
-                break;
-            case R.id.refreshend:
-                diff = new MyDifferenceFromToday(2015, 6, 10, 13, 0);
-                TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
-                end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                 break;
             case FINE_SCUOLA_ID:
                 FragmentManager fragmentManager = getSupportFragmentManager();

@@ -223,7 +223,7 @@ public class LoginRegistroDialog extends DialogFragment {
         protected void onPostExecute(Boolean b) {
             if (b) {
                 mDialog.dismiss();
-                MainActivity.context.startActivity(new Intent(MainActivity.context, RegistroActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                MainActivity.context.startActivity(new Intent(MainActivity.context, RegistroActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("USER",user).putExtra("PWD",pw));
             }
             else {
                 Toast.makeText(MainActivity.context, "Dati errati, login fallito", Toast.LENGTH_SHORT).show();

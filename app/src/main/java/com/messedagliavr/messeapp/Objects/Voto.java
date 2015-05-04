@@ -51,4 +51,5 @@ public class Voto
   {
     this.voto = paramString.trim();
   }
+
 }

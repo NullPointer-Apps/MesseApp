@@ -2,8 +2,13 @@ package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
+import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.AlignmentSpan;
+import android.text.style.ParagraphStyle;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SubscriptSpan;
 import android.view.LayoutInflater;
@@ -46,7 +51,8 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
 
         nMat.setText(materia.getNome().trim());
         if (medie.size()<=position) medie.add(position,materia.mediaVoti(tipo, quad));
-        avg.setText("media: "+medie.get(position));
+        if (medie.get(position)>0) avg.setText("media: "+medie.get(position));
+        else avg.setText("media: n/d");
 
         tbVoti.removeAllViews();
 
@@ -58,38 +64,52 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
             SpannableString cs;
 
             if((v.getTipo().equals(tipo)||tipo.equals("tutti"))&&(v.getQuadrimestre()==quad||quad==3)){
-                if (v.getTipo().equals("Scritto")) cs = new SpannableString(votos+"s");
-                else if (v.getTipo().equals("Orale")) cs = new SpannableString(votos+"o");
-                else cs = new SpannableString(votos+"p");
+
+                if ((int) votos.charAt(0) >= 54){
+                    if ((int) votos.charAt(0) == 71){
+                        //BLUE
+                        voto.setBackgroundColor(Color.rgb(114,177,214));
+                    } else {
+                        //GREEN
+                        voto.setBackgroundColor(Color.rgb(79,193,72));
+                    }
+                }else if ((int) votos.charAt(0) >= 48){
+                    //RED
+                    voto.setBackgroundColor(Color.rgb(238,81,67));
+                }
+
+                switch (v.getTipo()) {
+                    case "Scritto":
+                        cs = new SpannableString(votos + "S");
+                        break;
+                    case "Orale":
+                        cs = new SpannableString(votos + "O");
+                        break;
+                    case "Pratico":
+                        cs = new SpannableString(votos + "P");
+                        break;
+                    case "Test":
+                        cs = new SpannableString(votos + "T");
+                        voto.setBackgroundColor(Color.rgb(114,177,214));
+                        break;
+                    case "Recupero":
+                        cs = new SpannableString(votos + "R");
+                        voto.setBackgroundColor(Color.rgb(114,177,214));
+                        break;
+                    default:
+                        cs = new SpannableString(votos + "e");
+                        break;
+                }
 
                 cs.setSpan(new SubscriptSpan(), cs.length() - 1, cs.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                cs.setSpan(new RelativeSizeSpan(0.75f), cs.length() - 1, cs.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                cs.setSpan(new RelativeSizeSpan(0.65f), cs.length() - 1, cs.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                cs.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), cs.length() - 1, cs.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 voto.setTextSize(16);
                 voto.setTextColor(Color.WHITE);
                 voto.setText(cs);
                 voto.setEms(2);
                 voto.setGravity(0x11);
-                voto.setLineSpacing(0f,1.2f);
-                if ((int) votos.charAt(0) >= 54){
-                    if ((int) votos.charAt(0) == 71){
-                        //BLUE
-                        //#1 voto.setBackgroundColor(Color.rgb(184,210,226));
-                        voto.setBackgroundColor(Color.rgb(114,177,214));//#2
-                        //#3voto.setBackgroundColor(Color.rgb(53,75,148));
-                    } else {
-                        //GREEN
-                        //#1 voto.setBackgroundColor(Color.rgb(170,210,154));
-                        voto.setBackgroundColor(Color.rgb(79,193,72));//#2
-                        //#3voto.setBackgroundColor(Color.rgb(22,173,35));
-
-                    }
-                }else {
-                    //RED
-                    //#1voto.setBackgroundColor(Color.rgb(220,96,93));
-                    voto.setBackgroundColor(Color.rgb(238,81,67));//#2
-                    //#3voto.setBackgroundColor(Color.rgb(187,57,40));
-                }
-
+                voto.setLineSpacing(0f, 1.15f);
                 tbVoti.addView(voto);
             }
         }
