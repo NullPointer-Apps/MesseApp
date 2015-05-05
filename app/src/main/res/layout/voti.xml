@@ -20,7 +20,7 @@
         android:layerType="software"
         android:id="@android:id/list"
         android:divider="@drawable/dashed_line"
-        android:dividerHeight="2dp"
+        android:dividerHeight="20dp"
         android:listSelector="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
         />

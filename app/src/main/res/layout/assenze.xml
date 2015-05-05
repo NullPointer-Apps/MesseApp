@@ -2,17 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="true">
+    android:background="#FFFFFF">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sizeTv"
-        android:gravity="center_horizontal"
-        android:textSize="12sp"
-        android:textColor="#ff467fd9"/>
+
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,5 +14,12 @@
         android:layout_height="wrap_content"
         tools:context=".MainActivity"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sizeTv"
+        android:gravity="center_horizontal"
+        android:textSize="12sp"
+        android:textColor="#ff467fd9"/>
 
 </LinearLayout>

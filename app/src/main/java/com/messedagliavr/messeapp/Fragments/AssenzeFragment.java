@@ -3,6 +3,7 @@ package com.messedagliavr.messeapp.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,8 +34,32 @@ public class AssenzeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.assenze, container, false);
-        TextView size = (TextView) v.findViewById(R.id.sizeTv);
+        final TextView size = (TextView) v.findViewById(R.id.sizeTv);
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.list);
+
+        /*rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            boolean hideToolBar = false;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (hideToolBar) {
+                    ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
+                } else {
+                    ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 20) {
+                    hideToolBar = true;
+                } else if (dy < -5) {
+                    hideToolBar = false;
+                }
+            }
+        });*/
 
         mLayoutManager = new GridLayoutManager(c,4);
         rv.setHasFixedSize(true);
@@ -47,6 +72,8 @@ public class AssenzeFragment extends Fragment {
         rv.setAdapter(new CardAssenzeAdapter(c,list));
         return v;
     }
+
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
