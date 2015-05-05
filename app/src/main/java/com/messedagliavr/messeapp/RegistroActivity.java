@@ -224,7 +224,6 @@ public class RegistroActivity extends AppCompatActivity {
 
         for (Element tr : html.select("tr")) {
             for (Element td : tr.select("td")) {
-
                 //ha classe font-size-14 (Materie)
                 if (td.text().equals("Test")){
                     isTest=true;
@@ -296,12 +295,13 @@ public class RegistroActivity extends AppCompatActivity {
                 for (i=1; td!=null; i++) {
                     tipo = td.text().trim();
                     if (tipo.length()>0&&(tipo.contains("A") || tipo.contains("R"))) {
-                        Log.i("ASS","trovata assenza:"+"Tipo="+tipo+" Mese="+mese+" Giorno="+i);
+                        Log.i("ASS", "trovata assenza:" + "Tipo=" + tipo + " Mese=" + mese + " Giorno=" + i);
                         Assenza ass = new Assenza();
                         ass.setMese(mese.trim());
-                        ass.setTipo(String.valueOf(tipo.charAt(tipo.length()-1)));
+                        ass.setTipo(String.valueOf(tipo.charAt(tipo.length() - 1)));
                         ass.setGiorno(i);
                         for (Element div : td.select("div")) title = div.attr("title");
+
                         if (tipo.contains("R")) {
                             ass.setTipoR(title.substring(23));
                         }
@@ -372,6 +372,7 @@ public class RegistroActivity extends AppCompatActivity {
     public void setUpAssenze(){
         final ActionBar actionBar;
         ActionBar.TabListener tabListener;
+        actionBar = getSupportActionBar();
 
         TabAssenzeAdapter tabAdapter =
                 new TabAssenzeAdapter(
@@ -381,17 +382,16 @@ public class RegistroActivity extends AppCompatActivity {
                 new ViewPager.SimpleOnPageChangeListener() {
                     @Override
                     public void onPageSelected(int position) {
-                        getSupportActionBar().setSelectedNavigationItem(position);
+                        actionBar.setSelectedNavigationItem(position);
                     }
                 });
         mViewPager.setAdapter(tabAdapter);
 
-        actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         tabListener = new ActionBar.TabListener() {
             @Override
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                mViewPager.setCurrentItem(tab.getPosition());
+                mViewPager.setCurrentItem(tab.getPosition(),true);
             }
 
             @Override

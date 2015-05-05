@@ -30,9 +30,5 @@ public class TabVotiAdapter extends FragmentStatePagerAdapter {
         return 2;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return "OBJECT " + (position + 1);
-    }
 }
 

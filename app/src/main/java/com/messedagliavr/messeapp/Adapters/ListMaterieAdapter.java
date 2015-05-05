@@ -109,7 +109,7 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
                 voto.setText(cs);
                 voto.setEms(2);
                 voto.setGravity(0x11);
-                voto.setLineSpacing(0f, 1.15f);
+                voto.setLineSpacing(0f, 1.2f);
                 tbVoti.addView(voto);
             }
         }

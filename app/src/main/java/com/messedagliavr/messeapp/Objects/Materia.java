@@ -27,7 +27,7 @@ public class Materia
       double somma=0;
       for (Voto v : vv.values()){
           String voto = v.getVoto();
-          if (((int)voto.charAt(0)!=71)&&(v.getTipo().equals(tipo)||tipo.equals("tutti"))&&(v.getQuadrimestre()==q||q==3)) {
+          if (((int)voto.charAt(0)!=71)&&(v.getTipo().equals(tipo)||tipo.equals("tutti"))&&(v.getQuadrimestre()==q||q==3)&&!(v.getTipo().equals("Test")||v.getTipo().equals("Recupero"))) {
               somma += (int) voto.charAt(0) - 48;
               if (voto.length()>1) {
                   if (voto.charAt(1) == '-') {

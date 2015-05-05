@@ -46,6 +46,7 @@ public class VotiFragment extends ListFragment {
         } else {
            bd=new BigDecimal(0);
         }
+
         Bundle args = new Bundle();
         args.putInt("num", num);
         args.putDouble("media", bd.doubleValue() );

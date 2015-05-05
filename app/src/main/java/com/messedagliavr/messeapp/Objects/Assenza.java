@@ -1,6 +1,7 @@
 package com.messedagliavr.messeapp.Objects;
 
-public class Assenza {
+
+public class Assenza{
     String tipo;
     String mese;
     int giorno;
@@ -94,4 +95,5 @@ public class Assenza {
     public void setMese(String mese) {
         this.mese = mese;
     }
+
 }
