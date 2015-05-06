@@ -62,7 +62,7 @@ System.out.println("voti"+num);
             for (int i = 1; i <= RegistroActivity.v.size() ; i++) {
                 t.add(RegistroActivity.v.get(i));
             }
-            lma = new ListMaterieAdapter(c, t, "tutti", getArguments().getInt("num"));
+            lma = new ListMaterieAdapter(c, t, "tutti", getArguments().getInt("num"),getFragmentManager());
             m=getArguments().getDouble("media");
         }
 

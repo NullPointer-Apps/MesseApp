@@ -2,6 +2,9 @@ package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,9 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.messedagliavr.messeapp.Fragments.DialogVoti;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
 import com.messedagliavr.messeapp.R;
+import com.messedagliavr.messeapp.RegistroActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,17 +32,18 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
     String tipo="";
     int quad=0;
     ArrayList<Double> medie =new ArrayList<>();
-
-    public ListMaterieAdapter(Context context, ArrayList<Materia> materie, String tipo, int quad) {
+    FragmentManager fm;
+    public ListMaterieAdapter(Context context, ArrayList<Materia> materie, String tipo, int quad,FragmentManager fm) {
         super(context, 0, materie);
         this.tipo=tipo;
         this.quad=quad+1;
+        this.fm = fm;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Materia materia = getItem(position);
+        final Materia materia = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.litem_registro, parent, false);
@@ -56,10 +62,10 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
 
         HashMap<Integer,Voto> vv = materia.getVoti();
         for (int i = 1; i <= vv.size(); i++) {
-            Voto v = vv.get(i);
+            final Voto v = vv.get(i);
             String votos = v.getVoto();
-            TextView voto = new TextView(getContext());
-            SpannableString cs;
+            final TextView voto = new TextView(getContext());
+            final SpannableString cs;
 
             if((v.getTipo().equals(tipo)||tipo.equals("tutti"))&&(v.getQuadrimestre()==quad||quad==3)){
 
@@ -111,7 +117,16 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
                 voto.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        Toast.makeText(getContext(),"Dettagli voti", Toast.LENGTH_SHORT).show();
+                        DialogVoti dv = new DialogVoti();
+                        Bundle data = new Bundle();
+                        data.putString("materia", materia.getNome());
+                        data.putString("voto", v.getVoto());
+                        data.putString("data", v.getData());
+                        data.putInt("quad", v.getQuadrimestre());
+                        data.putString("tipo", v.getTipo());
+                        data.putInt("color", ((ColorDrawable) voto.getBackground()).getColor());
+                        dv.setArguments(data);
+                        dv.show(fm,"dettagli voto");
                         return false;
                     }
                 });
