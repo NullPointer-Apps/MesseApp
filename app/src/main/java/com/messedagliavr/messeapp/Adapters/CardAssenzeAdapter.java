@@ -37,7 +37,10 @@ public class CardAssenzeAdapter extends RecyclerView.Adapter<CardAssenzeAdapter.
         vh.month.setText(n.getMeseS());
         vh.day.setText(n.getGiornoS());
         vh.cv.setCardBackgroundColor(Color.rgb(114, 177, 214)); //BLUE
-        if (n.isRitardo()) vh.hour.setText(n.getTipoR());
+        if (n.isRitardo()) {
+            if (n.getTipoR().equals("Breve")) vh.cv.setCardBackgroundColor(Color.rgb(79,193,72)); //GREEN
+            vh.hour.setText(n.getTipoR());
+        }
         if (!n.isGiustificata()) vh.cv.setCardBackgroundColor(Color.rgb(238, 81, 67)); //RED
     }
 

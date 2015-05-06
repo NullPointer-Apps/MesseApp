@@ -4,6 +4,7 @@ package com.messedagliavr.messeapp;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,11 +19,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.messedagliavr.messeapp.Adapters.CircolariAdapter;
 import com.messedagliavr.messeapp.Adapters.TabAssenzeAdapter;
 import com.messedagliavr.messeapp.Adapters.TabVotiAdapter;
 import com.messedagliavr.messeapp.Objects.Assenza;
+import com.messedagliavr.messeapp.Objects.Circolari;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
 import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
@@ -34,9 +43,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -53,6 +64,7 @@ public class RegistroActivity extends AppCompatActivity {
 
     public static HashMap<Integer, Materia> v;
     public static HashMap<Integer, Assenza> a;
+    public static HashMap<Integer, Circolari> c;
 
     public void votiBtn(View v) throws IOException {
         //scarico voti
@@ -69,6 +81,7 @@ public class RegistroActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         switch(section){
+            case 6:
             case 1:
                 NavUtils.navigateUpFromSameTask(this);
                 break;
@@ -80,6 +93,11 @@ public class RegistroActivity extends AppCompatActivity {
                 getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                 section=1;
                 setContentView(R.layout.menu_registro);
+                break;
+            case 7:
+                section=6;
+                setContentView(R.layout.circolari);
+                setUpCircolari();
                 break;
         }
     }
@@ -190,6 +208,38 @@ public class RegistroActivity extends AppCompatActivity {
             section=4;
             supportInvalidateOptionsMenu();
             setUpAssenze();
+        }
+    }
+
+    class SCircolari extends AsyncTask<Void, Void, Void> {
+
+        protected void onPreExecute() {
+            mDialog = ProgressDialog.show(RegistroActivity.this, null,
+                    "Aggiornamento circolari in corso", true, true,
+                    new DialogInterface.OnCancelListener() {
+                        public void onCancel(DialogInterface dialog) {
+                            SCircolari.this.cancel(true);
+                        }
+                    });
+        }
+
+        protected Void doInBackground(Void... voids) {
+            try {
+                //lista circolari
+                c=scaricaCircolari(leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php").getElementById("data_table"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            mDialog.dismiss();
+            setContentView(R.layout.circolari);
+            section=6;
+            supportInvalidateOptionsMenu();
+            setUpCircolari();
         }
     }
 
@@ -318,6 +368,29 @@ public class RegistroActivity extends AppCompatActivity {
         return a;
     }
 
+    public HashMap<Integer,Circolari> scaricaCircolari(Element html) throws IOException {
+        c = new HashMap<>();
+        int i=0;
+        for (Element a : html.select("a.specifica")){
+            Circolari cn = new Circolari();
+            i++;
+            cn.setData(a.parent().previousElementSibling().select("div.font_size_12").first().ownText());
+            cn.setId(a.attr("comunicazione_id"));
+            Element dettagli = leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_comunicazione.php?action=risposta_com&com_id=" + cn.getId());
+            System.out.println(dettagli);
+            Element divs = dettagli.select("div").first();
+            cn.setTitolo(divs.ownText());
+            divs.nextElementSibling();
+            cn.setTesto(divs.ownText());
+            divs.nextElementSibling();
+            cn.setAllegato(!divs.className().equals("hidden"));
+            System.out.println("Trovata circolare - ID:" + cn.getId()+" Data:"+cn.getData()+" Titolo:"+cn.getTitolo()+" Testo:"+cn.getTesto());
+            c.put(i,cn);
+        }
+
+        return c;
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // save state of your activity to outState
@@ -415,6 +488,31 @@ public class RegistroActivity extends AppCompatActivity {
                         .setTabListener(tabListener));
     }
 
+    public void setUpCircolari(){
+        ListView cs = (ListView) findViewById(R.id.list);
+        ArrayList<Circolari> alc = new ArrayList<>();
+        for (int j = 1; j < c.size(); j++){
+            alc.add(c.get(j));
+
+        }
+        cs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                setContentView(R.layout.circolare);
+                section=7;
+                Circolari cc = c.get(i);
+                TextView titolo = (TextView) findViewById(R.id.cTitle);
+                TextView testo = (TextView) findViewById(R.id.cText);
+                Button dwn = (Button) findViewById(R.id.cScarica);
+                titolo.setText(cc.getTitolo());
+                testo.setText(cc.getTesto());
+                if (cc.getAllegato()) dwn.setVisibility(View.VISIBLE);
+                else dwn.setVisibility(View.GONE);
+            }
+        });
+        cs.setAdapter(new CircolariAdapter(this,alc));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -447,10 +545,18 @@ public class RegistroActivity extends AppCompatActivity {
                     setContentView(R.layout.voti_parent);
                     setUpAssenze();
                     break;
+                case 6:
+                    setContentView(R.layout.circolari);
+                    setUpCircolari();
+                    break;
             }
-        } else {
+        } else if (getIntent().getIntExtra("circolari",0)==0){
             setContentView(R.layout.menu_registro);
             section = 1;
+        } else {
+            SCircolari sc = new SCircolari();
+            sc.execute();
+            section = 6;
         }
     }
 

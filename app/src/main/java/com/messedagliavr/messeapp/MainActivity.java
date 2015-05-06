@@ -154,10 +154,10 @@ public class MainActivity extends AppCompatActivity
             }
         }*/
         if (position==4){
-            Intent voti = new Intent(Intent.ACTION_VIEW);
-            voti.setData(Uri
+            Intent web = new Intent(Intent.ACTION_VIEW);
+            web.setData(Uri
                     .parse("https://www.messedaglia.it"));
-            startActivity(voti);
+            startActivity(web);
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -394,8 +394,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(voti);
         }*/
         DialogFragment login = new LoginRegistroDialog();
+        Bundle data = new Bundle();
+        data.putInt("circolari",0);
+        login.setArguments(data);
         login.show(getSupportFragmentManager(),"login");
-
     }
 
     public void news(View v) {
@@ -426,6 +428,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void notices(View v) {
+        DialogFragment login = new LoginRegistroDialog();
+        Bundle data = new Bundle();
+        data.putInt("circolari",1);
+        login.setArguments(data);
+        login.show(getSupportFragmentManager(),"login");
         Toast.makeText(this, R.string.ondevelopment,
                 Toast.LENGTH_LONG).show();
     }
