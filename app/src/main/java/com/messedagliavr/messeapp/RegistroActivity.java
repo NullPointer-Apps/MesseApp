@@ -4,11 +4,8 @@ package com.messedagliavr.messeapp;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.DataSetObserver;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
@@ -19,13 +16,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Adapters.CircolariAdapter;
 import com.messedagliavr.messeapp.Adapters.TabAssenzeAdapter;
@@ -34,7 +28,6 @@ import com.messedagliavr.messeapp.Objects.Assenza;
 import com.messedagliavr.messeapp.Objects.Circolari;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
-import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -43,7 +36,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,6 +57,7 @@ public class RegistroActivity extends AppCompatActivity {
     public static HashMap<Integer, Materia> v;
     public static HashMap<Integer, Assenza> a;
     public static HashMap<Integer, Circolari> c;
+    public String urlAllegato=null;
 
     public void votiBtn(View v) throws IOException {
         //scarico voti
@@ -81,7 +74,6 @@ public class RegistroActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         switch(section){
-            case 6:
             case 1:
                 NavUtils.navigateUpFromSameTask(this);
                 break;
@@ -94,6 +86,7 @@ public class RegistroActivity extends AppCompatActivity {
                 section=1;
                 setContentView(R.layout.menu_registro);
                 break;
+            case 6:
             case 7:
                 section=6;
                 setContentView(R.layout.circolari);
@@ -122,6 +115,7 @@ public class RegistroActivity extends AppCompatActivity {
                     case 3:
                     case 4:
                     case 5:
+                    case 6:
                         onBackPressed();
                         break;
                 }
@@ -214,6 +208,7 @@ public class RegistroActivity extends AppCompatActivity {
     class SCircolari extends AsyncTask<Void, Void, Void> {
 
         protected void onPreExecute() {
+            getSupportActionBar().setTitle(getString(R.string.circolari));
             mDialog = ProgressDialog.show(RegistroActivity.this, null,
                     "Aggiornamento circolari in corso", true, true,
                     new DialogInterface.OnCancelListener() {
@@ -489,7 +484,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void setUpCircolari(){
-        ListView cs = (ListView) findViewById(R.id.list);
+        ListView cs = (ListView) findViewById(R.id.circolari_list);
         ArrayList<Circolari> alc = new ArrayList<>();
         for (int j = 1; j < c.size(); j++){
             alc.add(c.get(j));
@@ -499,18 +494,29 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 setContentView(R.layout.circolare);
-                section=7;
-                Circolari cc = c.get(i);
+                section = 7;
+                Circolari cc = c.get(i + 1);
                 TextView titolo = (TextView) findViewById(R.id.cTitle);
                 TextView testo = (TextView) findViewById(R.id.cText);
                 Button dwn = (Button) findViewById(R.id.cScarica);
                 titolo.setText(cc.getTitolo());
                 testo.setText(cc.getTesto());
-                if (cc.getAllegato()) dwn.setVisibility(View.VISIBLE);
+                if (cc.getAllegato()) {
+                    dwn.setVisibility(View.VISIBLE);
+                    urlAllegato = "https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id="+cc.getId();
+                }
                 else dwn.setVisibility(View.GONE);
             }
         });
-        cs.setAdapter(new CircolariAdapter(this,alc));
+        cs.setAdapter(new CircolariAdapter(this, alc));
+    }
+
+    public void scaricaAllegato(View v) {
+        Intent urlAllegatoi = new Intent(Intent.ACTION_VIEW, Uri.parse(urlAllegato));
+        if (urlAllegato!=null) {
+            startActivity(urlAllegatoi);
+        }
+
     }
 
     @Override
@@ -518,16 +524,6 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.registro));
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            // create our manager instance after the content view is set
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            // enable status bar tint
-            tintManager.setStatusBarTintEnabled(true);
-            // enable navigation bar tint
-            tintManager.setNavigationBarTintEnabled(true);
-            //tintManager.setTintColor(Color.parseColor("#ab46e5"));
-            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-        }
         if (savedInstanceState!=null) {
             section = savedInstanceState.getInt("Section", 0);
             switch (section) {

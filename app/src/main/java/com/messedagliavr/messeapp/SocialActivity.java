@@ -2,20 +2,15 @@ package com.messedagliavr.messeapp;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-
-import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 /**
  * Created by Ambrof on 17/03/15.
@@ -38,16 +33,6 @@ public class SocialActivity extends AppCompatActivity {
         setContentView(R.layout.social);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Social");
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            // create our manager instance after the content view is set
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            // enable status bar tint
-            tintManager.setStatusBarTintEnabled(true);
-            // enable navigation bar tint
-            tintManager.setNavigationBarTintEnabled(true);
-            //tintManager.setTintColor(Color.parseColor("#ab46e5"));
-            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-        }
         if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
             window.setEnterTransition(new Slide(Gravity.BOTTOM));

@@ -1,17 +1,13 @@
 package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.messedagliavr.messeapp.Fragments.AssenzeFragment;
 import com.messedagliavr.messeapp.Objects.Assenza;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TabAssenzeAdapter extends FragmentStatePagerAdapter {

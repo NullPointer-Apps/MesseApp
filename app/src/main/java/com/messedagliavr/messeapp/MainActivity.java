@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.InputType;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -37,10 +35,8 @@ import com.messedagliavr.messeapp.Dialogs.HelpPaninoDialog;
 import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
 import com.messedagliavr.messeapp.Fragments.NavigationDrawerFragment;
 import com.messedagliavr.messeapp.Utilities.MyDifferenceFromToday;
-import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
@@ -94,15 +90,6 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            // create our manager instance after the content view is set
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            // enable status bar tint
-            tintManager.setStatusBarTintEnabled(true);
-            // enable navigation bar tint
-            tintManager.setNavigationBarTintEnabled(true);
-            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-        }
     }
 
     /*public void paniniplus(View i) {
@@ -433,13 +420,6 @@ public class MainActivity extends AppCompatActivity
         data.putInt("circolari",1);
         login.setArguments(data);
         login.show(getSupportFragmentManager(),"login");
-        Toast.makeText(this, R.string.ondevelopment,
-                Toast.LENGTH_LONG).show();
-    }
-
-    public void notavailable(View v) {
-        Toast.makeText(this, R.string.notavailable,
-                Toast.LENGTH_LONG).show();
     }
 
 

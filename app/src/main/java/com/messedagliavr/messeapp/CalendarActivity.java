@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.Parsers.XMLParser;
-import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -67,16 +66,6 @@ public class CalendarActivity extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(getString(R.string.eventi));
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            // create our manager instance after the content view is set
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            // enable status bar tint
-            tintManager.setStatusBarTintEnabled(true);
-            // enable navigation bar tint
-            tintManager.setNavigationBarTintEnabled(true);
-            //tintManager.setTintColor(Color.parseColor("#ab46e5"));
-            tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-        }
 		if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
             window.setEnterTransition(new Slide(Gravity.BOTTOM));

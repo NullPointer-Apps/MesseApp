@@ -7,10 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.NavUtils;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.util.Log;
@@ -20,10 +17,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.messedagliavr.messeapp.Utilities.ColorTool;
-import com.messedagliavr.messeapp.Utilities.SystemBarTintManager;
 
 
 public class ContactsActivity extends AppCompatActivity implements View.OnTouchListener {
@@ -37,17 +32,7 @@ public class ContactsActivity extends AppCompatActivity implements View.OnTouchL
        if (iv != null) {
             iv.setOnTouchListener(this);
        }
-       
-       if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                // create our manager instance after the content view is set
-                SystemBarTintManager tintManager = new SystemBarTintManager(this);
-                // enable status bar tint
-                tintManager.setStatusBarTintEnabled(true);
-                // enable navigation bar tint
-                tintManager.setNavigationBarTintEnabled(true);
-                //tintManager.setTintColor(Color.parseColor("#d00045"));
-                tintManager.setTintColor(Color.parseColor("#AFAFAF"));
-                }
+
         if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
             window.setEnterTransition(new Slide(Gravity.RIGHT));
