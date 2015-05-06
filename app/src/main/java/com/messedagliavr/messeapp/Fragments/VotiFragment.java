@@ -27,7 +27,7 @@ public class VotiFragment extends ListFragment {
 
     public static VotiFragment newInstance(Context context, int num, HashMap<Integer,Materia> v) {
         VotiFragment f = new VotiFragment();
-
+System.out.println("voti"+num);
         double somma=0;
         int size = v.size();
         Log.d("SIZE",size+"");

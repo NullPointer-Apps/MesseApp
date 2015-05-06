@@ -14,20 +14,61 @@ import android.widget.TextView;
 import com.messedagliavr.messeapp.Adapters.CardAssenzeAdapter;
 import com.messedagliavr.messeapp.Objects.Assenza;
 import com.messedagliavr.messeapp.R;
+import com.messedagliavr.messeapp.RegistroActivity;
 
 import java.util.ArrayList;
 
 import java.util.Collections;
+import java.util.HashMap;
 
 public class AssenzeFragment extends Fragment {
     static Context c;
-    public ArrayList<Assenza> list;
     GridLayoutManager mLayoutManager;
+
+    public static ArrayList<Assenza> assList;
+    public static ArrayList<Assenza> rList;
+
+    static String s;
+    static int l;
+    static CardAssenzeAdapter caa;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        assList = new ArrayList<>();
+        rList = new ArrayList<>();
+        int i = getArguments().getInt("tipo");
+        for (int j = 1; j < RegistroActivity.a.size(); j++){
+            Assenza ass = RegistroActivity.a.get(j);
+            if(ass.isRitardo()&&i==1){
+                rList.add(ass);
+            } else if (!ass.isRitardo()&&i==0){
+                assList.add(ass);
+            }
+        }
+        if (i==0) {
+            s=" assenze";
+            l=assList.size();
+            Collections.reverse(assList);
+            caa = new CardAssenzeAdapter(c, assList);
+        }
+        else if (i==1) {
+            s=" ritardi";
+            l=rList.size();
+            Collections.reverse(rList);
+            caa = new CardAssenzeAdapter(c,rList);
+        }
 
+    }
+
+    public static AssenzeFragment newInstance(Context context, int i, HashMap<Integer,Assenza> a) {
+        c=context;
+        AssenzeFragment af = new AssenzeFragment();
+        Bundle args = new Bundle();
+        args.putInt("tipo", i);
+        af.setArguments(args);
+
+        return af;
     }
 
     @Override
@@ -65,11 +106,9 @@ public class AssenzeFragment extends Fragment {
         rv.setHasFixedSize(true);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(null);
-        Collections.reverse(list);
 
-        if (getArguments().getInt("tipo")==0) size.setText(list.size() + " assenze");
-        else size.setText(list.size() + " ritardi");
-        rv.setAdapter(new CardAssenzeAdapter(c,list));
+        size.setText(l + s);
+        rv.setAdapter(caa);
         return v;
     }
 

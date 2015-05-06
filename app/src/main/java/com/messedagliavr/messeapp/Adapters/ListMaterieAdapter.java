@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
@@ -110,6 +111,13 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
                 voto.setEms(2);
                 voto.setGravity(0x11);
                 voto.setLineSpacing(0f, 1.2f);
+                voto.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        Toast.makeText(getContext(),"Dettagli voti", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                });
                 tbVoti.addView(voto);
             }
         }
