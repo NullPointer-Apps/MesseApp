@@ -2,11 +2,14 @@ package com.messedagliavr.messeapp;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.PowerManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
@@ -20,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Adapters.CircolariAdapter;
 import com.messedagliavr.messeapp.Adapters.TabAssenzeAdapter;
@@ -29,6 +33,7 @@ import com.messedagliavr.messeapp.Objects.Circolari;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -37,8 +42,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,6 +55,7 @@ public class RegistroActivity extends AppCompatActivity {
 
     ViewPager mViewPager;
     ProgressDialog mDialog;
+    ProgressDialog mProgressDialog;
     int section = 1;
 
     public static HttpResponse httpResponse;
@@ -57,7 +66,7 @@ public class RegistroActivity extends AppCompatActivity {
     public static HashMap<Integer, Materia> v;
     public static HashMap<Integer, Assenza> a;
     public static HashMap<Integer, Circolari> c;
-    public String urlAllegato=null;
+    public String idCircolare=null;
 
     public void votiBtn(View v) throws IOException {
         //scarico voti
@@ -75,6 +84,7 @@ public class RegistroActivity extends AppCompatActivity {
     public void onBackPressed() {
         switch(section){
             case 1:
+            case 6:
                 NavUtils.navigateUpFromSameTask(this);
                 break;
             case 2:
@@ -86,7 +96,6 @@ public class RegistroActivity extends AppCompatActivity {
                 section=1;
                 setContentView(R.layout.menu_registro);
                 break;
-            case 6:
             case 7:
                 section=6;
                 setContentView(R.layout.circolari);
@@ -116,6 +125,7 @@ public class RegistroActivity extends AppCompatActivity {
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
                         onBackPressed();
                         break;
                 }
@@ -135,7 +145,6 @@ public class RegistroActivity extends AppCompatActivity {
                 }
                 startActivity(voti);
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -503,7 +512,7 @@ public class RegistroActivity extends AppCompatActivity {
                 testo.setText(cc.getTesto());
                 if (cc.getAllegato()) {
                     dwn.setVisibility(View.VISIBLE);
-                    urlAllegato = "https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id="+cc.getId();
+                    idCircolare = cc.getId();
                 }
                 else dwn.setVisibility(View.GONE);
             }
@@ -512,11 +521,115 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void scaricaAllegato(View v) {
-        Intent urlAllegatoi = new Intent(Intent.ACTION_VIEW, Uri.parse(urlAllegato));
-        if (urlAllegato!=null) {
-            startActivity(urlAllegatoi);
+        final downloadAllegato downloadTask = new downloadAllegato(RegistroActivity.this);
+        downloadTask.execute();
+
+
+    }
+
+    private class downloadAllegato extends AsyncTask<Void, Integer, String> {
+
+        private Context context;
+        private PowerManager.WakeLock mWakeLock;
+
+        public downloadAllegato(Context context) {
+            this.context = context;
         }
 
+        @Override
+        protected String doInBackground(Void... sUrl) {
+            InputStream input = null;
+            OutputStream output = null;
+            HttpGet httpget = new HttpGet("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id="+idCircolare);
+            HttpResponse response = null;
+            try {
+                response = httpClient.execute(httpget);
+                HttpEntity entity = response.getEntity();
+                long fileLength = 0;
+                if (entity != null) {
+                    fileLength = entity.getContentLength();
+                    try {
+                        input = entity.getContent();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    // How do I write it?
+                }
+
+
+                // this will be useful to display download percentage
+                // might be -1: server did not report the length
+                // download the file
+                File directory = new File("Environment.getExternalStorageDirectory()"+"/MesseApp/");
+                directory.mkdirs();
+                output = new FileOutputStream("Environment.getExternalStorageDirectory()"+"/MesseApp/"+idCircolare+".pdf");
+
+                byte data[] = new byte[4096];
+                long total = 0;
+                int count;
+                while ((count = input.read(data)) != -1) {
+                    // allow canceling with back button
+                    if (isCancelled()) {
+                        input.close();
+                        return null;
+                    }
+                    total += count;
+                    // publishing the progress....
+                    if (fileLength > 0) // only if total length is known
+                        publishProgress((int) (total * 100 / fileLength));
+                    output.write(data, 0, count);
+                    output.close();
+                    input.close();
+                }
+            } catch (Exception e) {
+                return e.toString();
+            } finally {
+                try {
+                    if (output != null)
+                        output.close();
+                    if (input != null)
+                        input.close();
+                } catch (IOException ignored) {
+                }
+
+                return null;
+            }
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // take CPU lock to prevent CPU from going off if the user
+            // presses the power button during download
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                    getClass().getName());
+            mWakeLock.acquire();
+            mProgressDialog = new ProgressDialog(RegistroActivity.this);
+            mProgressDialog.setMessage("Scaricando l'allegato");
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(true);
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            super.onProgressUpdate(progress);
+            // if we get here, length is known, now set indeterminate to false
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(100);
+            mProgressDialog.setProgress(progress[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            mWakeLock.release();
+            mProgressDialog.dismiss();
+            if (result != null)
+                Toast.makeText(context, "Errore nel download: " + result, Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(context, "File downloaded", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
