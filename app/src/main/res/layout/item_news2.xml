@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="80dp"
+	android:orientation="horizontal"
+    android:background="#FF9100">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="7dp">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/datenews"
+            android:gravity="center_horizontal|bottom"
+            android:text="04"
+            android:textSize="23sp"
+            android:textColor="#ffffffff" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/datenews2"
+            android:text="APR"
+            android:textSize="22sp"
+            android:gravity="center_horizontal|top"
+            android:textColor="#ffffffff" />
+    </LinearLayout>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/titlenews"
+            android:gravity="center"
+            android:textSize="19sp"
+            android:text="Prova titolo notizia"
+        android:textColor="#ffffffff" />
+</LinearLayout>

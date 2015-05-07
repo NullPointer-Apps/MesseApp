@@ -586,8 +586,7 @@ public class RegistroActivity extends AppCompatActivity {
                     output.write(data, 0, count);
                 }
             } catch (Exception e) {
-
-                System.out.println(e);
+                e.printStackTrace();
             } finally {
                 try {
                     if (output != null)
@@ -595,9 +594,8 @@ public class RegistroActivity extends AppCompatActivity {
                     if (input != null)
                         input.close();
                 } catch (IOException ignored) {
-                    System.out.println(ignored);
+                    ignored.printStackTrace();
                 }
-
                 return null;
             }
         }

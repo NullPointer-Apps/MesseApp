@@ -20,21 +20,68 @@ public class CircolariAdapter extends ArrayAdapter<Circolari> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View v, ViewGroup parent) {
 
         Circolari c = getItem(position);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_news, parent, false);
+        if (v == null) {
+            v = LayoutInflater.from(getContext()).inflate(R.layout.item_news2, parent, false);
         }
 
-        TextView data = (TextView) convertView.findViewById(R.id.datenews);
-        TextView titolo = (TextView) convertView.findViewById(R.id.titlenews);
+        TextView tt = (TextView) v.findViewById(R.id.datenews);
+        TextView tt2 = (TextView) v.findViewById(R.id.datenews2);
+        TextView tt1 = (TextView) v.findViewById(R.id.titlenews);
 
-        data.setText(c.getData());
-        titolo.setText(c.getTitolo());
+        String day="";
+        String month="";
+        String s = c.getData();
+        day = s.substring(0,2);
+        switch(s.substring(3,5)){
+            case "01":
+                month="GEN";
+                break;
+            case "02":
+                month="FEB";
+                break;
+            case "03":
+                month="MAR";
+                break;
+            case "04":
+                month="APR";
+                break;
+            case "05":
+                month="MAG";
+                break;
+            case "06":
+                month="GIU";
+                break;
+            case "07":
+                month="LUG";
+                break;
+            case "08":
+                month="AGO";
+                break;
+            case "09":
+                month="SET";
+                break;
+            case "10":
+                month="OTT";
+                break;
+            case "11":
+                month="NOV";
+                break;
+            case "12":
+                month="DEC";
+                break;
+        }
+        tt.setText(day);
+        tt2.setText(month);
+
+        tt1.setText(c.getTitolo());
+
+
 
         // Return the completed view to render on screen
-        return convertView;
+        return v;
     }
 }
