@@ -17,13 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Fragments.DialogVoti;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
 import com.messedagliavr.messeapp.R;
-import com.messedagliavr.messeapp.RegistroActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

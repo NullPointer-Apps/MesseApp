@@ -1,12 +1,16 @@
 package com.messedagliavr.messeapp;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
@@ -19,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -67,6 +72,7 @@ public class RegistroActivity extends AppCompatActivity {
     public static HashMap<Integer, Assenza> a;
     public static HashMap<Integer, Circolari> c;
     public String idCircolare=null;
+    public String nomeCircolare=null;
 
     public void votiBtn(View v) throws IOException {
         //scarico voti
@@ -381,14 +387,17 @@ public class RegistroActivity extends AppCompatActivity {
             cn.setData(a.parent().previousElementSibling().select("div.font_size_12").first().ownText());
             cn.setId(a.attr("comunicazione_id"));
             Element dettagli = leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_comunicazione.php?action=risposta_com&com_id=" + cn.getId());
-            System.out.println(dettagli);
             Element divs = dettagli.select("div").first();
             cn.setTitolo(divs.ownText());
             divs.nextElementSibling();
             cn.setTesto(divs.ownText());
             divs.nextElementSibling();
-            cn.setAllegato(!divs.className().equals("hidden"));
-            System.out.println("Trovata circolare - ID:" + cn.getId()+" Data:"+cn.getData()+" Titolo:"+cn.getTitolo()+" Testo:"+cn.getTesto());
+            if (dettagli.select("div.hidden").size() > 3) {
+                cn.setAllegato(false);
+            } else {
+                cn.setAllegato(true);
+            }
+            System.out.println("Trovata circolare - ID:" + cn.getId() + " Data:" + cn.getData() + " Titolo:" + cn.getTitolo() + " Testo:" + cn.getTesto());
             c.put(i,cn);
         }
 
@@ -513,8 +522,12 @@ public class RegistroActivity extends AppCompatActivity {
                 if (cc.getAllegato()) {
                     dwn.setVisibility(View.VISIBLE);
                     idCircolare = cc.getId();
+                    nomeCircolare = cc.getTitolo();
                 }
-                else dwn.setVisibility(View.GONE);
+                else {
+                    dwn.setVisibility(View.INVISIBLE);
+                    dwn.setClickable(false);
+                }
             }
         });
         cs.setAdapter(new CircolariAdapter(this, alc));
@@ -540,6 +553,7 @@ public class RegistroActivity extends AppCompatActivity {
         protected String doInBackground(Void... sUrl) {
             InputStream input = null;
             OutputStream output = null;
+            String fileName = null;
             HttpGet httpget = new HttpGet("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id="+idCircolare);
             HttpResponse response = null;
             try {
@@ -548,41 +562,32 @@ public class RegistroActivity extends AppCompatActivity {
                 long fileLength = 0;
                 if (entity != null) {
                     fileLength = entity.getContentLength();
-                    try {
-                        input = entity.getContent();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    // How do I write it?
+                    input = entity.getContent();
                 }
 
-
-                // this will be useful to display download percentage
-                // might be -1: server did not report the length
-                // download the file
-                File directory = new File("Environment.getExternalStorageDirectory()"+"/MesseApp/");
-                directory.mkdirs();
-                output = new FileOutputStream("Environment.getExternalStorageDirectory()"+"/MesseApp/"+idCircolare+".pdf");
+                File directory = new File(Environment.getExternalStorageDirectory()+"/MesseApp/");
+                if (!directory.exists()) {
+                    directory.mkdir();
+                }
+                output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/MesseApp/"+idCircolare+".pdf");
 
                 byte data[] = new byte[4096];
                 long total = 0;
                 int count;
                 while ((count = input.read(data)) != -1) {
-                    // allow canceling with back button
+
                     if (isCancelled()) {
                         input.close();
                         return null;
                     }
                     total += count;
-                    // publishing the progress....
-                    if (fileLength > 0) // only if total length is known
+                    if (fileLength > 0)
                         publishProgress((int) (total * 100 / fileLength));
                     output.write(data, 0, count);
-                    output.close();
-                    input.close();
                 }
             } catch (Exception e) {
-                return e.toString();
+
+                System.out.println(e);
             } finally {
                 try {
                     if (output != null)
@@ -590,6 +595,7 @@ public class RegistroActivity extends AppCompatActivity {
                     if (input != null)
                         input.close();
                 } catch (IOException ignored) {
+                    System.out.println(ignored);
                 }
 
                 return null;
@@ -598,8 +604,6 @@ public class RegistroActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // take CPU lock to prevent CPU from going off if the user
-            // presses the power button during download
             PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     getClass().getName());
@@ -615,7 +619,6 @@ public class RegistroActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... progress) {
             super.onProgressUpdate(progress);
-            // if we get here, length is known, now set indeterminate to false
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.setMax(100);
             mProgressDialog.setProgress(progress[0]);
@@ -627,8 +630,34 @@ public class RegistroActivity extends AppCompatActivity {
             mProgressDialog.dismiss();
             if (result != null)
                 Toast.makeText(context, "Errore nel download: " + result, Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(context, "File downloaded", Toast.LENGTH_SHORT).show();
+            else{
+                File file = new File(Environment.getExternalStorageDirectory()+"/MesseApp/"+idCircolare+".pdf");
+                Intent intent = new Intent();
+                intent.setAction(android.content.Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(file),"application/" + MimeTypeMap.getFileExtensionFromUrl(file.getAbsolutePath()));
+                PendingIntent pIntent = PendingIntent.getActivity(RegistroActivity.this, 0, intent, 0);
+                Notification.Builder builder  = new Notification.Builder(RegistroActivity.this)
+                        .setContentTitle("Circolare scaricata")
+                        .setContentText(nomeCircolare)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentIntent(pIntent);
+                Notification n= null;
+                if(Build.VERSION.SDK_INT < 16) {
+                    n = builder.getNotification();
+                } else {
+                    n = builder.build();
+                }
+                if (n != null) {
+                    n.flags |= Notification.FLAG_AUTO_CANCEL;
+
+
+                    NotificationManager notificationManager =
+                            (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                    notificationManager.notify(0, n);
+                }
+            }
+
         }
     }
 
