@@ -1,19 +1,13 @@
 package com.messedagliavr.messeapp;
 
 
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.PowerManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
@@ -23,22 +17,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Adapters.CircolariAdapter;
 import com.messedagliavr.messeapp.Adapters.TabAssenzeAdapter;
 import com.messedagliavr.messeapp.Adapters.TabVotiAdapter;
+import com.messedagliavr.messeapp.Dialogs.CircolariDialog;
+import com.messedagliavr.messeapp.Dialogs.LegendaVotiDialog;
 import com.messedagliavr.messeapp.Objects.Assenza;
 import com.messedagliavr.messeapp.Objects.Circolari;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -47,11 +38,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -60,7 +48,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     ViewPager mViewPager;
     ProgressDialog mDialog;
-    ProgressDialog mProgressDialog;
     int section = 1;
 
     public static HttpResponse httpResponse;
@@ -71,8 +58,6 @@ public class RegistroActivity extends AppCompatActivity {
     public static HashMap<Integer, Materia> v;
     public static HashMap<Integer, Assenza> a;
     public static HashMap<Integer, Circolari> c;
-    public String idCircolare=null;
-    public String nomeCircolare=null;
 
     public void votiBtn(View v) throws IOException {
         //scarico voti
@@ -100,7 +85,7 @@ public class RegistroActivity extends AppCompatActivity {
                 getSupportActionBar().removeAllTabs();
                 getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                 section=1;
-                setContentView(R.layout.menu_registro);
+                setContentView(R.layout.menu_registro2);
                 break;
             case 7:
                 section=6;
@@ -108,12 +93,15 @@ public class RegistroActivity extends AppCompatActivity {
                 setUpCircolari();
                 break;
         }
+        invalidateOptionsMenu();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.clear();
-        getMenuInflater().inflate(R.menu.registro_menu, menu);
+        if(section==2||section==3){
+            getMenuInflater().inflate(R.menu.voti_registro_menu, menu);
+        } else getMenuInflater().inflate(R.menu.registro_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -150,6 +138,10 @@ public class RegistroActivity extends AppCompatActivity {
                                     + user + "&password=" + password));
                 }
                 startActivity(voti);
+                break;
+            case R.id.help:
+                LegendaVotiDialog lvd = new LegendaVotiDialog();
+                lvd.show(getSupportFragmentManager(),"Help voti");
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -387,11 +379,8 @@ public class RegistroActivity extends AppCompatActivity {
             cn.setData(a.parent().previousElementSibling().select("div.font_size_12").first().ownText());
             cn.setId(a.attr("comunicazione_id"));
             Element dettagli = leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_comunicazione.php?action=risposta_com&com_id=" + cn.getId());
-            Element divs = dettagli.select("div").first();
-            cn.setTitolo(divs.ownText());
-            divs.nextElementSibling();
-            cn.setTesto(divs.ownText());
-            divs.nextElementSibling();
+            cn.setTitolo(dettagli.select("div").first().ownText());
+            cn.setTesto(dettagli.select("div.timesroman").first().ownText());
             if (dettagli.select("div.hidden").size() > 3) {
                 cn.setAllegato(false);
             } else {
@@ -407,7 +396,7 @@ public class RegistroActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // save state of your activity to outState
-        outState.putInt("Section",section);
+        outState.putInt("Section", section);
     }
 
     public void setUpVoti(){
@@ -511,153 +500,22 @@ public class RegistroActivity extends AppCompatActivity {
         cs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                setContentView(R.layout.circolare);
-                section = 7;
+                NotificationManager notificationManager =
+                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                CircolariDialog cd = new CircolariDialog(RegistroActivity.this,notificationManager);
                 Circolari cc = c.get(i + 1);
-                TextView titolo = (TextView) findViewById(R.id.cTitle);
-                TextView testo = (TextView) findViewById(R.id.cText);
-                Button dwn = (Button) findViewById(R.id.cScarica);
-                titolo.setText(cc.getTitolo());
-                testo.setText(cc.getTesto());
-                if (cc.getAllegato()) {
-                    dwn.setVisibility(View.VISIBLE);
-                    idCircolare = cc.getId();
-                    nomeCircolare = cc.getTitolo();
-                }
-                else {
-                    dwn.setVisibility(View.INVISIBLE);
-                    dwn.setClickable(false);
-                }
+                Bundle data = new Bundle();
+                data.putString("tit",cc.getTitolo());
+                data.putString("mex", cc.getTesto());
+                data.putBoolean("vis", cc.getAllegato());
+                data.putString("id", cc.getId());
+                cd.setArguments(data);
+                cd.show(getSupportFragmentManager(),"circolare");
             }
         });
         cs.setAdapter(new CircolariAdapter(this, alc));
     }
 
-    public void scaricaAllegato(View v) {
-        final downloadAllegato downloadTask = new downloadAllegato(RegistroActivity.this);
-        downloadTask.execute();
-
-
-    }
-
-    private class downloadAllegato extends AsyncTask<Void, Integer, String> {
-
-        private Context context;
-        private PowerManager.WakeLock mWakeLock;
-
-        public downloadAllegato(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        protected String doInBackground(Void... sUrl) {
-            InputStream input = null;
-            OutputStream output = null;
-            String fileName = null;
-            HttpGet httpget = new HttpGet("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id="+idCircolare);
-            HttpResponse response = null;
-            try {
-                response = httpClient.execute(httpget);
-                HttpEntity entity = response.getEntity();
-                long fileLength = 0;
-                if (entity != null) {
-                    fileLength = entity.getContentLength();
-                    input = entity.getContent();
-                }
-
-                File directory = new File(Environment.getExternalStorageDirectory()+"/MesseApp/");
-                if (!directory.exists()) {
-                    directory.mkdir();
-                }
-                output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/MesseApp/"+idCircolare+".pdf");
-
-                byte data[] = new byte[4096];
-                long total = 0;
-                int count;
-                while ((count = input.read(data)) != -1) {
-
-                    if (isCancelled()) {
-                        input.close();
-                        return null;
-                    }
-                    total += count;
-                    if (fileLength > 0)
-                        publishProgress((int) (total * 100 / fileLength));
-                    output.write(data, 0, count);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (output != null)
-                        output.close();
-                    if (input != null)
-                        input.close();
-                } catch (IOException ignored) {
-                    ignored.printStackTrace();
-                }
-                return null;
-            }
-        }
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                    getClass().getName());
-            mWakeLock.acquire();
-            mProgressDialog = new ProgressDialog(RegistroActivity.this);
-            mProgressDialog.setMessage("Scaricando l'allegato");
-            mProgressDialog.setIndeterminate(true);
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.setCancelable(true);
-            mProgressDialog.show();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-            mProgressDialog.setIndeterminate(false);
-            mProgressDialog.setMax(100);
-            mProgressDialog.setProgress(progress[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            mWakeLock.release();
-            mProgressDialog.dismiss();
-            if (result != null)
-                Toast.makeText(context, "Errore nel download: " + result, Toast.LENGTH_LONG).show();
-            else{
-                File file = new File(Environment.getExternalStorageDirectory()+"/MesseApp/"+idCircolare+".pdf");
-                Intent intent = new Intent();
-                intent.setAction(android.content.Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(file),"application/" + MimeTypeMap.getFileExtensionFromUrl(file.getAbsolutePath()));
-                PendingIntent pIntent = PendingIntent.getActivity(RegistroActivity.this, 0, intent, 0);
-                Notification.Builder builder  = new Notification.Builder(RegistroActivity.this)
-                        .setContentTitle("Circolare scaricata")
-                        .setContentText(nomeCircolare)
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentIntent(pIntent);
-                Notification n= null;
-                if(Build.VERSION.SDK_INT < 16) {
-                    n = builder.getNotification();
-                } else {
-                    n = builder.build();
-                }
-                if (n != null) {
-                    n.flags |= Notification.FLAG_AUTO_CANCEL;
-
-
-                    NotificationManager notificationManager =
-                            (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-                    notificationManager.notify(0, n);
-                }
-            }
-
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -669,7 +527,7 @@ public class RegistroActivity extends AppCompatActivity {
             switch (section) {
                 case 1:
                     section=1;
-                    setContentView(R.layout.menu_registro);
+                    setContentView(R.layout.menu_registro2);
                     break;
                 case 2:
                 case 3:
@@ -687,7 +545,7 @@ public class RegistroActivity extends AppCompatActivity {
                     break;
             }
         } else if (getIntent().getIntExtra("circolari",0)==0){
-            setContentView(R.layout.menu_registro);
+            setContentView(R.layout.menu_registro2);
             section = 1;
         } else {
             SCircolari sc = new SCircolari();

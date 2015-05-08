@@ -1,6 +1,8 @@
 package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,7 @@ public class CircolariAdapter extends ArrayAdapter<Circolari> {
         TextView tt2 = (TextView) v.findViewById(R.id.datenews2);
         TextView tt1 = (TextView) v.findViewById(R.id.titlenews);
 
-        String day="";
+        String day;
         String month="";
         String s = c.getData();
         day = s.substring(0,2);
@@ -76,10 +78,9 @@ public class CircolariAdapter extends ArrayAdapter<Circolari> {
         }
         tt.setText(day);
         tt2.setText(month);
-
+        tt.setTextColor(Color.rgb(114, 177, 214));
+        tt2.setTextColor(Color.rgb(114, 177, 214));
         tt1.setText(c.getTitolo());
-
-
 
         // Return the completed view to render on screen
         return v;

@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
 	android:orientation="horizontal"
-    android:background="#FF9100">
+    android:background="#FFFFFF"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:padding="7dp">
+        android:paddingLeft="9dp"
+        android:paddingRight="3dp"
+        >
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/datenews"
             android:gravity="center_horizontal|bottom"
-            android:text="04"
             android:textSize="23sp"
-            android:textColor="#ffffffff" />
+            android:textStyle="bold" />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/datenews2"
-            android:text="APR"
             android:textSize="22sp"
             android:gravity="center_horizontal|top"
-            android:textColor="#ffffffff" />
+            android:textStyle="bold"
+            android:layout_marginTop="-5dp" />
     </LinearLayout>
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/titlenews"
             android:gravity="center"
-            android:textSize="19sp"
-            android:text="Prova titolo notizia"
-        android:textColor="#ffffffff" />
+            android:textSize="18sp"/>
 </LinearLayout>

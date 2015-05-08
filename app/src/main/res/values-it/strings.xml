@@ -206,4 +206,5 @@
         <item>Secondo Piano</item>
     </string-array>
     <string name="gotowebsite">Vai al sito</string>
+    <string name="download">Scarica</string>
 </resources>

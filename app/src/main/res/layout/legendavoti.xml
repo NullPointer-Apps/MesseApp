@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:id="@+id/legendavoti">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17sp"
+        android:text="Utilizza la legenda sottostante per chiarimenti sulla visualizzazione dei voti. Se qualcosa ti risulta ancora poco chiaro faccelo sapere inviandoci un suggerimento!"
+        android:padding="10dp"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="17sp"
+            android:text="Colori:"
+            android:padding="10dp"
+            android:textStyle="bold"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sufficiente"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/greens"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insufficiente"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/red"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non partecipa alla media"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/blue"
+            android:drawablePadding="10dp"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17sp"
+        android:paddingRight="20dp"
+        android:text="Tipo:"
+        android:padding="10dp"
+        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="40dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" O    Orale"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" S    Scritto"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" T    Test"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" R    Prova di recupero"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" G    Giustificazione"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="10dp"/>
+    </LinearLayout>
+</LinearLayout>

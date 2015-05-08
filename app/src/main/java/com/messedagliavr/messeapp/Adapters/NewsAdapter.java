@@ -1,6 +1,7 @@
 package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,6 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
     public View getView(int position, View v, ViewGroup parent) {
 
         if (v == null) {
-
             LayoutInflater vi;
             vi = LayoutInflater.from(context);
             v = vi.inflate(R.layout.item_news2, null);
@@ -66,12 +66,13 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
                         }
                     }
                 }
+
+                tt.setTextColor(Color.rgb(114, 177, 214));
                 tt.setText(day);
                 tt2.setText(month.toUpperCase());
+                tt2.setTextColor(Color.rgb(114, 177, 214));
             }
-
         }
-
         return v;
 
     }

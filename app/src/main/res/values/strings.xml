@@ -6,7 +6,7 @@
     <string name="orario">Timetable</string>
     <string name="notizie">News</string>
     <string name="eventi">Calendar</string>
-    <string name="registro">Marks</string>
+    <string name="registro">Register</string>
     <string name="circolari">Notices</string>
     <string name="main_title">A. Messedaglia VR</string>
     <string name="exit">Exit</string>
@@ -209,4 +209,5 @@
         <item>Second Floor</item>
     </string-array>
     <string name="gotowebsite">Go to website</string>
+    <string name="download">Download</string>
 </resources>
