@@ -46,7 +46,7 @@ public class DownloadAllegato extends AsyncTask<Void, Integer, String> {
         OutputStream output = null;
         String fileName = null;
         HttpGet httpget = new HttpGet("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id="+idCircolare);
-        HttpResponse response = null;
+        HttpResponse response;
         try {
             response = RegistroActivity.httpClient.execute(httpget);
             HttpEntity entity = response.getEntity();
@@ -128,7 +128,7 @@ public class DownloadAllegato extends AsyncTask<Void, Integer, String> {
             Notification.Builder builder  = new Notification.Builder(context)
                     .setContentTitle("Circolare scaricata")
                     .setContentText(nomeCircolare)
-                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setSmallIcon(R.drawable.webicon)
                     .setContentIntent(pIntent);
             Notification n;
             if(Build.VERSION.SDK_INT < 16) {
