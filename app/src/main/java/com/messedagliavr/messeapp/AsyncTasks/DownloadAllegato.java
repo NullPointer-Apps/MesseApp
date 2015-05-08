@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp;
+package com.messedagliavr.messeapp.AsyncTasks;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -13,6 +13,9 @@ import android.os.Environment;
 import android.os.PowerManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
+
+import com.messedagliavr.messeapp.R;
+import com.messedagliavr.messeapp.RegistroActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

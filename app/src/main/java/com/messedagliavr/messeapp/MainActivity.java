@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -38,6 +39,7 @@ import com.messedagliavr.messeapp.Utilities.MyDifferenceFromToday;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -380,9 +382,19 @@ public class MainActivity extends AppCompatActivity
             query.close();
             startActivity(voti);
         }*/
+        Boolean isSessionValid=false;
+        SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+        Long storedDate = sharedpreferences.getLong("lastLogin",0);
+        if ((storedDate - new Date().getTime()) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
+            isSessionValid = false;
+        } else if (storedDate != 0) {
+            isSessionValid = true;
+        }
+        System.out.println("Tempo "+sharedpreferences.getLong("lastLogin",0)+" Main " +isSessionValid);
         DialogFragment login = new LoginRegistroDialog();
         Bundle data = new Bundle();
         data.putInt("circolari",0);
+        data.putBoolean("isSessionValid",isSessionValid);
         login.setArguments(data);
         login.show(getSupportFragmentManager(),"login");
     }
@@ -415,9 +427,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void notices(View v) {
+        Boolean isSessionValid=false;
+        SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+        Long storedDate = sharedpreferences.getLong("lastLogin",0);
+        if ((storedDate - new Date().getTime()) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
+            isSessionValid = false;
+        } else if (storedDate != 0) {
+            isSessionValid = true;
+        }
         DialogFragment login = new LoginRegistroDialog();
         Bundle data = new Bundle();
         data.putInt("circolari",1);
+        data.putBoolean("isSessionValid",isSessionValid);
         login.setArguments(data);
         login.show(getSupportFragmentManager(),"login");
     }

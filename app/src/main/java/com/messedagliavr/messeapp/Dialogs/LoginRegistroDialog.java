@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -38,7 +39,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 
-public class LoginRegistroDialog extends DialogFragment {
+public class LoginRegistroDialog extends DialogFragment  {
 
     HttpPost httpPost;
     ProgressDialog mDialog;
@@ -47,11 +48,15 @@ public class LoginRegistroDialog extends DialogFragment {
     String pw = "";
     final String custcode = "VRLS0003";
     ArrayList<BasicNameValuePair> values = new ArrayList<>();
+    Boolean isSessionValid=false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         a=getActivity();
+        System.out.println("dialog Prima " +isSessionValid);
+        isSessionValid=getArguments().getBoolean("isSessionValid");
+        System.out.println("dialog Dopo " +isSessionValid);
         MainDB databaseHelper = new MainDB(MainActivity.context);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = {"enabled", "username", "password"};
@@ -73,25 +78,35 @@ public class LoginRegistroDialog extends DialogFragment {
             values.add(new BasicNameValuePair("custcode", custcode));
             values.add(new BasicNameValuePair("login", user));
             values.add(new BasicNameValuePair("password", pw));
-
-            if (user.contains("@")) {
-                httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login_email.php");
+            if (isSessionValid) {
+                Intent registro = new Intent(MainActivity.context, RegistroActivity.class);
+                registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra("USER", user)
+                        .putExtra("PWD", pw)
+                        .putExtra("circolari", getArguments().getInt("circolari"));
+                MainActivity.context.startActivity(registro);
+                this.dismiss();
             } else {
-                httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login.php");
+
+                if (user.contains("@")) {
+                    httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login_email.php");
+                } else {
+                    httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login.php");
+                }
+                try {
+                    httpPost.setEntity(new UrlEncodedFormEntity(values));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                Log.i("LOGIN", "inizio login");
+                //faccio il login su un nuovo thread
+                Login l = new Login();
+                l.execute();
+
+                this.dismiss();
+
             }
-            try {
-                httpPost.setEntity(new UrlEncodedFormEntity(values));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
-            Log.i("LOGIN", "inizio login");
-            //faccio il login su un nuovo thread
-            Login l = new Login();
-            l.execute();
-
-            this.dismiss();
-
         }
 
     }
