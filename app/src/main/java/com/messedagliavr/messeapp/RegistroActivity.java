@@ -503,9 +503,7 @@ public class RegistroActivity extends AppCompatActivity {
         cs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                NotificationManager notificationManager =
-                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                CircolariDialog cd = new CircolariDialog(RegistroActivity.this,notificationManager);
+                CircolariDialog cd = new CircolariDialog();
                 Circolari cc = c.get(i + 1);
                 Bundle data = new Bundle();
                 data.putString("tit",cc.getTitolo());

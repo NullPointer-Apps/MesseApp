@@ -390,7 +390,6 @@ public class MainActivity extends AppCompatActivity
         } else if (storedDate != 0) {
             isSessionValid = true;
         }
-        System.out.println("Tempo "+sharedpreferences.getLong("lastLogin",0)+" Main " +isSessionValid);
         DialogFragment login = new LoginRegistroDialog();
         Bundle data = new Bundle();
         data.putInt("circolari",0);

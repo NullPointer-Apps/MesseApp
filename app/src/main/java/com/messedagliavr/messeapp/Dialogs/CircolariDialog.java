@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 
 import com.messedagliavr.messeapp.AsyncTasks.DownloadAllegato;
 import com.messedagliavr.messeapp.R;
+import com.messedagliavr.messeapp.RegistroActivity;
 
 
 public class CircolariDialog extends DialogFragment {
@@ -19,15 +20,13 @@ public class CircolariDialog extends DialogFragment {
     public CircolariDialog(){
     }
 
-    public CircolariDialog(Context c,NotificationManager nm){
-        this.c=c;
-        this.nm=nm;
-    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        c=getActivity();
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        nm = (NotificationManager) c.getSystemService(c.NOTIFICATION_SERVICE);
         builder.setTitle(getArguments().getString("tit"))
                 .setMessage(getArguments().getString("mex"));
         if (getArguments().getBoolean("vis")) {

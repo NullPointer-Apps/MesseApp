@@ -54,9 +54,7 @@ public class LoginRegistroDialog extends DialogFragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         a=getActivity();
-        System.out.println("dialog Prima " +isSessionValid);
         isSessionValid=getArguments().getBoolean("isSessionValid");
-        System.out.println("dialog Dopo " +isSessionValid);
         MainDB databaseHelper = new MainDB(MainActivity.context);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         String[] columns = {"enabled", "username", "password"};
