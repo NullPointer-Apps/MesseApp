@@ -1,7 +1,6 @@
 package com.messedagliavr.messeapp;
 
 
-import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +21,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.messedagliavr.messeapp.Adapters.CircolariAdapter;
 import com.messedagliavr.messeapp.Adapters.TabAssenzeAdapter;
 import com.messedagliavr.messeapp.Adapters.TabVotiAdapter;
@@ -42,9 +44,11 @@ import org.jsoup.parser.Parser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class RegistroActivity extends AppCompatActivity {
@@ -276,62 +280,76 @@ public class RegistroActivity extends AppCompatActivity {
         Materia materia = new Materia();
         boolean isRec=false;
         boolean isTest=false;
+        SharedPreferences sharedpreferences = getSharedPreferences("Voti", Context.MODE_PRIVATE);
+        String json = sharedpreferences.getString("json", "default");
+        Long lastUpdate = sharedpreferences.getLong("lastupdate",0);
+        if(!json.equals("default")&& (new Date().getTime()-lastUpdate) < 10800000) {
+            Type typeOfHashMap = new TypeToken<Map<Integer, Materia>>() {
+            }.getType();
+            Gson gson = new GsonBuilder().create();
+            v = gson.fromJson(json, typeOfHashMap);
+        } else {
 
-        for (Element tr : html.select("tr")) {
-            for (Element td : tr.select("td")) {
-                //ha classe font-size-14 (Materie)
-                if (td.text().equals("Test")){
-                    isTest=true;
-                    isRec=false;
-                    continue;
-                } else if (td.text().equals("Prove recupero")) {
-                    isRec = true;
-                    isTest = false;
-                    continue;
-                }
+            for (Element tr : html.select("tr")) {
+                for (Element td : tr.select("td")) {
+                    //ha classe font-size-14 (Materie)
+                    if (td.text().equals("Test")) {
+                        isTest = true;
+                        isRec = false;
+                        continue;
+                    } else if (td.text().equals("Prove recupero")) {
+                        isRec = true;
+                        isTest = false;
+                        continue;
+                    }
 
-                if (td.hasClass("font_size_14") && td.hasText()) {
-                    isRec=false;
-                    isTest=false;
-                    materia = new Materia(td.text());
-                    k++;
-                    System.out.println(td.text()+k);
-                    v.put(k,materia);
-                    j = 0;
-                    nv=0;
-                } else {
-                    j++;
-                    if (td.hasText()){
-                        nv++;
-                        Voto voto = new Voto();
-                        for (Element span : td.getElementsByTag("span")) {
-                            if (span.hasClass("voto_data") && span.hasText()) {
-                                voto.setData(span.text());
-                            }
-                        }
-                        for (Element p : td.getElementsByTag("p")) {
-                            if (p.hasText() && p.hasClass("s_reg_testo")) {
-                                if (isRec){
-                                    voto.setTipo("Recupero");
-                                } else if (isTest){
-                                    voto.setTipo("Test");
-                                } else if ((j <= 5) || (j > 15 && j <= 20))
-                                    voto.setTipo("Scritto");
-                                else if ((j > 5 && j <= 10) || (j > 20 || j <= 25))
-                                    voto.setTipo("Orale");
-                                else voto.setTipo("Pratico");
-                                if (j > 15&&!isRec) {
-                                    voto.setQuadrimestre(2);
-                                } else {
-                                    voto.setQuadrimestre(1);
+                    if (td.hasClass("font_size_14") && td.hasText()) {
+                        isRec = false;
+                        isTest = false;
+                        materia = new Materia(td.text());
+                        k++;
+                        System.out.println(td.text() + k);
+                        v.put(k, materia);
+                        j = 0;
+                        nv = 0;
+                    } else {
+                        j++;
+                        if (td.hasText()) {
+                            nv++;
+                            Voto voto = new Voto();
+                            for (Element span : td.getElementsByTag("span")) {
+                                if (span.hasClass("voto_data") && span.hasText()) {
+                                    voto.setData(span.text());
                                 }
-                                voto.setVoto(p.text());
-                                materia.addVoto(nv, voto);
+                            }
+                            for (Element p : td.getElementsByTag("p")) {
+                                if (p.hasText() && p.hasClass("s_reg_testo")) {
+                                    if (isRec) {
+                                        voto.setTipo("Recupero");
+                                    } else if (isTest) {
+                                        voto.setTipo("Test");
+                                    } else if ((j <= 5) || (j > 15 && j <= 20))
+                                        voto.setTipo("Scritto");
+                                    else if ((j > 5 && j <= 10) || (j > 20 || j <= 25))
+                                        voto.setTipo("Orale");
+                                    else voto.setTipo("Pratico");
+                                    if (j > 15 && !isRec) {
+                                        voto.setQuadrimestre(2);
+                                    } else {
+                                        voto.setQuadrimestre(1);
+                                    }
+                                    voto.setVoto(p.text());
+                                    materia.addVoto(nv, voto);
+                                }
                             }
                         }
                     }
                 }
             }
+            Gson gson = new GsonBuilder().create();
+            json = gson.toJson(v);
+            sharedpreferences.edit().putString("json",json).apply();
+            sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
         }
         return v;
     }
@@ -339,36 +357,50 @@ public class RegistroActivity extends AppCompatActivity {
     public HashMap<Integer,Assenza> scaricaAssenze(Element html) throws IOException {
         a = new HashMap<>();
         String mese, title="",tipo;
+        SharedPreferences sharedpreferences = getSharedPreferences("Assenze", Context.MODE_PRIVATE);
+        String json = sharedpreferences.getString("json", "default");
+        Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
+        if(!json.equals("default")&& (new Date().getTime()-lastUpdate) < 10800000) {
+            Type typeOfHashMap = new TypeToken<Map<Integer, Assenza>>() {
+            }.getType();
+            Gson gson = new GsonBuilder().create();
+            a = gson.fromJson(json, typeOfHashMap);
+        } else {
 
-        int n=0,i;
-        for (Element tr : html.select("tr")){
-            if (tr.children().size()>2){
-                Element td = tr.child(1);
-                mese = td.text();
-                if (mese.equals("Mese")) continue;
-                td=td.nextElementSibling();
-                for (i=1; td!=null; i++) {
-                    tipo = td.text().trim();
-                    if (tipo.length()>0&&(tipo.contains("A") || tipo.contains("R"))) {
-                        Log.i("ASS", "trovata assenza:" + "Tipo=" + tipo + " Mese=" + mese + " Giorno=" + i);
-                        Assenza ass = new Assenza();
-                        ass.setMese(mese.trim());
-                        ass.setTipo(String.valueOf(tipo.charAt(tipo.length() - 1)));
-                        ass.setGiorno(i);
-                        for (Element div : td.select("div")) title = div.attr("title");
+            int n = 0, i;
+            for (Element tr : html.select("tr")) {
+                if (tr.children().size() > 2) {
+                    Element td = tr.child(1);
+                    mese = td.text();
+                    if (mese.equals("Mese")) continue;
+                    td = td.nextElementSibling();
+                    for (i = 1; td != null; i++) {
+                        tipo = td.text().trim();
+                        if (tipo.length() > 0 && (tipo.contains("A") || tipo.contains("R"))) {
+                            Log.i("ASS", "trovata assenza:" + "Tipo=" + tipo + " Mese=" + mese + " Giorno=" + i);
+                            Assenza ass = new Assenza();
+                            ass.setMese(mese.trim());
+                            ass.setTipo(String.valueOf(tipo.charAt(tipo.length() - 1)));
+                            ass.setGiorno(i);
+                            for (Element div : td.select("div")) title = div.attr("title");
 
-                        if (tipo.contains("R")) {
-                            ass.setTipoR(title.substring(23));
+                            if (tipo.contains("R")) {
+                                ass.setTipoR(title.substring(23));
+                            }
+                            if (tipo.contains("NG")) {
+                                ass.setGiustificata(false);
+                            }
+                            n++;
+                            a.put(n, ass);
                         }
-                        if (tipo.contains("NG")){
-                            ass.setGiustificata(false);
-                        }
-                        n++;
-                        a.put(n, ass);
+                        td = td.nextElementSibling();
                     }
-                    td=td.nextElementSibling();
                 }
             }
+            Gson gson = new GsonBuilder().create();
+            json = gson.toJson(a);
+            sharedpreferences.edit().putString("json",json).apply();
+            sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
         }
         return a;
     }
@@ -376,23 +408,35 @@ public class RegistroActivity extends AppCompatActivity {
     public HashMap<Integer,Circolari> scaricaCircolari(Element html) throws IOException {
         c = new HashMap<>();
         int i=0;
-        for (Element a : html.select("a.specifica")){
-            Circolari cn = new Circolari();
-            i++;
-            cn.setData(a.parent().previousElementSibling().select("div.font_size_12").first().ownText());
-            cn.setId(a.attr("comunicazione_id"));
-            Element dettagli = leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_comunicazione.php?action=risposta_com&com_id=" + cn.getId());
-            cn.setTitolo(dettagli.select("div").first().ownText());
-            cn.setTesto(dettagli.select("div.timesroman").first().ownText());
-            if (dettagli.select("div.hidden").size() > 3) {
-                cn.setAllegato(false);
-            } else {
-                cn.setAllegato(true);
+        SharedPreferences sharedpreferences = getSharedPreferences("Circolari", Context.MODE_PRIVATE);
+        String json = sharedpreferences.getString("json", "default");
+        Long lastUpdate = sharedpreferences.getLong("lastupdate",0);
+        if(!json.equals("default") && (new Date().getTime()-lastUpdate) < 10800000) {
+            Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() { }.getType();
+            Gson gson = new GsonBuilder().create();
+                c = gson.fromJson(json, typeOfHashMap);
+        } else {
+            for (Element a : html.select("a.specifica")) {
+                Circolari cn = new Circolari();
+                i++;
+                cn.setData(a.parent().previousElementSibling().select("div.font_size_12").first().ownText());
+                cn.setId(a.attr("comunicazione_id"));
+                Element dettagli = leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_comunicazione.php?action=risposta_com&com_id=" + cn.getId());
+                cn.setTitolo(dettagli.select("div").first().ownText());
+                cn.setTesto(dettagli.select("div.timesroman").first().ownText());
+                if (dettagli.select("div.hidden").size() > 3) {
+                    cn.setAllegato(false);
+                } else {
+                    cn.setAllegato(true);
+                }
+                System.out.println("Trovata circolare - ID:" + cn.getId() + " Data:" + cn.getData() + " Titolo:" + cn.getTitolo() + " Testo:" + cn.getTesto());
+                c.put(i, cn);
             }
-            System.out.println("Trovata circolare - ID:" + cn.getId() + " Data:" + cn.getData() + " Titolo:" + cn.getTitolo() + " Testo:" + cn.getTesto());
-            c.put(i,cn);
+            Gson gson = new GsonBuilder().create();
+            json = gson.toJson(c);
+            sharedpreferences.edit().putString("json",json).apply();
+            sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
         }
-
         return c;
     }
 
