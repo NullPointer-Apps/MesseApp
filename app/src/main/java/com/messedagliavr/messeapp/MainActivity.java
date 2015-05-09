@@ -385,7 +385,7 @@ public class MainActivity extends AppCompatActivity
         Boolean isSessionValid=false;
         SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
         Long storedDate = sharedpreferences.getLong("lastLogin",0);
-        if ((storedDate - new Date().getTime()) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
+        if ((new Date().getTime()- storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
             isSessionValid = false;
         } else if (storedDate != 0) {
             isSessionValid = true;
@@ -429,7 +429,7 @@ public class MainActivity extends AppCompatActivity
         Boolean isSessionValid=false;
         SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
         Long storedDate = sharedpreferences.getLong("lastLogin",0);
-        if ((storedDate - new Date().getTime()) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
+        if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
             isSessionValid = false;
         } else if (storedDate != 0) {
             isSessionValid = true;
