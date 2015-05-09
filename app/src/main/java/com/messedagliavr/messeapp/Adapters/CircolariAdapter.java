@@ -2,7 +2,6 @@ package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

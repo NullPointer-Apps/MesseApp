@@ -10,7 +10,6 @@ import android.support.v4.app.DialogFragment;
 
 import com.messedagliavr.messeapp.AsyncTasks.DownloadAllegato;
 import com.messedagliavr.messeapp.R;
-import com.messedagliavr.messeapp.RegistroActivity;
 
 
 public class CircolariDialog extends DialogFragment {
