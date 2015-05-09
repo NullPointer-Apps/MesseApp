@@ -119,8 +119,8 @@ public class NewsActivity extends AppCompatActivity  {
         getSupportActionBar().setTitle(getString(R.string.notizie));
 		if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM));
-            window.setExitTransition(new Slide(Gravity.TOP));
+            window.setEnterTransition(new Slide(Gravity.BOTTOM).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
+            window.setExitTransition(new Slide(Gravity.TOP).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
         }
         if (CheckInternet()) {
             nointernet = "false";

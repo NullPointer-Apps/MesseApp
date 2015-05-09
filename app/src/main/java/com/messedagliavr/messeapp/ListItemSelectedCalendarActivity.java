@@ -43,8 +43,8 @@ public class ListItemSelectedCalendarActivity extends AppCompatActivity {
         descrizioneview.setBackgroundColor(Color.parseColor("#eeeeee"));
         if (Build.VERSION.SDK_INT >= 21) {
             window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.RIGHT));
-            window.setExitTransition(new Slide(Gravity.LEFT));
+            window.setEnterTransition(new Slide(Gravity.RIGHT).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
+            window.setExitTransition(new Slide(Gravity.LEFT).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
         }
 
     }
