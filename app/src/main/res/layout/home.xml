@@ -50,7 +50,7 @@
                 android:gravity="center"
                 android:text="Social"
                 android:id="@+id/textView1"
-                android:textColor="@android:color/black" />
+                android:textColor="#ffffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 android:text="@string/orario"
                 android:id="@+id/textView2"
-                android:textColor="@android:color/black" />
+                android:textColor="#ffffffff" />
         </TableRow>
 
         <TableRow
@@ -106,7 +106,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:textColor="@android:color/black"
+                android:textColor="#ffffffff"
                 android:text="@string/notizie"
                 android:id="@+id/textView3" />
 
@@ -118,7 +118,7 @@
                 android:gravity="center"
                 android:text="@string/eventi"
                 android:id="@+id/textView4"
-                android:textColor="@android:color/black" />
+                android:textColor="#ffffffff" />
         </TableRow>
 
         <TableRow
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView5"
-                android:src="@drawable/voti"
+                android:src="@drawable/registro"
                 android:scaleType="centerInside"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -163,7 +163,7 @@
                 android:gravity="center"
                 android:text="@string/registro"
                 android:id="@+id/textView5"
-                android:textColor="@android:color/black" />
+                android:textColor="#ffffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -173,6 +173,6 @@
                 android:gravity="center"
                 android:text="@string/circolari"
                 android:id="@+id/textView6"
-                android:textColor="@android:color/black" />
+                android:textColor="#ffffffff" />
         </TableRow>
 </TableLayout>

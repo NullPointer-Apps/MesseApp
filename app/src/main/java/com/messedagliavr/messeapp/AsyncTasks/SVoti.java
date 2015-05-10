@@ -11,7 +11,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;
-import com.messedagliavr.messeapp.R;
 import com.messedagliavr.messeapp.RegistroActivity;
 
 import org.apache.http.client.methods.HttpGet;

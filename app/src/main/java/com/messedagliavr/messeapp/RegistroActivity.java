@@ -80,7 +80,7 @@ public class RegistroActivity extends AppCompatActivity {
                 getSupportActionBar().removeAllTabs();
                 getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                 section=1;
-                setContentView(R.layout.menu_registro2);
+                setContentView(R.layout.menu_registro);
                 break;
             case 7:
                 section=6;
@@ -293,7 +293,7 @@ public class RegistroActivity extends AppCompatActivity {
             switch (section) {
                 case 1:
                     section=1;
-                    setContentView(R.layout.menu_registro2);
+                    setContentView(R.layout.menu_registro);
                     break;
                 case 2:
                 case 3:
@@ -311,7 +311,7 @@ public class RegistroActivity extends AppCompatActivity {
                     break;
             }
         } else if (getIntent().getIntExtra("circolari",0)==0){
-            setContentView(R.layout.menu_registro2);
+            setContentView(R.layout.menu_registro);
             section = 1;
         } else {
             getSupportActionBar().setTitle(getString(R.string.circolari));
