@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,10 +30,12 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
 
     RegistroActivity ra;
     ProgressDialog mDialog;
-
+    Boolean isOffline;
+    Boolean error=false;
     public static HashMap<Integer, Circolari> c;
 
-    public SCircolari(RegistroActivity ra){
+    public SCircolari(RegistroActivity ra, Boolean isOffline){
+        this.isOffline=isOffline;
         this.ra=ra;
     }
 
@@ -49,7 +52,18 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try {
             //lista circolari
-            c=scaricaCircolari(leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php").getElementById("data_table"));
+            SharedPreferences sharedpreferences = ra.getSharedPreferences("Circolari", Context.MODE_PRIVATE);
+            String json = sharedpreferences.getString("json", "default");
+            if(isOffline && !json.equals("default")) {
+                c = new HashMap<>();
+                Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() { }.getType();
+                Gson gson = new GsonBuilder().create();
+                c = gson.fromJson(json, typeOfHashMap);
+            } else if(isOffline == false) {
+                c = scaricaCircolari(leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php").getElementById("data_table"));
+            }  else {
+                error=true;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +73,11 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         mDialog.dismiss();
-        ra.setUpCircolari(c);
+        if(!error) {
+            ra.setUpCircolari(c);
+        } else {
+            Toast.makeText(ra,"C'è stato un errore con il download delle circolari", Toast.LENGTH_SHORT);
+        }
     }
 
     public HashMap<Integer,Circolari> scaricaCircolari(Element html) throws IOException {
@@ -68,7 +86,7 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
         SharedPreferences sharedpreferences = ra.getSharedPreferences("Circolari", Context.MODE_PRIVATE);
         String json = sharedpreferences.getString("json", "default");
         Long lastUpdate = sharedpreferences.getLong("lastupdate",0);
-        if(!json.equals("default") && (new Date().getTime()-lastUpdate) < 10800000) {
+        if((!json.equals("default") && (new Date().getTime()-lastUpdate) < 10800000)) {
             Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() { }.getType();
             Gson gson = new GsonBuilder().create();
             c = gson.fromJson(json, typeOfHashMap);

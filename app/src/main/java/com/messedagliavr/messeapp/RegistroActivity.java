@@ -52,6 +52,7 @@ public class RegistroActivity extends AppCompatActivity {
     public static HashMap<Integer, Materia> v;
     public static HashMap<Integer, Assenza> a;
     public static HashMap<Integer, Circolari> c;
+    public Boolean isOffline = false;
 
     public void votiBtn(View v) throws IOException {
         //scarico voti
@@ -291,8 +292,13 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.registro));
-        SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
-        sharedpreferences.edit().putLong("lastLogin",new Date().getTime()).commit();
+        isOffline = getIntent().getBooleanExtra("isOffline",false);
+        if (isOffline) {
+
+        } else {
+            SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+            sharedpreferences.edit().putLong("lastLogin", new Date().getTime()).commit();
+        }
         if (savedInstanceState!=null) {
             section = savedInstanceState.getInt("Section", 0);
             switch (section) {
@@ -320,7 +326,7 @@ public class RegistroActivity extends AppCompatActivity {
             section = 1;
         } else {
             getSupportActionBar().setTitle(getString(R.string.circolari));
-            SCircolari sc = new SCircolari(this);
+            SCircolari sc = new SCircolari(this,isOffline);
             sc.execute();
             section = 6;
         }

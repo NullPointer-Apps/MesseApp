@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -385,17 +386,47 @@ public class MainActivity extends AppCompatActivity
         Boolean isSessionValid=false;
         SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
         Long storedDate = sharedpreferences.getLong("lastLogin",0);
-        if ((new Date().getTime()- storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
-            isSessionValid = false;
-        } else if (storedDate != 0) {
-            isSessionValid = true;
+        if (!CheckInternet() && storedDate != 0){
+            DialogFragment login = new LoginRegistroDialog();
+            Bundle data = new Bundle();
+            data.putInt("circolari", 0);
+            data.putBoolean("isOffline", true);
+            login.setArguments(data);
+            login.show(getSupportFragmentManager(), "login");
+
+        } else {
+            if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null) {
+                isSessionValid = false;
+            } else if (storedDate != 0) {
+                isSessionValid = true;
+            }
+            DialogFragment login = new LoginRegistroDialog();
+            Bundle data = new Bundle();
+            data.putInt("circolari", 0);
+            data.putBoolean("isOffline", false);
+            data.putBoolean("isSessionValid", isSessionValid);
+            login.setArguments(data);
+            login.show(getSupportFragmentManager(), "login");
         }
-        DialogFragment login = new LoginRegistroDialog();
-        Bundle data = new Bundle();
-        data.putInt("circolari",0);
-        data.putBoolean("isSessionValid",isSessionValid);
-        login.setArguments(data);
-        login.show(getSupportFragmentManager(),"login");
+    }
+
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected()) connected = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return connected;
     }
 
     public void news(View v) {
@@ -427,19 +458,33 @@ public class MainActivity extends AppCompatActivity
 
     public void notices(View v) {
         Boolean isSessionValid=false;
-        SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
-        Long storedDate = sharedpreferences.getLong("lastLogin",0);
-        if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null){
-            isSessionValid = false;
-        } else if (storedDate != 0) {
-            isSessionValid = true;
+        SharedPreferences sp = getSharedPreferences("Circolari", Context.MODE_PRIVATE);
+        String json = sp.getString("json", "default");
+        if (CheckInternet() == false && !json.equals("default")){
+            DialogFragment login = new LoginRegistroDialog();
+            Bundle data = new Bundle();
+            data.putInt("circolari",1);
+            data.putBoolean("isOffline", true);
+            login.setArguments(data);
+            login.show(getSupportFragmentManager(), "login");
+
+        } else if (CheckInternet() == true) {
+            SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+            Long storedDate = sharedpreferences.getLong("lastLogin",0);
+            if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null) {
+                isSessionValid = false;
+            } else if (storedDate != 0) {
+                isSessionValid = true;
+            }
+            DialogFragment login = new LoginRegistroDialog();
+            Bundle data = new Bundle();
+            data.putInt("circolari", 1);
+            data.putBoolean("isSessionValid", isSessionValid);
+            login.setArguments(data);
+            login.show(getSupportFragmentManager(), "login");
+        } else {
+            Toast.makeText(this,R.string.noconnection,Toast.LENGTH_SHORT);
         }
-        DialogFragment login = new LoginRegistroDialog();
-        Bundle data = new Bundle();
-        data.putInt("circolari",1);
-        data.putBoolean("isSessionValid",isSessionValid);
-        login.setArguments(data);
-        login.show(getSupportFragmentManager(),"login");
     }
 
 

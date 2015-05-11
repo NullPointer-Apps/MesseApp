@@ -47,62 +47,74 @@ public class LoginRegistroDialog extends DialogFragment  {
     String pw = "";
     final String custcode = "VRLS0003";
     ArrayList<BasicNameValuePair> values = new ArrayList<>();
-    Boolean isSessionValid=false;
+    Boolean isSessionValid = false;
+    Boolean isOffline = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         a=getActivity();
         isSessionValid=getArguments().getBoolean("isSessionValid");
-        MainDB databaseHelper = new MainDB(MainActivity.context);
-        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        String[] columns = {"enabled", "username", "password"};
-        Cursor query = db.query("settvoti", // The table to query
-                columns, // The columns to return
-                null, // The columns for the WHERE clause
-                null, // The values for the WHERE clause
-                null, // don't group the rows
-                null, // don't filter by row groups
-                null // The sort order
-        );
-        query.moveToFirst();
-        String enabled = query.getString(query.getColumnIndex("enabled"));
-        db.close();
-        if (enabled.matches("true")) {
-            user = query.getString(query.getColumnIndex("username"));
-            pw = query.getString(query.getColumnIndex("password"));
+        isOffline=getArguments().getBoolean("isOffline");
+        if (isOffline) {
+            Intent registro = new Intent(MainActivity.context, RegistroActivity.class);
+            registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra("circolari", getArguments().getInt("circolari"))
+                    .putExtra("isOffline", isOffline);
+            MainActivity.context.startActivity(registro);
+            this.dismiss();
 
-            values.add(new BasicNameValuePair("custcode", custcode));
-            values.add(new BasicNameValuePair("login", user));
-            values.add(new BasicNameValuePair("password", pw));
-            if (isSessionValid) {
-                Intent registro = new Intent(MainActivity.context, RegistroActivity.class);
-                registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .putExtra("USER", user)
-                        .putExtra("PWD", pw)
-                        .putExtra("circolari", getArguments().getInt("circolari"));
-                MainActivity.context.startActivity(registro);
-                this.dismiss();
-            } else {
+        } else {
+            MainDB databaseHelper = new MainDB(MainActivity.context);
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            String[] columns = {"enabled", "username", "password"};
+            Cursor query = db.query("settvoti", // The table to query
+                    columns, // The columns to return
+                    null, // The columns for the WHERE clause
+                    null, // The values for the WHERE clause
+                    null, // don't group the rows
+                    null, // don't filter by row groups
+                    null // The sort order
+            );
+            query.moveToFirst();
+            String enabled = query.getString(query.getColumnIndex("enabled"));
+            db.close();
+            if (enabled.matches("true")) {
+                user = query.getString(query.getColumnIndex("username"));
+                pw = query.getString(query.getColumnIndex("password"));
 
-                if (user.contains("@")) {
-                    httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login_email.php");
+                values.add(new BasicNameValuePair("custcode", custcode));
+                values.add(new BasicNameValuePair("login", user));
+                values.add(new BasicNameValuePair("password", pw));
+                if (isSessionValid) {
+                    Intent registro = new Intent(MainActivity.context, RegistroActivity.class);
+                    registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .putExtra("USER", user)
+                            .putExtra("PWD", pw)
+                            .putExtra("circolari", getArguments().getInt("circolari"));
+                    MainActivity.context.startActivity(registro);
+                    this.dismiss();
                 } else {
-                    httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login.php");
+
+                    if (user.contains("@")) {
+                        httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login_email.php");
+                    } else {
+                        httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login.php");
+                    }
+                    try {
+                        httpPost.setEntity(new UrlEncodedFormEntity(values));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.i("LOGIN", "inizio login");
+                    //faccio il login su un nuovo thread
+                    Login l = new Login();
+                    l.execute();
+
+                    this.dismiss();
+
                 }
-                try {
-                    httpPost.setEntity(new UrlEncodedFormEntity(values));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-
-                Log.i("LOGIN", "inizio login");
-                //faccio il login su un nuovo thread
-                Login l = new Login();
-                l.execute();
-
-                this.dismiss();
-
             }
         }
 
