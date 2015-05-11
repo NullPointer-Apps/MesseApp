@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:id="@+id/legendavoti">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="17sp"
+        android:text="Utilizza la legenda sottostante per chiarimenti sulla visualizzazione delle assenze.\nSe qualcosa ti risulta ancora poco chiaro faccelo sapere inviandoci un suggerimento!"
+        android:padding="10dp"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="17sp"
+            android:text="Colori:"
+            android:padding="10dp"
+            android:textStyle="bold"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assenza giustificata"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/greend"
+            android:drawablePadding="10dp"
+            android:paddingBottom="7dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non giustificata"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/red"
+            android:drawablePadding="10dp"
+            android:paddingBottom="7dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ritardo breve"
+            android:textSize="17sp"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/blue"
+            android:drawablePadding="7dp"/>
+    </LinearLayout>
+</LinearLayout>

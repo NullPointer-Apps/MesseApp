@@ -1,7 +1,6 @@
 package com.messedagliavr.messeapp;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +24,7 @@ import com.messedagliavr.messeapp.AsyncTasks.SAssenze;
 import com.messedagliavr.messeapp.AsyncTasks.SCircolari;
 import com.messedagliavr.messeapp.AsyncTasks.SVoti;
 import com.messedagliavr.messeapp.Dialogs.CircolariDialog;
+import com.messedagliavr.messeapp.Dialogs.LegendaAssenzeDialog;
 import com.messedagliavr.messeapp.Dialogs.LegendaVotiDialog;
 import com.messedagliavr.messeapp.Objects.Assenza;
 import com.messedagliavr.messeapp.Objects.Circolari;
@@ -42,7 +42,6 @@ import java.util.HashMap;
 public class RegistroActivity extends AppCompatActivity {
 
     ViewPager mViewPager;
-    ProgressDialog mDialog;
     int section = 1;
 
     public static HttpResponse httpResponse;
@@ -94,7 +93,7 @@ public class RegistroActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.clear();
-        if(section==2||section==3){
+        if(section==2||section==3||section==4||section==5){
             getMenuInflater().inflate(R.menu.voti_registro_menu, menu);
         } else getMenuInflater().inflate(R.menu.registro_menu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -135,8 +134,14 @@ public class RegistroActivity extends AppCompatActivity {
                 startActivity(voti);
                 break;
             case R.id.help:
-                LegendaVotiDialog lvd = new LegendaVotiDialog();
-                lvd.show(getSupportFragmentManager(),"Help voti");
+                if (section==2||section==3){
+                    LegendaVotiDialog lvd = new LegendaVotiDialog();
+                    lvd.show(getSupportFragmentManager(),"Help voti");
+                } else {
+                    LegendaAssenzeDialog lad = new LegendaAssenzeDialog();
+                    lad.show(getSupportFragmentManager(),"Help assenze");
+                }
+
                 break;
         }
         return super.onOptionsItemSelected(item);

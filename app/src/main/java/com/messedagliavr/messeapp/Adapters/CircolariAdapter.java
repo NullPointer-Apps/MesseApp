@@ -26,7 +26,7 @@ public class CircolariAdapter extends ArrayAdapter<Circolari> {
         Circolari c = getItem(position);
 
         if (v == null) {
-            v = LayoutInflater.from(getContext()).inflate(R.layout.item_news2, parent, false);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.item_news, parent, false);
         }
 
         TextView tt = (TextView) v.findViewById(R.id.datenews);

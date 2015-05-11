@@ -32,7 +32,7 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
         if (v == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(context);
-            v = vi.inflate(R.layout.item_news2, null);
+            v = vi.inflate(R.layout.item_news, null);
         }
 
         Spanned p = getItem(position);
