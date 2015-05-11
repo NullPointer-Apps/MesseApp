@@ -2,15 +2,19 @@ package com.messedagliavr.messeapp.AsyncTasks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.TypedValue;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.messedagliavr.messeapp.Objects.Circolari;
+import com.messedagliavr.messeapp.R;
 import com.messedagliavr.messeapp.RegistroActivity;
 
 import org.apache.http.client.methods.HttpGet;
@@ -32,21 +36,38 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
     ProgressDialog mDialog;
     Boolean isOffline;
     Boolean error=false;
+    Boolean isRefresh=false;
     public static HashMap<Integer, Circolari> c;
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
+
 
     public SCircolari(RegistroActivity ra, Boolean isOffline){
+        this.isOffline=isOffline;
+        this.ra=ra;
+        ra.setContentView(R.layout.circolari);
+        ra.setSection(6);
+        ra.supportInvalidateOptionsMenu();
+    }
+
+    public SCircolari(RegistroActivity ra, Boolean isOffline, Boolean isRefresh){
+        this.isRefresh=isRefresh;
         this.isOffline=isOffline;
         this.ra=ra;
     }
 
     protected void onPreExecute() {
-        mDialog = ProgressDialog.show(ra, null,
-                "Aggiornamento circolari in corso", true, true,
-                new DialogInterface.OnCancelListener() {
-                    public void onCancel(DialogInterface dialog) {
-                        SCircolari.this.cancel(true);
-                    }
-                });
+        mSwipeRefreshLayout = (SwipeRefreshLayout) ra.findViewById(R.id.swipe_refresh_layout_circolari);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshCircolari();
+            }
+        });
+        mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
+        mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, ra.getResources().getDisplayMetrics()));
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     protected Void doInBackground(Void... voids) {
@@ -54,12 +75,14 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
             //lista circolari
             SharedPreferences sharedpreferences = ra.getSharedPreferences("Circolari", Context.MODE_PRIVATE);
             String json = sharedpreferences.getString("json", "default");
-            if(isOffline && !json.equals("default")) {
+            System.out.println(isOffline);
+            if(isOffline && !json.equals("default") && !isRefresh) {
                 c = new HashMap<>();
                 Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() { }.getType();
                 Gson gson = new GsonBuilder().create();
                 c = gson.fromJson(json, typeOfHashMap);
             } else if(isOffline == false) {
+                System.out.println("Pre Scarica");
                 c = scaricaCircolari(leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php").getElementById("data_table"));
             }  else {
                 error=true;
@@ -71,13 +94,49 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
+    protected void onCancelled() {
+        mSwipeRefreshLayout.setRefreshing(false);
+        ra.onBackPressed();
+    }
+
+    @Override
     protected void onPostExecute(Void aVoid) {
-        mDialog.dismiss();
-        if(!error) {
+        //mDialog.dismiss();
+        if (!error) {
             ra.setUpCircolari(c);
         } else {
             Toast.makeText(ra,"C'è stato un errore con il download delle circolari", Toast.LENGTH_SHORT);
         }
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    void refreshCircolari() {
+        if(CheckInternet()) {
+            SCircolari sc = new SCircolari(ra, false, true);
+            sc.execute();
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(ra, "Serve una connessione ad internet per aggiornare le circolari", Toast.LENGTH_SHORT);
+        }
+    }
+
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) ra.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected()) connected = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return connected;
     }
 
     public HashMap<Integer,Circolari> scaricaCircolari(Element html) throws IOException {
@@ -85,12 +144,14 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
         int i=0;
         SharedPreferences sharedpreferences = ra.getSharedPreferences("Circolari", Context.MODE_PRIVATE);
         String json = sharedpreferences.getString("json", "default");
-        Long lastUpdate = sharedpreferences.getLong("lastupdate",0);
-        if((!json.equals("default") && (new Date().getTime()-lastUpdate) < 10800000)) {
+        Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
+        SharedPreferences sp = ra.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+        Long storedDate = sp.getLong("lastLogin",0);
+        if(!json.equals("default") && (new Date().getTime()-lastUpdate) < 10800000 && !isRefresh) {
             Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() { }.getType();
             Gson gson = new GsonBuilder().create();
             c = gson.fromJson(json, typeOfHashMap);
-        } else {
+        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0) {
             for (Element a : html.select("a.specifica")) {
                 Circolari cn = new Circolari();
                 i++;

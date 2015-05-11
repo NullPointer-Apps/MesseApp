@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.widget.Toast;
 
 import com.messedagliavr.messeapp.AsyncTasks.DownloadAllegato;
 import com.messedagliavr.messeapp.R;
@@ -17,6 +19,25 @@ public class CircolariDialog extends DialogFragment {
     NotificationManager nm;
 
     public CircolariDialog(){
+    }
+
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected()) connected = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return connected;
     }
 
 
@@ -33,7 +54,12 @@ public class CircolariDialog extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     final DownloadAllegato downloadTask = new DownloadAllegato(c, getArguments().getString("id"),getArguments().getString("tit"),nm);
-                    downloadTask.execute();
+                    if(CheckInternet()) {
+                        downloadTask.execute();
+                    } else {
+                        Toast.makeText(c, "Serve una connessione ad internet per scaricare gli allegati", Toast.LENGTH_SHORT);
+                    }
+
                 }
             });
         }

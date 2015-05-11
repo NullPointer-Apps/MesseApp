@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.messedagliavr.messeapp.Dialogs.DialogVoti;
 import com.messedagliavr.messeapp.Objects.Materia;
 import com.messedagliavr.messeapp.Objects.Voto;

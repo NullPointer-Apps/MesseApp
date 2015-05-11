@@ -4,6 +4,7 @@ package com.messedagliavr.messeapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Adapters.CircolariAdapter;
 import com.messedagliavr.messeapp.Adapters.TabAssenzeAdapter;
@@ -56,13 +58,13 @@ public class RegistroActivity extends AppCompatActivity {
 
     public void votiBtn(View v) throws IOException {
         //scarico voti
-        SVoti sv = new SVoti(this);
+        SVoti sv = new SVoti(this,isOffline);
         sv.execute();
     }
 
     public void assenzeBtn(View v) throws IOException {
         //scarico Assenze
-        SAssenze sa = new SAssenze(this);
+        SAssenze sa = new SAssenze(this,isOffline);
         sa.execute();
     }
 
@@ -144,8 +146,44 @@ public class RegistroActivity extends AppCompatActivity {
                 }
 
                 break;
+            case R.id.refresh:
+                if(section==2||section==3) {
+                    if(CheckInternet()) {
+                        SVoti sv = new SVoti(this, false, true);
+                        sv.execute();
+                    } else {
+                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare i voti", Toast.LENGTH_SHORT);
+                    }
+                } else {
+                    if(CheckInternet()) {
+                        SAssenze sv = new SAssenze(this, false, true);
+                        sv.execute();
+                    } else {
+                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare le assenze", Toast.LENGTH_SHORT);
+                    }
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected()) connected = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return connected;
     }
 
     @Override
@@ -156,12 +194,13 @@ public class RegistroActivity extends AppCompatActivity {
 
     public void setUpVoti(HashMap<Integer, Materia> v){
         final ActionBar actionBar;
-        ActionBar.TabListener tabListener;
-
-        RegistroActivity.v = v;
         setContentView(R.layout.voti_parent);
         section=2;
         supportInvalidateOptionsMenu();
+        ActionBar.TabListener tabListener;
+
+        RegistroActivity.v = v;
+
 
         TabVotiAdapter tabAdapter =
                 new TabVotiAdapter(
@@ -194,7 +233,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             }
         };
-
+        actionBar.removeAllTabs();
         actionBar.addTab(
                 actionBar.newTab()
                         .setText("Quad I")
@@ -206,6 +245,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void setUpAssenze(HashMap<Integer, Assenza> a){
+        invalidateOptionsMenu();
         final ActionBar actionBar;
         ActionBar.TabListener tabListener;
         RegistroActivity.a=a;
@@ -245,7 +285,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             }
         };
-
+        actionBar.removeAllTabs();
         actionBar.addTab(
                 actionBar.newTab()
                         .setText("Assenze")
@@ -256,11 +296,11 @@ public class RegistroActivity extends AppCompatActivity {
                         .setTabListener(tabListener));
     }
 
-    public void setUpCircolari(HashMap<Integer, Circolari> c){
+    public void setSection(int section) {
+        this.section=section;
+    }
 
-        setContentView(R.layout.circolari);
-        section=6;
-        supportInvalidateOptionsMenu();
+    public void setUpCircolari(HashMap<Integer, Circolari> c){
 
         RegistroActivity.c=c;
 

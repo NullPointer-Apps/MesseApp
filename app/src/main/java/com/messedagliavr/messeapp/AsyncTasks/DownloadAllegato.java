@@ -44,68 +44,71 @@ public class DownloadAllegato extends AsyncTask<Void, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(Void... sUrl) {
-        InputStream input = null;
-        OutputStream output = null;
-        String fileName = null;
-        HttpGet httpget = new HttpGet("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id="+idCircolare);
-        HttpResponse response;
-        try {
-            response = RegistroActivity.httpClient.execute(httpget);
-            HttpEntity entity = response.getEntity();
-            long fileLength = 0;
-            if (entity != null) {
-                fileLength = entity.getContentLength();
-                input = entity.getContent();
-            }
-
-            File directory = new File(Environment.getExternalStorageDirectory()+"/MesseApp/");
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-            output = new FileOutputStream(Environment.getExternalStorageDirectory()+"/MesseApp/"+idCircolare+".pdf");
-
-            byte data[] = new byte[4096];
-            long total = 0;
-            int count;
-            while ((count = input.read(data)) != -1) {
-
-                if (isCancelled()) {
-                    input.close();
-                    return null;
-                }
-                total += count;
-                if (fileLength > 0)
-                    publishProgress((int) (total * 100 / fileLength));
-                output.write(data, 0, count);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (output != null)
-                    output.close();
-                if (input != null)
-                    input.close();
-            } catch (IOException ignored) {
-                ignored.printStackTrace();
-            }
-            return null;
-        }
-    }
-    @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                getClass().getName());
-        mWakeLock.acquire();
-        mProgressDialog = new ProgressDialog(context);
-        mProgressDialog.setMessage("Scaricando l'allegato");
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setCancelable(true);
-        mProgressDialog.show();
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                    getClass().getName());
+            mWakeLock.acquire();
+            mProgressDialog = new ProgressDialog(context);
+            mProgressDialog.setMessage("Scaricando l'allegato");
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(true);
+            mProgressDialog.show();
+
+    }
+
+    @Override
+    protected String doInBackground(Void... sUrl) {
+            InputStream input = null;
+            OutputStream output = null;
+            String fileName = null;
+            HttpGet httpget = new HttpGet("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php?action=file_download&com_id=" + idCircolare);
+            HttpResponse response;
+            try {
+                response = RegistroActivity.httpClient.execute(httpget);
+                HttpEntity entity = response.getEntity();
+                long fileLength = 0;
+                if (entity != null) {
+                    fileLength = entity.getContentLength();
+                    input = entity.getContent();
+                }
+
+                File directory = new File(Environment.getExternalStorageDirectory() + "/MesseApp/");
+                if (!directory.exists()) {
+                    directory.mkdir();
+                }
+                output = new FileOutputStream(Environment.getExternalStorageDirectory() + "/MesseApp/" + idCircolare + ".pdf");
+
+                byte data[] = new byte[4096];
+                long total = 0;
+                int count;
+                while ((count = input.read(data)) != -1) {
+
+                    if (isCancelled()) {
+                        input.close();
+                        return null;
+                    }
+                    total += count;
+                    if (fileLength > 0)
+                        publishProgress((int) (total * 100 / fileLength));
+                    output.write(data, 0, count);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (output != null)
+                        output.close();
+                    if (input != null)
+                        input.close();
+                } catch (IOException ignored) {
+                    ignored.printStackTrace();
+                }
+
+            }
+        return null;
     }
 
     @Override

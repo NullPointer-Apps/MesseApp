@@ -186,8 +186,7 @@ public class SNews extends
                     HashMap<String, Spanned> map = new HashMap<String, Spanned>();
                     e = (Element) nl.item(i);
                     title= parser.getValue(e,TITLE);
-                    titleb="<b>" + parser.getValue(e, TITLE)
-                            + "</b>";
+                    titleb=parser.getValue(e, TITLE);
                     desc=parser.getValue(e, DESC);
                     values.put("_id", i);
                     values.put(TITLE, title);

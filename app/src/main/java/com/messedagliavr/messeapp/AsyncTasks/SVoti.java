@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,16 +31,26 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
 
     ProgressDialog mDialog;
     RegistroActivity c;
+    Boolean isOffline = false;
+    Boolean error = false;
+    Boolean isRefresh = false;
 
     public static HashMap<Integer, Materia> v;
 
-    public SVoti(RegistroActivity c){
+    public SVoti(RegistroActivity c, Boolean isOffline){
+        this.isOffline=isOffline;
+        this.c=c;
+    }
+
+    public SVoti(RegistroActivity c, Boolean isOffline, Boolean isRefresh){
+        this.isRefresh=isRefresh;
+        this.isOffline=isOffline;
         this.c=c;
     }
 
     protected void onPreExecute() {
         mDialog = ProgressDialog.show(c, null,
-                "Aggiornamento voti in corso", true, true,
+                "Aggiornamento assenze in corso", true, true,
                 new DialogInterface.OnCancelListener() {
                     public void onCancel(DialogInterface dialog) {
                         SVoti.this.cancel(true);
@@ -47,10 +58,23 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
                 });
     }
 
+
     protected Void doInBackground(Void... voids) {
 
         try {
-            v=scaricaVoti(leggiPagina("https://web.spaggiari.eu/cvv/app/default/genitori_voti.php").getElementById("data_table_2"));
+            SharedPreferences sharedpreferences = c.getSharedPreferences("Voti", Context.MODE_PRIVATE);
+            String json = sharedpreferences.getString("json", "default");
+            if (isOffline && !json.equals("default") && !isRefresh) {
+                v = new HashMap<>();
+                Type typeOfHashMap = new TypeToken<Map<Integer, Materia>>() {
+                }.getType();
+                Gson gson = new GsonBuilder().create();
+                v = gson.fromJson(json, typeOfHashMap);
+            } else if (isOffline == false) {
+                v = scaricaVoti(leggiPagina("https://web.spaggiari.eu/cvv/app/default/genitori_voti.php").getElementById("data_table_2"));
+            } else {
+                error=true;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,10 +82,21 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
+    protected void onCancelled() {
         mDialog.dismiss();
-        c.setUpVoti(v);
+        c.onBackPressed();
     }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        if(!error) {
+            c.setUpVoti(v);
+        } else {
+            Toast.makeText(c, "C'è stato un errore con il download dei voti", Toast.LENGTH_SHORT);
+        }
+        mDialog.dismiss();
+    }
+
 
     public HashMap<Integer,Materia> scaricaVoti(Element html) throws IOException {
         v = new HashMap<>();
@@ -71,13 +106,15 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
         boolean isTest=false;
         SharedPreferences sharedpreferences = c.getSharedPreferences("Voti", Context.MODE_PRIVATE);
         String json = sharedpreferences.getString("json", "default");
-        Long lastUpdate = sharedpreferences.getLong("lastupdate",0);
-        if(!json.equals("default")&& (new Date().getTime()-lastUpdate) < 10800000) {
+        Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
+        SharedPreferences sp = c.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+        Long storedDate = sp.getLong("lastLogin",0);
+        if(!json.equals("default") && (new Date().getTime()-lastUpdate) < 10800000 && !isRefresh) {
             Type typeOfHashMap = new TypeToken<Map<Integer, Materia>>() {
             }.getType();
             Gson gson = new GsonBuilder().create();
             v = gson.fromJson(json, typeOfHashMap);
-        } else {
+        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0) {
 
             for (Element tr : html.select("tr")) {
                 for (Element td : tr.select("td")) {

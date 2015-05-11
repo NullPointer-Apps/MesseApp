@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,8 +32,18 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
     ProgressDialog mDialog;
     public static HashMap<Integer, Assenza> a;
     RegistroActivity c;
+    Boolean isOffline = false;
+    Boolean error = false;
+    Boolean isRefresh = false;
 
-    public SAssenze(RegistroActivity c){
+    public SAssenze(RegistroActivity c, Boolean isOffline){
+        this.isOffline=isOffline;
+        this.c=c;
+    }
+
+    public SAssenze(RegistroActivity c, Boolean isOffline, Boolean isRefresh){
+        this.isRefresh=isRefresh;
+        this.isOffline=isOffline;
         this.c=c;
     }
 
@@ -48,7 +59,19 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
 
     protected Void doInBackground(Void... voids) {
         try {
-            a=scaricaAssenze(leggiPagina("https://web.spaggiari.eu/tic/app/default/consultasingolo.php#calendario").getElementById("skeda_calendario"));
+            SharedPreferences sharedpreferences = c.getSharedPreferences("Assenze", Context.MODE_PRIVATE);
+            String json = sharedpreferences.getString("json", "default");
+            if (isOffline && !json.equals("default") && !isRefresh) {
+                a = new HashMap<>();
+                Type typeOfHashMap = new TypeToken<Map<Integer, Assenza>>() {
+                }.getType();
+                Gson gson = new GsonBuilder().create();
+                a = gson.fromJson(json, typeOfHashMap);
+            } else if (isOffline == false) {
+                a = scaricaAssenze(leggiPagina("https://web.spaggiari.eu/tic/app/default/consultasingolo.php#calendario").getElementById("skeda_calendario"));
+            } else {
+                error = true;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +81,17 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         mDialog.dismiss();
-        c.setUpAssenze(a);
+        if(!error) {
+            c.setUpAssenze(a);
+        } else {
+            Toast.makeText(c, "C'è stato un errore con il download delle assenze", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    protected void onCancelled() {
+        mDialog.dismiss();
+        c.onBackPressed();
     }
 
     public Document leggiPagina(String url)
@@ -87,12 +120,14 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
         SharedPreferences sharedpreferences = c.getSharedPreferences("Assenze", Context.MODE_PRIVATE);
         String json = sharedpreferences.getString("json", "default");
         Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
-        if(!json.equals("default")&& (new Date().getTime()-lastUpdate) < 10800000) {
+        SharedPreferences sp = c.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+        Long storedDate = sp.getLong("lastLogin",0);
+        if(!json.equals("default")&& (new Date().getTime()-lastUpdate) < 10800000 && !isRefresh) {
             Type typeOfHashMap = new TypeToken<Map<Integer, Assenza>>() {
             }.getType();
             Gson gson = new GsonBuilder().create();
             a = gson.fromJson(json, typeOfHashMap);
-        } else {
+        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0) {
 
             int n = 0, i;
             for (Element tr : html.select("tr")) {
