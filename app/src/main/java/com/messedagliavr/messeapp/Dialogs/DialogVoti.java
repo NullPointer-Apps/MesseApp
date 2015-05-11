@@ -1,4 +1,4 @@
-package com.messedagliavr.messeapp.Fragments;
+package com.messedagliavr.messeapp.Dialogs;
 
 import android.app.Dialog;
 import android.os.Bundle;
