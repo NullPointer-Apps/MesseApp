@@ -152,14 +152,14 @@ public class RegistroActivity extends AppCompatActivity {
                         SVoti sv = new SVoti(this, false, true);
                         sv.execute();
                     } else {
-                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare i voti", Toast.LENGTH_SHORT);
+                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare i voti", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     if(CheckInternet()) {
                         SAssenze sv = new SAssenze(this, false, true);
                         sv.execute();
                     } else {
-                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare le assenze", Toast.LENGTH_SHORT);
+                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare le assenze", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
@@ -333,11 +333,9 @@ public class RegistroActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.registro));
         isOffline = getIntent().getBooleanExtra("isOffline",false);
-        if (isOffline) {
-
-        } else {
+        if (!isOffline) {
             SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
-            sharedpreferences.edit().putLong("lastLogin", new Date().getTime()).commit();
+            sharedpreferences.edit().putLong("lastLogin", new Date().getTime()).apply();
         }
         if (savedInstanceState!=null) {
             section = savedInstanceState.getInt("Section", 0);

@@ -67,7 +67,7 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
                 }.getType();
                 Gson gson = new GsonBuilder().create();
                 a = gson.fromJson(json, typeOfHashMap);
-            } else if (isOffline == false) {
+            } else if (!isOffline) {
                 a = scaricaAssenze(leggiPagina("https://web.spaggiari.eu/tic/app/default/consultasingolo.php#calendario").getElementById("skeda_calendario"));
             } else {
                 error = true;
@@ -84,7 +84,7 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
         if(!error) {
             c.setUpAssenze(a);
         } else {
-            Toast.makeText(c, "C'è stato un errore con il download delle assenze", Toast.LENGTH_SHORT);
+            Toast.makeText(c, "C'è stato un errore con il download delle assenze", Toast.LENGTH_SHORT).show();
         }
     }
 
