@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -20,6 +22,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.InputType;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -33,11 +36,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.messedagliavr.messeapp.AsyncTasks.Login;
+import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.Dialogs.HelpPaninoDialog;
 import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
 import com.messedagliavr.messeapp.Fragments.NavigationDrawerFragment;
 import com.messedagliavr.messeapp.Utilities.MyDifferenceFromToday;
 
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -347,66 +357,76 @@ public class MainActivity extends AppCompatActivity
 
 
     public void voti(View v) {
-        /*Database databaseHelper = new Database(getBaseContext());
-        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        String[] columns = {"enabled", "username", "password"};
-        Cursor query = db.query("settvoti", // The table to query
-                columns, // The columns to return
-                null, // The columns for the WHERE clause
-                null, // The values for the WHERE clause
-                null, // don't group the rows
-                null, // don't filter by row groups
-                null // The sort order
-        );
-        query.moveToFirst();
-        String enabled = query.getString(query.getColumnIndex("enabled"));
-        db.close();
-        if (enabled.matches("true")) {
-            String user = query.getString(query.getColumnIndex("username"));
-            String password = query.getString(query.getColumnIndex("password"));
-            Intent voti = new Intent(Intent.ACTION_VIEW);
-            if(user.contains("@")) {
-                voti.setData(Uri
-                        .parse("https://web.spaggiari.eu/home/app/default/login_email.php?custcode=VRLS0003&login="
-                                + user + "&password=" + password));
-            } else {
-                voti.setData(Uri
-                        .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="
-                                + user + "&password=" + password));
-            }
-            query.close();
-            startActivity(voti);
-        } else {
-            Intent voti = new Intent(Intent.ACTION_VIEW);
-            voti.setData(Uri
-                    .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003"));
-            query.close();
-            startActivity(voti);
-        }*/
+        String user;
+        String pw;
+        final String custcode = "VRLS0003";
+        HttpPost httpPost;
+        ArrayList<BasicNameValuePair> values = new ArrayList<>();
         Boolean isSessionValid=false;
         SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
         Long storedDate = sharedpreferences.getLong("lastLogin",0);
         if (!CheckInternet() && storedDate != 0){
-            DialogFragment login = new LoginRegistroDialog();
-            Bundle data = new Bundle();
-            data.putInt("circolari", 0);
-            data.putBoolean("isOffline", true);
-            login.setArguments(data);
-            login.show(getSupportFragmentManager(), "login");
-
+            Intent registro = new Intent(this, RegistroActivity.class);
+            registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra("circolari", 0)
+                    .putExtra("isOffline", true);
+            this.startActivity(registro);
         } else {
             if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null) {
                 isSessionValid = false;
             } else if (storedDate != 0) {
                 isSessionValid = true;
             }
-            DialogFragment login = new LoginRegistroDialog();
-            Bundle data = new Bundle();
-            data.putInt("circolari", 0);
-            data.putBoolean("isOffline", false);
-            data.putBoolean("isSessionValid", isSessionValid);
-            login.setArguments(data);
-            login.show(getSupportFragmentManager(), "login");
+            MainDB databaseHelper = new MainDB(MainActivity.context);
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            String[] columns = {"enabled", "username", "password"};
+            Cursor query = db.query("settvoti", // The table to query
+                    columns, // The columns to return
+                    null, // The columns for the WHERE clause
+                    null, // The values for the WHERE clause
+                    null, // don't group the rows
+                    null, // don't filter by row groups
+                    null // The sort order
+            );
+            query.moveToFirst();
+            String enabled = query.getString(query.getColumnIndex("enabled"));
+            db.close();
+            if (enabled.matches("true")) {
+                user = query.getString(query.getColumnIndex("username"));
+                pw = query.getString(query.getColumnIndex("password"));
+
+                values.add(new BasicNameValuePair("custcode", custcode));
+                values.add(new BasicNameValuePair("login", user));
+                values.add(new BasicNameValuePair("password", pw));
+
+                if (isSessionValid) {
+                    Intent registro = new Intent(this, RegistroActivity.class);
+                    registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .putExtra("USER", user)
+                            .putExtra("PWD", pw)
+                            .putExtra("circolari", 0);
+                    this.startActivity(registro);
+                } else {
+                    if (user.contains("@")) {
+                        httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login_email.php");
+                    } else {
+                        httpPost = new HttpPost("https://web.spaggiari.eu/home/app/default/login.php");
+                    }
+                    try {
+                        httpPost.setEntity(new UrlEncodedFormEntity(values));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.i("LOGIN", "inizio login");
+                    //faccio il login su un nuovo thread
+                    Login l = new Login(this, httpPost, user, pw, 0);
+                    l.execute();
+                }
+            } else {
+                LoginRegistroDialog lrd = new LoginRegistroDialog();
+                lrd.show(getSupportFragmentManager(),"login voti");
+            }
         }
     }
 
