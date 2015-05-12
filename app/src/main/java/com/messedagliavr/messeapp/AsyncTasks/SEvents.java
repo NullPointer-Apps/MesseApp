@@ -699,7 +699,7 @@ public class SEvents extends
     }
 
     public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
-        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) ca.findViewById(R.id.listview_swipe_refresh_layout);
+        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) ca.findViewById(R.id.listview_swipe_refresh_news);
         if (unknhost) {
             Toast.makeText(ca, R.string.connerr,
                     Toast.LENGTH_LONG).show();

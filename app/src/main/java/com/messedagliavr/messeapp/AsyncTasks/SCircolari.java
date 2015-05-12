@@ -38,7 +38,7 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
     Boolean error=false;
     Boolean isRefresh=false;
     public static HashMap<Integer, Circolari> c;
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    static SwipeRefreshLayout mSwipeRefreshLayout;
 
 
 
@@ -57,17 +57,19 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
     }
 
     protected void onPreExecute() {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) ra.findViewById(R.id.swipe_refresh_layout_circolari);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshCircolari();
-            }
-        });
-        mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
-        mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, ra.getResources().getDisplayMetrics()));
-        mSwipeRefreshLayout.setRefreshing(true);
+        if(!isRefresh || mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout = (SwipeRefreshLayout) ra.findViewById(R.id.swipe_refresh_layout_circolari);
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    refreshCircolari();
+                }
+            });
+            mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
+            mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, ra.getResources().getDisplayMetrics()));
+            mSwipeRefreshLayout.setRefreshing(true);
+        }
     }
 
     protected Void doInBackground(Void... voids) {

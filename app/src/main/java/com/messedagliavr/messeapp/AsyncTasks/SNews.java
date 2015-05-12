@@ -3,17 +3,20 @@ package com.messedagliavr.messeapp.AsyncTasks;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -41,19 +44,56 @@ import java.util.Locale;
 
 public class SNews extends
         AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
-    Boolean showLoading = true;
     NewsActivity na;
     ProgressDialog mDialog;
     public SQLiteDatabase db;
     Boolean unknhost;
     Cursor data;
+    static SwipeRefreshLayout mSwipeRefreshLayout = null;
+    Boolean isRefresh = false;
 
     public static final String TITLE = "title";
     public static final String DESC = "description";
 
-    public SNews(NewsActivity na, Boolean showLoading) {
+    public SNews(NewsActivity na, Boolean isRefresh) {
         this.na = na;
-        this.showLoading = showLoading;
+        this.isRefresh = isRefresh;
+    }
+
+    public void refreshNews() {
+        if (CheckInternet()) {
+            MainDB databaseHelper = new MainDB(na.getBaseContext());
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            ContentValues nowdb = new ContentValues();
+            nowdb.put("newsdate", "2012-02-20 15:00:00");
+            long samerow = db.update("lstchk", nowdb, null, null);
+            db.close();
+            SNews news = new SNews(na, true);
+            news.execute();
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(na, R.string.noconnection,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) na.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected()) connected = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return connected;
     }
 
     private Long getTimeDiff(String time, String curTime) throws ParseException {
@@ -99,33 +139,18 @@ public class SNews extends
         date.close();
         db.close();
         long l = getTimeDiff(past, now);
-        if (NewsActivity.nointernet.equals("true") && showLoading && l / 10800000 >= 3) {
-            mDialog = ProgressDialog.show(na, null,
-                    na.getString(R.string.retrievingNews), true, true,
-                    new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface dialog) {
-                            SNews.this.cancel(true);
-                        }
-                    });
-        } else if (showLoading && l / 10800000 >= 3) {
-            mDialog = ProgressDialog.show(na, null,
-                    na.getString(R.string.downloadingNews), true, true,
-                    new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface dialog) {
-                            SNews.this.cancel(true);
-                        }
-                    });
-        } else if (past.equals("1995-01-19 23:40:20")){
-            mDialog = ProgressDialog.show(na, null,
-                    na.getString(R.string.downloadingNews), true, true,
-                    new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface dialog) {
-                            SNews.this.cancel(true);
-                        }
-                    });
-        } else {
-            showLoading=false;
-        }
+            mSwipeRefreshLayout = (SwipeRefreshLayout) na.findViewById(R.id.listview_swipe_refresh_news);
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    refreshNews();
+                }
+            });
+            mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
+            mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, na.getResources().getDisplayMetrics()));
+            mSwipeRefreshLayout.setRefreshing(true);
+
     }
 
     public HashMap<String, ArrayList<Spanned>> doInBackground(
@@ -163,7 +188,7 @@ public class SNews extends
         String past = date.getString(date.getColumnIndex("newsdate"));
         date.close();
         long l = getTimeDiff(past, now);
-        if (l / 10800000 >= 3 && !NewsActivity.nointernet.equals("true")) {
+        if (l / 10800000 >= 3 && CheckInternet()) {
             XMLParser parser = new XMLParser();
             String xml = parser.getXmlFromUrl(URL);
             if (xml.equals("UnknownHostException")) {
@@ -271,7 +296,7 @@ public class SNews extends
     }
 
     public void onPostExecute(HashMap<String, ArrayList<Spanned>> resultmap) {
-        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) na.findViewById(R.id.listview_swipe_refresh_layout);
+
         if (unknhost) {
             Toast.makeText(na, R.string.connerr, Toast.LENGTH_LONG)
                     .show();
@@ -281,13 +306,6 @@ public class SNews extends
 
             if (resultmap.size() > 0) {
 
-                mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                       na.refreshNews();
-                    }
-                });
-                mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"),Color.parseColor("#ff1a171b"));
                 final ArrayList<Spanned> titoli = resultmap.get("titoli");
                 final ArrayList<Spanned> descrizioni = resultmap
                         .get("descrizioni");
@@ -317,9 +335,6 @@ public class SNews extends
                     }
                 });
             }
-        }
-        if (showLoading) {
-            mDialog.dismiss();
         }
         mSwipeRefreshLayout.setRefreshing(false);
     }

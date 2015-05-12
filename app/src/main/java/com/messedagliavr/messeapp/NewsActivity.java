@@ -41,24 +41,7 @@ public class NewsActivity extends AppCompatActivity {
         return connected;
     }
 
-    public void refreshNews() {
-        if (CheckInternet()) {
-            MainDB databaseHelper = new MainDB(getBaseContext());
-            SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            ContentValues nowdb = new ContentValues();
-            nowdb.put("newsdate", "2012-02-20 15:00:00");
-            long samerow = db.update("lstchk", nowdb, null, null);
-            db.close();
-            nointernet = "false";
-            SNews news = new SNews(this, false);
-            news.execute();
-        } else {
-            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
-            mSwipeRefreshLayout.setRefreshing(false);
-            Toast.makeText(this, R.string.noconnection,
-                    Toast.LENGTH_LONG).show();
-        }
-    }
+
 
     @Override
     public void onCreate(Bundle icicle) {

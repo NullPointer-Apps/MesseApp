@@ -113,7 +113,7 @@ public class CalendarActivity extends AppCompatActivity {
             SEvents calendar = new SEvents(false, this);
             calendar.execute();
         } else {
-            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_layout);
+            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_news);
             mSwipeRefreshLayout.setRefreshing(false);
             Toast.makeText(this, R.string.noconnection,
                     Toast.LENGTH_LONG).show();
