@@ -2,6 +2,7 @@ package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,13 @@ import android.widget.TextView;
 
 import com.messedagliavr.messeapp.R;
 
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class NewsAdapter extends ArrayAdapter<Spanned> {
     private ArrayList<Spanned> date;
@@ -47,30 +54,23 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
                 tt1.setText(titoli.get(position));
             }
             boolean f = false;
-            String day = "";
-            String month = "";
+            Locale currentLocale = context.getResources().getConfiguration().locale;
+            DateFormat parserDatePub = DateFormat.getDateInstance(DateFormat.FULL, currentLocale);
+            Date data = null;
+            try {
+                data = parserDatePub.parse(date.get(position).toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-            if (tt != null && date != null) {
-                String s = date.get(position).toString();
-                for (int i = 0; i < s.length(); i++) {
-                    if (s.charAt(i) == ',') {
-                        if (!f) {
-                            month += s.charAt(i + 2);
-                            month += s.charAt(i + 3);
-                            month += s.charAt(i + 4);
-                            f = true;
-                        } else {
-                            if (s.charAt(i - 2) != ' ') day += s.charAt(i - 2);
-                            else day += '0';
-                            day += s.charAt(i - 1);
-                        }
-                    }
-                }
+            String day = Integer.toString(data.getDay());
+            String month =new DateFormatSymbols().getMonths()[data.getMonth()].toUpperCase().substring(0,3);
 
+            if (tt != null && data != null) {
                 tt.setTextColor(Color.rgb(114, 177, 214));
                 tt.setText(day);
                 tt2.setTextColor(Color.rgb(114, 177, 214));
-                tt2.setText(month.toUpperCase());
+                tt2.setText(month);
             }
         }
         return v;

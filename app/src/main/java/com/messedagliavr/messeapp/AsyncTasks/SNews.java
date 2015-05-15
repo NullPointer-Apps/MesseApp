@@ -304,6 +304,10 @@ public class SNews extends
                         .get("descrizioni");
                 final ArrayList<Spanned> pubDate = resultmap
                         .get("pubdate");
+                for (int i = 0; i < pubDate.size(); i++) {
+                    System.out.println("Data " + i + " :" + pubDate.get(i));
+
+                }
 
                 NewsAdapter adapter = new NewsAdapter(
                         na, R.layout.item_news,
