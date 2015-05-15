@@ -27,14 +27,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ListMaterieAdapter extends ArrayAdapter<Materia> {
-    String tipo="";
-    int quad=0;
-    ArrayList<Double> medie =new ArrayList<>();
+    String tipo = "";
+    int quad = 0;
+    ArrayList<Double> medie = new ArrayList<>();
     FragmentManager fm;
-    public ListMaterieAdapter(Context context, ArrayList<Materia> materie, String tipo, int quad,FragmentManager fm) {
+
+    public ListMaterieAdapter(Context context, ArrayList<Materia> materie, String tipo, int quad, FragmentManager fm) {
         super(context, 0, materie);
-        this.tipo=tipo;
-        this.quad=quad+1;
+        this.tipo = tipo;
+        this.quad = quad + 1;
         this.fm = fm;
     }
 
@@ -52,55 +53,62 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
         LinearLayout tbVoti = (LinearLayout) convertView.findViewById(R.id.tbVoti);
 
         nMat.setText(materia.getNome().trim());
-        if (medie.size()<=position) medie.add(position,materia.mediaVoti(tipo, quad));
-        if (medie.get(position)>0) avg.setText("media: "+medie.get(position));
-        else avg.setText("media: n/d");
+        if (medie.size() <= position)
+            medie.add(position, materia.mediaVoti(tipo, quad));
+        if (medie.get(position) > 0)
+            avg.setText("media: " + medie.get(position));
+        else
+            avg.setText("media: n/d");
 
         tbVoti.removeAllViews();
 
-        HashMap<Integer,Voto> vv = materia.getVoti();
+        HashMap<Integer, Voto> vv = materia.getVoti();
         for (int i = 1; i <= vv.size(); i++) {
             final Voto v = vv.get(i);
             String votos = v.getVoto();
             final TextView voto = new TextView(getContext());
             final SpannableString cs;
 
-            if((v.getTipo().equals(tipo)||tipo.equals("tutti"))&&(v.getQuadrimestre()==quad||quad==3)){
+            if ((v.getTipo().equals(tipo) || tipo.equals("tutti")) && (v.getQuadrimestre() == quad || quad == 3)) {
 
-                if ((int) votos.charAt(0) >= 54){
-                    if ((int) votos.charAt(0) == 71){
-                        //BLUE
-                        voto.setBackgroundColor(Color.rgb(114,177,214));
+                if ((int) votos.charAt(0) >= 54) {
+                    if ((int) votos.charAt(0) == 71) {
+                        // BLUE
+                        voto.setBackgroundColor(Color.rgb(114, 177, 214));
                     } else {
-                        //GREEN
-                        voto.setBackgroundColor(Color.rgb(79,193,72));
+                        // GREEN
+                        voto.setBackgroundColor(Color.rgb(79, 193, 72));
                     }
-                }else if ((int) votos.charAt(0) >= 48){
-                    //RED
-                    voto.setBackgroundColor(Color.rgb(238,81,67));
+                } else if ((int) votos.charAt(0) >= 48) {
+                    if ((int) votos.charAt(0) == 49 && (int) votos.charAt(1) == 48)
+                        // GREEN
+                        voto.setBackgroundColor(Color.rgb(79, 193, 72));
+                    else
+                        // RED
+                        voto.setBackgroundColor(Color.rgb(238, 81, 67));
                 }
 
                 switch (v.getTipo()) {
-                    case "Scritto":
-                        cs = new SpannableString(votos + "S");
-                        break;
-                    case "Orale":
-                        cs = new SpannableString(votos + "O");
-                        break;
-                    case "Pratico":
-                        cs = new SpannableString(votos + "P");
-                        break;
-                    case "Test":
-                        cs = new SpannableString(votos + "T");
-                        voto.setBackgroundColor(Color.rgb(114,177,214));
-                        break;
-                    case "Recupero":
-                        cs = new SpannableString(votos + "R");
-                        voto.setBackgroundColor(Color.rgb(114,177,214));
-                        break;
-                    default:
-                        cs = new SpannableString(votos + "e");
-                        break;
+                case "Scritto":
+                    cs = new SpannableString(votos + "S");
+                    break;
+                case "Orale":
+                    cs = new SpannableString(votos + "O");
+                    break;
+                case "Pratico":
+                    cs = new SpannableString(votos + "P");
+                    break;
+                case "Test":
+                    cs = new SpannableString(votos + "T");
+                    voto.setBackgroundColor(Color.rgb(114, 177, 214));
+                    break;
+                case "Recupero":
+                    cs = new SpannableString(votos + "R");
+                    voto.setBackgroundColor(Color.rgb(114, 177, 214));
+                    break;
+                default:
+                    cs = new SpannableString(votos + "e");
+                    break;
                 }
 
                 cs.setSpan(new SubscriptSpan(), cs.length() - 1, cs.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -124,14 +132,13 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
                         data.putString("tipo", v.getTipo());
                         data.putInt("color", ((ColorDrawable) voto.getBackground()).getColor());
                         dv.setArguments(data);
-                        dv.show(fm,"dettagli voto");
+                        dv.show(fm, "dettagli voto");
                         return false;
                     }
                 });
                 tbVoti.addView(voto);
             }
         }
-
 
         // Return the completed view to render on screen
         return convertView;
