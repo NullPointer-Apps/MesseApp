@@ -85,6 +85,7 @@ public class Login extends AsyncTask<Void, Void, Boolean> {
     {
         try {
             HttpGet httpGet = new HttpGet(url);
+            //httpGet.addHeader("If-Modified-Since", DateFormat.format("Y-m-d h-M-s", new Date()).toString());
             InputStream inputStream;
             inputStream = RegistroActivity.httpClient.execute(httpGet).getEntity().getContent();
             Document s1 = Jsoup.parse(inputStream, "UTF-8", url);

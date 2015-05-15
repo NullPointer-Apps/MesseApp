@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity
     public static FragmentManager sFm;
     //PANINI
     //public static ListView listViewpanini;
-    //public static ArrayList<String> names;
-    //public static ArrayList<String> prices;
-    //public static ArrayList<Integer> numbers = new ArrayList<>();
+    public static ArrayList<String> names;
+    public static ArrayList<String> prices;
+    public static ArrayList<Integer> numbers = new ArrayList<>();
     //public static String[] piani;
     //public static String myPiano = "Primo Piano";
     public static String username;
@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -653,3 +654,4 @@ public class MainActivity extends AppCompatActivity
         }
     }
 }
+
