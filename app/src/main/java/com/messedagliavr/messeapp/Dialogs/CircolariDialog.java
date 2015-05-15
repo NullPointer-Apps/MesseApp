@@ -18,7 +18,7 @@ public class CircolariDialog extends DialogFragment {
     Context c;
     NotificationManager nm;
 
-    public CircolariDialog(){
+    public CircolariDialog() {
     }
 
     public boolean CheckInternet() {
@@ -44,7 +44,7 @@ public class CircolariDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        c=getActivity();
+        c = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
         nm = (NotificationManager) c.getSystemService(c.NOTIFICATION_SERVICE);
         builder.setTitle(getArguments().getString("tit"))
@@ -53,8 +53,8 @@ public class CircolariDialog extends DialogFragment {
             builder.setNeutralButton(R.string.download, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    final DownloadAllegato downloadTask = new DownloadAllegato(c, getArguments().getString("id"),getArguments().getString("tit"),nm);
-                    if(CheckInternet()) {
+                    final DownloadAllegato downloadTask = new DownloadAllegato(c, getArguments().getString("id"), getArguments().getString("tit"), nm);
+                    if (CheckInternet()) {
                         downloadTask.execute();
                     } else {
                         Toast.makeText(c, "Serve una connessione ad internet per scaricare gli allegati", Toast.LENGTH_SHORT);

@@ -1,22 +1,29 @@
 package com.messedagliavr.messeapp.Objects;
 
 
-public class Assenza{
+public class Assenza {
     String tipo;
     String mese;
     int giorno;
     String tipoR;
-    boolean giustificata=true;
+    boolean giustificata = true;
 
-    public Assenza(){}
+    public Assenza() {
+    }
 
     public boolean isRitardo() {
         return tipo.equals("R");
     }
+
     public String getTipoR() {
-        if (tipoR.equals("ritardo breve")) tipoR="Breve";
+        if (tipoR.equals("ritardo breve")) tipoR = "Breve";
         return tipoR;
     }
+
+    public void setTipoR(String tipoR) {
+        this.tipoR = tipoR;
+    }
+
     public String getTipo() {
         switch (tipo) {
             case "R":
@@ -27,10 +34,6 @@ public class Assenza{
                 return "Uscita";
         }
         return tipoR;
-    }
-
-    public void setTipoR(String tipoR) {
-        this.tipoR = tipoR;
     }
 
     public void setTipo(String tipo) {
@@ -45,20 +48,22 @@ public class Assenza{
         this.giorno = giorno;
     }
 
-    public void setGiustificata(boolean g){
-        giustificata=g;
-    }
-
-    public boolean isGiustificata(){
+    public boolean isGiustificata() {
         return giustificata;
     }
-    public String getMeseS(){
-        return mese.substring(0,3);
+
+    public void setGiustificata(boolean g) {
+        giustificata = g;
     }
+
+    public String getMeseS() {
+        return mese.substring(0, 3);
+    }
+
     public String getGiornoS() {
-        if (giorno<10){
-            return "0"+giorno;
-        } else return ""+giorno;
+        if (giorno < 10) {
+            return "0" + giorno;
+        } else return "" + giorno;
     }
 
     public int getMese() {

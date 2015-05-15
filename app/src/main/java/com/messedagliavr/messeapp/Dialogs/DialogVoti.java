@@ -21,7 +21,7 @@ public class DialogVoti extends DialogFragment {
         TextView voto = (TextView) v.findViewById(R.id.voto);
         voto.setText(getArguments().getString("voto"));
         TextView quad = (TextView) v.findViewById(R.id.quad);
-        quad.setText("Quad "+getArguments().getInt("quad"));
+        quad.setText("Quad " + getArguments().getInt("quad"));
         TextView data = (TextView) v.findViewById(R.id.data);
         data.setText(getArguments().getString("data"));
         TextView tipo = (TextView) v.findViewById(R.id.tipo);

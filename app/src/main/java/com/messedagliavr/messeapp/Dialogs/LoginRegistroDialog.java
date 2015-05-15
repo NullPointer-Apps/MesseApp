@@ -38,14 +38,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 
-public class LoginRegistroDialog extends DialogFragment  {
+public class LoginRegistroDialog extends DialogFragment {
 
+    static Activity a;
+    final String custcode = "VRLS0003";
     HttpPost httpPost;
     ProgressDialog mDialog;
-    static Activity a;
     String user = "";
     String pw = "";
-    final String custcode = "VRLS0003";
     ArrayList<BasicNameValuePair> values = new ArrayList<>();
     Boolean isSessionValid = false;
     Boolean isOffline = false;
@@ -53,9 +53,9 @@ public class LoginRegistroDialog extends DialogFragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        a=getActivity();
-        isSessionValid=getArguments().getBoolean("isSessionValid");
-        isOffline=getArguments().getBoolean("isOffline");
+        a = getActivity();
+        isSessionValid = getArguments().getBoolean("isSessionValid");
+        isOffline = getArguments().getBoolean("isOffline");
         if (isOffline) {
             Intent registro = new Intent(MainActivity.context, RegistroActivity.class);
             registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -126,8 +126,8 @@ public class LoginRegistroDialog extends DialogFragment  {
         AlertDialog.Builder builder = new AlertDialog.Builder(a);
 
 
-        LayoutInflater li= (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View login=li.inflate(R.layout.registro_activity,null);
+        LayoutInflater li = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View login = li.inflate(R.layout.registro_activity, null);
 
         builder.setView(login)
                 .setTitle("Login")
@@ -185,8 +185,7 @@ public class LoginRegistroDialog extends DialogFragment  {
     }
 
     //parsing della pagina
-    public Document leggiPagina(String url)
-    {
+    public Document leggiPagina(String url) {
         try {
             HttpGet httpGet = new HttpGet(url);
             //httpGet.addHeader("If-Modified-Since", DateFormat.format("Y-m-d h-M-s", new Date()).toString());
@@ -201,13 +200,11 @@ public class LoginRegistroDialog extends DialogFragment  {
         }
     }
 
-    public boolean accessoEseguito()
-    {
-        String s2="";
-        try{
+    public boolean accessoEseguito() {
+        String s2 = "";
+        try {
             s2 = leggiPagina("https://web.spaggiari.eu/home/app/default/menu_webinfoschool_studenti.php").toString();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return s2.substring(0, 150).contains("<html class=\"login_page\">");
@@ -216,7 +213,7 @@ public class LoginRegistroDialog extends DialogFragment  {
     public class Login extends AsyncTask<Void, Void, Boolean> {
 
         protected void onPreExecute() {
-            mDialog = ProgressDialog.show(LoginRegistroDialog.a,null,
+            mDialog = ProgressDialog.show(LoginRegistroDialog.a, null,
                     "Login in corso", true, true,
                     new DialogInterface.OnCancelListener() {
                         public void onCancel(DialogInterface dialog) {
@@ -229,7 +226,7 @@ public class LoginRegistroDialog extends DialogFragment  {
 
             try {
                 RegistroActivity.httpResponse = RegistroActivity.httpClient.execute(httpPost);
-                if (RegistroActivity.httpResponse.getStatusLine().getStatusCode()!=200 || accessoEseguito()) {
+                if (RegistroActivity.httpResponse.getStatusLine().getStatusCode() != 200 || accessoEseguito()) {
                     Log.e("login", "ERRORE: Response " + RegistroActivity.httpResponse.getStatusLine().getStatusCode());
                     return false;
                 } else {
@@ -249,12 +246,11 @@ public class LoginRegistroDialog extends DialogFragment  {
                 mDialog.dismiss();
                 Intent registro = new Intent(MainActivity.context, RegistroActivity.class);
                 registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .putExtra("USER",user)
-                        .putExtra("PWD",pw)
+                        .putExtra("USER", user)
+                        .putExtra("PWD", pw)
                         .putExtra("circolari", getArguments().getInt("circolari"));
                 MainActivity.context.startActivity(registro);
-            }
-            else {
+            } else {
                 Toast.makeText(MainActivity.context, "Dati errati, login fallito", Toast.LENGTH_SHORT).show();
             }
         }

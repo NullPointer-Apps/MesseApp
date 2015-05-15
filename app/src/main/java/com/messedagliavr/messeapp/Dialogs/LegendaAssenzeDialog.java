@@ -18,8 +18,8 @@ public class LegendaAssenzeDialog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        LayoutInflater li= (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View helpVoti=li.inflate(R.layout.legendassenze,null);
+        LayoutInflater li = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View helpVoti = li.inflate(R.layout.legendassenze, null);
 
         builder.setView(helpVoti)
                 .setTitle("Legenda Assenze")

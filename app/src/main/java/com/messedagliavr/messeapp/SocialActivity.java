@@ -17,6 +17,7 @@ import android.view.Window;
  */
 public class SocialActivity extends AppCompatActivity {
     static Window window;
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -34,7 +35,7 @@ public class SocialActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Social");
         if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
+            window = getWindow();
             window.setEnterTransition(new Slide(Gravity.BOTTOM));
             window.setExitTransition(new Slide(Gravity.TOP));
         }

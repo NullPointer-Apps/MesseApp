@@ -4,17 +4,19 @@ import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.net.ParseException;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,19 +44,19 @@ import java.util.Locale;
 public class SEvents extends
         AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
 
-    ProgressDialog mDialog;
-    public SQLiteDatabase db;
     public static final String TITLE = "title";
     public static final String DESC = "description";
     public static final String ICAL = "ical";
+    static SwipeRefreshLayout mSwipeRefreshLayout = null;
+    public SQLiteDatabase db;
+    ProgressDialog mDialog;
     Boolean unknhost = false;
-    Boolean showLoading=true;
+    Boolean isRefresh = false;
     CalendarActivity ca;
     Cursor data;
 
-    public SEvents (Boolean showLoading, CalendarActivity ca) {
-        this.showLoading=showLoading;
-        this.ca=ca;
+    public SEvents(CalendarActivity ca) {
+        this.ca = ca;
     }
 
     private Long getTimeDiff(String time, String curTime) throws ParseException {
@@ -71,6 +73,44 @@ public class SEvents extends
         long oldMillis = oldDate.getTime();
         long curMillis = curDate.getTime();
         return curMillis - oldMillis;
+    }
+
+    public boolean CheckInternet() {
+        boolean connected = false;
+        ConnectivityManager connec = (ConnectivityManager) ca.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec
+                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnected()) {
+            connected = true;
+        } else {
+            try {
+                if (mobile.isConnected()) connected = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return connected;
+    }
+
+    public void refreshCalendar() {
+        if (CheckInternet()) {
+            MainDB databaseHelper = new MainDB(ca.getBaseContext());
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            ContentValues nowdb = new ContentValues();
+            nowdb.put("calendardate", "2012-02-20 15:00:00");
+            db.update("lstchk", nowdb, null, null);
+            db.close();
+            MainActivity.nointernet = "false";
+            isRefresh = true;
+            SEvents calendar = new SEvents(ca);
+            calendar.execute();
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(ca, R.string.noconnection,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -102,33 +142,20 @@ public class SEvents extends
         date.close();
         db.close();
         long l = getTimeDiff(past, now);
-        if (CalendarActivity.nointernet.equals("true") && showLoading && l / 10800000 >= 3) {
-            mDialog = ProgressDialog.show(ca, null,
-                    ca.getString(R.string.retrievingEvents), true, true,
-                    new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface dialog) {
-                            SEvents.this.cancel(true);
-                        }
-                    });
-
-        } else if (showLoading && l / 10800000 >= 3) {
-            mDialog = ProgressDialog.show(ca, null,
-                    ca.getString(R.string.downloadingEvents), true, true,
-                    new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface dialog) {
-                            SEvents.this.cancel(true);
-                        }
-                    });
-        } else if (past.equals("1995-01-19 23:40:20")){
-            mDialog = ProgressDialog.show(ca, null,
-                    ca.getString(R.string.downloadingNews), true, true,
-                    new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface dialog) {
-                            SEvents.this.cancel(true);
-                        }
-                    });
-        } else {
-            showLoading=false;
+        if (mSwipeRefreshLayout == null) {
+            mSwipeRefreshLayout = (SwipeRefreshLayout) ca.findViewById(R.id.listview_swipe_refresh_news);
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    refreshCalendar();
+                }
+            });
+            mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
+            mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, ca.getResources().getDisplayMetrics()));
+        }
+        if (isRefresh) {
+            mSwipeRefreshLayout.setRefreshing(true);
         }
     }
 
@@ -146,7 +173,7 @@ public class SEvents extends
         final String TITLE = "title";
         final String DESC = "description";
         Element e, e2;
-        String[] outdated = { "newsdate", "calendardate" };
+        String[] outdated = {"newsdate", "calendardate"};
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String now = df.format(c.getTime());
@@ -629,7 +656,7 @@ public class SEvents extends
                     map.put(TITLE, Html.fromHtml(tito));
                     titoli.add(Html.fromHtml(tito));
                     titolib.add(Html.fromHtml("<b>" + tito + "</b>"));
-                    description = parser.getValue(e,DESC);
+                    description = parser.getValue(e, DESC);
 
                     values.put(DESC, description);
                     values.put("titleb", "<b>" + tito + "</b>");
@@ -654,7 +681,7 @@ public class SEvents extends
             }
 
         } else {
-            String[] clmndata = { "title", "description", "titleb", "ical" };
+            String[] clmndata = {"title", "description", "titleb", "ical"};
             String sortOrder = "_id";
 
             data = db.query("calendar", // The table to query
@@ -713,7 +740,7 @@ public class SEvents extends
                         .get("descrizioni");
                 final ArrayList<Spanned> titolib = resultmap.get("titolib");
                 final ArrayList<Spanned> icalarr = resultmap.get("ical");
-                if (titoli.size()==0) {
+                if (titoli.size() == 0) {
                     ca.setContentView(R.layout.noevents);
                 } else {
                     ArrayAdapter<Spanned> adapter = new ArrayAdapter<>(
@@ -723,13 +750,6 @@ public class SEvents extends
                     listView.setAdapter(adapter);
 
                     ca.registerForContextMenu(ca.findViewById(R.id.list));
-                    mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override
-                        public void onRefresh() {
-                            ca.refreshCalendar();
-                        }
-                    });
-                    mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"),Color.parseColor("#ff1a171b"));
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parentView,
                                                 View childView, int position, long id) {
@@ -757,9 +777,6 @@ public class SEvents extends
                     });
                 }
             }
-        }
-        if (showLoading) {
-            mDialog.dismiss();
         }
         mSwipeRefreshLayout.setRefreshing(false);
 

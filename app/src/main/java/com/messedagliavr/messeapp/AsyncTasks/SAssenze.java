@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
 import com.messedagliavr.messeapp.Objects.Assenza;
 import com.messedagliavr.messeapp.RegistroActivity;
 
@@ -29,22 +32,28 @@ import java.util.Map;
 
 public class SAssenze extends AsyncTask<Void, Void, Void> {
 
-    ProgressDialog mDialog;
     public static HashMap<Integer, Assenza> a;
+    ProgressDialog mDialog;
     RegistroActivity c;
     Boolean isOffline = false;
     Boolean error = false;
     Boolean isRefresh = false;
+    Boolean loginRequired = false;
 
-    public SAssenze(RegistroActivity c, Boolean isOffline){
-        this.isOffline=isOffline;
-        this.c=c;
+    public SAssenze(RegistroActivity c, Boolean isOffline) {
+        this.isOffline = isOffline;
+        this.c = c;
     }
 
-    public SAssenze(RegistroActivity c, Boolean isOffline, Boolean isRefresh){
-        this.isRefresh=isRefresh;
-        this.isOffline=isOffline;
-        this.c=c;
+    public SAssenze(RegistroActivity c, Boolean isOffline, Boolean isRefresh) {
+        this.isRefresh = isRefresh;
+        this.isOffline = isOffline;
+        this.c = c;
+    }
+
+    public static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
     }
 
     protected void onPreExecute() {
@@ -69,6 +78,8 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
                 a = gson.fromJson(json, typeOfHashMap);
             } else if (isOffline == false) {
                 a = scaricaAssenze(leggiPagina("https://web.spaggiari.eu/tic/app/default/consultasingolo.php#calendario").getElementById("skeda_calendario"));
+                SharedPreferences sp = c.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+                sp.edit().putLong("lastLogin", new Date().getTime()).commit();
             } else {
                 error = true;
             }
@@ -81,10 +92,19 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         mDialog.dismiss();
-        if(!error) {
+        if (!error) {
             c.setUpAssenze(a);
+        } else if (loginRequired) {
+            Toast.makeText(c, "È necessario effettuare il login", Toast.LENGTH_SHORT);
+            DialogFragment login = new LoginRegistroDialog();
+            Bundle data = new Bundle();
+            data.putInt("circolari", 0);
+            data.putBoolean("isOffline", false);
+            data.putBoolean("isSessionValid", false);
+            login.setArguments(data);
+            login.show(c.getSupportFragmentManager(), "login");
         } else {
-            Toast.makeText(c, "C'� stato un errore con il download delle assenze", Toast.LENGTH_SHORT);
+            Toast.makeText(c, "C'è stato un errore con il download delle assenze", Toast.LENGTH_SHORT);
         }
     }
 
@@ -94,8 +114,7 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
         c.onBackPressed();
     }
 
-    public Document leggiPagina(String url)
-    {
+    public Document leggiPagina(String url) {
         try {
             HttpGet httpGet = new HttpGet(url);
             InputStream inputStream;
@@ -109,20 +128,15 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    public static String convertStreamToString(java.io.InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
-    public HashMap<Integer,Assenza> scaricaAssenze(Element html) throws IOException {
+    public HashMap<Integer, Assenza> scaricaAssenze(Element html) throws IOException {
         a = new HashMap<>();
-        String mese, title="",tipo;
+        String mese, title = "", tipo;
         SharedPreferences sharedpreferences = c.getSharedPreferences("Assenze", Context.MODE_PRIVATE);
         String json = sharedpreferences.getString("json", "default");
         Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
         SharedPreferences sp = c.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
-        Long storedDate = sp.getLong("lastLogin",0);
-        if(!json.equals("default")&& (new Date().getTime()-lastUpdate) < 10800000 && !isRefresh) {
+        Long storedDate = sp.getLong("lastLogin", 0);
+        if (!json.equals("default") && (new Date().getTime() - lastUpdate) < 10800000 && !isRefresh) {
             Type typeOfHashMap = new TypeToken<Map<Integer, Assenza>>() {
             }.getType();
             Gson gson = new GsonBuilder().create();
@@ -161,8 +175,11 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
             }
             Gson gson = new GsonBuilder().create();
             json = gson.toJson(a);
-            sharedpreferences.edit().putString("json",json).apply();
+            sharedpreferences.edit().putString("json", json).apply();
             sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
+        } else {
+            error = true;
+            loginRequired = true;
         }
         return a;
     }

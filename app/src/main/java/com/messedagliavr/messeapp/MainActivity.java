@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }*/
-        if (position==4){
+        if (position == 4) {
             Intent web = new Intent(Intent.ACTION_VIEW);
             web.setData(Uri
                     .parse("https://www.messedaglia.it"));
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity
         ActionBar.setHomeButtonEnabled(true);
         ActionBar.setDisplayShowTitleEnabled(true);
         ActionBar.setTitle(mTitle);
-        actionBar= ActionBar;
+        actionBar = ActionBar;
     }
 
     @Override
@@ -322,7 +322,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -336,7 +335,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             startActivity(new Intent(this, SocialActivity.class));
         }
-        }
+    }
 
     public void NullPApps(View v) {
         Intent npa = new Intent(Intent.ACTION_VIEW);
@@ -345,48 +344,11 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     public void voti(View v) {
-        /*Database databaseHelper = new Database(getBaseContext());
-        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        String[] columns = {"enabled", "username", "password"};
-        Cursor query = db.query("settvoti", // The table to query
-                columns, // The columns to return
-                null, // The columns for the WHERE clause
-                null, // The values for the WHERE clause
-                null, // don't group the rows
-                null, // don't filter by row groups
-                null // The sort order
-        );
-        query.moveToFirst();
-        String enabled = query.getString(query.getColumnIndex("enabled"));
-        db.close();
-        if (enabled.matches("true")) {
-            String user = query.getString(query.getColumnIndex("username"));
-            String password = query.getString(query.getColumnIndex("password"));
-            Intent voti = new Intent(Intent.ACTION_VIEW);
-            if(user.contains("@")) {
-                voti.setData(Uri
-                        .parse("https://web.spaggiari.eu/home/app/default/login_email.php?custcode=VRLS0003&login="
-                                + user + "&password=" + password));
-            } else {
-                voti.setData(Uri
-                        .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="
-                                + user + "&password=" + password));
-            }
-            query.close();
-            startActivity(voti);
-        } else {
-            Intent voti = new Intent(Intent.ACTION_VIEW);
-            voti.setData(Uri
-                    .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003"));
-            query.close();
-            startActivity(voti);
-        }*/
-        Boolean isSessionValid=false;
+        Boolean isSessionValid = false;
         SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
-        Long storedDate = sharedpreferences.getLong("lastLogin",0);
-        if (!CheckInternet() && storedDate != 0){
+        Long storedDate = sharedpreferences.getLong("lastLogin", 0);
+        if (!CheckInternet() && storedDate != 0) {
             DialogFragment login = new LoginRegistroDialog();
             Bundle data = new Bundle();
             data.putInt("circolari", 0);
@@ -457,20 +419,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void notices(View v) {
-        Boolean isSessionValid=false;
+        Boolean isSessionValid = false;
         SharedPreferences sp = getSharedPreferences("Circolari", Context.MODE_PRIVATE);
         String json = sp.getString("json", "default");
-        if (CheckInternet() == false && !json.equals("default")){
+        if (CheckInternet() == false && !json.equals("default")) {
             DialogFragment login = new LoginRegistroDialog();
             Bundle data = new Bundle();
-            data.putInt("circolari",1);
+            data.putInt("circolari", 1);
             data.putBoolean("isOffline", true);
             login.setArguments(data);
             login.show(getSupportFragmentManager(), "login");
 
         } else if (CheckInternet() == true) {
             SharedPreferences sharedpreferences = getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
-            Long storedDate = sharedpreferences.getLong("lastLogin",0);
+            Long storedDate = sharedpreferences.getLong("lastLogin", 0);
             if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null) {
                 isSessionValid = false;
             } else if (storedDate != 0) {
@@ -483,10 +445,9 @@ public class MainActivity extends AppCompatActivity
             login.setArguments(data);
             login.show(getSupportFragmentManager(), "login");
         } else {
-            Toast.makeText(this,R.string.noconnection,Toast.LENGTH_SHORT);
+            Toast.makeText(this, R.string.noconnection, Toast.LENGTH_SHORT);
         }
     }
-
 
 
     /**
@@ -498,6 +459,9 @@ public class MainActivity extends AppCompatActivity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public PlaceholderFragment() {
+        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -512,13 +476,12 @@ public class MainActivity extends AppCompatActivity
             return fragment;
         }
 
-        public PlaceholderFragment() {
-        }
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            if ((rootView != null) && ((rootView.getParent()) != null)  ) { ((ViewGroup) rootView.getParent()).removeView(rootView);}
+            if ((rootView != null) && ((rootView.getParent()) != null)) {
+                ((ViewGroup) rootView.getParent()).removeView(rootView);
+            }
             getActivity().supportInvalidateOptionsMenu();
             switch (section) {
                 case 0:
@@ -555,7 +518,7 @@ public class MainActivity extends AppCompatActivity
                         spin.setAdapter(aa);
 
                     } else {*/
-                        rootView = inflater.inflate(R.layout.paninichiusa, container, false);
+                    rootView = inflater.inflate(R.layout.paninichiusa, container, false);
                     //}
                     break;
                 case 2:

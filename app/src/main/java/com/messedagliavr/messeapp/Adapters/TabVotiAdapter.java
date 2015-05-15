@@ -12,12 +12,12 @@ import java.util.HashMap;
 
 public class TabVotiAdapter extends FragmentStatePagerAdapter {
     static Context c;
-    static HashMap<Integer,Materia> v;
+    static HashMap<Integer, Materia> v;
 
-    public TabVotiAdapter(FragmentManager fm,Context co, HashMap<Integer,Materia> vo) {
+    public TabVotiAdapter(FragmentManager fm, Context co, HashMap<Integer, Materia> vo) {
         super(fm);
-        c=co;
-        v=vo;
+        c = co;
+        v = vo;
     }
 
     @Override

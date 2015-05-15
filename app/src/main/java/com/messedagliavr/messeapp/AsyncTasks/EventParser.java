@@ -22,9 +22,11 @@ import java.util.Date;
 @SuppressLint("SimpleDateFormat")
 public class EventParser extends AsyncTask<Void, Void, Void> {
     CalendarActivity ca;
-    public EventParser(CalendarActivity ca){
-        this.ca=ca;
+
+    public EventParser(CalendarActivity ca) {
+        this.ca = ca;
     }
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     protected Void doInBackground(Void... params) {
@@ -35,7 +37,7 @@ public class EventParser extends AsyncTask<Void, Void, Void> {
             Document doc = parser.getDomElement(xml);
             NodeList nl = doc.getElementsByTagName("VEVENT");
 
-            String[] dati = { "", "", "", "", "" };
+            String[] dati = {"", "", "", "", ""};
             Element e = (Element) nl.item(0);
             dati[0] = parser.getValue(e, "SUMMARY");
             int l = parser.getValue(e, "DESCRIPTION").length();

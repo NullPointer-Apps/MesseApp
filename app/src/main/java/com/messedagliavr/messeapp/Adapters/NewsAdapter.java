@@ -16,16 +16,16 @@ import java.util.ArrayList;
 public class NewsAdapter extends ArrayAdapter<Spanned> {
     private ArrayList<Spanned> date;
     private ArrayList<Spanned> titoli;
-	private Context context;
+    private Context context;
 
 
     public NewsAdapter(Context context, int resource, ArrayList<Spanned> titoli, ArrayList<Spanned> date) {
-        super(context, resource,titoli);
+        super(context, resource, titoli);
         this.date = date;
         this.titoli = titoli;
-		this.context=context;
+        this.context = context;
     }
-	
+
     @Override
     public View getView(int position, View v, ViewGroup parent) {
 
@@ -46,31 +46,31 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
             if (tt1 != null) {
                 tt1.setText(titoli.get(position));
             }
-            boolean f=false;
-            String day="";
-            String month="";
+            boolean f = false;
+            String day = "";
+            String month = "";
 
-            if (tt != null && date!=null) {
+            if (tt != null && date != null) {
                 String s = date.get(position).toString();
-                for (int i= 0; i<s.length();i++){
-                    if (s.charAt(i)==','){
-                        if (!f){
-                            month+=s.charAt(i+2);
-                            month+=s.charAt(i+3);
-                            month+=s.charAt(i+4);
-                            f=true;
+                for (int i = 0; i < s.length(); i++) {
+                    if (s.charAt(i) == ',') {
+                        if (!f) {
+                            month += s.charAt(i + 2);
+                            month += s.charAt(i + 3);
+                            month += s.charAt(i + 4);
+                            f = true;
                         } else {
-                            if (s.charAt(i-2)!=' ') day+=s.charAt(i-2);
-                            else day+='0';
-                            day+=s.charAt(i-1);
+                            if (s.charAt(i - 2) != ' ') day += s.charAt(i - 2);
+                            else day += '0';
+                            day += s.charAt(i - 1);
                         }
                     }
                 }
 
                 tt.setTextColor(Color.rgb(114, 177, 214));
                 tt.setText(day);
-                tt2.setText(month.toUpperCase());
                 tt2.setTextColor(Color.rgb(114, 177, 214));
+                tt2.setText(month.toUpperCase());
             }
         }
         return v;

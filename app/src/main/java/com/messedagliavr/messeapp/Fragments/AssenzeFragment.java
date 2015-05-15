@@ -20,15 +20,23 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class AssenzeFragment extends Fragment {
-    static Context c;
-    GridLayoutManager mLayoutManager;
-
     public static ArrayList<Assenza> assList;
     public static ArrayList<Assenza> rList;
-
+    static Context c;
     static String s;
     static int l;
     static CardAssenzeAdapter caa;
+    GridLayoutManager mLayoutManager;
+
+    public static AssenzeFragment newInstance(Context context, int i, HashMap<Integer, Assenza> a) {
+        c = context;
+        AssenzeFragment af = new AssenzeFragment();
+        Bundle args = new Bundle();
+        args.putInt("tipo", i);
+        af.setArguments(args);
+
+        return af;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,37 +44,26 @@ public class AssenzeFragment extends Fragment {
         assList = new ArrayList<>();
         rList = new ArrayList<>();
         int i = getArguments().getInt("tipo");
-        for (int j = 1; j < RegistroActivity.a.size(); j++){
+        for (int j = 1; j < RegistroActivity.a.size(); j++) {
             Assenza ass = RegistroActivity.a.get(j);
-            if(ass.isRitardo()&&i==1){
+            if (ass.isRitardo() && i == 1) {
                 rList.add(ass);
-            } else if (!ass.isRitardo()&&i==0){
+            } else if (!ass.isRitardo() && i == 0) {
                 assList.add(ass);
             }
         }
-        if (i==0) {
-            s=" assenze";
-            l=assList.size();
+        if (i == 0) {
+            s = " assenze";
+            l = assList.size();
             Collections.reverse(assList);
             caa = new CardAssenzeAdapter(c, assList);
-        }
-        else if (i==1) {
-            s=" ritardi";
-            l=rList.size();
+        } else if (i == 1) {
+            s = " ritardi";
+            l = rList.size();
             Collections.reverse(rList);
-            caa = new CardAssenzeAdapter(c,rList);
+            caa = new CardAssenzeAdapter(c, rList);
         }
 
-    }
-
-    public static AssenzeFragment newInstance(Context context, int i, HashMap<Integer,Assenza> a) {
-        c=context;
-        AssenzeFragment af = new AssenzeFragment();
-        Bundle args = new Bundle();
-        args.putInt("tipo", i);
-        af.setArguments(args);
-
-        return af;
     }
 
     @Override
@@ -100,7 +97,7 @@ public class AssenzeFragment extends Fragment {
             }
         });*/
 
-        mLayoutManager = new GridLayoutManager(c,4);
+        mLayoutManager = new GridLayoutManager(c, 4);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(mLayoutManager);
         rv.setItemAnimator(null);
@@ -111,11 +108,10 @@ public class AssenzeFragment extends Fragment {
     }
 
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("tipo",getArguments().getInt("tipo"));
+        outState.putInt("tipo", getArguments().getInt("tipo"));
     }
 
     @Override

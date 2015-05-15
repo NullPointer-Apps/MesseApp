@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
 import com.messedagliavr.messeapp.Objects.Circolari;
 import com.messedagliavr.messeapp.R;
 import com.messedagliavr.messeapp.RegistroActivity;
@@ -32,32 +35,37 @@ import java.util.Map;
 
 public class SCircolari extends AsyncTask<Void, Void, Void> {
 
+    public static HashMap<Integer, Circolari> c;
+    static SwipeRefreshLayout mSwipeRefreshLayout;
     RegistroActivity ra;
     ProgressDialog mDialog;
     Boolean isOffline;
-    Boolean error=false;
-    Boolean isRefresh=false;
-    public static HashMap<Integer, Circolari> c;
-    static SwipeRefreshLayout mSwipeRefreshLayout;
+    Boolean error = false;
+    Boolean isRefresh = false;
+    Boolean loginRequired = false;
 
 
-
-    public SCircolari(RegistroActivity ra, Boolean isOffline){
-        this.isOffline=isOffline;
-        this.ra=ra;
+    public SCircolari(RegistroActivity ra, Boolean isOffline) {
+        this.isOffline = isOffline;
+        this.ra = ra;
         ra.setContentView(R.layout.circolari);
         ra.setSection(6);
         ra.supportInvalidateOptionsMenu();
     }
 
-    public SCircolari(RegistroActivity ra, Boolean isOffline, Boolean isRefresh){
-        this.isRefresh=isRefresh;
-        this.isOffline=isOffline;
-        this.ra=ra;
+    public SCircolari(RegistroActivity ra, Boolean isOffline, Boolean isRefresh) {
+        this.isRefresh = isRefresh;
+        this.isOffline = isOffline;
+        this.ra = ra;
+    }
+
+    public static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
     }
 
     protected void onPreExecute() {
-        if(!isRefresh || mSwipeRefreshLayout != null) {
+        if (!isRefresh || mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout = (SwipeRefreshLayout) ra.findViewById(R.id.swipe_refresh_layout_circolari);
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -78,16 +86,19 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
             SharedPreferences sharedpreferences = ra.getSharedPreferences("Circolari", Context.MODE_PRIVATE);
             String json = sharedpreferences.getString("json", "default");
             System.out.println(isOffline);
-            if(isOffline && !json.equals("default") && !isRefresh) {
+            if (isOffline && !json.equals("default") && !isRefresh) {
                 c = new HashMap<>();
-                Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() { }.getType();
+                Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() {
+                }.getType();
                 Gson gson = new GsonBuilder().create();
                 c = gson.fromJson(json, typeOfHashMap);
-            } else if(isOffline == false) {
+            } else if (!isOffline) {
                 System.out.println("Pre Scarica");
                 c = scaricaCircolari(leggiPagina("https://web.spaggiari.eu/sif/app/default/bacheca_utente.php").getElementById("data_table"));
-            }  else {
-                error=true;
+                SharedPreferences sp = ra.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
+                sp.edit().putLong("lastLogin", new Date().getTime()).commit();
+            } else {
+                error = true;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,14 +117,20 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
         //mDialog.dismiss();
         if (!error) {
             ra.setUpCircolari(c);
-        } else {
-            Toast.makeText(ra,"C'è stato un errore con il download delle circolari", Toast.LENGTH_SHORT);
+        } else if (loginRequired) {
+            Toast.makeText(ra, "Ãˆ necessario effettuare il login", Toast.LENGTH_SHORT);
+            DialogFragment login = new LoginRegistroDialog();
+            Bundle data = new Bundle();
+            data.putInt("circolari", 1);
+            data.putBoolean("isSessionValid", false);
+            login.setArguments(data);
+            login.show(ra.getSupportFragmentManager(), "login");
         }
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
     void refreshCircolari() {
-        if(CheckInternet()) {
+        if (CheckInternet()) {
             SCircolari sc = new SCircolari(ra, false, true);
             sc.execute();
         } else {
@@ -141,16 +158,17 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
         return connected;
     }
 
-    public HashMap<Integer,Circolari> scaricaCircolari(Element html) throws IOException {
+    public HashMap<Integer, Circolari> scaricaCircolari(Element html) throws IOException {
         c = new HashMap<>();
-        int i=0;
+        int i = 0;
         SharedPreferences sharedpreferences = ra.getSharedPreferences("Circolari", Context.MODE_PRIVATE);
         String json = sharedpreferences.getString("json", "default");
         Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
         SharedPreferences sp = ra.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
-        Long storedDate = sp.getLong("lastLogin",0);
-        if(!json.equals("default") && (new Date().getTime()-lastUpdate) < 10800000 && !isRefresh) {
-            Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() { }.getType();
+        Long storedDate = sp.getLong("lastLogin", 0);
+        if (!json.equals("default") && (new Date().getTime() - lastUpdate) < 10800000 && !isRefresh) {
+            Type typeOfHashMap = new TypeToken<Map<Integer, Circolari>>() {
+            }.getType();
             Gson gson = new GsonBuilder().create();
             c = gson.fromJson(json, typeOfHashMap);
         } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0) {
@@ -172,20 +190,17 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
             }
             Gson gson = new GsonBuilder().create();
             json = gson.toJson(c);
-            sharedpreferences.edit().putString("json",json).apply();
+            sharedpreferences.edit().putString("json", json).apply();
             sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
+        } else {
+            error = true;
+            loginRequired = true;
         }
         return c;
     }
 
-    public static String convertStreamToString(java.io.InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
-
     //parsing della pagina
-    public Document leggiPagina(String url)
-    {
+    public Document leggiPagina(String url) {
         try {
             HttpGet httpGet = new HttpGet(url);
             //httpGet.addHeader("If-Modified-Since", DateFormat.format("Y-m-d h-M-s", new Date()).toString());

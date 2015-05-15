@@ -34,45 +34,45 @@ public class CircolariAdapter extends ArrayAdapter<Circolari> {
         TextView tt1 = (TextView) v.findViewById(R.id.titlenews);
 
         String day;
-        String month="";
+        String month = "";
         String s = c.getData();
-        day = s.substring(0,2);
-        switch(s.substring(3,5)){
+        day = s.substring(0, 2);
+        switch (s.substring(3, 5)) {
             case "01":
-                month="GEN";
+                month = "GEN";
                 break;
             case "02":
-                month="FEB";
+                month = "FEB";
                 break;
             case "03":
-                month="MAR";
+                month = "MAR";
                 break;
             case "04":
-                month="APR";
+                month = "APR";
                 break;
             case "05":
-                month="MAG";
+                month = "MAG";
                 break;
             case "06":
-                month="GIU";
+                month = "GIU";
                 break;
             case "07":
-                month="LUG";
+                month = "LUG";
                 break;
             case "08":
-                month="AGO";
+                month = "AGO";
                 break;
             case "09":
-                month="SET";
+                month = "SET";
                 break;
             case "10":
-                month="OTT";
+                month = "OTT";
                 break;
             case "11":
-                month="NOV";
+                month = "NOV";
                 break;
             case "12":
-                month="DEC";
+                month = "DEC";
                 break;
         }
         tt.setText(day);

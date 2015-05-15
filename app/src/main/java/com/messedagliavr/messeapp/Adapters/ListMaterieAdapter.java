@@ -89,26 +89,26 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
                 }
 
                 switch (v.getTipo()) {
-                case "Scritto":
-                    cs = new SpannableString(votos + "S");
-                    break;
-                case "Orale":
-                    cs = new SpannableString(votos + "O");
-                    break;
-                case "Pratico":
-                    cs = new SpannableString(votos + "P");
-                    break;
-                case "Test":
-                    cs = new SpannableString(votos + "T");
-                    voto.setBackgroundColor(Color.rgb(114, 177, 214));
-                    break;
-                case "Recupero":
-                    cs = new SpannableString(votos + "R");
-                    voto.setBackgroundColor(Color.rgb(114, 177, 214));
-                    break;
-                default:
-                    cs = new SpannableString(votos + "e");
-                    break;
+                    case "Scritto":
+                        cs = new SpannableString(votos + "S");
+                        break;
+                    case "Orale":
+                        cs = new SpannableString(votos + "O");
+                        break;
+                    case "Pratico":
+                        cs = new SpannableString(votos + "P");
+                        break;
+                    case "Test":
+                        cs = new SpannableString(votos + "T");
+                        voto.setBackgroundColor(Color.rgb(114, 177, 214));
+                        break;
+                    case "Recupero":
+                        cs = new SpannableString(votos + "R");
+                        voto.setBackgroundColor(Color.rgb(114, 177, 214));
+                        break;
+                    default:
+                        cs = new SpannableString(votos + "e");
+                        break;
                 }
 
                 cs.setSpan(new SubscriptSpan(), cs.length() - 1, cs.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -28,6 +28,7 @@ import com.messedagliavr.messeapp.Databases.MainDB;
 public class TimetableActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
     static Window window;
+    String fname = null;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,32 +48,31 @@ public class TimetableActivity extends AppCompatActivity implements
         }
         return true;
     }
+
     public String[] items() {
         try {
             return MainActivity.context.getResources().getStringArray(R.array.classi);
         } catch (RuntimeException e) {
             Intent i = getBaseContext().getPackageManager()
-                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                    .getLaunchIntentForPackage(getBaseContext().getPackageName());
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
-    return null;
+        return null;
     }
-
-    String fname = null;
 
     @Override
     public void onCreate(Bundle icicle) {
-        String[] items= items();
+        String[] items = items();
         super.onCreate(icicle);
         setContentView(R.layout.timetable);
         ActionBar ab = getSupportActionBar();
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
-		ab.setTitle(getString(R.string.orario));
+        ab.setTitle(getString(R.string.orario));
         MainDB databaseHelper = new MainDB(getBaseContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        String[] columns = { "fname" };
+        String[] columns = {"fname"};
         Cursor classe = db.query("class", // The table to query
                 columns, // The columns to return
                 null, // The columns for the WHERE clause
@@ -86,45 +86,45 @@ public class TimetableActivity extends AppCompatActivity implements
         classe.close();
         db.close();
         if (!fname.matches("novalue")) {
-			try {
-                 items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
-                
-			} catch (NullPointerException e) {
-				Intent i = getBaseContext().getPackageManager()
-                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(i);
-            }
-            } 
-			try{
-				Spinner spin = (Spinner) findViewById(R.id.spinner);
-                spin.setOnItemSelectedListener(this);
+            try {
+                items[0] = MainActivity.context.getResources().getString(R.string.defaultclass) + " " + fname.toUpperCase();
 
-                ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
-															  android.R.layout.simple_spinner_item, items);
-
-                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spin.setAdapter(aa);
-			} catch (NullPointerException e) {
-				Intent i = getBaseContext().getPackageManager()
-                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(i);
+            } catch (NullPointerException e) {
+                Intent i = getBaseContext().getPackageManager()
+                        .getLaunchIntentForPackage(getBaseContext().getPackageName());
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
+        }
+        try {
+            Spinner spin = (Spinner) findViewById(R.id.spinner);
+            spin.setOnItemSelectedListener(this);
+
+            ArrayAdapter<?> aa = new ArrayAdapter<Object>(this,
+                    android.R.layout.simple_spinner_item, items);
+
+            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spin.setAdapter(aa);
+        } catch (NullPointerException e) {
+            Intent i = getBaseContext().getPackageManager()
+                    .getLaunchIntentForPackage(getBaseContext().getPackageName());
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        }
         if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
-            window.setExitTransition(new Slide(Gravity.TOP).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
-			WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
-			descrizioneview.setTransitionGroup(true);
+            window = getWindow();
+            window.setEnterTransition(new Slide(Gravity.BOTTOM).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
+            window.setExitTransition(new Slide(Gravity.TOP).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
+            WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
+            descrizioneview.setTransitionGroup(true);
         }
-        }
+    }
 
 
-    @SuppressLint({ "DefaultLocale", "SetJavaScriptEnabled" })
+    @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled"})
     public void onItemSelected(AdapterView<?> parent, View v, int position,
                                long id) {
-        String[] items= items();
+        String[] items = items();
         WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
         if (position == 0) {
             if (!fname.matches("novalue")) {

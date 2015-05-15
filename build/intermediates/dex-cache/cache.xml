@@ -2,60 +2,60 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.1.1\jars\classes.jar"
+        jar="C:\Users\Simone\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.8.2\64238922c4006c3d0a9951c4c03983ecc6a1e1a0\jsoup-1.8.2.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="22886d910315028a2b34b1ba068c265534ade87a">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\classes-abeadc3fe9637dfc14de38c44f9df0d4c18cffef.jar" />
-    </item>
-    <item
-        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\internal_impl-22.1.1-e41b418fa2076063ef683a4c4db3682553c3d46f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e0b0c35d02308b270015a74cada4887e2e49b889">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\classes-2d136dd61cc518e37de1636a67ebfd997fe905f6.jar" />
+        sha1="64238922c4006c3d0a9951c4c03983ecc6a1e1a0">
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\jsoup-1.8.2-0a2db2340b6ec388002da8cf32bf32eefb3077ab.jar" />
     </item>
     <item
         jar="C:\Users\Simone\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\gson-2.3.1-56e454b17e9bbaabbaa6714906311e3bc71ad46f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\classes-171005fab821cc75afbf2062f999306ab4648a1e.jar" />
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\gson-2.3.1-56e454b17e9bbaabbaa6714906311e3bc71ad46f.jar" />
     </item>
     <item
         jar="C:\Users\Simone\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\support-annotations-22.1.1-d34b90c300a8c4688574efe9570c9d0f6c1b34e7.jar" />
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-d34b90c300a8c4688574efe9570c9d0f6c1b34e7.jar" />
     </item>
     <item
-        jar="C:\Users\Simone\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.8.2\64238922c4006c3d0a9951c4c03983ecc6a1e1a0\jsoup-1.8.2.jar"
+        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="64238922c4006c3d0a9951c4c03983ecc6a1e1a0">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\jsoup-1.8.2-0a2db2340b6ec388002da8cf32bf32eefb3077ab.jar" />
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-171005fab821cc75afbf2062f999306ab4648a1e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e0b0c35d02308b270015a74cada4887e2e49b889">
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-2d136dd61cc518e37de1636a67ebfd997fe905f6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="22886d910315028a2b34b1ba068c265534ade87a">
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-abeadc3fe9637dfc14de38c44f9df0d4c18cffef.jar" />
+    </item>
+    <item
+        jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-e41b418fa2076063ef683a4c4db3682553c3d46f.jar" />
     </item>
     <item
         jar="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\release\classes-4037b60d8f2c3666d324ea1623d9292f9b41fa4d.jar" />
+        <dex dex="C:\Users\Simone\Documents\GitHub\MesseApp\app\build\intermediates\pre-dexed\debug\classes-4037b60d8f2c3666d324ea1623d9292f9b41fa4d.jar" />
     </item>
 
 </items>

@@ -1,13 +1,11 @@
 package com.messedagliavr.messeapp;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
@@ -40,7 +38,6 @@ public class NewsActivity extends AppCompatActivity {
         }
         return connected;
     }
-
 
 
     @Override

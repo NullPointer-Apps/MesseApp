@@ -17,12 +17,12 @@ import java.util.List;
 
 public class CardAssenzeAdapter extends RecyclerView.Adapter<CardAssenzeAdapter.AssenzeViewHolder> {
 
-    private List<Assenza> list;
     Context c;
+    private List<Assenza> list;
 
     public CardAssenzeAdapter(Context c, List<Assenza> list) {
         this.c = c;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
@@ -36,9 +36,10 @@ public class CardAssenzeAdapter extends RecyclerView.Adapter<CardAssenzeAdapter.
         Assenza n = list.get(i);
         vh.month.setText(n.getMeseS());
         vh.day.setText(n.getGiornoS());
-        vh.cv.setCardBackgroundColor(Color.rgb(79,193,72)); //GREEN
+        vh.cv.setCardBackgroundColor(Color.rgb(79, 193, 72)); //GREEN
         if (n.isRitardo()) {
-            if (n.getTipoR().equals("Breve")) vh.cv.setCardBackgroundColor(Color.rgb(253,165,61)); //ORANGE
+            if (n.getTipoR().equals("Breve"))
+                vh.cv.setCardBackgroundColor(Color.rgb(253, 165, 61)); //ORANGE
             vh.hour.setText(n.getTipoR());
         }
         if (!n.isGiustificata()) vh.cv.setCardBackgroundColor(Color.rgb(238, 81, 67)); //RED

@@ -33,34 +33,32 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-
-
 public class XMLParser {
-	
-	final static HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
-	public boolean verify(String hostname, SSLSession session) {
-		return true;
-	}
-};
 
-/**
- * Trust every server - dont check for any certificate
- */
+    final static HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
+        public boolean verify(String hostname, SSLSession session) {
+            return true;
+        }
+    };
+
+    /**
+     * Trust every server - dont check for any certificate
+     */
     private static void trustAllHosts() {
         // Create a trust manager that does not validate certificate chains
-        TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
             public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                return new java.security.cert.X509Certificate[] {};
+                return new java.security.cert.X509Certificate[]{};
             }
 
             public void checkClientTrusted(X509Certificate[] chain,
-                    String authType) throws CertificateException {
+                                           String authType) throws CertificateException {
             }
 
             public void checkServerTrusted(X509Certificate[] chain,
-                    String authType) throws CertificateException {
+                                           String authType) throws CertificateException {
             }
-        } };
+        }};
 
         // Install the all-trusting trust manager
         try {
@@ -73,54 +71,54 @@ public class XMLParser {
         }
     }
 
-	private static String getStringFromInputStream(InputStream is) {
- 
-		BufferedReader br = null;
-		StringBuilder sb = new StringBuilder();
- 
-		String line;
-		try {
- 
-			br = new BufferedReader(new InputStreamReader(is));
-			while ((line = br.readLine()) != null) {
-				sb.append(line);
-			}
- 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
- 
-		return sb.toString();
- 
-	}
+    private static String getStringFromInputStream(InputStream is) {
+
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+
+            br = new BufferedReader(new InputStreamReader(is));
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return sb.toString();
+
+    }
 
     public String getXmlFromUrl(String gUrl) {
         String xml = null;
 
         try {
-			URL url = new URL(gUrl);
-			HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-			urlConnection.setHostnameVerifier(DO_NOT_VERIFY);
-			InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-			xml = getStringFromInputStream(in);
+            URL url = new URL(gUrl);
+            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+            urlConnection.setHostnameVerifier(DO_NOT_VERIFY);
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            xml = getStringFromInputStream(in);
             urlConnection.disconnect();
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
             e.printStackTrace();
-            xml ="UnknownHostException";
+            xml = "UnknownHostException";
         } catch (IOException e) {
             e.printStackTrace();
-            xml ="UnknownHostException";
+            xml = "UnknownHostException";
         }
       /* if(xml.indexOf("<?xml-stylesheet href=\"/components/com_jevents/views/ext/assets/css/modstyle.css\" type=\"text/css\"?>")!= 0){
            xml=xml.substring(205);
@@ -161,12 +159,11 @@ public class XMLParser {
     public final String getElementValue(Node elem) {
         try {
             Node child;
-            if( elem != null){
-                if (elem.hasChildNodes()){
-                    for( child = elem.getFirstChild(); child != null; child = child.getNextSibling() ){
-                        if( child.getNodeType() == Node.CDATA_SECTION_NODE
-                                || child.getNodeType() == Node.TEXT_NODE )
-                        {
+            if (elem != null) {
+                if (elem.hasChildNodes()) {
+                    for (child = elem.getFirstChild(); child != null; child = child.getNextSibling()) {
+                        if (child.getNodeType() == Node.CDATA_SECTION_NODE
+                                || child.getNodeType() == Node.TEXT_NODE) {
                             return child.getNodeValue().trim();
                         }
                     }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 public class ListItemSelectedNewsActivity extends AppCompatActivity {
     static Window window;
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -35,7 +36,7 @@ public class ListItemSelectedNewsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.notizie));
         Intent intent = getIntent();
         String titolorw = intent.getStringExtra("title");
-        String descrizionerw ="<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body>" + intent.getStringExtra("description") +"</body></html>";
+        String descrizionerw = "<!DOCTYPE html><head><meta http-equiv=\"Content-Type\" \" content=\"text/html; charset=utf-8\"></head><body>" + intent.getStringExtra("description") + "</body></html>";
         TextView titoloview = (TextView) findViewById(R.id.TitoloView);
         Spanned titolo = Html.fromHtml(titolorw);
         titoloview.setText(titolo);
@@ -43,9 +44,9 @@ public class ListItemSelectedNewsActivity extends AppCompatActivity {
         descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
         descrizioneview.setBackgroundColor(Color.parseColor("#eeeeee"));
         if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.RIGHT).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
-            window.setExitTransition(new Slide(Gravity.LEFT).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
+            window = getWindow();
+            window.setEnterTransition(new Slide(Gravity.RIGHT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
+            window.setExitTransition(new Slide(Gravity.LEFT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
         }
     }
 

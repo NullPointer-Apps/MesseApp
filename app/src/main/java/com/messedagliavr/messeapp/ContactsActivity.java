@@ -23,18 +23,19 @@ import com.messedagliavr.messeapp.Utilities.ColorTool;
 
 public class ContactsActivity extends AppCompatActivity implements View.OnTouchListener {
     static Window window;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contatti);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         View iv = findViewById(R.id.contattibg);
-       if (iv != null) {
+        if (iv != null) {
             iv.setOnTouchListener(this);
-       }
+        }
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
+            window = getWindow();
             window.setEnterTransition(new Slide(Gravity.RIGHT));
             window.setExitTransition(new Slide(Gravity.LEFT));
         }
@@ -87,29 +88,44 @@ public class ContactsActivity extends AppCompatActivity implements View.OnTouchL
                 // varying pixel density.
                 ColorTool ct = new ColorTool();
                 int tolerance = 30;
-                if (ct.closeMatch(-13893888, touchColor, tolerance)){
-                    methodtobcalled = 0;handledHere = true;
-                } else { if (ct.closeMatch(Color.BLUE, touchColor, tolerance)) {
-                    methodtobcalled = 1;handledHere = true;
-                } else { if (ct.closeMatch(Color.RED, touchColor, tolerance)) {
-                    methodtobcalled = 2;handledHere = true;
-                } else { if (ct.closeMatch(Color.YELLOW, touchColor, tolerance)) {
-                    methodtobcalled = 3;handledHere = true;
-                } else { if (ct.closeMatch(-65341, touchColor, tolerance)) {
-                    methodtobcalled = 4;handledHere = true;
-                } else { if (ct.closeMatch(Color.CYAN, touchColor, tolerance)) {
-                    methodtobcalled = 5;handledHere = true;
-                } else { if (ct.closeMatch(-5526613, touchColor, tolerance)) {
-                    methodtobcalled = 6;handledHere = true;
-                } else { if (ct.closeMatch(Color.WHITE, touchColor, tolerance)) {
-                    methodtobcalled = 7;handledHere = true;
-                } else handledHere = false;
-                }
-                }
-                }
-                }
-                }
-                }
+                if (ct.closeMatch(-13893888, touchColor, tolerance)) {
+                    methodtobcalled = 0;
+                    handledHere = true;
+                } else {
+                    if (ct.closeMatch(Color.BLUE, touchColor, tolerance)) {
+                        methodtobcalled = 1;
+                        handledHere = true;
+                    } else {
+                        if (ct.closeMatch(Color.RED, touchColor, tolerance)) {
+                            methodtobcalled = 2;
+                            handledHere = true;
+                        } else {
+                            if (ct.closeMatch(Color.YELLOW, touchColor, tolerance)) {
+                                methodtobcalled = 3;
+                                handledHere = true;
+                            } else {
+                                if (ct.closeMatch(-65341, touchColor, tolerance)) {
+                                    methodtobcalled = 4;
+                                    handledHere = true;
+                                } else {
+                                    if (ct.closeMatch(Color.CYAN, touchColor, tolerance)) {
+                                        methodtobcalled = 5;
+                                        handledHere = true;
+                                    } else {
+                                        if (ct.closeMatch(-5526613, touchColor, tolerance)) {
+                                            methodtobcalled = 6;
+                                            handledHere = true;
+                                        } else {
+                                            if (ct.closeMatch(Color.WHITE, touchColor, tolerance)) {
+                                                methodtobcalled = 7;
+                                                handledHere = true;
+                                            } else handledHere = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 break;
 
@@ -146,7 +162,9 @@ public class ContactsActivity extends AppCompatActivity implements View.OnTouchL
         return true;
     }
 
-    /** Get the color from the hotspot image at point x-y. */
+    /**
+     * Get the color from the hotspot image at point x-y.
+     */
     public int getHotspotColor(int hotspotId, int x, int y) {
         ImageView img = (ImageView) findViewById(hotspotId);
         if (img == null) {

@@ -1,13 +1,11 @@
 package com.messedagliavr.messeapp;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spanned;
@@ -26,11 +24,10 @@ import java.util.ArrayList;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    static Window window;
-
     public static String nointernet;
     public static String idical = null;
     public static ArrayList<Spanned> icalarr = new ArrayList<>();
+    static Window window;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -40,14 +37,14 @@ public class CalendarActivity extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(getString(R.string.eventi));
-		if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
-            window.setExitTransition(new Slide(Gravity.TOP).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
+        if (Build.VERSION.SDK_INT >= 21) {
+            window = getWindow();
+            window.setEnterTransition(new Slide(Gravity.BOTTOM).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
+            window.setExitTransition(new Slide(Gravity.TOP).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
         }
         if (CheckInternet()) {
             nointernet = "false";
-				new SEvents(true,this).execute();
+            new SEvents(this).execute();
         } else {
             String[] outdated = {"newsdate", "calendardate"};
             MainDB databaseHelper = new MainDB(getBaseContext());
@@ -68,11 +65,11 @@ public class CalendarActivity extends AppCompatActivity {
             db.close();
             if (!nodata.equals(verifydatenews)) {
                 nointernet = "true";
-				if (Build.VERSION.SDK_INT >= 21) {
-					new SEvents(false,this).execute();
-				} else {
-					new SEvents(true,this).execute();
-				}
+                if (Build.VERSION.SDK_INT >= 21) {
+                    new SEvents(this).execute();
+                } else {
+                    new SEvents(this).execute();
+                }
             } else {
                 Toast.makeText(this,
                         R.string.noconnection, Toast.LENGTH_LONG)
@@ -101,24 +98,6 @@ public class CalendarActivity extends AppCompatActivity {
         return connected;
     }
 
-    public void refreshCalendar() {
-        if (CheckInternet()) {
-            MainDB databaseHelper = new MainDB(getBaseContext());
-            SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            ContentValues nowdb = new ContentValues();
-            nowdb.put("calendardate", "2012-02-20 15:00:00");
-            db.update("lstchk", nowdb, null, null);
-            db.close();
-            MainActivity.nointernet = "false";
-            SEvents calendar = new SEvents(false, this);
-            calendar.execute();
-        } else {
-            SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_news);
-            mSwipeRefreshLayout.setRefreshing(false);
-            Toast.makeText(this, R.string.noconnection,
-                    Toast.LENGTH_LONG).show();
-        }
-    }
 
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item

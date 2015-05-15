@@ -12,17 +12,17 @@ import java.util.HashMap;
 
 public class TabAssenzeAdapter extends FragmentStatePagerAdapter {
     static Context c;
-    static HashMap<Integer,Assenza> a;
+    static HashMap<Integer, Assenza> a;
 
     public TabAssenzeAdapter(FragmentManager fm, Context co, HashMap<Integer, Assenza> as) {
         super(fm);
-        c=co;
-        a=as;
+        c = co;
+        a = as;
     }
 
     @Override
     public Fragment getItem(int i) {
-        return AssenzeFragment.newInstance(c, i,a);
+        return AssenzeFragment.newInstance(c, i, a);
     }
 
     @Override

@@ -17,10 +17,10 @@ public class NavDrawerListAdapter extends BaseAdapter {
     private String[] navDrawerItems;
     private String[] images;
 
-    public NavDrawerListAdapter(Context context, String[] navDrawerItems, String [] images){
+    public NavDrawerListAdapter(Context context, String[] navDrawerItems, String[] images) {
         this.context = context;
         this.navDrawerItems = navDrawerItems;
-        this.images= images;
+        this.images = images;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
         TextView txtTitle = (TextView) convertView.findViewById(R.id.text1);
 
 
-        imgIcon.setImageResource(context.getResources().getIdentifier(images[position],"drawable",context.getPackageName()));
+        imgIcon.setImageResource(context.getResources().getIdentifier(images[position], "drawable", context.getPackageName()));
         txtTitle.setText(navDrawerItems[position]);
 
         return convertView;

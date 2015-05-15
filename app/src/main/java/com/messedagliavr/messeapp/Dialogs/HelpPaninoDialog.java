@@ -18,8 +18,8 @@ public class HelpPaninoDialog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        LayoutInflater li= (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View helpPanino=li.inflate(R.layout.infolistapanini,null);
+        LayoutInflater li = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View helpPanino = li.inflate(R.layout.infolistapanini, null);
 
         builder.setView(helpPanino)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

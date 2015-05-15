@@ -16,6 +16,7 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
 public class MySSLSocketFactory extends SSLSocketFactory {
     SSLContext sslContext = SSLContext.getInstance("TLS");
 
@@ -34,7 +35,7 @@ public class MySSLSocketFactory extends SSLSocketFactory {
             }
         };
 
-        sslContext.init(null, new TrustManager[] { tm }, null);
+        sslContext.init(null, new TrustManager[]{tm}, null);
     }
 
     @Override

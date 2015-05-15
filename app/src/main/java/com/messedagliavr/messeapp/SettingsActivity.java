@@ -22,10 +22,11 @@ import com.messedagliavr.messeapp.Databases.MainDB;
 
 public class SettingsActivity extends AppCompatActivity {
     static Window window;
+
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.settings);
-        ActionBar ab= getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(getString(R.string.settings));
@@ -67,9 +68,9 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window= getWindow();
-            window.setEnterTransition(new Slide(Gravity.RIGHT).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
-            window.setExitTransition(new Slide(Gravity.LEFT).excludeTarget(android.R.id.statusBarBackground,true).excludeTarget(android.R.id.navigationBarBackground,true));
+            window = getWindow();
+            window.setEnterTransition(new Slide(Gravity.RIGHT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
+            window.setExitTransition(new Slide(Gravity.LEFT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
         }
     }
 

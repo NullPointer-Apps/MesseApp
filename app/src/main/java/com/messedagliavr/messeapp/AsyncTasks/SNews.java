@@ -4,7 +4,6 @@ import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -44,16 +43,15 @@ import java.util.Locale;
 
 public class SNews extends
         AsyncTask<Void, Void, HashMap<String, ArrayList<Spanned>>> {
-    NewsActivity na;
-    ProgressDialog mDialog;
-    public SQLiteDatabase db;
-    Boolean unknhost;
-    Cursor data;
-    static SwipeRefreshLayout mSwipeRefreshLayout = null;
-    Boolean isRefresh = false;
-
     public static final String TITLE = "title";
     public static final String DESC = "description";
+    static SwipeRefreshLayout mSwipeRefreshLayout = null;
+    public SQLiteDatabase db;
+    NewsActivity na;
+    ProgressDialog mDialog;
+    Boolean unknhost;
+    Cursor data;
+    Boolean isRefresh = false;
 
     public SNews(NewsActivity na, Boolean isRefresh) {
         this.na = na;
@@ -68,6 +66,7 @@ public class SNews extends
             nowdb.put("newsdate", "2012-02-20 15:00:00");
             long samerow = db.update("lstchk", nowdb, null, null);
             db.close();
+            isRefresh = true;
             SNews news = new SNews(na, true);
             news.execute();
         } else {
@@ -139,6 +138,7 @@ public class SNews extends
         date.close();
         db.close();
         long l = getTimeDiff(past, now);
+        if (mSwipeRefreshLayout == null) {
             mSwipeRefreshLayout = (SwipeRefreshLayout) na.findViewById(R.id.listview_swipe_refresh_news);
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -149,20 +149,22 @@ public class SNews extends
             mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
             mSwipeRefreshLayout.setProgressViewOffset(false, 0,
                     (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, na.getResources().getDisplayMetrics()));
+        }
+        if (!isRefresh) {
             mSwipeRefreshLayout.setRefreshing(true);
+        }
 
     }
 
     public HashMap<String, ArrayList<Spanned>> doInBackground(
             Void... params) {
-        unknhost=false;
+        unknhost = false;
         MainDB databaseHelper = new MainDB(na.getBaseContext());
         db = databaseHelper.getWritableDatabase();
         HashMap<String, ArrayList<Spanned>> temhashmap = new HashMap<String, ArrayList<Spanned>>();
         ArrayList<Spanned> titoli = new ArrayList<Spanned>();
         ArrayList<Spanned> descrizioni = new ArrayList<Spanned>();
         ArrayList<Spanned> datePubList = new ArrayList<Spanned>();
-        ArrayList<Spanned> titolib = new ArrayList<Spanned>();
         // All static variables
         final String URL = "https://www.messedaglia.it/index.php?option=com_ninjarsssyndicator&feed_id=1&format=raw";
         // XML node keys
@@ -204,15 +206,13 @@ public class SNews extends
                 Locale currentLocale = na.getResources().getConfiguration().locale;
                 datePubFormat = DateFormat.getDateInstance(DateFormat.FULL, currentLocale);
                 String datePubLocale = "";
-                String titleb = "";
-                String title="";
-                String desc="";
+                String title = "";
+                String desc = "";
                 for (int i = 0; i < nl.getLength(); i++) {
                     HashMap<String, Spanned> map = new HashMap<String, Spanned>();
                     e = (Element) nl.item(i);
-                    title= parser.getValue(e,TITLE);
-                    titleb=parser.getValue(e, TITLE);
-                    desc=parser.getValue(e, DESC);
+                    title = parser.getValue(e, TITLE);
+                    desc = parser.getValue(e, DESC);
                     values.put("_id", i);
                     values.put(TITLE, title);
                     values.put(DESC, desc);
@@ -224,7 +224,6 @@ public class SNews extends
 
                     }
                     values.put(PUBDATE, datePubLocale);
-                    values.put("titleb", titleb);
                     map.put(TITLE, Html.fromHtml(title));
                     map.put(DESC, Html.fromHtml(desc));
                     map.put(PUBDATE, Html.fromHtml(datePubLocale));
@@ -234,7 +233,6 @@ public class SNews extends
                             .add(Html.fromHtml(desc));
                     datePubList
                             .add(Html.fromHtml(datePubLocale));
-                    titolib.add(Html.fromHtml(titleb));
                     // adding HashList to ArrayList
                     menuItems.add(map);
                     long newRowId = db.insertWithOnConflict("news", null,
@@ -246,12 +244,11 @@ public class SNews extends
                 db.close();
                 temhashmap.put("titoli", titoli);
                 temhashmap.put("descrizioni", descrizioni);
-                temhashmap.put("titolib", titolib);
                 temhashmap.put("pubdate", datePubList);
                 return temhashmap;
             }
         } else {
-            String[] clmndata = {"title", "pubdate", "description", "titleb"};
+            String[] clmndata = {"title", "pubdate", "description"};
             String sortOrder = "_id";
 
             data = db.query("news", // The table to query
@@ -275,8 +272,6 @@ public class SNews extends
                         .getColumnIndex("title"))));
                 descrizioni.add(Html.fromHtml(data.getString(data
                         .getColumnIndex("description"))));
-                titolib.add(Html.fromHtml(data.getString(data
-                        .getColumnIndex("titleb"))));
                 datePubList.add(Html.fromHtml(data.getString(data
                         .getColumnIndex("pubdate"))));
                 // adding HashList to ArrayList
@@ -287,7 +282,6 @@ public class SNews extends
             db.close();
             temhashmap.put("titoli", titoli);
             temhashmap.put("descrizioni", descrizioni);
-            temhashmap.put("titolib", titolib);
             temhashmap.put("pubdate", datePubList);
             return temhashmap;
 
@@ -311,11 +305,10 @@ public class SNews extends
                         .get("descrizioni");
                 final ArrayList<Spanned> pubDate = resultmap
                         .get("pubdate");
-                final ArrayList<Spanned> titolib = resultmap.get("titolib");
 
                 NewsAdapter adapter = new NewsAdapter(
                         na, R.layout.item_news,
-                        titolib, pubDate);
+                        titoli, pubDate);
                 ListView listView = (ListView) na.findViewById(R.id.list);
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

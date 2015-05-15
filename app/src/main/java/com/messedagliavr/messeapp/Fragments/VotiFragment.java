@@ -25,31 +25,31 @@ public class VotiFragment extends ListFragment {
     static double m;
 
 
-    public static VotiFragment newInstance(Context context, int num, HashMap<Integer,Materia> v) {
+    public static VotiFragment newInstance(Context context, int num, HashMap<Integer, Materia> v) {
         VotiFragment f = new VotiFragment();
-System.out.println("voti"+num);
-        double somma=0;
+        System.out.println("voti" + num);
+        double somma = 0;
         int size = v.size();
-        Log.d("SIZE",size+"");
-        c=context;
+        Log.d("SIZE", size + "");
+        c = context;
 
-        for (Materia m : v.values()){
-            if(m.haVoti("tutti",num+1)) {
+        for (Materia m : v.values()) {
+            if (m.haVoti("tutti", num + 1)) {
                 somma += m.mediaVoti("tutti", num + 1);
             } else size--;
         }
 
         BigDecimal bd;
-        if (size!=0) {
+        if (size != 0) {
             bd = new BigDecimal(somma / size);
             bd = bd.setScale(2, RoundingMode.HALF_UP);
         } else {
-           bd=new BigDecimal(0);
+            bd = new BigDecimal(0);
         }
 
         Bundle args = new Bundle();
         args.putInt("num", num);
-        args.putDouble("media", bd.doubleValue() );
+        args.putDouble("media", bd.doubleValue());
         f.setArguments(args);
         return f;
     }
@@ -57,13 +57,13 @@ System.out.println("voti"+num);
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments()!=null) {
+        if (getArguments() != null) {
             ArrayList<Materia> t = new ArrayList<>();
-            for (int i = 1; i <= RegistroActivity.v.size() ; i++) {
+            for (int i = 1; i <= RegistroActivity.v.size(); i++) {
                 t.add(RegistroActivity.v.get(i));
             }
-            lma = new ListMaterieAdapter(c, t, "tutti", getArguments().getInt("num"),getFragmentManager());
-            m=getArguments().getDouble("media");
+            lma = new ListMaterieAdapter(c, t, "tutti", getArguments().getInt("num"), getFragmentManager());
+            m = getArguments().getDouble("media");
         }
 
     }
