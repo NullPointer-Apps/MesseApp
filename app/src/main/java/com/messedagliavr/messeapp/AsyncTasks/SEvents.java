@@ -58,7 +58,12 @@ public class SEvents extends
     public SEvents(CalendarActivity ca) {
         this.ca = ca;
     }
-
+	
+	
+	public SEvents(CalendarActivity ca, Boolean isRefresh) {
+        this.ca = ca;
+		this.isRefresh = isRefresh;
+    }
     private Long getTimeDiff(String time, String curTime) throws ParseException {
         Date curDate = null;
         Date oldDate = null;
@@ -103,8 +108,7 @@ public class SEvents extends
             db.update("lstchk", nowdb, null, null);
             db.close();
             MainActivity.nointernet = "false";
-            isRefresh = true;
-            SEvents calendar = new SEvents(ca);
+            SEvents calendar = new SEvents(ca,true);
             calendar.execute();
         } else {
             mSwipeRefreshLayout.setRefreshing(false);

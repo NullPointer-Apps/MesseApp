@@ -66,7 +66,6 @@ public class SNews extends
             nowdb.put("newsdate", "2012-02-20 15:00:00");
             long samerow = db.update("lstchk", nowdb, null, null);
             db.close();
-            isRefresh = true;
             SNews news = new SNews(na, true);
             news.execute();
         } else {

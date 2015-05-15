@@ -65,7 +65,7 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
     }
 
     protected void onPreExecute() {
-        if (!isRefresh || mSwipeRefreshLayout != null) {
+        if (!isRefresh || mSwipeRefreshLayout == null) {
             mSwipeRefreshLayout = (SwipeRefreshLayout) ra.findViewById(R.id.swipe_refresh_layout_circolari);
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -99,6 +99,7 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
                 sp.edit().putLong("lastLogin", new Date().getTime()).commit();
             } else {
                 error = true;
+				loginRequired = true;
             }
         } catch (IOException e) {
             e.printStackTrace();
