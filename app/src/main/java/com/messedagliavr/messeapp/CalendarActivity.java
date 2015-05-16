@@ -3,16 +3,15 @@ package com.messedagliavr.messeapp;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spanned;
-import android.transition.Slide;
-import android.view.Gravity;
+import android.util.TypedValue;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
@@ -27,7 +26,6 @@ public class CalendarActivity extends AppCompatActivity {
     public static String nointernet;
     public static String idical = null;
     public static ArrayList<Spanned> icalarr = new ArrayList<>();
-    static Window window;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -37,11 +35,6 @@ public class CalendarActivity extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(getString(R.string.eventi));
-        if (Build.VERSION.SDK_INT >= 21) {
-            window = getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-            window.setExitTransition(new Slide(Gravity.TOP).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-        }
         if (CheckInternet()) {
             nointernet = "false";
             new SEvents(this).execute();
@@ -65,11 +58,13 @@ public class CalendarActivity extends AppCompatActivity {
             db.close();
             if (!nodata.equals(verifydatenews)) {
                 nointernet = "true";
-                if (Build.VERSION.SDK_INT >= 21) {
-                    new SEvents(this).execute();
-                } else {
-                    new SEvents(this).execute();
-                }
+                SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.listview_swipe_refresh_news);
+                mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
+                mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+                mSwipeRefreshLayout.setRefreshing(true);
+                new SEvents(this).execute();
+
             } else {
                 Toast.makeText(this,
                         R.string.noconnection, Toast.LENGTH_LONG)

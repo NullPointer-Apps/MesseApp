@@ -3,20 +3,15 @@ package com.messedagliavr.messeapp;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 
 /**
  * Created by Ambrof on 17/03/15.
  */
 public class SocialActivity extends AppCompatActivity {
-    static Window window;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -34,11 +29,6 @@ public class SocialActivity extends AppCompatActivity {
         setContentView(R.layout.social);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Social");
-        if (Build.VERSION.SDK_INT >= 21) {
-            window = getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM));
-            window.setExitTransition(new Slide(Gravity.TOP));
-        }
     }
 
 

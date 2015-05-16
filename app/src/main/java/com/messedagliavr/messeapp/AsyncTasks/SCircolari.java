@@ -99,7 +99,7 @@ public class SCircolari extends AsyncTask<Void, Void, Void> {
                 sp.edit().putLong("lastLogin", new Date().getTime()).commit();
             } else {
                 error = true;
-				loginRequired = true;
+                loginRequired = true;
             }
         } catch (IOException e) {
             e.printStackTrace();

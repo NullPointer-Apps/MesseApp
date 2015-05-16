@@ -5,17 +5,13 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,7 +23,6 @@ import com.messedagliavr.messeapp.Databases.MainDB;
 @SuppressLint("DefaultLocale")
 public class TimetableActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
-    static Window window;
     String fname = null;
 
     @Override
@@ -110,13 +105,6 @@ public class TimetableActivity extends AppCompatActivity implements
                     .getLaunchIntentForPackage(getBaseContext().getPackageName());
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
-        }
-        if (Build.VERSION.SDK_INT >= 21) {
-            window = getWindow();
-            window.setEnterTransition(new Slide(Gravity.BOTTOM).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-            window.setExitTransition(new Slide(Gravity.TOP).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-            WebView descrizioneview = (WebView) findViewById(R.id.imageorario);
-            descrizioneview.setTransitionGroup(true);
         }
     }
 

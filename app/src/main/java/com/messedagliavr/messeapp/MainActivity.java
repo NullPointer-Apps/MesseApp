@@ -1,7 +1,6 @@
 package com.messedagliavr.messeapp;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.net.ConnectivityManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -330,11 +328,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void social(View v) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            startActivity(new Intent(this, SocialActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(new Intent(this, SocialActivity.class));
-        }
+        startActivity(new Intent(this, SocialActivity.class));
     }
 
     public void NullPApps(View v) {
@@ -392,30 +386,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void news(View v) {
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            startActivity(new Intent(this, NewsActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(new Intent(this, NewsActivity.class));
-        }
-
-
+        startActivity(new Intent(this, NewsActivity.class));
     }
 
     public void calendar(View v) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            startActivity(new Intent(this, CalendarActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(new Intent(this, CalendarActivity.class));
-        }
+        startActivity(new Intent(this, CalendarActivity.class));
     }
 
     public void orario(View v) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            startActivity(new Intent(this, TimetableActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(new Intent(this, TimetableActivity.class));
-        }
+        startActivity(new Intent(this, TimetableActivity.class));
     }
 
     public void notices(View v) {

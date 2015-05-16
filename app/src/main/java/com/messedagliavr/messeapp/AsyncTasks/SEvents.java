@@ -1,7 +1,6 @@
 package com.messedagliavr.messeapp.AsyncTasks;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.ParseException;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.Spanned;
@@ -58,12 +56,13 @@ public class SEvents extends
     public SEvents(CalendarActivity ca) {
         this.ca = ca;
     }
-	
-	
-	public SEvents(CalendarActivity ca, Boolean isRefresh) {
+
+
+    public SEvents(CalendarActivity ca, Boolean isRefresh) {
         this.ca = ca;
-		this.isRefresh = isRefresh;
+        this.isRefresh = isRefresh;
     }
+
     private Long getTimeDiff(String time, String curTime) throws ParseException {
         Date curDate = null;
         Date oldDate = null;
@@ -108,7 +107,7 @@ public class SEvents extends
             db.update("lstchk", nowdb, null, null);
             db.close();
             MainActivity.nointernet = "false";
-            SEvents calendar = new SEvents(ca,true);
+            SEvents calendar = new SEvents(ca, true);
             calendar.execute();
         } else {
             mSwipeRefreshLayout.setRefreshing(false);
@@ -146,21 +145,6 @@ public class SEvents extends
         date.close();
         db.close();
         long l = getTimeDiff(past, now);
-        if (mSwipeRefreshLayout == null) {
-            mSwipeRefreshLayout = (SwipeRefreshLayout) ca.findViewById(R.id.listview_swipe_refresh_news);
-            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    refreshCalendar();
-                }
-            });
-            mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
-            mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, ca.getResources().getDisplayMetrics()));
-        }
-        if (isRefresh) {
-            mSwipeRefreshLayout.setRefreshing(true);
-        }
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -766,11 +750,8 @@ public class SEvents extends
                                         Html.toHtml(descrizioni.get(position)));
                                 intent.putExtra(ICAL,
                                         Html.toHtml(icalarr.get(position)));
-                                if (Build.VERSION.SDK_INT >= 21) {
-                                    ca.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ca).toBundle());
-                                } else {
-                                    ca.startActivity(intent);
-                                }
+                                ca.startActivity(intent);
+
 
                             } else {
                                 Toast.makeText(ca,
@@ -782,7 +763,17 @@ public class SEvents extends
                 }
             }
         }
+        mSwipeRefreshLayout = (SwipeRefreshLayout) ca.findViewById(R.id.listview_swipe_refresh_news);
         mSwipeRefreshLayout.setRefreshing(false);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshCalendar();
+            }
+        });
+        mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
+        mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, ca.getResources().getDisplayMetrics()));
 
     }
 }

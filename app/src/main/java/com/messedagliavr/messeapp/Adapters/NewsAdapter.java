@@ -2,7 +2,6 @@ package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Html;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.messedagliavr.messeapp.R;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -64,7 +62,7 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
             }
 
             String day = Integer.toString(data.getDay());
-            String month =new DateFormatSymbols().getMonths()[data.getMonth()].toUpperCase().substring(0,3);
+            String month = new DateFormatSymbols().getMonths()[data.getMonth()].toUpperCase().substring(0, 3);
 
             if (tt != null && data != null) {
                 tt.setTextColor(Color.rgb(114, 177, 214));

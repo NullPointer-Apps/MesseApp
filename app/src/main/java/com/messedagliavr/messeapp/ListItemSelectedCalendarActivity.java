@@ -2,21 +2,16 @@ package com.messedagliavr.messeapp;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.Window;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 
 public class ListItemSelectedCalendarActivity extends AppCompatActivity {
-    static Window window;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -42,11 +37,6 @@ public class ListItemSelectedCalendarActivity extends AppCompatActivity {
         WebView descrizioneview = (WebView) findViewById(R.id.DescrizioneView);
         descrizioneview.loadData(descrizionerw, "text/html", "UTF-8");
         descrizioneview.setBackgroundColor(Color.parseColor("#eeeeee"));
-        if (Build.VERSION.SDK_INT >= 21) {
-            window = getWindow();
-            window.setEnterTransition(new Slide(Gravity.RIGHT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-            window.setExitTransition(new Slide(Gravity.LEFT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-        }
 
     }
 

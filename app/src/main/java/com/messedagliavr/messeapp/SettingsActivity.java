@@ -3,15 +3,11 @@ package com.messedagliavr.messeapp;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,7 +17,6 @@ import android.widget.ToggleButton;
 import com.messedagliavr.messeapp.Databases.MainDB;
 
 public class SettingsActivity extends AppCompatActivity {
-    static Window window;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -65,13 +60,6 @@ public class SettingsActivity extends AppCompatActivity {
             check.setVisibility(View.GONE);
         }
         query.close();
-
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            window = getWindow();
-            window.setEnterTransition(new Slide(Gravity.RIGHT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-            window.setExitTransition(new Slide(Gravity.LEFT).excludeTarget(android.R.id.statusBarBackground, true).excludeTarget(android.R.id.navigationBarBackground, true));
-        }
     }
 
 

@@ -1,6 +1,5 @@
 package com.messedagliavr.messeapp.AsyncTasks;
 
-import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.ParseException;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.Spanned;
@@ -137,22 +135,6 @@ public class SNews extends
         date.close();
         db.close();
         long l = getTimeDiff(past, now);
-        if (mSwipeRefreshLayout == null) {
-            mSwipeRefreshLayout = (SwipeRefreshLayout) na.findViewById(R.id.listview_swipe_refresh_news);
-            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    refreshNews();
-                }
-            });
-            mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
-            mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, na.getResources().getDisplayMetrics()));
-        }
-        if (!isRefresh) {
-            mSwipeRefreshLayout.setRefreshing(true);
-        }
-
     }
 
     public HashMap<String, ArrayList<Spanned>> doInBackground(
@@ -304,10 +286,6 @@ public class SNews extends
                         .get("descrizioni");
                 final ArrayList<Spanned> pubDate = resultmap
                         .get("pubdate");
-                for (int i = 0; i < pubDate.size(); i++) {
-                    System.out.println("Data " + i + " :" + pubDate.get(i));
-
-                }
 
                 NewsAdapter adapter = new NewsAdapter(
                         na, R.layout.item_news,
@@ -323,15 +301,22 @@ public class SNews extends
                                 Html.toHtml(titoli.get(position)));
                         intent.putExtra(DESC,
                                 Html.toHtml(descrizioni.get(position)));
-                        if (Build.VERSION.SDK_INT >= 21) {
-                            na.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(na).toBundle());
-                        } else {
-                            na.startActivity(intent);
-                        }
+                        na.startActivity(intent);
                     }
                 });
             }
         }
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) na.findViewById(R.id.listview_swipe_refresh_news);
         mSwipeRefreshLayout.setRefreshing(false);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshNews();
+            }
+        });
+        mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#fffbb901"), Color.parseColor("#ff1a171b"));
+        mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, na.getResources().getDisplayMetrics()));
     }
 }

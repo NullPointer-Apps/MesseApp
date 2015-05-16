@@ -28,12 +28,12 @@ public class Login extends AsyncTask<Void, Void, Boolean> {
     String pw;
     int c;
 
-    public Login(Context a , HttpPost hp, String user, String pw, int c){
-        this.a=a;
-        httpPost=hp;
-        this.user=user;
-        this.pw=pw;
-        this.c=c;
+    public Login(Context a, HttpPost hp, String user, String pw, int c) {
+        this.a = a;
+        httpPost = hp;
+        this.user = user;
+        this.pw = pw;
+        this.c = c;
     }
 
     protected void onPreExecute() {
@@ -50,7 +50,7 @@ public class Login extends AsyncTask<Void, Void, Boolean> {
 
         try {
             RegistroActivity.httpResponse = RegistroActivity.httpClient.execute(httpPost);
-            if (RegistroActivity.httpResponse.getStatusLine().getStatusCode()!=200 || accessoEseguito()) {
+            if (RegistroActivity.httpResponse.getStatusLine().getStatusCode() != 200 || accessoEseguito()) {
                 Log.e("login", "ERRORE: Response " + RegistroActivity.httpResponse.getStatusLine().getStatusCode());
                 return false;
             } else {
@@ -73,15 +73,13 @@ public class Login extends AsyncTask<Void, Void, Boolean> {
                     .putExtra("PWD", pw)
                     .putExtra("circolari", c);
             a.startActivity(registro);
-        }
-        else {
+        } else {
             Toast.makeText(a, "Dati errati, login fallito", Toast.LENGTH_SHORT).show();
         }
     }
 
     //parsing della pagina
-    public Document leggiPagina(String url)
-    {
+    public Document leggiPagina(String url) {
         try {
             HttpGet httpGet = new HttpGet(url);
             InputStream inputStream;
@@ -95,13 +93,11 @@ public class Login extends AsyncTask<Void, Void, Boolean> {
         }
     }
 
-    public boolean accessoEseguito()
-    {
-        String s2="";
-        try{
+    public boolean accessoEseguito() {
+        String s2 = "";
+        try {
             s2 = leggiPagina("https://web.spaggiari.eu/home/app/default/menu_webinfoschool_studenti.php").toString();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return s2.substring(0, 150).contains("<html class=\"login_page\">");

@@ -5,24 +5,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Slide;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 
 import com.messedagliavr.messeapp.Utilities.ColorTool;
 
 
 public class ContactsActivity extends AppCompatActivity implements View.OnTouchListener {
-    static Window window;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,13 +28,6 @@ public class ContactsActivity extends AppCompatActivity implements View.OnTouchL
         if (iv != null) {
             iv.setOnTouchListener(this);
         }
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            window = getWindow();
-            window.setEnterTransition(new Slide(Gravity.RIGHT));
-            window.setExitTransition(new Slide(Gravity.LEFT));
-        }
-
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

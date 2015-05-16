@@ -58,7 +58,7 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
 
     protected void onPreExecute() {
         mDialog = ProgressDialog.show(c, null,
-                "Aggiornamento assenze in corso", true, true,
+                "Aggiornamento voti in corso", true, true,
                 new DialogInterface.OnCancelListener() {
                     public void onCancel(DialogInterface dialog) {
                         SVoti.this.cancel(true);
