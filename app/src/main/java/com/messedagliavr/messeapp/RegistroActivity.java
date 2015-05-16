@@ -149,14 +149,14 @@ public class RegistroActivity extends AppCompatActivity {
                         SVoti sv = new SVoti(this, false, true);
                         sv.execute();
                     } else {
-                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare i voti", Toast.LENGTH_SHORT);
+                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare i voti", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     if (CheckInternet()) {
                         SAssenze sv = new SAssenze(this, false, true);
                         sv.execute();
                     } else {
-                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare le assenze", Toast.LENGTH_SHORT);
+                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare le assenze", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;

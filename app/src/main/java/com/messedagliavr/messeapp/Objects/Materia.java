@@ -34,7 +34,7 @@ public class Materia {
                         somma += 0.25;
                     } else if (voto.charAt(1) == '½') {
                         somma += 0.5;
-                    }
+                    } else if (voto.charAt(1) == '0') somma += 9;
                 }
             } else n--;
         }
