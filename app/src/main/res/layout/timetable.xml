@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coordinator_timetable"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    	<Spinner
-		android:id="@+id/spinner"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-            android:minHeight="40dp" />
+    android:layout_height="wrap_content">
 
-    	<WebView
-    	    android:id="@+id/imageorario"
-    	    android:layout_width="match_parent"
-    	    android:layout_height="match_parent" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"/>
+
+        <WebView
+            android:id="@+id/imageorario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="42dp" />
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

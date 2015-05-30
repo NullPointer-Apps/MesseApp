@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coordinator_settings"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listview_rlayout"
     android:layout_width="match_parent"
@@ -86,3 +90,4 @@
     </RelativeLayout>
 </ScrollView>
 </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>

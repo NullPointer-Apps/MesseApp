@@ -12,13 +12,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Databases.MainDB;
 import com.messedagliavr.messeapp.MainActivity;
@@ -242,8 +242,8 @@ public class LoginRegistroDialog extends DialogFragment {
 
         @Override
         protected void onPostExecute(Boolean b) {
+            mDialog.dismiss();
             if (b) {
-                mDialog.dismiss();
                 Intent registro = new Intent(MainActivity.context, RegistroActivity.class);
                 registro.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         .putExtra("USER", user)
@@ -251,7 +251,9 @@ public class LoginRegistroDialog extends DialogFragment {
                         .putExtra("circolari", getArguments().getInt("circolari"));
                 MainActivity.context.startActivity(registro);
             } else {
-                Toast.makeText(MainActivity.context, "Dati errati, login fallito", Toast.LENGTH_SHORT).show();
+                Snackbar
+                        .make(MainActivity.CoordinatorMain, "Dati errati, login fallito", Snackbar.LENGTH_LONG)
+                        .show();
             }
         }
 

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.messedagliavr.messeapp.Databases.MainDB;
@@ -77,8 +77,9 @@ public class SettingsActivity extends AppCompatActivity {
         @SuppressWarnings("unused")
         long samerow = db.update("settvoti", values, null, null);
         db.close();
-        Toast.makeText(this, getString(R.string.settingssaved),
-                Toast.LENGTH_LONG).show();
+        Snackbar
+                .make(findViewById(R.id.coordinator_settings), R.string.settingssaved, Snackbar.LENGTH_LONG)
+                .show();
     }
 
     public void onToggleClicked(View view) {
@@ -121,8 +122,9 @@ public class SettingsActivity extends AppCompatActivity {
             @SuppressWarnings("unused")
             long samerow = db.update("settvoti", values, null, null);
             db.close();
-            Toast.makeText(this, getString(R.string.noautologin),
-                    Toast.LENGTH_LONG).show();
+            Snackbar
+                    .make(findViewById(R.id.coordinator_settings), R.string.noautologin, Snackbar.LENGTH_LONG)
+                    .show();
         }
     }
 

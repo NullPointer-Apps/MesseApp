@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,6 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Databases.MainDB;
 
@@ -34,8 +34,9 @@ public class TimetableActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.palestre:
-                Toast.makeText(TimetableActivity.this, R.string.notavailable,
-                        Toast.LENGTH_LONG).show();
+                Snackbar
+                        .make(findViewById(R.id.coordinator_timetable), R.string.notavailable, Snackbar.LENGTH_LONG)
+                        .show();
                 break;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);

@@ -95,7 +95,7 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
         if (!error) {
             c.setUpAssenze(a);
         } else if (loginRequired) {
-            Toast.makeText(c, "È necessario effettuare il login", Toast.LENGTH_SHORT);
+            Toast.makeText(c, "È necessario effettuare il login", Toast.LENGTH_SHORT).show();
             DialogFragment login = new LoginRegistroDialog();
             Bundle data = new Bundle();
             data.putInt("circolari", 0);
@@ -104,7 +104,7 @@ public class SAssenze extends AsyncTask<Void, Void, Void> {
             login.setArguments(data);
             login.show(c.getSupportFragmentManager(), "login");
         } else {
-            Toast.makeText(c, "C'è stato un errore con il download delle assenze", Toast.LENGTH_SHORT);
+            Toast.makeText(c, "C'è stato un errore con il download delle assenze", Toast.LENGTH_SHORT).show();
         }
     }
 

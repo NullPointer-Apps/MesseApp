@@ -6,14 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spanned;
 import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.messedagliavr.messeapp.AsyncTasks.EventParser;
 import com.messedagliavr.messeapp.AsyncTasks.SEvents;
@@ -66,9 +67,16 @@ public class CalendarActivity extends AppCompatActivity {
                 new SEvents(this).execute();
 
             } else {
-                Toast.makeText(this,
-                        R.string.noconnection, Toast.LENGTH_LONG)
+                View.OnClickListener listener = new View.OnClickListener() {
+                    public void onClick(View view) {
+                        onBackPressed();
+                    }
+                };
+                Snackbar
+                        .make(findViewById(R.id.coordinator_news), R.string.noconnection, Snackbar.LENGTH_LONG)
+                        .setAction("OK", listener)
                         .show();
+
             }
         }
 
@@ -100,8 +108,9 @@ public class CalendarActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.ical:
                 if (android.os.Build.VERSION.SDK_INT < 14) {
-                    Toast.makeText(this, R.string.noapilevel,
-                            Toast.LENGTH_LONG).show();
+                    Snackbar
+                            .make(findViewById(R.id.coordinator_news), R.string.noapilevel, Snackbar.LENGTH_LONG)
+                            .show();
                 } else {
                     idical = icalarr.get(info.position).toString();
                     new EventParser(this).execute();

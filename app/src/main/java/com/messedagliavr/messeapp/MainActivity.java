@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Dialogs.HelpPaninoDialog;
 import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     public static String username;
     public static String password;
     public static ActionBar actionBar;
+    public static View CoordinatorMain;
     //INFO
     static PackageInfo pinfo = null;
     /**
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        CoordinatorMain = findViewById(R.id.coordinator_main);
         context = getBaseContext();
         sFm = getSupportFragmentManager();
 
@@ -244,9 +246,9 @@ public class MainActivity extends AppCompatActivity
         if (keyCode == KeyEvent.KEYCODE_MENU) {
             DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             if (mNavigationDrawerFragment.isDrawerOpen()) {
-                mDrawerLayout.closeDrawer(Gravity.START);
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
             } else {
-                mDrawerLayout.openDrawer(Gravity.START);
+                mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         }
         return super.onKeyDown(keyCode, event);
@@ -281,7 +283,16 @@ public class MainActivity extends AppCompatActivity
 
                 boolean go = (hour == 10 && minute <= 15) || (hour < 10 && hour >= 8) || (hour == 7 && minute >= 45);
                 if (!go) {
-                    Toast.makeText(this, "La lista panini è chiusa", Toast.LENGTH_SHORT).show();
+                    View.OnClickListener listener = new View.OnClickListener() {
+                        public void onClick(View view) {
+                            onBackPressed();
+                        }
+                    };
+                    Snackbar
+                            .make(findViewById(R.id.coordinator_news), "La lista panini è chiusa", Snackbar.LENGTH_LONG)
+                            .setAction("OK", listener)
+                            .show();
+                    //Toast.makeText(this, "La lista panini è chiusa", Toast.LENGTH_SHORT).show();
                 }/* else if (coolposition.size()>0){
                         //
                         Bundle arg=new Bundle();
@@ -310,10 +321,6 @@ public class MainActivity extends AppCompatActivity
                 item.getSubMenu().add("" + diff.getDays(diff.getDiff()) + " giorni");
                 item.getSubMenu().add("" + diff.getHours(diff.getDiff()) + " ore");
                 item.getSubMenu().add("" + diff.getMinutes(diff.getDiff()) + " min");
-                break;
-            case R.id.palestre:
-                Toast.makeText(MainActivity.this, R.string.notavailable,
-                        Toast.LENGTH_LONG).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -350,12 +357,16 @@ public class MainActivity extends AppCompatActivity
             login.setArguments(data);
             login.show(getSupportFragmentManager(), "login");
 
-        } else {
-            if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null) {
-                isSessionValid = false;
-            } else if (storedDate != 0) {
-                isSessionValid = true;
-            }
+        } else if (!CheckInternet()) {
+            Snackbar
+                    .make(findViewById(R.id.coordinator_main), R.string.noconnection, Snackbar.LENGTH_LONG)
+                    .show();
+        } else if ((new Date().getTime() - storedDate) > 300000 || RegistroActivity.httpClient == null || RegistroActivity.httpResponse == null) {
+            isSessionValid = false;
+        } else if (storedDate != 0) {
+            isSessionValid = true;
+        }
+        if (CheckInternet()) {
             DialogFragment login = new LoginRegistroDialog();
             Bundle data = new Bundle();
             data.putInt("circolari", 0);
@@ -365,6 +376,7 @@ public class MainActivity extends AppCompatActivity
             login.show(getSupportFragmentManager(), "login");
         }
     }
+
 
     public boolean CheckInternet() {
         boolean connected = false;
@@ -424,7 +436,14 @@ public class MainActivity extends AppCompatActivity
             login.setArguments(data);
             login.show(getSupportFragmentManager(), "login");
         } else {
-            Toast.makeText(this, R.string.noconnection, Toast.LENGTH_SHORT);
+            View.OnClickListener listener = new View.OnClickListener() {
+                public void onClick(View view) {
+                    onBackPressed();
+                }
+            };
+            Snackbar
+                    .make(findViewById(R.id.coordinator_main), R.string.noconnection, Snackbar.LENGTH_LONG)
+                    .show();
         }
     }
 

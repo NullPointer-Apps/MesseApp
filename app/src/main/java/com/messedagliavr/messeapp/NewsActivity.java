@@ -5,12 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
-import android.widget.Toast;
+import android.view.View;
 
 import com.messedagliavr.messeapp.AsyncTasks.SNews;
 import com.messedagliavr.messeapp.Databases.MainDB;
@@ -74,15 +74,20 @@ public class NewsActivity extends AppCompatActivity {
                 mSwipeRefreshLayout.setProgressViewOffset(false, 0,
                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
                 mSwipeRefreshLayout.setRefreshing(true);
-                if (Build.VERSION.SDK_INT >= 21) {
-                    new SNews(this, false).execute();
-                } else {
-                    new SNews(this, false).execute();
-                }
+                new SNews(this, false).execute();
             } else {
-                Toast.makeText(this, R.string.noconnection,
-                        Toast.LENGTH_LONG).show();
+                View.OnClickListener listener = new View.OnClickListener() {
+                    public void onClick(View view) {
+                        onBackPressed();
+                    }
+                };
+                Snackbar
+                        .make(findViewById(R.id.coordinator_news), R.string.noconnection, Snackbar.LENGTH_LONG)
+                        .setAction("OK", listener)
+                        .show();
             }
         }
     }
+
+
 }
