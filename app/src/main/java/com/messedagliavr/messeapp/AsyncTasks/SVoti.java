@@ -39,6 +39,7 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
     Boolean error = false;
     Boolean isRefresh = false;
     Boolean loginRequired = false;
+    Boolean noVotes = false;
 
     public SVoti(RegistroActivity c, Boolean isOffline) {
         this.isOffline = isOffline;
@@ -98,6 +99,8 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
+        System.out.println("Ci sono voti " + noVotes);
+        System.out.println("Il login è richiesto " + loginRequired);
         if (!error) {
             c.setUpVoti(v);
         } else if (loginRequired) {
@@ -109,8 +112,10 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
             data.putBoolean("isSessionValid", false);
             login.setArguments(data);
             login.show(c.getSupportFragmentManager(), "login");
+        } else if (noVotes) {
+            Toast.makeText(c, "Sul registro elettronico non ci sono ancora voti", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(c, "C'è stato un errore con il download dei voti", Toast.LENGTH_SHORT);
+            Toast.makeText(c, "C'è stato un errore con il download dei voti", Toast.LENGTH_SHORT).show();
         }
         mDialog.dismiss();
     }
@@ -131,7 +136,7 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
             }.getType();
             Gson gson = new GsonBuilder().create();
             v = gson.fromJson(json, typeOfHashMap);
-        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0) {
+        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0 && html != null) {
 
             for (Element tr : html.select("tr")) {
                 for (Element td : tr.select("td")) {
@@ -195,7 +200,11 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
             sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
         } else {
             error = true;
-            loginRequired = true;
+            if (html == null) {
+                noVotes = true;
+            } else {
+                loginRequired = true;
+            }
         }
         return v;
     }
