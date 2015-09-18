@@ -544,7 +544,7 @@ public class MainActivity extends AppCompatActivity
                                     String m_Text = input.getText().toString();
                                     Intent emailIntent = new Intent(
                                             Intent.ACTION_SENDTO, Uri.fromParts(
-                                            "mailto", "support@nullpointerapps.com",
+                                            "mailto", "simone@nullpointerapps.com",
                                             null));
                                     emailIntent.putExtra(Intent.EXTRA_SUBJECT,
                                             getString(R.string.suggestion));
