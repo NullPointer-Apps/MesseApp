@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.messedagliavr.messeapp.Dialogs.HelpPaninoDialog;
 import com.messedagliavr.messeapp.Dialogs.LoginRegistroDialog;
@@ -402,7 +403,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void calendar(View v) {
-        startActivity(new Intent(this, CalendarActivity.class));
+        Toast.makeText(this,"La funzionalità è momentaneamente disabilitata. Verrà reintrodotta il prima possibile",Toast.LENGTH_LONG).show();
+        //startActivity(new Intent(this, CalendarActivity.class));
     }
 
     public void orario(View v) {
