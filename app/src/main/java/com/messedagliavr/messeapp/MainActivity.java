@@ -403,8 +403,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void calendar(View v) {
-        Toast.makeText(this,"La funzionalità è momentaneamente disabilitata. Verrà reintrodotta il prima possibile",Toast.LENGTH_LONG).show();
-        //startActivity(new Intent(this, CalendarActivity.class));
+        startActivity(new Intent(this, CalendarActivity.class));
     }
 
     public void orario(View v) {
@@ -578,7 +577,7 @@ public class MainActivity extends AppCompatActivity
                 case 12:
                     //Fine Scuola
                     rootView = inflater.inflate(R.layout.fine_scuola, container, false);
-                    MyDifferenceFromToday diff = new MyDifferenceFromToday(2015, 6, 10, 13, 0);
+                    MyDifferenceFromToday diff = new MyDifferenceFromToday(2016, 6, 8, 13, 0);
                     TextView end = (TextView) rootView.findViewById(R.id.fine_scuola);
                     end.setText("Fine della scuola in:\n" + diff.getDays(diff.getDiff()) + "g " + diff.getHours(diff.getDiff()) + "h " + diff.getMinutes(diff.getDiff()) + "m");
                     break;
