@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -60,9 +61,10 @@ public class NewsAdapter extends ArrayAdapter<Spanned> {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-            String day = Integer.toString(data.getDay());
-            String month = new DateFormatSymbols().getMonths()[data.getMonth()].toUpperCase().substring(0, 3);
+            Calendar calFrom = Calendar.getInstance();
+            calFrom.setTime(data);
+            String day = Integer.toString(calFrom.get(Calendar.DAY_OF_MONTH));
+            String month = new DateFormatSymbols().getMonths()[calFrom.get(Calendar.MONTH)].toUpperCase().substring(0, 3);
 
             if (tt != null && data != null) {
                 tt.setTextColor(Color.rgb(114, 177, 214));
