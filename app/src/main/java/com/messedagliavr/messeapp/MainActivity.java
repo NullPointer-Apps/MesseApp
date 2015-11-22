@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity
                         .commit();
                 break;
             case R.id.timetoend:
-                diff = new MyDifferenceFromToday(2015, 6, 10, 13, 0);
+                diff = new MyDifferenceFromToday(2016, 6, 8, 13, 0);
                 item.getSubMenu().clear();
                 item.getSubMenu().add(Menu.NONE, Menu.NONE, Menu.NONE, "Fine della scuola in:");
                 item.getSubMenu().add("" + diff.getDays(diff.getDiff()) + " giorni");
