@@ -131,12 +131,12 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
         Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
         SharedPreferences sp = c.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
         Long storedDate = sp.getLong("lastLogin", 0);
-        /*if (!json.equals("default") && (new Date().getTime() - lastUpdate) < 10800000 && !isRefresh) {
+        if (!json.equals("default") && (new Date().getTime() - lastUpdate) < 10800000 && !isRefresh) {
             Type typeOfHashMap = new TypeToken<Map<Integer, Materia>>() {
             }.getType();
             Gson gson = new GsonBuilder().create();
             v = gson.fromJson(json, typeOfHashMap);
-        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0 && html != null) {*/
+        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0 && html != null) {
 
             for (Element tr : html.select("tr")) {
                 for (Element td : tr.select("td")) {
@@ -198,14 +198,14 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
             json = gson.toJson(v);
             sharedpreferences.edit().putString("json", json).apply();
             sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
-        /*} else {
+        } else {
             error = true;
             if (html == null) {
                 noVotes = true;
             } else {
                 loginRequired = true;
             }
-        }*/
+        }
         return v;
     }
 

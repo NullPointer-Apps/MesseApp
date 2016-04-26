@@ -211,4 +211,7 @@
     <string name="download">Download</string>
     <string name="per1">Period I</string>
     <string name="per2">Period 2</string>
+    <string name="NeedConnection">An internet connection is needed to update the marks</string>
+    <string name="absences">Absences</string>
+    <string name="late">Late</string>
 </resources>

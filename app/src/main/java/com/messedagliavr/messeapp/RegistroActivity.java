@@ -125,11 +125,11 @@ public class RegistroActivity extends AppCompatActivity {
                 Intent voti = new Intent(Intent.ACTION_VIEW);
                 if (user.contains("@")) {
                     voti.setData(Uri
-                            .parse("https://web.spaggiari.eu/home/app/default/login_email.php?custcode=VRIT0004&login="
+                            .parse("https://web.spaggiari.eu/home/app/default/login_email.php?custcode=VRLS0003&login="
                                     + user + "&password=" + password));
                 } else {
                     voti.setData(Uri
-                            .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRIT0004&login="
+                            .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="
                                     + user + "&password=" + password));
                 }
                 startActivity(voti);
@@ -150,7 +150,7 @@ public class RegistroActivity extends AppCompatActivity {
                         SVoti sv = new SVoti(this, false, true);
                         sv.execute();
                     } else {
-                        Toast.makeText(this, "Serve una connessione ad internet per aggiornare i voti", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.NeedConnection), Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     if (CheckInternet()) {
@@ -286,11 +286,11 @@ public class RegistroActivity extends AppCompatActivity {
         actionBar.removeAllTabs();
         actionBar.addTab(
                 actionBar.newTab()
-                        .setText("Assenze")
+                        .setText(getString(R.string.absences))
                         .setTabListener(tabListener));
         actionBar.addTab(
                 actionBar.newTab()
-                        .setText("Ritardi")
+                        .setText(getString(R.string.late))
                         .setTabListener(tabListener));
     }
 

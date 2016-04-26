@@ -208,4 +208,7 @@
     <string name="download">Scarica</string>
     <string name="per1">Periodo I</string>
     <string name="per2">Periodo II</string>
+    <string name="NeedConnection">Serve una connessione ad internet per aggiornare i voti</string>
+    <string name="absences">Assenze</string>
+    <string name="late">Ritardi</string>
 </resources>
