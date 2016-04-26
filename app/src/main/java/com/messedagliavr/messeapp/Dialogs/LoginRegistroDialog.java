@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class LoginRegistroDialog extends DialogFragment {
 
     static Activity a;
-    final String custcode = "VRLS0003";
+    final String custcode = "VRIT0004";
     HttpPost httpPost;
     ProgressDialog mDialog;
     String user = "";

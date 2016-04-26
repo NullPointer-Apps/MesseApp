@@ -131,17 +131,16 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
         Long lastUpdate = sharedpreferences.getLong("lastupdate", 0);
         SharedPreferences sp = c.getSharedPreferences("RegistroSettings", Context.MODE_PRIVATE);
         Long storedDate = sp.getLong("lastLogin", 0);
-        if (!json.equals("default") && (new Date().getTime() - lastUpdate) < 10800000 && !isRefresh) {
+        /*if (!json.equals("default") && (new Date().getTime() - lastUpdate) < 10800000 && !isRefresh) {
             Type typeOfHashMap = new TypeToken<Map<Integer, Materia>>() {
             }.getType();
             Gson gson = new GsonBuilder().create();
             v = gson.fromJson(json, typeOfHashMap);
-        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0 && html != null) {
+        } else if (!(new Date().getTime() - storedDate > 300000) && storedDate != 0 && html != null) {*/
 
             for (Element tr : html.select("tr")) {
                 for (Element td : tr.select("td")) {
-                    //ha classe font-size-14 (Materie)
-                    if (td.text().equals("Test")) {
+                    if (td.text().contains("Test")) {
                         isTest = true;
                         isRec = false;
                         continue;
@@ -151,6 +150,7 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
                         continue;
                     }
 
+                    //ha classe font-size-14 (Materie)
                     if (td.hasClass("font_size_14") && td.hasText()) {
                         isRec = false;
                         isTest = false;
@@ -181,10 +181,10 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
                                     else if ((j > 5 && j <= 10) || (j > 20 || j <= 25))
                                         voto.setTipo("Orale");
                                     else voto.setTipo("Pratico");
-                                    if (j > 15 && !isRec) {
-                                        voto.setQuadrimestre(2);
-                                    } else {
+                                    if (j <= 15 || isRec || isTest) {
                                         voto.setQuadrimestre(1);
+                                    } else {
+                                        voto.setQuadrimestre(2);
                                     }
                                     voto.setVoto(p.text());
                                     materia.addVoto(nv, voto);
@@ -198,14 +198,14 @@ public class SVoti extends AsyncTask<Void, Void, Void> {
             json = gson.toJson(v);
             sharedpreferences.edit().putString("json", json).apply();
             sharedpreferences.edit().putLong("lastupdate", new Date().getTime()).apply();
-        } else {
+        /*} else {
             error = true;
             if (html == null) {
                 noVotes = true;
             } else {
                 loginRequired = true;
             }
-        }
+        }*/
         return v;
     }
 

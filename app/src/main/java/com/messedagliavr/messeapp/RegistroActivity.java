@@ -125,11 +125,11 @@ public class RegistroActivity extends AppCompatActivity {
                 Intent voti = new Intent(Intent.ACTION_VIEW);
                 if (user.contains("@")) {
                     voti.setData(Uri
-                            .parse("https://web.spaggiari.eu/home/app/default/login_email.php?custcode=VRLS0003&login="
+                            .parse("https://web.spaggiari.eu/home/app/default/login_email.php?custcode=VRIT0004&login="
                                     + user + "&password=" + password));
                 } else {
                     voti.setData(Uri
-                            .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRLS0003&login="
+                            .parse("https://web.spaggiari.eu/home/app/default/login.php?custcode=VRIT0004&login="
                                     + user + "&password=" + password));
                 }
                 startActivity(voti);
@@ -234,11 +234,11 @@ public class RegistroActivity extends AppCompatActivity {
         actionBar.removeAllTabs();
         actionBar.addTab(
                 actionBar.newTab()
-                        .setText("Quad I")
+                        .setText(getString(R.string.per1))
                         .setTabListener(tabListener));
         actionBar.addTab(
                 actionBar.newTab()
-                        .setText("Quad II")
+                        .setText(getString(R.string.per2))
                         .setTabListener(tabListener));
     }
 

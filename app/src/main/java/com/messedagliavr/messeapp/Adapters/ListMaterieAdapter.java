@@ -63,8 +63,10 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
         tbVoti.removeAllViews();
 
         HashMap<Integer, Voto> vv = materia.getVoti();
+        System.out.println(materia.getNome());
         for (int i = 1; i <= vv.size(); i++) {
             final Voto v = vv.get(i);
+            System.out.println(v.getVoto());
             String votos = v.getVoto();
             final TextView voto = new TextView(getContext());
             final SpannableString cs;
