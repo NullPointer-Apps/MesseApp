@@ -2,20 +2,21 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.3'
+    useLibrary 'org.apache.http.legacy'
+
 
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 74
-        versionName "3.00"
+        versionCode 76
+        versionName "3.01"
     }
     buildTypes {
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            zipAlignEnabled true
         }
     }
 }
@@ -26,7 +27,6 @@ dependencies {
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.android.support:cardview-v7:23.3.0'
-    compile 'org.jsoup:jsoup:1.8.3'
-    compile 'com.google.code.gson:gson:2.4'
-    compile files('libs/org.apache.http.legacy.jar')
+    compile 'org.jsoup:jsoup:1.9.1'
+    compile 'com.google.code.gson:gson:2.6.2'
 }
