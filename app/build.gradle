@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 76
+        versionCode 77
         versionName "3.02"
     }
     buildTypes {
