@@ -1,7 +1,6 @@
 package com.messedagliavr.messeapp.Adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.SubscriptSpan;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,14 +31,12 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
     int quad = 0;
     ArrayList<Double> medie = new ArrayList<>();
     FragmentManager fm;
-    Context context;
 
     public ListMaterieAdapter(Context context, ArrayList<Materia> materie, String tipo, int quad, FragmentManager fm) {
         super(context, 0, materie);
         this.tipo = tipo;
         this.quad = quad + 1;
         this.fm = fm;
-        this.context = context;
     }
 
     @Override
@@ -55,7 +51,6 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
         TextView nMat = (TextView) convertView.findViewById(R.id.nMat);
         TextView avg = (TextView) convertView.findViewById(R.id.avg);
         LinearLayout tbVoti = (LinearLayout) convertView.findViewById(R.id.tbVoti);
-        LinearLayout tbVoti2 = (LinearLayout) convertView.findViewById(R.id.tbVoti2);
 
         nMat.setText(materia.getNome().trim());
         if (medie.size() <= position)
@@ -143,21 +138,11 @@ public class ListMaterieAdapter extends ArrayAdapter<Materia> {
                         return false;
                     }
                 });
-                Resources resources = context.getResources();
-                DisplayMetrics metrics = resources.getDisplayMetrics();
-                //3dp larghezza del divider
-                int dividerWidth = (int) (3 * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
-
-                int maxNVoti = tbVoti.getWidth() / (voto.getWidth()+dividerWidth);
-                if (tbVoti.getChildCount() < maxNVoti)
-                    tbVoti.addView(voto);
-                    tbVoti2.setVisibility(View.GONE);
-                } else  {
-                    tbVoti.setVisibility(View.VISIBLE);
-                    tbVoti2.addView(voto);
-                }
+                tbVoti.addView(voto);
             }
+        }
 
+        // Return the completed view to render on screen
         return convertView;
     }
 }

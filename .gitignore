@@ -7,7 +7,3 @@
 *.apk
 *.ap_
 Thumbs.db
-
-build/intermediates/dex-cache/cache.xml
-
-build/intermediates/dex-cache/cache.xml
