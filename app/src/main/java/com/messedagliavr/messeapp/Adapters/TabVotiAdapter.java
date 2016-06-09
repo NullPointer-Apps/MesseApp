@@ -22,6 +22,7 @@ public class TabVotiAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
+        System.out.println("NEW IST"+i);
         return VotiFragment.newInstance(c, i, v);
     }
 

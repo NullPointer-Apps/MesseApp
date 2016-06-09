@@ -55,26 +55,21 @@ public class VotiFragment extends ListFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         if (getArguments() != null) {
             ArrayList<Materia> t = new ArrayList<>();
             for (int i = 1; i <= RegistroActivity.v.size(); i++) {
                 t.add(RegistroActivity.v.get(i));
             }
+
             lma = new ListMaterieAdapter(c, t, "tutti", getArguments().getInt("num"), getFragmentManager());
             m = getArguments().getDouble("media");
         }
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.voti, container, false);
         TextView media = (TextView) v.findViewById(R.id.mediaTV);
-        media.setText("Media quadrimestre: " + m);
         setListAdapter(lma);
+        media.setText("Media quadrimestre: " + m);
         return v;
     }
 

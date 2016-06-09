@@ -204,14 +204,15 @@ public class RegistroActivity extends AppCompatActivity {
                 new TabVotiAdapter(
                         getSupportFragmentManager(), this, v);
         mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(tabAdapter);
         mViewPager.setOnPageChangeListener(
                 new ViewPager.SimpleOnPageChangeListener() {
                     @Override
                     public void onPageSelected(int position) {
                         getSupportActionBar().setSelectedNavigationItem(position);
+                        mViewPager.setCurrentItem(position);
                     }
                 });
-        mViewPager.setAdapter(tabAdapter);
 
         actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
