@@ -1,2 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/com.android.support-design-23.4.0_9b1a4cff7d433bebd4afb1e54f4b8397abff8adb.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/gson-2.6.2_4faec7c2535519d99c4636c60ed4ff8e00b19edf.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/com.android.support-support-v4-23.4.0_9eec03339c54124b0ad3dfb8f8a3c5f85c1aa073.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-23.4.0_419b09a64ba5257355e528f9c0d85d4bb9835eaa.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/com.android.support-animated-vector-drawable-23.4.0_48227e257ca32493388fd82fce2ceb858c78a89d.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/android-sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/support-annotations-23.4.0_e624506cfa58ed05ddba52ece0e2521b11ee6940.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.9.1/3dc0a3bea4f876c54846cd050e688f1bfc78fc96/jsoup-1.9.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="3dc0a3bea4f876c54846cd050e688f1bfc78fc96">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/jsoup-1.9.1_d36e1840fb560d1532d8d992c4261fca86dabf8d.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/com.android.support-support-vector-drawable-23.4.0_6b3f18b64b694df35249e5878633899fb8e656d1.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/com.android.support-recyclerview-v7-23.4.0_48f2c16c82f2cdce1b9c8dd7ee4d21893b6a2d4a.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/com.android.support-cardview-v7-23.4.0_ad814445914cea7d9fe5e316b93a90f5395117d2.jar" />
+    </item>
+    <item
+        jar="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/Simone/Documents/Android/GitHub/MesseApp/app/build/intermediates/pre-dexed/release/internal_impl-23.4.0_68b09afa479eff566236a911dbe7000e3ef1a19e.jar" />
+    </item>
+
+</items>
